@@ -33,11 +33,11 @@ export default function Community() {
       <Navigation />
 
       {/* Hero */}
-      <section className="flex flex-col gap-8 w-full px-16 pt-[100px] pb-[80px] border-b border-border">
+      <section className="flex flex-col gap-8 w-full px-6 sm:px-10 lg:px-16 pt-14 md:pt-[100px] pb-12 md:pb-[80px] border-b border-border">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
           // Join the Exchange
         </p>
-        <h1 className="text-[48px] font-light leading-[64px] tracking-[-0.03em] max-w-[800px]">
+        <h1 className="text-[30px] md:text-[48px] font-light leading-[40px] md:leading-[64px] tracking-[-0.03em] max-w-[800px]">
           A community for the next generation of AI governance
         </h1>
         <p className="text-[15px] font-light leading-[26px] text-muted max-w-[580px]">
@@ -48,10 +48,10 @@ export default function Community() {
       </section>
 
       {/* Benefits */}
-      <section className="w-full px-16 py-16">
-        <div className="grid grid-cols-2 gap-10">
+      <section className="w-full px-6 sm:px-10 lg:px-16 py-10 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
           {benefits.map((benefit) => (
-            <div key={benefit.title} className="border border-border p-10">
+            <div key={benefit.title} className="border border-border p-6 md:p-10">
               <h2 className="text-[20px] font-normal leading-[30px] mb-3">
                 {benefit.title}
               </h2>
@@ -64,14 +64,14 @@ export default function Community() {
       </section>
 
       {/* Who is it for */}
-      <section className="w-full px-16 py-16 border-t border-border">
+      <section className="w-full px-6 sm:px-10 lg:px-16 py-10 md:py-16 border-t border-border">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent mb-3">
           Who is this for
         </p>
         <h2 className="text-[32px] font-light leading-[44px] mb-6 max-w-[600px]">
           Anyone working on or interested in AI governance
         </h2>
-        <div className="flex gap-16 max-w-[900px]">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-16 max-w-[900px]">
           <div className="flex-1">
             <p className="text-[14px] font-light leading-[24px] text-muted">
               Policy professionals, civil servants, and regulators looking for
@@ -89,8 +89,8 @@ export default function Community() {
       </section>
 
       {/* CTA */}
-      <section className="flex flex-col items-center w-full px-16 py-20 bg-dark">
-        <h2 className="text-[36px] font-light leading-[52px] text-light text-center max-w-[620px] mb-4">
+      <section className="flex flex-col items-center w-full px-6 sm:px-10 lg:px-16 py-14 md:py-20 bg-dark">
+        <h2 className="text-[26px] md:text-[36px] font-light leading-[52px] text-light text-center max-w-[620px] mb-4">
           Ready to join?
         </h2>
         <p className="text-[14px] text-muted text-center mb-8 max-w-[500px]">
@@ -106,7 +106,7 @@ export default function Community() {
       </section>
 
       {/* Fellowship pointer */}
-      <section className="flex items-center justify-between w-full px-16 py-12 border-b border-border">
+      <section className="flex flex-col md:flex-row items-start md:items-center justify-between w-full px-6 sm:px-10 lg:px-16 py-10 md:py-12 gap-6 md:gap-0 border-b border-border">
         <div className="max-w-[600px]">
           <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
             // Go deeper

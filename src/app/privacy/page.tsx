@@ -13,11 +13,11 @@ export default function Privacy() {
     <div className="flex flex-col w-full font-mono">
       <Navigation />
 
-      <section className="w-full px-16 pt-[100px] pb-[80px] max-w-[720px]">
+      <section className="w-full px-6 sm:px-10 lg:px-16 pt-14 md:pt-[100px] pb-12 md:pb-[80px] max-w-full md:max-w-[720px]">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent mb-6">
           // Legal
         </p>
-        <h1 className="text-[40px] font-light leading-[56px] tracking-[-0.03em] mb-10">
+        <h1 className="text-[28px] md:text-[40px] font-light leading-[38px] md:leading-[56px] tracking-[-0.03em] mb-10">
           Privacy Policy
         </h1>
 

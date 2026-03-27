@@ -36,17 +36,17 @@ export default function About() {
       <Navigation />
 
       {/* Hero */}
-      <section className="flex flex-col gap-6 w-full px-16 pt-[100px] pb-[80px]">
+      <section className="flex flex-col gap-6 w-full px-6 sm:px-10 lg:px-16 pt-14 md:pt-[100px] pb-12 md:pb-[80px]">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
           About the Exchange
         </p>
-        <h1 className="text-[48px] font-light leading-[64px] tracking-[-0.03em] max-w-[800px]">
+        <h1 className="text-[30px] md:text-[48px] font-light leading-[40px] md:leading-[64px] tracking-[-0.03em] max-w-[800px]">
           An independent voice on the governance challenges that matter most
         </h1>
       </section>
 
       {/* Mission Content */}
-      <section className="flex gap-10 w-full px-16 py-16 border-t border-border">
+      <section className="flex flex-col md:flex-row gap-10 w-full px-6 sm:px-10 lg:px-16 py-10 md:py-16 border-t border-border">
         <div className="flex-1 max-w-[600px]">
           <h2 className="text-[24px] font-normal leading-[36px] mb-6">The problem</h2>
           <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
@@ -79,11 +79,11 @@ export default function About() {
       </section>
 
       {/* What We Do */}
-      <section className="w-full px-16 pt-16 pb-20 bg-dark">
-        <h2 className="text-[40px] font-light leading-[52px] text-light mb-12">
+      <section className="w-full px-6 sm:px-10 lg:px-16 pt-12 md:pt-16 pb-14 md:pb-20 bg-dark">
+        <h2 className="text-[28px] md:text-[40px] font-light leading-[52px] text-light mb-12">
           What we do
         </h2>
-        <div className="flex gap-10">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-10">
           {activities.map((activity) => (
             <div key={activity.label} className="flex-1">
               <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent mb-3">
@@ -101,9 +101,9 @@ export default function About() {
       </section>
 
       {/* Founder */}
-      <section className="flex gap-16 w-full px-16 py-20 border-b border-border">
-        <div className="w-[280px] shrink-0">
-          <Image src="/jamie-green.png" alt="Jamie Green" width={280} height={340} className="object-cover w-[280px] h-[340px]" />
+      <section className="flex flex-col md:flex-row gap-10 md:gap-16 w-full px-6 sm:px-10 lg:px-16 py-12 md:py-20 border-b border-border">
+        <div className="w-full md:w-[280px] shrink-0">
+          <Image src="/jamie-green.png" alt="Jamie Green" width={280} height={340} className="object-cover w-full md:w-[280px] h-[240px] md:h-[340px]" />
         </div>
         <div className="flex-1">
           <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent mb-2">
@@ -137,7 +137,7 @@ export default function About() {
       </section>
 
       {/* Advisory Board */}
-      <section className="w-full px-16 py-20">
+      <section className="w-full px-6 sm:px-10 lg:px-16 py-12 md:py-20">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent mb-3">
           Advisory Board
         </p>

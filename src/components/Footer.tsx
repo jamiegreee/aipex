@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="flex items-center justify-between w-full px-16 py-8 bg-cream-dark">
+    <footer className="flex flex-col md:flex-row items-center justify-between w-full px-6 sm:px-10 lg:px-16 py-6 md:py-8 gap-4 md:gap-0 bg-cream-dark">
       <span className="text-[11px] text-muted">
         &copy; 2026 AI Policy Exchange
       </span>

@@ -13,11 +13,11 @@ export default function Contact() {
     <div className="flex flex-col w-full font-mono">
       <Navigation />
 
-      <section className="flex flex-col gap-8 w-full px-16 pt-[100px] pb-[80px] border-b border-border">
+      <section className="flex flex-col gap-8 w-full px-6 sm:px-10 lg:px-16 pt-14 md:pt-[100px] pb-12 md:pb-[80px] border-b border-border">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
           // Get in touch
         </p>
-        <h1 className="text-[48px] font-light leading-[64px] tracking-[-0.03em] max-w-[800px]">
+        <h1 className="text-[30px] md:text-[48px] font-light leading-[40px] md:leading-[64px] tracking-[-0.03em] max-w-[800px]">
           Contact
         </h1>
         <p className="text-[15px] font-light leading-[26px] text-muted max-w-[580px]">
@@ -27,8 +27,8 @@ export default function Contact() {
         </p>
       </section>
 
-      <section className="w-full px-16 py-16">
-        <div className="flex gap-16 max-w-[900px]">
+      <section className="w-full px-6 sm:px-10 lg:px-16 py-10 md:py-16">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-16 max-w-[900px]">
           <div className="flex-1">
             <h2 className="text-[20px] font-normal leading-[30px] mb-4">General enquiries</h2>
             <p className="text-[14px] font-light leading-[24px] text-muted mb-2">
@@ -52,7 +52,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="w-full px-16 py-16 border-t border-border">
+      <section className="w-full px-6 sm:px-10 lg:px-16 py-10 md:py-16 border-t border-border">
         <h2 className="text-[20px] font-normal leading-[30px] mb-4">Find us elsewhere</h2>
         <div className="flex gap-8">
           <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-[14px] text-accent hover:opacity-80 transition-opacity">
@@ -64,7 +64,7 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="flex items-center justify-between w-full px-16 py-12 border-t border-border">
+      <section className="flex flex-col md:flex-row items-start md:items-center justify-between w-full px-6 sm:px-10 lg:px-16 py-10 md:py-12 gap-6 md:gap-0 border-t border-border">
         <div className="max-w-[600px]">
           <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
             // Join the community

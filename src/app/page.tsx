@@ -20,7 +20,7 @@ const briefs = [
     tag: "Governance",
     date: "2026.03.26",
     title: 'Why "AI regulation" is the wrong frame — and what to do instead',
-    summary: "AI governance is not about constraining a static technology \u2014 it\u2019s about building institutional capacity to manage a transition already underway.",
+    summary: "AI governance is not about constraining a static technology — it's about building institutional capacity to manage a transition already underway.",
     href: "/research/ai-regulation-wrong-frame",
   },
   {
@@ -38,11 +38,11 @@ export default function Home() {
       <Navigation />
 
       {/* Hero */}
-      <section className="flex flex-col gap-12 w-full px-16 pt-[120px] pb-[140px] border-b border-border">
+      <section className="flex flex-col gap-12 w-full px-6 sm:px-10 lg:px-16 pt-16 md:pt-[120px] pb-20 md:pb-[140px] border-b border-border">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
           // Independent Policy Institute
         </p>
-        <h1 className="text-[72px] font-extralight leading-[82px] tracking-[-0.04em] max-w-[900px]">
+        <h1 className="text-[36px] sm:text-[48px] md:text-[72px] font-extralight leading-[44px] sm:leading-[58px] md:leading-[82px] tracking-[-0.04em] max-w-[900px]">
           Navigating the AI transition
         </h1>
         <div className="flex flex-col gap-8">
@@ -51,7 +51,7 @@ export default function Home() {
             rapidly scale. We bring operational experience to governance
             questions that matter.
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/research"
               className="flex items-center px-7 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
@@ -69,12 +69,12 @@ export default function Home() {
       </section>
 
       {/* Pillars Strip */}
-      <section className="flex w-full border-b border-border">
+      <section className="grid grid-cols-2 md:flex w-full border-b border-border">
         {pillars.map((pillar, i) => (
           <div
             key={pillar.number}
-            className={`flex flex-col gap-2 flex-1 py-7 px-8 ${
-              i < pillars.length - 1 ? "border-r border-border" : ""
+            className={`flex flex-col gap-2 flex-1 py-5 md:py-7 px-6 md:px-8 ${
+              i < pillars.length - 1 ? "md:border-r border-border" : ""
             }`}
           >
             <span className="text-[11px] font-medium text-accent">
@@ -86,7 +86,7 @@ export default function Home() {
       </section>
 
       {/* Latest Research Header */}
-      <section className="flex items-center justify-between w-full px-16 pt-12 pb-8">
+      <section className="flex items-center justify-between w-full px-6 sm:px-10 lg:px-16 pt-12 pb-8">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
           // Latest Research
         </p>
@@ -99,11 +99,11 @@ export default function Home() {
       {briefs.map((brief, i) => (
         <article
           key={i}
-          className={`flex items-start gap-12 w-full px-16 py-8 border-t border-border ${
+          className={`flex flex-col md:flex-row items-start gap-4 md:gap-12 w-full px-6 sm:px-10 lg:px-16 py-8 border-t border-border ${
             i === briefs.length - 1 ? "border-b" : ""
           }`}
         >
-          <div className="w-[140px] shrink-0">
+          <div className="w-full md:w-[140px] shrink-0">
             <p className="text-[11px] font-medium tracking-[0.06em] uppercase text-accent">
               {brief.tag}
             </p>
@@ -124,11 +124,11 @@ export default function Home() {
       ))}
 
       {/* Founding Charter / Position Statement */}
-      <section className="flex flex-col w-full px-16 py-24 gap-8 bg-dark">
+      <section className="flex flex-col w-full px-6 sm:px-10 lg:px-16 py-14 md:py-24 gap-8 bg-dark">
         <p className="text-[11px] font-medium tracking-[3px] uppercase text-accent">
           // Our Position
         </p>
-        <h2 className="text-[36px] font-extralight leading-[1.3] text-light max-w-[1000px]">
+        <h2 className="text-[26px] md:text-[36px] font-extralight leading-[1.3] text-light max-w-[1000px]">
           AI governance cannot wait for perfect information. We believe in
           learning by doing — iteratively.
         </h2>
@@ -146,11 +146,11 @@ export default function Home() {
       </section>
 
       {/* Get Involved CTA */}
-      <section className="flex flex-col w-full px-16 py-24 gap-8 border-b border-border">
+      <section className="flex flex-col w-full px-6 sm:px-10 lg:px-16 py-14 md:py-24 gap-8 border-b border-border">
         <p className="text-[11px] font-medium tracking-[3px] uppercase text-accent">
           // Get Involved
         </p>
-        <h2 className="text-[48px] font-extralight leading-[1.15] max-w-[900px]">
+        <h2 className="text-[30px] md:text-[48px] font-extralight leading-[1.15] max-w-[900px]">
           The future of AI governance is being written now. Help us get it
           right.
         </h2>
@@ -158,7 +158,7 @@ export default function Home() {
           Join policymakers, researchers, and technologists shaping responsible
           AI governance worldwide.
         </p>
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row gap-4">
           <Link
             href="/community"
             className="flex items-center px-7 py-3.5 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
@@ -178,8 +178,8 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="flex flex-col gap-10 w-full px-16 py-12 bg-cream-dark">
-        <div className="flex justify-between">
+      <footer className="flex flex-col gap-10 w-full px-6 sm:px-10 lg:px-16 py-12 bg-cream-dark">
+        <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-0">
           <div className="max-w-[340px]">
             <Link href="/" className="text-[16px] font-medium block mb-4 hover:text-accent transition-colors">
               AI Policy Exchange
@@ -189,7 +189,7 @@ export default function Home() {
               through research, dialogue, and actionable frameworks.
             </p>
           </div>
-          <div className="flex gap-16">
+          <div className="flex flex-col sm:flex-row gap-8 sm:gap-10 lg:gap-16">
             <div className="flex flex-col gap-3.5">
               <p className="text-[10px] font-medium tracking-[2px] uppercase text-[#A8A098]">
                 // Research
@@ -217,7 +217,7 @@ export default function Home() {
           </div>
         </div>
         <div className="w-full h-px bg-border" />
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
           <span className="text-[11px] font-light text-[#A8A098]">
             &copy; 2026 AI Policy Exchange. All rights reserved.
           </span>

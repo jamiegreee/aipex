@@ -15,11 +15,11 @@ export default function Charter() {
       <Navigation />
 
       {/* Hero */}
-      <section className="flex flex-col gap-6 w-full px-16 pt-[100px] pb-[80px] border-b border-border">
+      <section className="flex flex-col gap-6 w-full px-6 sm:px-10 lg:px-16 pt-14 md:pt-[100px] pb-12 md:pb-[80px] border-b border-border">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
           // Founding Charter
         </p>
-        <h1 className="text-[48px] font-light leading-[64px] tracking-[-0.03em] max-w-[900px]">
+        <h1 className="text-[30px] md:text-[48px] font-light leading-[40px] md:leading-[64px] tracking-[-0.03em] max-w-[900px]">
           AI governance cannot wait for perfect information
         </h1>
         <p className="text-[15px] font-light leading-[26px] text-muted max-w-[640px]">
@@ -29,7 +29,7 @@ export default function Charter() {
       </section>
 
       {/* Body */}
-      <section className="w-full px-16 py-16 max-w-[800px]">
+      <section className="w-full px-6 sm:px-10 lg:px-16 py-10 md:py-16 max-w-full md:max-w-[800px]">
         <div className="flex flex-col gap-12">
           <div>
             <h2 className="text-[24px] font-normal leading-[34px] mb-4">
@@ -147,7 +147,7 @@ export default function Charter() {
       </section>
 
       {/* Signed */}
-      <section className="w-full px-16 py-12 border-t border-border">
+      <section className="w-full px-6 sm:px-10 lg:px-16 py-10 md:py-12 border-t border-border">
         <p className="text-[14px] font-light text-muted italic mb-2">
           Jamie Green
         </p>
@@ -157,7 +157,7 @@ export default function Charter() {
       </section>
 
       {/* CTA */}
-      <section className="flex items-center justify-between w-full px-16 py-12 border-t border-border">
+      <section className="flex flex-col md:flex-row items-start md:items-center justify-between w-full px-6 sm:px-10 lg:px-16 py-10 md:py-12 gap-6 md:gap-0 border-t border-border">
         <div className="max-w-[600px]">
           <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
             // Get involved

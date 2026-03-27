@@ -41,11 +41,11 @@ export default function Research() {
       <Navigation />
 
       {/* Hero */}
-      <section className="flex flex-col gap-6 w-full px-16 pt-[100px] pb-[80px] border-b border-border">
+      <section className="flex flex-col gap-6 w-full px-6 sm:px-10 lg:px-16 pt-14 md:pt-[100px] pb-12 md:pb-[80px] border-b border-border">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
           // Publications
         </p>
-        <h1 className="text-[48px] font-light leading-[64px] tracking-[-0.03em] max-w-[800px]">
+        <h1 className="text-[30px] md:text-[48px] font-light leading-[40px] md:leading-[64px] tracking-[-0.03em] max-w-[800px]">
           Research &amp; policy briefs
         </h1>
         <p className="text-[15px] font-light leading-[26px] text-muted max-w-[580px]">
@@ -60,9 +60,9 @@ export default function Research() {
         <Link
           key={brief.href}
           href={brief.href}
-          className="group flex items-start gap-12 w-full px-16 py-10 border-b border-border hover:bg-cream-dark transition-colors"
+          className="group flex flex-col md:flex-row items-start gap-4 md:gap-12 w-full px-6 sm:px-10 lg:px-16 py-8 md:py-10 border-b border-border hover:bg-cream-dark transition-colors"
         >
-          <div className="w-[160px] shrink-0">
+          <div className="w-full md:w-[160px] shrink-0">
             <p className="text-[11px] font-medium tracking-[0.06em] uppercase text-accent">
               {brief.tag}
             </p>
@@ -77,14 +77,14 @@ export default function Research() {
               {brief.summary}
             </p>
           </div>
-          <span className="text-[15px] text-accent shrink-0 mt-2">
+          <span className="text-[15px] text-accent shrink-0 mt-0 md:mt-2">
             Read &rarr;
           </span>
         </Link>
       ))}
 
       {/* More coming */}
-      <section className="flex flex-col items-center w-full px-16 py-20">
+      <section className="flex flex-col items-center w-full px-6 sm:px-10 lg:px-16 py-12 md:py-20">
         <p className="text-[14px] text-muted">More briefs coming soon.</p>
       </section>
 

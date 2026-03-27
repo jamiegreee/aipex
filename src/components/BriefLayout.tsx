@@ -38,7 +38,7 @@ export default function BriefLayout({
       <Navigation />
 
       {/* Header */}
-      <section className="w-full px-16 pt-[80px] pb-[60px] border-b border-border">
+      <section className="w-full px-6 sm:px-10 lg:px-16 pt-12 md:pt-[80px] pb-10 md:pb-[60px] border-b border-border">
         <div className="flex items-center gap-3 mb-6">
           <span className="text-xs font-medium tracking-[0.06em] uppercase text-accent">
             {tag}
@@ -48,10 +48,10 @@ export default function BriefLayout({
           <span className="w-1 h-1 rounded-full bg-muted" />
           <span className="text-xs text-muted">{readTime}</span>
         </div>
-        <h1 className="text-[40px] font-light leading-[56px] tracking-[-0.03em] max-w-[900px] mb-6">
+        <h1 className="text-[28px] md:text-[40px] font-light leading-[38px] md:leading-[56px] tracking-[-0.03em] max-w-[900px] mb-6">
           {title}
         </h1>
-        <p className="text-[16px] font-light leading-[28px] text-muted max-w-[720px] mb-8">
+        <p className="text-[16px] font-light leading-[28px] text-muted max-w-full md:max-w-[720px] mb-8">
           {subtitle}
         </p>
         <div className="flex items-center gap-3">
@@ -64,9 +64,9 @@ export default function BriefLayout({
       </section>
 
       {/* Body + Sidebar */}
-      <section className="flex gap-16 w-full px-16 py-16">
+      <section className="flex flex-col lg:flex-row gap-10 lg:gap-16 w-full px-6 sm:px-10 lg:px-16 py-10 lg:py-16">
         {/* Article body */}
-        <div className="flex-1 max-w-[720px]">
+        <div className="flex-1 max-w-full lg:max-w-[720px]">
           {children}
 
           {/* Key Recommendation */}
@@ -81,7 +81,7 @@ export default function BriefLayout({
         </div>
 
         {/* Sidebar */}
-        <aside className="w-[280px] shrink-0">
+        <aside className="w-full lg:w-[280px] shrink-0 border-t lg:border-t-0 border-border pt-8 lg:pt-0">
           <div className="mb-8">
             <p className="text-[11px] font-medium tracking-[0.06em] uppercase text-muted mb-4">
               In this brief
@@ -120,7 +120,7 @@ export default function BriefLayout({
       </section>
 
       {/* Back to research */}
-      <section className="flex items-center w-full px-16 py-8 border-t border-border">
+      <section className="flex items-center w-full px-6 sm:px-10 lg:px-16 py-8 border-t border-border">
         <Link href="/research" className="text-[14px] text-accent hover:opacity-80 transition-opacity">
           &larr; All publications
         </Link>

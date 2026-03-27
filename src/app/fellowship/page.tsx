@@ -19,12 +19,12 @@ const modules = [
   {
     number: "01",
     title: "The AI Technology Landscape",
-    description: "What policymakers actually need to understand about how AI systems work, their capabilities, and their limitations. No CS degree required \u2014 but no hand-waving either.",
+    description: "What policymakers actually need to understand about how AI systems work, their capabilities, and their limitations. No CS degree required — but no hand-waving either.",
   },
   {
     number: "02",
     title: "Governance Frameworks",
-    description: "Comparative analysis of how different jurisdictions govern AI. EU AI Act, US executive orders, UK pro-innovation approach, China\u2019s framework. What works, what doesn\u2019t, and why.",
+    description: "Comparative analysis of how different jurisdictions govern AI. EU AI Act, US executive orders, UK pro-innovation approach, China's framework. What works, what doesn't, and why.",
   },
   {
     number: "03",
@@ -50,7 +50,7 @@ const audiences = [
   },
   {
     title: "Technologists",
-    description: "Engineers, product managers, or researchers who want to engage with the governance side. You build technology and want to shape how it\u2019s governed.",
+    description: "Engineers, product managers, or researchers who want to engage with the governance side. You build technology and want to shape how it's governed.",
   },
   {
     title: "Cross-sector leaders",
@@ -62,12 +62,12 @@ const outcomes = [
   {
     number: "1",
     title: "A published policy brief",
-    description: "Your capstone brief is published by the Exchange \u2014 a real portfolio piece for your career.",
+    description: "Your capstone brief is published by the Exchange — a real portfolio piece for your career.",
   },
   {
     number: "2",
     title: "A cross-sector network",
-    description: "15 peers from tech, policy, civil service, and academia \u2014 the people who\u2019ll shape AI governance alongside you.",
+    description: "15 peers from tech, policy, civil service, and academia — the people who'll shape AI governance alongside you.",
   },
   {
     number: "3",
@@ -87,14 +87,14 @@ export default function Fellowship() {
       <Navigation />
 
       {/* Hero */}
-      <section className="flex flex-col gap-8 w-full px-16 pt-[100px] pb-[80px] border-b border-border">
+      <section className="flex flex-col gap-8 w-full px-6 sm:px-10 lg:px-16 pt-14 md:pt-[100px] pb-12 md:pb-[80px] border-b border-border">
         <div className="flex items-center gap-3">
           <span className="w-2 h-2 rounded-full bg-accent" />
           <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
             AI Governance Fellowship
           </p>
         </div>
-        <h1 className="text-[48px] font-light leading-[72px] tracking-[-0.03em] max-w-[900px]">
+        <h1 className="text-[30px] md:text-[48px] font-light leading-[40px] md:leading-[72px] tracking-[-0.03em] max-w-[900px]">
           Become one of the people who shape how AI is governed
         </h1>
         <p className="text-[16px] font-light leading-[28px] text-muted max-w-[640px]">
@@ -102,7 +102,7 @@ export default function Fellowship() {
           12 weeks. Part-time. You leave with published work, a powerful network,
           and the knowledge to lead.
         </p>
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
           <Link
             href="/community"
             className="flex items-center px-7 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
@@ -116,15 +116,15 @@ export default function Fellowship() {
       </section>
 
       {/* Stats */}
-      <section className="flex w-full border-b border-border">
+      <section className="grid grid-cols-2 md:flex w-full border-b border-border">
         {stats.map((stat, i) => (
           <div
             key={stat.label}
-            className={`flex flex-col gap-3 flex-1 py-16 px-8 ${
-              i < stats.length - 1 ? "border-r border-border" : ""
+            className={`flex flex-col gap-3 flex-1 py-8 md:py-16 px-6 md:px-8 ${
+              i < stats.length - 1 ? "md:border-r border-border" : ""
             }`}
           >
-            <span className="text-[48px] font-light leading-[58px] tracking-[-0.03em]">
+            <span className="text-[36px] md:text-[48px] font-light leading-[58px] tracking-[-0.03em]">
               {stat.value}
             </span>
             <span className="text-[14px] text-muted">{stat.label}</span>
@@ -133,19 +133,19 @@ export default function Fellowship() {
       </section>
 
       {/* Curriculum */}
-      <section className="w-full px-16 pt-16 pb-8">
+      <section className="w-full px-6 sm:px-10 lg:px-16 pt-12 md:pt-16 pb-8">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent mb-3">
           Curriculum
         </p>
-        <h2 className="text-[40px] font-light leading-[52px] mb-10">
+        <h2 className="text-[28px] md:text-[40px] font-light leading-[52px] mb-10">
           What you&apos;ll learn
         </h2>
         {modules.map((mod) => (
           <div
             key={mod.number}
-            className="flex gap-8 py-10 border-t border-border"
+            className="flex gap-4 md:gap-8 py-8 md:py-10 border-t border-border"
           >
-            <span className="text-[48px] font-extralight leading-[58px] text-muted w-[60px] shrink-0">
+            <span className="text-[32px] md:text-[48px] font-extralight leading-[58px] text-muted w-[40px] md:w-[60px] shrink-0">
               {mod.number}
             </span>
             <div className="flex-1">
@@ -161,14 +161,14 @@ export default function Fellowship() {
       </section>
 
       {/* Who Should Apply */}
-      <section className="w-full px-16 pt-16 pb-16 border-t border-border">
+      <section className="w-full px-6 sm:px-10 lg:px-16 pt-12 md:pt-16 pb-12 md:pb-16 border-t border-border">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent mb-3">
           Who should apply
         </p>
-        <h2 className="text-[40px] font-light leading-[52px] mb-10">
+        <h2 className="text-[28px] md:text-[40px] font-light leading-[52px] mb-10">
           Is this for you?
         </h2>
-        <div className="flex gap-10 mb-8">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-10 mb-8">
           {audiences.map((audience) => (
             <div key={audience.title} className="flex-1 border border-border p-8">
               <h3 className="text-[18px] font-medium leading-[28px] mb-3">
@@ -186,7 +186,7 @@ export default function Fellowship() {
       </section>
 
       {/* What You Get */}
-      <section className="flex gap-16 w-full px-16 py-20 bg-dark">
+      <section className="flex flex-col lg:flex-row gap-10 lg:gap-16 w-full px-6 sm:px-10 lg:px-16 py-12 md:py-20 bg-dark">
         <div className="max-w-[600px]">
           <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent mb-3">
             What you leave with
@@ -215,15 +215,15 @@ export default function Fellowship() {
       </section>
 
       {/* Apply CTA */}
-      <section className="flex flex-col items-center w-full px-16 py-20 gap-6 border-b border-border">
-        <h2 className="text-[36px] font-light leading-[52px] text-center max-w-[620px]">
+      <section className="flex flex-col items-center w-full px-6 sm:px-10 lg:px-16 py-12 md:py-20 gap-6 border-b border-border">
+        <h2 className="text-[26px] md:text-[36px] font-light leading-[52px] text-center max-w-[620px]">
           Ready to shape the future of AI governance?
         </h2>
         <p className="text-[14px] text-muted text-center">
           Cohort 1 applications open Autumn 2027. Register your interest now and
           we&apos;ll notify you when applications go live.
         </p>
-        <div className="flex gap-4 mt-2">
+        <div className="flex flex-col sm:flex-row gap-4 mt-2">
           <Link
             href="/community"
             className="flex items-center px-7 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
