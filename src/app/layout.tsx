@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -21,6 +22,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${jetbrainsMono.variable} antialiased`}>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-DPM40ZB0PN"
+        strategy="afterInteractive"
+      />
+      <Script id="gtag-init" strategy="afterInteractive">
+        {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-DPM40ZB0PN');`}
+      </Script>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
