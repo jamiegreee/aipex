@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 
 const pillars = [
   { number: "01", label: "Economy & Labour" },
@@ -31,13 +30,6 @@ const briefs = [
     summary: 'Government talks about being "pro-innovation" on AI. But does the British state have the technical capacity and institutional knowledge to actually deliver?',
     href: "/research/state-capacity-ai",
   },
-];
-
-const communityBenefits = [
-  "Weekly newsletter with curated AI policy analysis",
-  "Slack community for discussion and networking",
-  "Events, seminars, and roundtables",
-  "Opportunities to contribute to policy briefs",
 ];
 
 export default function Home() {
@@ -131,71 +123,111 @@ export default function Home() {
         </article>
       ))}
 
-      {/* Position Statement */}
-      <section className="flex flex-col items-center w-full px-16 py-[100px] gap-9 bg-dark">
-        <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-accent">
+      {/* Founding Charter / Position Statement */}
+      <section className="flex flex-col w-full px-16 py-24 gap-8 bg-dark">
+        <p className="text-[11px] font-medium tracking-[3px] uppercase text-accent">
           // Our Position
         </p>
-        <div className="max-w-[900px]">
-          <p className="text-[18px] font-light leading-[34px] tracking-[-0.01em] text-center text-light">
-            &ldquo;Neither safetyist nor accelerationist. We believe AI is a
-            strategic opportunity that requires thoughtful governance — and
-            that capability and responsibility are complementary, not in
-            tension.&rdquo;
-          </p>
-        </div>
-      </section>
-
-      {/* Fellowship Banner */}
-      <section className="flex items-center justify-between w-full px-16 py-12 border-b border-border">
-        <div className="max-w-[600px]">
-          <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
-            // Fellowship
-          </p>
-          <h2 className="text-[28px] font-normal leading-[34px] mt-3">
-            Developing the next generation of AI governance leaders
-          </h2>
-          <p className="text-[13px] text-muted mt-3">
-            12-week cohort programme — Applications open Autumn 2027
-          </p>
-        </div>
+        <h2 className="text-[36px] font-extralight leading-[1.3] text-light max-w-[1000px]">
+          AI governance cannot wait for perfect information. We believe in
+          learning by doing — iteratively.
+        </h2>
+        <p className="text-[14px] font-light leading-[1.6] text-muted max-w-[800px]">
+          The pace of AI development demands that policy frameworks evolve in
+          real time. We bring together the people who build these systems and the
+          people who govern them — because neither can succeed alone.
+        </p>
         <Link
-          href="/fellowship"
-          className="flex items-center px-7 py-3 border border-border text-[13px] hover:border-ink transition-colors"
+          href="/about"
+          className="flex items-center w-fit px-7 py-3.5 border border-[#C4BEB2] text-light text-[12px] hover:border-light transition-colors mt-2"
         >
-          Learn more &rarr;
+          Read Our Founding Charter &rarr;
         </Link>
       </section>
 
-      {/* Community CTA */}
-      <section className="flex w-full px-16 py-20 gap-20 border-b border-border">
-        <div className="max-w-[616px]">
-          <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
-            // Join the Exchange
-          </p>
-          <h2 className="text-[32px] font-normal leading-[40px] mt-4">
-            A community for the next generation of AI governance
-          </h2>
-        </div>
-        <div className="flex flex-col gap-5 max-w-[616px]">
-          {communityBenefits.map((benefit) => (
-            <div key={benefit} className="flex items-center gap-4">
-              <span className="text-accent text-[13px]">&rarr;</span>
-              <span className="text-[15px] font-light leading-[20px]">
-                {benefit}
-              </span>
-            </div>
-          ))}
+      {/* Get Involved CTA */}
+      <section className="flex flex-col w-full px-16 py-24 gap-8 border-b border-border">
+        <p className="text-[11px] font-medium tracking-[3px] uppercase text-accent">
+          // Get Involved
+        </p>
+        <h2 className="text-[48px] font-extralight leading-[1.15] max-w-[900px]">
+          The future of AI governance is being written now. Help us get it
+          right.
+        </h2>
+        <p className="text-[14px] font-light leading-[1.6] text-muted max-w-[680px]">
+          Join policymakers, researchers, and technologists shaping responsible
+          AI governance worldwide.
+        </p>
+        <div className="flex gap-4">
           <Link
             href="/community"
-            className="mt-4 flex items-center justify-center w-fit px-8 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
+            className="flex items-center px-7 py-3.5 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
           >
             Join the Exchange &rarr;
           </Link>
+          <Link
+            href="/community"
+            className="flex items-center px-7 py-3.5 border border-[#C4BEB2] text-[13px] hover:border-ink transition-colors"
+          >
+            Subscribe to Updates &rarr;
+          </Link>
         </div>
+        <p className="text-[11px] font-light text-[#A8A098]">
+          Free to join &middot; No spam &middot; Unsubscribe anytime
+        </p>
       </section>
 
-      <Footer />
+      {/* Footer */}
+      <footer className="flex flex-col gap-10 w-full px-16 py-12 bg-cream-dark">
+        <div className="flex justify-between">
+          <div className="max-w-[340px]">
+            <Link href="/" className="text-[16px] font-medium block mb-4 hover:text-accent transition-colors">
+              AI Policy Exchange
+            </Link>
+            <p className="text-[12px] font-light leading-[1.5] text-muted">
+              Bridging the gap between AI innovation and responsible governance
+              through research, dialogue, and actionable frameworks.
+            </p>
+          </div>
+          <div className="flex gap-16">
+            <div className="flex flex-col gap-3.5">
+              <p className="text-[10px] font-medium tracking-[2px] uppercase text-[#A8A098]">
+                // Research
+              </p>
+              <Link href="/research" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Policy Briefs</Link>
+              <Link href="/research" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Working Papers</Link>
+              <Link href="/research" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Annual Report</Link>
+            </div>
+            <div className="flex flex-col gap-3.5">
+              <p className="text-[10px] font-medium tracking-[2px] uppercase text-[#A8A098]">
+                // Programs
+              </p>
+              <Link href="/community" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Roundtables</Link>
+              <Link href="/fellowship" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Fellowship</Link>
+              <Link href="/community" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Events Calendar</Link>
+            </div>
+            <div className="flex flex-col gap-3.5">
+              <p className="text-[10px] font-medium tracking-[2px] uppercase text-[#A8A098]">
+                // Organisation
+              </p>
+              <Link href="/about" className="text-[12px] font-light text-muted hover:text-ink transition-colors">About Us</Link>
+              <Link href="/about" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Team</Link>
+              <Link href="/contact" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Contact</Link>
+            </div>
+          </div>
+        </div>
+        <div className="w-full h-px bg-border" />
+        <div className="flex justify-between items-center">
+          <span className="text-[11px] font-light text-[#A8A098]">
+            &copy; 2026 AI Policy Exchange. All rights reserved.
+          </span>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="text-[11px] font-light text-[#A8A098] hover:text-ink transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="text-[11px] font-light text-[#A8A098] hover:text-ink transition-colors">Terms of Use</Link>
+            <Link href="/privacy" className="text-[11px] font-light text-[#A8A098] hover:text-ink transition-colors">Accessibility</Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
