@@ -1,3 +1,7 @@
+import Link from "next/link";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+
 const pillars = [
   { number: "01", label: "Economy & Labour" },
   { number: "02", label: "State Capacity" },
@@ -9,25 +13,23 @@ const briefs = [
   {
     tag: "Economy",
     date: "2026.03.19",
-    title:
-      "What the AI transition means for the UK labour market — beyond the headlines",
-    summary:
-      "The debate about AI and jobs oscillates between utopian and apocalyptic. Neither is useful. This brief examines what the evidence actually shows about near-term labour market disruption.",
+    title: "What the AI transition means for the UK labour market — beyond the headlines",
+    summary: "The debate about AI and jobs oscillates between utopian and apocalyptic. Neither is useful. This brief examines what the evidence actually shows about near-term labour market disruption.",
+    href: "/research/ai-labour-market",
   },
   {
     tag: "Governance",
     date: "2026.03.26",
-    title:
-      'Why "AI regulation" is the wrong frame — and what to do instead',
-    summary:
-      "AI governance is not about constraining a static technology — it\u2019s about building institutional capacity to manage a transition already underway.",
+    title: 'Why "AI regulation" is the wrong frame — and what to do instead',
+    summary: "AI governance is not about constraining a static technology \u2014 it\u2019s about building institutional capacity to manage a transition already underway.",
+    href: "/research/ai-regulation-wrong-frame",
   },
   {
     tag: "State",
     date: "2026.04.09",
     title: "State capacity for AI: is Whitehall ready?",
-    summary:
-      'Government talks about being "pro-innovation" on AI. But does the British state have the technical capacity and institutional knowledge to actually deliver?',
+    summary: 'Government talks about being "pro-innovation" on AI. But does the British state have the technical capacity and institutional knowledge to actually deliver?',
+    href: "/research/state-capacity-ai",
   },
 ];
 
@@ -41,24 +43,7 @@ const communityBenefits = [
 export default function Home() {
   return (
     <div className="flex flex-col w-full font-mono">
-      {/* Navigation */}
-      <nav className="flex items-center justify-between w-full px-16 py-6 border-b border-border">
-        <span className="text-[15px] font-medium tracking-tight">
-          AI Policy Exchange
-        </span>
-        <div className="flex items-center gap-8">
-          <a href="#research" className="text-[13px] hover:text-accent transition-colors">Research</a>
-          <a href="#about" className="text-[13px] hover:text-accent transition-colors">About</a>
-          <a href="#fellowship" className="text-[13px] hover:text-accent transition-colors">Fellowship</a>
-          <a href="#community" className="text-[13px] hover:text-accent transition-colors">Community</a>
-          <a
-            href="#join"
-            className="text-[13px] font-medium text-cream bg-accent px-5 py-2 hover:opacity-90 transition-opacity"
-          >
-            Join &rarr;
-          </a>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero */}
       <section className="flex flex-col gap-12 w-full px-16 pt-[120px] pb-[140px] border-b border-border">
@@ -75,18 +60,18 @@ export default function Home() {
             questions that matter.
           </p>
           <div className="flex gap-4">
-            <a
-              href="#research"
+            <Link
+              href="/research"
               className="flex items-center px-7 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
             >
               Read latest
-            </a>
-            <a
-              href="#community"
+            </Link>
+            <Link
+              href="/community"
               className="flex items-center px-7 py-3 border border-[#C4BEB2] text-[13px] hover:border-ink transition-colors"
             >
               Join community
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -109,16 +94,13 @@ export default function Home() {
       </section>
 
       {/* Latest Research Header */}
-      <section
-        id="research"
-        className="flex items-center justify-between w-full px-16 pt-12 pb-8"
-      >
+      <section className="flex items-center justify-between w-full px-16 pt-12 pb-8">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
           // Latest Research
         </p>
-        <a href="#" className="text-[13px] text-muted hover:text-ink transition-colors">
+        <Link href="/research" className="text-[13px] text-muted hover:text-ink transition-colors">
           View all &rarr;
-        </a>
+        </Link>
       </section>
 
       {/* Brief Rows */}
@@ -143,9 +125,9 @@ export default function Home() {
               {brief.summary}
             </p>
           </div>
-          <a href="#" className="text-[15px] text-accent shrink-0 hover:opacity-80 transition-opacity">
+          <Link href={brief.href} className="text-[15px] text-accent shrink-0 hover:opacity-80 transition-opacity">
             Read &rarr;
-          </a>
+          </Link>
         </article>
       ))}
 
@@ -165,10 +147,7 @@ export default function Home() {
       </section>
 
       {/* Fellowship Banner */}
-      <section
-        id="fellowship"
-        className="flex items-center justify-between w-full px-16 py-12 border-b border-border"
-      >
+      <section className="flex items-center justify-between w-full px-16 py-12 border-b border-border">
         <div className="max-w-[600px]">
           <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
             // Fellowship
@@ -180,19 +159,16 @@ export default function Home() {
             12-week cohort programme — Applications open Autumn 2027
           </p>
         </div>
-        <a
-          href="#"
+        <Link
+          href="/fellowship"
           className="flex items-center px-7 py-3 border border-border text-[13px] hover:border-ink transition-colors"
         >
           Learn more &rarr;
-        </a>
+        </Link>
       </section>
 
       {/* Community CTA */}
-      <section
-        id="community"
-        className="flex w-full px-16 py-20 gap-20 border-b border-border"
-      >
+      <section className="flex w-full px-16 py-20 gap-20 border-b border-border">
         <div className="max-w-[616px]">
           <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
             // Join the Exchange
@@ -210,29 +186,16 @@ export default function Home() {
               </span>
             </div>
           ))}
-          <a
-            href="#join"
+          <Link
+            href="/community"
             className="mt-4 flex items-center justify-center w-fit px-8 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
           >
             Join the Exchange &rarr;
-          </a>
+          </Link>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="flex items-center justify-between w-full px-16 py-8 bg-cream-dark">
-        <span className="text-[11px] text-muted">
-          &copy; 2026 AI Policy Exchange
-        </span>
-        <span className="text-[11px] text-muted">
-          hello@aipolicyexchange.org
-        </span>
-        <div className="flex gap-6">
-          <a href="#" className="text-[11px] text-muted hover:text-ink transition-colors">X</a>
-          <a href="#" className="text-[11px] text-muted hover:text-ink transition-colors">LinkedIn</a>
-          <a href="#" className="text-[11px] text-muted hover:text-ink transition-colors">Privacy</a>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
