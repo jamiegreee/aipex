@@ -97,12 +97,12 @@ export default function Community() {
           Sign up to receive the weekly newsletter and get access to the Slack
           community, events, and more.
         </p>
-        <a
-          href="mailto:hello@aipolicyexchange.org"
+        <Link
+          href="/contact"
           className="flex items-center px-8 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
         >
           Join the Exchange &rarr;
-        </a>
+        </Link>
       </section>
 
       {/* Fellowship pointer */}

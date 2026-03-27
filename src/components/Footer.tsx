@@ -6,8 +6,8 @@ export default function Footer() {
       <span className="text-[11px] text-muted">
         &copy; 2026 AI Policy Exchange
       </span>
-      <a href="mailto:hello@aipolicyexchange.org" className="text-[11px] text-muted hover:text-ink transition-colors">
-        hello@aipolicyexchange.org
+      <a href="https://theaipex.org" target="_blank" rel="noopener noreferrer" className="text-[11px] text-muted hover:text-ink transition-colors">
+        theaipex.org
       </a>
       <div className="flex gap-6">
         <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-[11px] text-muted hover:text-ink transition-colors">X</a>

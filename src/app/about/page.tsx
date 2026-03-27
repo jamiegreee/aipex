@@ -146,9 +146,9 @@ export default function About() {
           We are assembling an advisory board of leading practitioners, technologists,
           and policymakers. Interested in joining? Get in touch.
         </p>
-        <a href="mailto:hello@aipolicyexchange.org" className="text-[14px] text-accent hover:opacity-80 transition-opacity">
+        <Link href="/contact" className="text-[14px] text-accent hover:opacity-80 transition-opacity">
           Contact us &rarr;
-        </a>
+        </Link>
       </section>
 
       <Footer />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
@@ -58,10 +59,10 @@ export default function Privacy() {
             <h2 className="text-[18px] font-normal leading-[28px] mb-3">Your rights</h2>
             <p className="text-[14px] font-light leading-[26px] text-muted">
               You can request access to, correction of, or deletion of your
-              personal data at any time by emailing{" "}
-              <a href="mailto:hello@aipolicyexchange.org" className="text-accent hover:opacity-80 transition-opacity">
-                hello@aipolicyexchange.org
-              </a>
+              personal data at any time via our{" "}
+              <Link href="/contact" className="text-accent hover:opacity-80 transition-opacity">
+                contact page
+              </Link>
               . You can unsubscribe from the newsletter at any time using the
               link in any email.
             </p>
@@ -79,10 +80,10 @@ export default function Privacy() {
           <div>
             <h2 className="text-[18px] font-normal leading-[28px] mb-3">Contact</h2>
             <p className="text-[14px] font-light leading-[26px] text-muted">
-              For any privacy-related questions, contact us at{" "}
-              <a href="mailto:hello@aipolicyexchange.org" className="text-accent hover:opacity-80 transition-opacity">
-                hello@aipolicyexchange.org
-              </a>
+              For any privacy-related questions,{" "}
+              <Link href="/contact" className="text-accent hover:opacity-80 transition-opacity">
+                get in touch
+              </Link>
               .
             </p>
           </div>
