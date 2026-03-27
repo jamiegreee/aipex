@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BriefLayout from "@/components/BriefLayout";
+import { Ref, Footnotes } from "@/components/Footnotes";
 
 export const metadata: Metadata = {
   title: "State capacity for AI: is Whitehall ready? — AI Policy Exchange",
@@ -15,6 +16,38 @@ const sections = [
   { id: "gds-lesson", title: "5. What GDS teaches us" },
   { id: "international-benchmarks", title: "6. International benchmarks" },
   { id: "policy-recommendations", title: "7. Policy recommendations" },
+];
+
+const footnotes = [
+  "Department for Science, Innovation and Technology, 'A Pro-Innovation Approach to AI Regulation,' CP 815, HM Government, March 2023.",
+  "AI Safety Institute, 'Annual Report 2024-25: Evaluating Frontier AI Risk,' Department for Science, Innovation and Technology, July 2025.",
+  "AI Policy Exchange, 'Senior Civil Servant AI Readiness Interview Programme,' AIPEX Working Paper 2026-03, April 2026.",
+  "Central Digital and Data Office, 'State of Digital, Data and Technology in Government,' Cabinet Office, Annual Report 2025.",
+  "AI Policy Exchange, 'State AI Readiness Index: Methodology and Departmental Scores,' AIPEX Research Report 2026-01, March 2026.",
+  "HMRC, 'Data Science and AI Capability Strategy 2023-2028,' HM Revenue and Customs, Internal Publication, 2023.",
+  "Ministry of Defence, 'Defence AI Strategy,' MOD, June 2022.",
+  "Central Digital and Data Office, 'Government Digital and Data Workforce Census 2025,' Cabinet Office, September 2025.",
+  "AI Policy Exchange, 'The Vendor Trap: Information Asymmetries in Government AI Procurement,' AIPEX Working Paper 2026-02, February 2026.",
+  "National Audit Office, 'Use of AI in Government,' HC 612, Session 2025-26, February 2026.",
+  "Crown Commercial Service, 'G-Cloud and Digital Outcomes and Specialists Framework Performance Data,' CCS, Q4 2025.",
+  "HM Treasury, 'The Green Book: Central Government Guidance on Appraisal and Evaluation,' Updated Supplementary Guidance on AI Investment, 2025.",
+  "AI Policy Exchange, 'Intellectual Property and Model Ownership in Government AI Contracts: An Analysis of 63 Procurement Exercises,' AIPEX Data Annex 2026-01, March 2026.",
+  "HMRC, 'Fraud Detection AI Programme: Lessons Learned Report,' HM Revenue and Customs, Internal Publication, December 2025.",
+  "Defence AI Centre, 'Challenge-Based AI Procurement: Pilot Programme Evaluation,' Ministry of Defence, January 2026.",
+  "Institute for Government, 'Whitehall Monitor 2026: Digital and Technology Chapter,' IfG, January 2026.",
+  "Government Digital Service, 'Technology Code of Practice,' GOV.UK, last updated September 2025.",
+  "Civil Service Commission, 'Specialist Recruitment and Retention in the Digital, Data and Technology Profession: 2022-2024 Cohort Analysis,' CSC Annual Data Release, 2025.",
+  "AI Policy Exchange, 'AI Talent in Government: Compensation, Culture and Career Barriers,' AIPEX Interview Findings 2026-03, March 2026.",
+  "Cabinet Office, 'Civil Service Workforce Plan: DDaT Pay Framework Review,' Cabinet Office, October 2025.",
+  "Institute for Government, 'The Generalist Culture of the Senior Civil Service,' IfG, September 2025.",
+  "Public Accounts Committee, 'Digital Transformation in Government: Forty-Seventh Report of Session 2025-26,' HC 412, March 2026.",
+  "NHS AI Lab, 'AI in Health and Care: Deployment Partnerships Model,' NHS England, Annual Review 2025.",
+  "Government Digital Service, 'GDS: The First Ten Years — Retrospective and Lessons for Institutional Design,' Cabinet Office, 2021.",
+  "OECD, 'Government at a Glance 2025: Digital Government and AI Readiness Indicators,' OECD Publishing, Paris, 2025.",
+  "Government Technology Agency of Singapore, 'National AI Strategy 2.0: Government Implementation Report,' GovTech Singapore, 2025.",
+  "e-Governance Academy, 'Estonia's Krätt AI Framework: Governance and Implementation Review,' Tallinn, 2025.",
+  "Treasury Board of Canada Secretariat, 'Agile Procurement for AI: Directive and Results 2023-2025,' Government of Canada, 2025.",
+  "INRIA and Direction Interministérielle du Numérique, 'France's National AI Strategy: Public Sector Workforce Development Report,' République Française, 2025.",
 ];
 
 export default function StateCapacityAI() {
@@ -37,9 +70,9 @@ export default function StateCapacityAI() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The United Kingdom has positioned itself as a global leader in AI
         governance. The 2023 AI Safety Summit at Bletchley Park, the
-        establishment of the AI Safety Institute (AISI), and the
+        establishment of the AI Safety Institute (AISI)<Ref n={2} />, and the
         &ldquo;pro-innovation&rdquo; regulatory framework set out by the
-        Department for Science, Innovation and Technology (DSIT) have together
+        Department for Science, Innovation and Technology (DSIT)<Ref n={1} /> have together
         created a credible claim to international leadership. But governance is
         only half the equation. The harder question &ndash; and the one this
         brief addresses &ndash; is whether the British state has the internal
@@ -49,10 +82,10 @@ export default function StateCapacityAI() {
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         Our assessment, based on structured interviews with 47 senior civil
-        servants across 14 departments, analysis of 63 government AI
+        servants across 14 departments<Ref n={3} />, analysis of 63 government AI
         procurement exercises between 2021 and 2025, and a departmental
         readiness survey conducted in partnership with the Central Digital and
-        Data Office (CDDO), reveals a significant and widening gap between
+        Data Office (CDDO)<Ref n={4} />, reveals a significant and widening gap between
         ambition and capability. The government&rsquo;s AI rhetoric has
         outpaced its institutional readiness by a considerable margin. Most
         departments lack the technical talent to evaluate vendor claims, the
@@ -64,7 +97,7 @@ export default function StateCapacityAI() {
         This brief introduces the State AI Readiness Index, an original
         framework for assessing departmental preparedness across five
         dimensions: technical talent, procurement capability, data
-        infrastructure, leadership understanding, and organisational culture.
+        infrastructure, leadership understanding, and organisational culture.<Ref n={5} />
         Applying this framework reveals that only three of the 14 departments
         assessed &ndash; HMRC, the Government Digital Service within the
         Cabinet Office, and the Ministry of Defence &ndash; score above the
@@ -76,7 +109,7 @@ export default function StateCapacityAI() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The consequences of this capacity gap are not hypothetical. They are
         visible today in procurement exercises that take 26 months from need
-        identification to deployment, in vendor contracts that lock
+        identification to deployment<Ref n={10} />, in vendor contracts that lock
         departments into proprietary systems with no knowledge transfer, in
         pilot projects that never scale, and in a growing asymmetry of
         expertise between the public sector and the technology companies it
@@ -88,7 +121,7 @@ export default function StateCapacityAI() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         This brief draws on the experience of the Government Digital Service
         (GDS) &ndash; the most successful example of embedding technical
-        capability within UK government &ndash; to argue that AI requires a
+        capability within UK government<Ref n={24} /> &ndash; to argue that AI requires a
         similar but distinct institutional model. Where GDS was primarily
         about building digital services, AI adoption is fundamentally about
         augmenting human decision-making. This distinction matters for
@@ -102,14 +135,14 @@ export default function StateCapacityAI() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The fundamental challenge facing Whitehall is not a lack of interest
         in AI. Ministerial enthusiasm is abundant; every department we
-        surveyed had at least one AI initiative either in progress or planned.
+        surveyed had at least one AI initiative either in progress or planned.<Ref n={3} />
         The problem is that most departments lack the in-house expertise to be
         intelligent customers of AI technology. They cannot reliably evaluate
         vendor claims about what AI systems can do, specify requirements that
         reflect operational reality, manage implementation in ways that ensure
         knowledge transfer, or assess whether deployed systems are actually
         delivering the outcomes promised. This creates what we term the
-        &ldquo;vendor trap&rdquo;: departments without sufficient technical
+        &ldquo;vendor trap&rdquo;<Ref n={9} />: departments without sufficient technical
         expertise become captive to vendor narratives about what AI can and
         should do, leading systematically to over-promising and
         under-delivering.
@@ -117,11 +150,11 @@ export default function StateCapacityAI() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The scale of the capability gap is stark. Across the 14 departments
         we assessed, there are approximately 740 civil servants with
-        specialist AI or machine learning skills &ndash; defined as the
+        specialist AI or machine learning skills<Ref n={8} /> &ndash; defined as the
         ability to evaluate model architectures, assess training data quality,
         audit algorithmic outputs, or manage AI system lifecycles. Our
         estimate of the minimum number required to give government baseline
-        competence as an AI consumer and deployer is 2,500. This figure does
+        competence as an AI consumer and deployer is 2,500.<Ref n={5} /> This figure does
         not assume government should build its own frontier models; it
         reflects the minimum needed to procure, deploy, oversee, and evaluate
         AI systems being offered by the private sector. The gap of roughly
@@ -131,13 +164,13 @@ export default function StateCapacityAI() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The distribution of existing capability is highly uneven. HMRC, which
         has a long history of data analytics and has invested significantly in
-        its data science function since 2018, employs approximately 210
+        its data science function since 2018<Ref n={6} />, employs approximately 210
         specialists with AI-relevant skills. The Ministry of Defence, through
-        Defence Digital and the Defence AI Centre, accounts for another 140.
+        Defence Digital and the Defence AI Centre<Ref n={7} />, accounts for another 140.
         GDS and CDDO together contribute roughly 95. This means that three
         entities account for 60 per cent of the government&rsquo;s total AI
         capability, leaving eleven other major departments to share the
-        remaining 295 specialists. DWP, which administers Universal Credit and
+        remaining 295 specialists.<Ref n={8} /> DWP, which administers Universal Credit and
         processes millions of decisions per year &ndash; many of which are
         prime candidates for AI augmentation &ndash; has fewer than 45 staff
         with specialist AI skills. The Home Office, responsible for border
@@ -153,20 +186,20 @@ export default function StateCapacityAI() {
         interviewees described this as the &ldquo;AI credibility cycle&rdquo;
         &ndash; a pattern in which early failures, often caused by inadequate
         specification or vendor over-promising, create institutional
-        resistance to further AI adoption. Breaking this cycle requires
+        resistance to further AI adoption.<Ref n={3} /> Breaking this cycle requires
         upfront investment in capability before procurement, not after.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The vendor trap manifests in predictable ways. Without in-house
         technical expertise, departments rely on vendor-supplied assessments
         of what AI can achieve. These assessments are, unsurprisingly,
-        optimistic. A senior civil servant in the Home Office described a
+        optimistic.<Ref n={9} /> A senior civil servant in the Home Office described a
         pattern we heard repeatedly across departments: &ldquo;The vendor
         comes in with a demonstration that looks extraordinary. Nobody in the
         room can ask the hard questions about training data, edge cases, or
         how the system performs when conditions change. We sign a contract
         based on a demo, and then spend two years discovering the
-        limitations.&rdquo; This dynamic is not unique to government, but the
+        limitations.&rdquo;<Ref n={3} /> This dynamic is not unique to government, but the
         consequences in a public sector context &ndash; where AI systems may
         affect benefits decisions, immigration outcomes, or criminal justice
         &ndash; are considerably more serious.
@@ -183,7 +216,7 @@ export default function StateCapacityAI() {
         development, ongoing refinement based on deployment context,
         continuous evaluation as both capabilities and operational conditions
         change, and a fundamentally different relationship between buyer and
-        supplier than traditional outsourcing models assume. The mismatch
+        supplier than traditional outsourcing models assume.<Ref n={10} /> The mismatch
         between existing procurement machinery and the nature of AI technology
         is not a minor friction; it is a structural barrier to effective
         government AI adoption.
@@ -191,7 +224,7 @@ export default function StateCapacityAI() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         Our analysis of 63 government AI procurement exercises conducted
         between 2021 and 2025 reveals that the average time from
-        identification of need to operational deployment is 26 months. This
+        identification of need to operational deployment is 26 months.<Ref n={13} /> This
         figure includes the full cycle: business case development (typically
         4&ndash;6 months), procurement process (8&ndash;12 months),
         contracting (2&ndash;3 months), implementation (4&ndash;6 months), and
@@ -208,7 +241,7 @@ export default function StateCapacityAI() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The Crown Commercial Service (CCS) frameworks through which most
         government AI procurement is channelled &ndash; principally the
-        G-Cloud and Digital Outcomes and Specialists frameworks &ndash; were
+        G-Cloud and Digital Outcomes and Specialists frameworks<Ref n={11} /> &ndash; were
         designed for cloud hosting and digital service delivery. They do not
         accommodate the iterative, experimental nature of AI deployment.
         Specification requirements assume that the buyer knows what they want
@@ -222,21 +255,21 @@ export default function StateCapacityAI() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         A particularly damaging feature of current procurement practice is the
         treatment of AI as a capital expenditure rather than an ongoing
-        capability investment. Departmental finance teams, operating within
+        capability investment.<Ref n={12} /> Departmental finance teams, operating within
         HM Treasury spending review cycles, want AI projects to have defined
         costs, timelines, and deliverables. This framing is at odds with the
         reality that AI systems require continuous monitoring, retraining, and
         adaptation. The result is projects that are funded for deployment but
         not for the ongoing investment needed to keep them effective &ndash;
         leading to a pattern of &ldquo;deploy and decay&rdquo; that several
-        interviewees identified as a growing problem.
+        interviewees identified as a growing problem.<Ref n={3} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         Intellectual property and data ownership provisions in standard
         government contracts are also poorly suited to AI. In 38 of the 63
         procurement exercises we reviewed, the resulting contracts gave
         vendors ownership of models trained on government data, with the
-        department receiving only a licence to use the outputs. This means
+        department receiving only a licence to use the outputs.<Ref n={13} /> This means
         that government is effectively subsidising the development of
         commercial AI products using public data, while retaining neither the
         models nor the institutional knowledge to maintain or modify them.
@@ -251,11 +284,11 @@ export default function StateCapacityAI() {
         to its fraud detection AI programme involved a hybrid model in which
         external vendors provided initial development support while an
         internal team was embedded throughout, progressively taking over
-        model maintenance and refinement. The MOD&rsquo;s Defence AI Centre
+        model maintenance and refinement.<Ref n={14} /> The MOD&rsquo;s Defence AI Centre
         has experimented with &ldquo;challenge-based&rdquo; procurement that
         defines problems rather than solutions, allowing vendors to propose
         approaches that are then evaluated through practical demonstration
-        rather than written bids. These examples suggest that reform is
+        rather than written bids.<Ref n={15} /> These examples suggest that reform is
         possible within existing legal frameworks; what is needed is
         institutional permission and technical capability to do procurement
         differently.
@@ -266,7 +299,7 @@ export default function StateCapacityAI() {
       </h2>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The civil service cannot compete with the private sector on AI talent
-        compensation. This is widely acknowledged. A mid-career machine
+        compensation. This is widely acknowledged.<Ref n={16} /> A mid-career machine
         learning engineer in the private sector can expect total compensation
         of &pound;120,000&ndash;&pound;180,000 in London; the equivalent
         civil service role, typically graded at SEO or Grade 7, offers
@@ -274,7 +307,7 @@ export default function StateCapacityAI() {
         more pronounced: a principal data scientist at a major technology
         company earns &pound;200,000&ndash;&pound;350,000, while a Grade 6
         or SCS1 technical leader in government earns
-        &pound;75,000&ndash;&pound;95,000. The Digital, Data and Technology
+        &pound;75,000&ndash;&pound;95,000.<Ref n={20} /> The Digital, Data and Technology
         (DDaT) pay framework, introduced to address this gap, has helped at
         junior levels but remains uncompetitive for the senior technical
         leaders who set architectural direction, evaluate vendor proposals,
@@ -285,26 +318,26 @@ export default function StateCapacityAI() {
         the most important part. Our interviews with both serving and former
         government technologists consistently identified three
         non-compensation factors that are at least as significant in
-        deterring AI talent from public service. First, career structures
+        deterring AI talent from public service.<Ref n={19} /> First, career structures
         that force technologists into general management to advance. The
         Senior Civil Service remains overwhelmingly generalist in its culture
         and promotion criteria; there is no credible technical career track
         that leads to the most senior grades without progressively abandoning
-        technical work. Second, working practices that frustrate technical
+        technical work.<Ref n={21} /> Second, working practices that frustrate technical
         staff: security-cleared laptops with restrictive software policies,
         inability to use modern development tools, and IT environments that
-        are years behind industry standard. Third, organisational cultures
+        are years behind industry standard.<Ref n={17} /> Third, organisational cultures
         that treat technical staff as service providers rather than
         decision-making partners. Multiple interviewees described being
         brought in to &ldquo;implement the solution&rdquo; after policy
         decisions had already been made, rather than being involved in
-        problem definition.
+        problem definition.<Ref n={3} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The Civil Service Commission&rsquo;s own data illustrates the
         retention challenge. Of the 180 specialist AI and data science roles
         filled through external recruitment between 2022 and 2024, 67 &ndash;
-        37 per cent &ndash; left within 18 months. Exit interviews, where
+        37 per cent &ndash; left within 18 months.<Ref n={18} /> Exit interviews, where
         conducted, cite a consistent set of factors: frustration with the
         pace of decision-making, inability to use the tools and methods they
         consider standard practice, and a perception that technical expertise
@@ -319,7 +352,7 @@ export default function StateCapacityAI() {
         genuine attractor for many technologists, and our interviews confirm
         that a significant cohort of AI specialists would accept a salary
         discount of 20&ndash;30 per cent to work on problems of public
-        significance. But this discount has limits. The current gap of
+        significance.<Ref n={19} /> But this discount has limits. The current gap of
         50&ndash;70 per cent at senior levels exceeds what mission motivation
         can bridge. Moreover, government needs to offer competitive
         compensation for a critical mass of senior technical leaders &ndash;
@@ -334,7 +367,7 @@ export default function StateCapacityAI() {
         clearance. Many AI roles in government require Developed Vetting (DV)
         or Security Check (SC) clearance, which adds 3&ndash;9 months to the
         recruitment process and excludes non-UK nationals who constitute a
-        significant proportion of the AI talent pool. The concentration of
+        significant proportion of the AI talent pool.<Ref n={16} /> The concentration of
         senior government roles in London, combined with a cost of living that
         makes civil service salaries even less competitive in real terms,
         further narrows the available talent pool. Remote and hybrid working
@@ -352,7 +385,7 @@ export default function StateCapacityAI() {
         considerably harder to address through policy intervention. The
         British civil service has a deeply embedded generalist culture, rooted
         in the Northcote&ndash;Trevelyan reforms of 1854 and reinforced by
-        170 years of institutional practice. The ideal civil servant, in this
+        170 years of institutional practice.<Ref n={21} /> The ideal civil servant, in this
         tradition, is a gifted generalist who can move between departments
         and policy areas, bringing judgement and analytical rigour rather
         than specialist technical knowledge. This model has many virtues, but
@@ -365,7 +398,7 @@ export default function StateCapacityAI() {
         In the majority of departments we assessed, decisions about AI
         adoption &ndash; which systems to procure, where to deploy them, what
         problems to prioritise &ndash; are made by policy officials and
-        senior leaders with little or no technical background. Technical
+        senior leaders with little or no technical background.<Ref n={3} /> Technical
         staff are consulted, but typically late in the process and in an
         advisory rather than decision-making capacity. The result is that AI
         strategy is shaped by people who understand policy objectives but
@@ -377,7 +410,7 @@ export default function StateCapacityAI() {
         Risk aversion compounds the cultural challenge. The civil service
         operates in an environment of intense public scrutiny, where failures
         are investigated by select committees and reported in the media,
-        while successes are invisible. This asymmetry creates a rational
+        while successes are invisible.<Ref n={22} /> This asymmetry creates a rational
         institutional preference for inaction over experimentation. AI
         adoption inherently involves uncertainty &ndash; systems may not
         perform as expected, edge cases may produce errors, and the
@@ -388,7 +421,7 @@ export default function StateCapacityAI() {
         requires. Several interviewees described a pattern of
         &ldquo;analysis paralysis&rdquo; in which AI projects remain
         permanently in pilot stage because nobody is willing to take the
-        decision to scale.
+        decision to scale.<Ref n={3} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The rotation system, in which civil servants move between roles every
@@ -399,18 +432,18 @@ export default function StateCapacityAI() {
         successor may have different priorities or less understanding of the
         technical decisions already made. This lack of continuity disrupts
         long-term capability building and makes it difficult to maintain
-        institutional knowledge about AI systems and their performance.
+        institutional knowledge about AI systems and their performance.<Ref n={16} />
         Three interviewees specifically cited SRO turnover as the primary
-        reason their AI programmes had stalled or been de-prioritised.
+        reason their AI programmes had stalled or been de-prioritised.<Ref n={3} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         There are, however, pockets of cultural innovation. HMRC&rsquo;s
         decision to co-locate data scientists with policy and operational
         teams, giving them equal status in project governance, has
-        demonstrably improved the quality of AI deployment in tax compliance.
+        demonstrably improved the quality of AI deployment in tax compliance.<Ref n={14} />
         The NHS&rsquo;s AI Lab, while not without its challenges, has created
         a model in which clinicians and technologists work as genuine
-        partners. These examples suggest that cultural change is possible, but
+        partners.<Ref n={23} /> These examples suggest that cultural change is possible, but
         it requires deliberate institutional design and sustained leadership
         commitment. It cannot be achieved through memoranda or training
         programmes alone.
@@ -422,7 +455,7 @@ export default function StateCapacityAI() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The Government Digital Service, established in 2011, remains the most
         important precedent for embedding technical capability within the
-        British state. Before GDS, government digital services were largely
+        British state.<Ref n={24} /> Before GDS, government digital services were largely
         outsourced to major systems integrators under contracts that were
         expensive, inflexible, and produced services that were difficult for
         citizens to use. GDS demonstrated that a central technical team,
@@ -441,10 +474,10 @@ export default function StateCapacityAI() {
         make inconsistent, often poor decisions about AI. CDDO, which
         succeeded GDS as the centre of government digital capability, has
         some of this mandate but has been significantly less well resourced
-        and has not been given the same level of ministerial backing. Second,
+        and has not been given the same level of ministerial backing.<Ref n={4} /> Second,
         standards drive behaviour. The Digital Service Standard gave GDS a
         lever to influence departmental practice that was more effective than
-        any number of strategy documents. An equivalent AI deployment
+        any number of strategy documents.<Ref n={17} /> An equivalent AI deployment
         standard &ndash; defining minimum requirements for in-house
         expertise, data quality, evaluation methodology, and ongoing
         monitoring &ndash; would be a powerful tool for raising the floor
@@ -487,7 +520,7 @@ export default function StateCapacityAI() {
         driven by strong ministerial support and charismatic leadership.
         After key leaders departed and ministerial attention moved on, the
         organisation lost momentum and was eventually absorbed into a broader
-        Cabinet Office function. Any institutional model for AI capability
+        Cabinet Office function.<Ref n={24} /> Any institutional model for AI capability
         must be designed for durability, not dependent on individual champions
         or the enthusiasm of a particular Secretary of State. This argues for
         a statutory or at minimum a formal framework basis for an AI
@@ -514,7 +547,7 @@ export default function StateCapacityAI() {
       </h2>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The UK&rsquo;s capacity challenges are not unique, but several
-        comparable governments have made more progress in addressing them.
+        comparable governments have made more progress in addressing them.<Ref n={25} />
         Examining international approaches reveals both models to learn from
         and cautionary tales. The most instructive comparisons are with
         countries of similar governmental complexity and democratic
@@ -536,14 +569,14 @@ export default function StateCapacityAI() {
         career transitions. As of early 2026, approximately 1,200 AI
         specialists work across federal agencies, a figure roughly
         proportional to the UK&rsquo;s gap when adjusted for the size of
-        the federal workforce.
+        the federal workforce.<Ref n={25} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         Singapore offers perhaps the most relevant model for a small,
         centralised government seeking to build AI capability rapidly. The
         Government Technology Agency (GovTech) employs over 400 AI and data
         science specialists and operates as an internal technology provider
-        to all government ministries. GovTech&rsquo;s compensation packages
+        to all government ministries.<Ref n={26} /> GovTech&rsquo;s compensation packages
         are explicitly benchmarked to the private sector at approximately 80
         per cent of equivalent roles, and it offers a technical career track
         that extends to the most senior grades without requiring a transition
@@ -560,7 +593,7 @@ export default function StateCapacityAI() {
         foundational investments in data infrastructure &ndash; particularly
         the X-Road data exchange layer &ndash; that enable AI applications to
         access and integrate data across government without the departmental
-        silos that plague UK government data architecture. Estonia&rsquo;s
+        silos that plague UK government data architecture.<Ref n={27} /> Estonia&rsquo;s
         Kr&auml;tt initiative, which established a legal and operational
         framework for government AI use, addressed governance questions early
         rather than treating them as an afterthought. The UK&rsquo;s data
@@ -573,14 +606,14 @@ export default function StateCapacityAI() {
         France&rsquo;s approach under the national AI strategy, led by
         INRIA and the Direction Interminist&eacute;rielle du
         Num&eacute;rique, has focused heavily on building sovereign AI
-        capability within the public sector. The French government has
+        capability within the public sector.<Ref n={29} /> The French government has
         invested directly in training programmes that produce AI specialists
         for government service, with bursary schemes that exchange tuition
         support for committed periods of public service. Canada&rsquo;s
         AI-focused procurement reforms through its Treasury Board Secretariat
         have reduced average AI procurement timelines to approximately 14
         months &ndash; still longer than the private sector but significantly
-        faster than the UK&rsquo;s 26-month average. The Canadian approach of
+        faster than the UK&rsquo;s 26-month average.<Ref n={28} /> The Canadian approach of
         &ldquo;agile procurement&rdquo; for AI, which allows contracts to be
         awarded on the basis of working prototypes rather than written bids,
         offers a practical model for CCS reform.
@@ -604,7 +637,7 @@ export default function StateCapacityAI() {
         an initial complement of 150 technical specialists and a mandate to
         embed teams in departments. This unit should combine the standard-
         setting authority of CDDO with the delivery capability of the
-        original GDS, specifically adapted for AI. It should have the power
+        original GDS, specifically adapted for AI.<Ref n={24} /> It should have the power
         to conduct AI deployment assessments &ndash; analogous to the old
         GDS service assessments &ndash; and to require remediation before
         departments proceed with AI deployments that do not meet baseline
@@ -621,7 +654,7 @@ export default function StateCapacityAI() {
         evaluation (assessing working demonstrations, not written proposals),
         and 90-day review cycles (allowing contracts to be adjusted or
         terminated based on actual performance rather than predicted
-        outcomes). The target should be to reduce average AI procurement
+        outcomes).<Ref n={11} /> The target should be to reduce average AI procurement
         timelines from 26 months to 12 months within three years, with a
         long-term target of 9 months. CCS should also mandate that all AI
         contracts above &pound;1 million include provisions for model
@@ -632,7 +665,7 @@ export default function StateCapacityAI() {
         Third, launch a Civil Service AI Fellowship programme, administered
         by the Civil Service Commission in partnership with DSIT, offering
         salaries benchmarked at 80 per cent of private-sector equivalents
-        for up to 300 senior technical leaders across government. Fellows
+        for up to 300 senior technical leaders across government.<Ref n={26} /> Fellows
         should be appointed on three-to-five-year terms, exempted from the
         standard rotation system, and given dual reporting lines to both
         their departmental permanent secretary and the head of the AI
@@ -647,7 +680,7 @@ export default function StateCapacityAI() {
         &ndash; defined as any department deploying AI systems that affect
         decisions about individuals or allocate public resources &ndash;
         maintain a minimum ratio of one in-house AI specialist for every
-        three external contractor staff on AI projects. This ratio
+        three external contractor staff on AI projects.<Ref n={10} /> This ratio
         requirement, enforced through the AI Delivery Unit&rsquo;s
         assessment process, would ensure meaningful knowledge transfer and
         reduce the vendor dependency that currently characterises most
@@ -663,7 +696,7 @@ export default function StateCapacityAI() {
         enable AI systems to access the information they need without
         duplicating datasets across departmental boundaries, and establishing
         clear governance frameworks for the use of linked administrative data
-        in AI training. Without this investment, AI adoption will continue to
+        in AI training.<Ref n={4} /> Without this investment, AI adoption will continue to
         be limited by the fragmented, inconsistent, and poorly documented
         data landscape that characterises most of Whitehall.
       </p>
@@ -674,7 +707,7 @@ export default function StateCapacityAI() {
         scale: &pound;180 million for the AI Fellowship and expanded
         technical recruitment, &pound;60 million for the AI Delivery Unit,
         &pound;50 million for shared AI infrastructure, and &pound;30 million
-        for procurement reform and training. This represents less than 0.03
+        for procurement reform and training.<Ref n={5} /> This represents less than 0.03
         per cent of total government expenditure and should be evaluated
         against the potential for AI to deliver significant efficiency gains
         across the &pound;1.2 trillion public spending envelope. The
@@ -684,6 +717,8 @@ export default function StateCapacityAI() {
         widening gap between what government promises its citizens and what
         it can actually deliver.
       </p>
+
+      <Footnotes notes={footnotes} />
     </BriefLayout>
   );
 }

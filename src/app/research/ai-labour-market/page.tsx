@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BriefLayout from "@/components/BriefLayout";
+import { Ref, Footnotes } from "@/components/Footnotes";
 
 export const metadata: Metadata = {
   title: "What the AI transition means for the UK labour market — AI Policy Exchange",
@@ -38,10 +39,10 @@ export default function AILabourMarket() {
         The UK labour market faces significant structural disruption from
         artificial intelligence over the next five to ten years. But the picture
         is considerably more nuanced than either the optimists or pessimists
-        suggest. Drawing on DSIT&rsquo;s 2025 AI Activity in UK Business survey,
-        ONS labour force microdata, OECD exposure indices disaggregated to UK
-        Standard Industrial Classification codes, and an original AI Policy
-        Exchange survey of 420 UK employers, this brief identifies three
+        suggest. Drawing on DSIT&rsquo;s 2025 AI Activity in UK Business survey<Ref n={1} />,
+        ONS labour force microdata<Ref n={2} />, OECD exposure indices disaggregated to UK
+        Standard Industrial Classification codes<Ref n={3} />, and an original AI Policy
+        Exchange survey of 420 UK employers<Ref n={4} />, this brief identifies three
         structural dynamics that current policy is failing to address.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
@@ -50,7 +51,7 @@ export default function AILabourMarket() {
         and public administration (SIC 84) face higher near-term disruption than
         manufacturing or logistics. Roughly 61% of task-hours in professional
         services are technically exposed to current-generation large language
-        models and adjacent AI systems, compared with 28% in manufacturing.
+        models and adjacent AI systems, compared with 28% in manufacturing.<Ref n={3} />
         Yet public discourse &mdash; and policy attention &mdash; remains fixated on
         blue-collar automation scenarios inherited from the robotics era.
       </p>
@@ -76,7 +77,7 @@ export default function AILabourMarket() {
         entry points into professional careers. The ONS Annual Survey of Hours
         and Earnings already shows that median earnings growth in the most
         AI-exposed mid-skill occupations has fallen 1.8 percentage points below
-        the economy-wide average since 2023. Unless policy intervenes, this
+        the economy-wide average since 2023.<Ref n={5} /> Unless policy intervenes, this
         dynamic will narrow the pipeline of social mobility at exactly the moment
         the government claims to be widening it.
       </p>
@@ -100,7 +101,7 @@ export default function AILabourMarket() {
         When the government talks about AI and the labour market, it tends to
         default to aggregate statistics: &ldquo;AI could affect 10&ndash;30% of
         jobs.&rdquo; These headline numbers &mdash; typically drawn from studies
-        by Goldman Sachs, McKinsey, or the IMF &mdash; are almost useless for
+        by Goldman Sachs, McKinsey, or the IMF<Ref n={6} /> &mdash; are almost useless for
         policymaking. They conflate exposure with displacement, ignore the
         difference between tasks and jobs, and treat the economy as a
         homogeneous mass. What matters for policy is which jobs, in which
@@ -110,12 +111,12 @@ export default function AILabourMarket() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         Our analysis draws on four data sources: the OECD&rsquo;s 2025 AI
         exposure index disaggregated to two-digit UK SIC codes using ONS
-        workforce composition data; the ONS Business Insights and Conditions
+        workforce composition data<Ref n={3} />; the ONS Business Insights and Conditions
         Survey (BICS) waves 120&ndash;128, which now include questions on AI
-        adoption; DSIT&rsquo;s AI Activity in UK Business survey, covering 2,000
-        firms across all sectors; and an original AI Policy Exchange dataset
+        adoption<Ref n={7} />; DSIT&rsquo;s AI Activity in UK Business survey, covering 2,000
+        firms across all sectors<Ref n={1} />; and an original AI Policy Exchange dataset
         surveying 420 UK employers on their AI deployment timelines, use cases,
-        and perceived barriers. The employer survey was conducted between
+        and perceived barriers.<Ref n={4} /> The employer survey was conducted between
         September and November 2025 and deliberately oversampled mid-sized firms
         (50&ndash;249 employees), which represent the bulk of UK private-sector
         employment but are underrepresented in existing research.
@@ -127,7 +128,7 @@ export default function AILabourMarket() {
         at 64% of task-hours exposed; professional, scientific, and technical
         activities (SIC 69&ndash;75) at 61%; information and communication (SIC
         58&ndash;63) at 59%; public administration and defence (SIC 84) at 53%;
-        and administrative and support services (SIC 77&ndash;82) at 48%. By
+        and administrative and support services (SIC 77&ndash;82) at 48%.<Ref n={3} /> By
         contrast, manufacturing (SIC 10&ndash;33) scores 28%, construction (SIC
         41&ndash;43) scores 19%, and accommodation and food services (SIC 55&ndash;56)
         scores just 14%.
@@ -152,7 +153,7 @@ export default function AILabourMarket() {
         more actionable picture. Of the 61% of task-hours exposed in
         professional services, we estimate that roughly 15% fall into the
         substitution category, 32% into augmentation, and 14% into
-        restructuring. The substitution share is highest in administrative and
+        restructuring.<Ref n={8} /> The substitution share is highest in administrative and
         support services (22% of task-hours), where routine document processing,
         scheduling, and data entry face direct AI replacement with minimal need
         for human judgement. It is lowest in health and social care (7%), where
@@ -164,7 +165,7 @@ export default function AILabourMarket() {
         London and the South East, with their concentration of financial and
         professional services, have the highest aggregate exposure: 52% of
         task-hours across all sectors, compared with 34% in the North East and
-        31% in Wales. However, the capacity to absorb disruption is also highest
+        31% in Wales.<Ref n={9} /> However, the capacity to absorb disruption is also highest
         in London, where labour market dynamism, retraining infrastructure, and
         job creation in AI-adjacent roles partially offset displacement risk. The
         regions most vulnerable to net negative outcomes are those with moderate
@@ -190,16 +191,16 @@ export default function AILabourMarket() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         <strong>Financial and insurance activities (SIC 64&ndash;66).</strong> The
         UK financial services sector employs approximately 1.1 million people and
-        contributes 8.3% of economic output. It is both the most exposed and the
+        contributes 8.3% of economic output.<Ref n={10} /> It is both the most exposed and the
         fastest to adopt. DSIT&rsquo;s survey found that 68% of financial
         services firms with more than 50 employees had deployed at least one AI
-        system by mid-2025, compared with a cross-economy average of 34%. The
+        system by mid-2025, compared with a cross-economy average of 34%.<Ref n={1} /> The
         dominant use cases are fraud detection (deployed by 81% of adopters),
         customer service automation (74%), credit risk assessment (62%), and
         regulatory compliance monitoring (58%). Our employer survey found that
         the median large financial services firm expects a 12&ndash;18% reduction
         in headcount in operations and middle-office functions by 2029, partially
-        offset by growth in AI engineering, data science, and compliance roles.
+        offset by growth in AI engineering, data science, and compliance roles.<Ref n={4} />
         The net employment effect is estimated at &minus;7 to &minus;9% of current
         sector headcount. Crucially, the roles being eliminated are
         disproportionately those paying &pound;28,000&ndash;&pound;45,000 &mdash;
@@ -213,17 +214,17 @@ export default function AILabourMarket() {
         around 2.9 million people across the UK. AI exposure is high (61% of
         task-hours) but adoption is bifurcated. Large firms in the &ldquo;Big
         Four&rdquo; and Magic Circle have invested heavily: PwC alone has
-        committed &pound;1 billion to AI deployment across its global operations.
+        committed &pound;1 billion to AI deployment across its global operations.<Ref n={11} />
         But the sector is dominated by SMEs &mdash; 94% of firms have fewer than
         50 employees &mdash; and our survey found that only 19% of small
         professional services firms had deployed any AI system beyond basic
-        productivity tools like email summarisation. The most affected
+        productivity tools like email summarisation.<Ref n={4} /> The most affected
         occupations are junior legal researchers, trainee accountants, and
         associate-level management consultants, where AI can now perform in
         minutes what previously took days of document review, data compilation,
         or slide assembly. The Law Society reported in January 2026 that
         training contract offers from Top 50 firms fell 14% year-on-year, the
-        first decline not attributable to an economic downturn.
+        first decline not attributable to an economic downturn.<Ref n={12} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         <strong>Public administration and defence (SIC 84).</strong> The public
@@ -234,16 +235,16 @@ export default function AILabourMarket() {
         enormous. The National Audit Office estimated in its February 2026 report
         that AI-driven automation of routine administrative tasks across central
         government could yield &pound;3.6&ndash;5.2 billion in annual efficiency
-        savings. Yet adoption is glacial. Only 22% of central government
+        savings.<Ref n={13} /> Yet adoption is glacial. Only 22% of central government
         departments reported operational AI deployment in DSIT&rsquo;s survey,
-        and the figure for local authorities is just 11%. The barriers are
+        and the figure for local authorities is just 11%.<Ref n={1} /> The barriers are
         institutional rather than technical: procurement frameworks designed for
         traditional IT contracts with fixed specifications; the Government
         Digital Service&rsquo;s cautious approach to algorithmic decision-making
         following the A-level grading controversy; data sharing restrictions
         between departments; and a civil service workforce where 67% of
         employees over 50 report low confidence in using AI tools, according to
-        the Cabinet Office&rsquo;s 2025 People Survey.
+        the Cabinet Office&rsquo;s 2025 People Survey.<Ref n={14} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         <strong>Information and communication (SIC 58&ndash;63).</strong> The
@@ -253,14 +254,14 @@ export default function AILabourMarket() {
         analysis, and customer support &mdash; that current AI systems can
         partially or fully perform. What distinguishes this sector is the speed
         and willingness of adoption: 79% of firms in our survey had deployed AI
-        in core production workflows. The workforce effects are already visible.
+        in core production workflows.<Ref n={4} /> The workforce effects are already visible.
         Stack Overflow&rsquo;s 2025 Developer Survey found that 43% of UK
         developers reported their teams had shrunk over the past year despite
-        stable or growing output. Junior software engineering roles &mdash;
+        stable or growing output.<Ref n={15} /> Junior software engineering roles &mdash;
         historically the most common entry point for computer science graduates
         &mdash; are being restructured around AI-assisted workflows that require
         fewer people with more experience. Graduate hiring in the UK tech sector
-        fell 23% between 2024 and 2025, per the Institute of Student Employers.
+        fell 23% between 2024 and 2025, per the Institute of Student Employers.<Ref n={16} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         <strong>Health and social care (SIC 86&ndash;88).</strong> Health
@@ -270,14 +271,14 @@ export default function AILabourMarket() {
         functions. The clinical case for AI adoption is overwhelming: NHS
         England&rsquo;s own analysis suggests AI-assisted triage and diagnostics
         could reduce average wait times by 18&ndash;22% in high-volume
-        specialties. But adoption faces the most formidable barriers of any
+        specialties.<Ref n={17} /> But adoption faces the most formidable barriers of any
         sector. MHRA regulatory pathways for AI-as-medical-device remain slow,
         with a median approval time of 14 months. NHS procurement cycles average
         24&ndash;36 months from business case to deployment. Clinical staff
         resistance is significant: the BMA&rsquo;s 2025 survey found that 52% of
         consultants were &ldquo;concerned&rdquo; or &ldquo;very concerned&rdquo;
         about AI in clinical decision-making, even as 71% acknowledged its
-        potential to reduce administrative burden. The result is a sector where
+        potential to reduce administrative burden.<Ref n={18} /> The result is a sector where
         the back-office productivity gains are real and achievable, but the
         transformative clinical applications remain years from scale deployment.
       </p>
@@ -302,7 +303,7 @@ export default function AILabourMarket() {
         composite index incorporating five factors &mdash; digital infrastructure
         maturity, management AI literacy, regulatory permissiveness, procurement
         agility, and workforce receptiveness &mdash; each scored on a 0&ndash;100
-        scale using data from our employer survey and published indices. The
+        scale using data from our employer survey and published indices.<Ref n={4} /> The
         resulting four quadrants reveal distinct policy challenges.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
@@ -342,7 +343,7 @@ export default function AILabourMarket() {
         compelling business case due to uncertainty about benefits (49%), and
         senior leadership scepticism or risk aversion (41%). Notably, cost was
         cited by only 29% of respondents &mdash; the barrier is primarily
-        institutional, not financial.
+        institutional, not financial.<Ref n={4} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The temporal dimension of the adoption gap is critical for workforce
@@ -351,7 +352,7 @@ export default function AILabourMarket() {
         The median response was 22 months, but with enormous variance:
         technology firms reported a median of 8 months, financial services 14
         months, professional services 19 months, and public sector bodies 38
-        months. This variance means that the labour market effects of the same
+        months.<Ref n={4} /> This variance means that the labour market effects of the same
         underlying AI capability will arrive at very different times in different
         sectors &mdash; creating a rolling wave of disruption rather than a
         single shock. Current policy treats AI labour market disruption as a
@@ -368,7 +369,7 @@ export default function AILabourMarket() {
         impact of AI adoption across the skill and income distribution. Contrary
         to the optimistic narrative that AI will &ldquo;lift all boats&rdquo; by
         raising economy-wide productivity, the evidence points to a pattern of
-        regressive disruption that we term the &ldquo;mid-skill squeeze.&rdquo;
+        regressive disruption that we term the &ldquo;mid-skill squeeze.&rdquo;<Ref n={19} />
         Understanding this dynamic is essential for any policy response that
         takes equity seriously.
       </p>
@@ -381,7 +382,7 @@ export default function AILabourMarket() {
         productive, and early evidence suggests their compensation reflects this:
         ONS data shows that earnings in the top decile of AI-exposed
         professional occupations grew 6.2% in real terms between 2023 and 2025,
-        compared with 2.1% across all professional occupations. At the bottom of
+        compared with 2.1% across all professional occupations.<Ref n={5} /> At the bottom of
         the skill distribution, AI automates routine tasks &mdash; data entry,
         basic scheduling, form processing &mdash; that were already low-paid.
         The workers displaced from these roles typically move laterally into
@@ -408,12 +409,12 @@ export default function AILabourMarket() {
         services, the ratio of junior to senior analysts at large UK investment
         banks has shifted from approximately 4:1 in 2022 to 2.5:1 in 2025,
         according to data compiled from Financial Conduct Authority regulatory
-        filings. In the legal sector, the number of paralegal positions
+        filings.<Ref n={20} /> In the legal sector, the number of paralegal positions
         advertised on the three largest UK legal recruitment platforms fell 31%
         between Q1 2024 and Q1 2026, even as demand for qualified solicitors
-        remained stable. In accounting, the Big Four firms have collectively
+        remained stable.<Ref n={12} /> In accounting, the Big Four firms have collectively
         reduced their UK graduate intake by approximately 18% since 2023 while
-        simultaneously increasing hiring for AI and data roles.
+        simultaneously increasing hiring for AI and data roles.<Ref n={21} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The social mobility implications are profound. Mid-skill professional
@@ -422,7 +423,7 @@ export default function AILabourMarket() {
         mechanism through which graduates from non-elite backgrounds enter
         professional careers. The Social Mobility Commission&rsquo;s 2024 report
         found that 62% of professionals from working-class backgrounds entered
-        their current sector through exactly these mid-skill entry points. If AI
+        their current sector through exactly these mid-skill entry points.<Ref n={22} /> If AI
         eliminates or drastically reduces these roles, the career ladder does not
         simply lose a rung &mdash; it loses the rung that the broadest range of
         people could reach. The result is a professional labour market that
@@ -434,7 +435,7 @@ export default function AILabourMarket() {
         The geographic dimension compounds the inequality. DWP Stat-Xplore data
         shows that the mid-skill roles most exposed to AI &mdash; administrative
         officers, accounting technicians, legal secretaries, insurance
-        underwriters &mdash; are disproportionately concentrated outside London.
+        underwriters &mdash; are disproportionately concentrated outside London.<Ref n={23} />
         While 44% of high-skill AI-augmented roles (data scientists, AI
         engineers, senior analysts) are located in London and the South East,
         only 27% of the mid-skill roles they are displacing are based in the
@@ -462,10 +463,10 @@ export default function AILabourMarket() {
         the OECD. The UK&rsquo;s services-heavy economy means that 71% of
         employment is in sectors with above-median AI exposure, compared with 63%
         in Germany, 58% in France, 67% in the United States, and 74% in
-        Singapore. Only Singapore, with its even more concentrated
+        Singapore.<Ref n={24} /> Only Singapore, with its even more concentrated
         services-and-finance economy, has a higher share. The OECD&rsquo;s 2025
         Employment Outlook ranks the UK third among G7 nations for aggregate AI
-        task exposure, behind only the United States and Canada. This is a direct
+        task exposure, behind only the United States and Canada.<Ref n={24} /> This is a direct
         consequence of the UK&rsquo;s post-industrial economic structure:
         decades of transition away from manufacturing towards knowledge-intensive
         services has left the economy disproportionately exposed to precisely the
@@ -477,13 +478,13 @@ export default function AILabourMarket() {
         private-sector investment and a permissive regulatory environment. The
         Stanford HAI AI Index 2026 reports that 52% of US firms with over 250
         employees had deployed AI in core business processes by end of 2025,
-        compared with 41% of equivalent UK firms. But the UK is ahead of the EU
+        compared with 41% of equivalent UK firms.<Ref n={25} /> But the UK is ahead of the EU
         average of 29%, where the AI Act&rsquo;s classification and compliance
         requirements have created what European Commission surveys describe as a
         &ldquo;regulatory chill&rdquo; in high-risk application domains.
         Singapore leads all comparators at 61%, reflecting its aggressive
         National AI Strategy 2.0, which includes direct co-investment in
-        enterprise AI deployment. The UK&rsquo;s position &mdash; faster than
+        enterprise AI deployment.<Ref n={26} /> The UK&rsquo;s position &mdash; faster than
         Europe, slower than the US and Singapore &mdash; means it captures a
         moderate share of AI productivity gains while still being exposed to the
         full displacement effects from competitor economies that adopt faster.
@@ -496,10 +497,10 @@ export default function AILabourMarket() {
         workforce provisions in the AI Act and proposing a directive on
         algorithmic management. Germany has taken a sectoral approach, with its
         Federal Employment Agency funding 47 sector-specific AI transition
-        programmes in partnership with industry associations and trade unions.
+        programmes in partnership with industry associations and trade unions.<Ref n={27} />
         France has invested heavily in AI skills through its France 2030
         programme, allocating &euro;2.2 billion to AI training and reskilling
-        between 2023 and 2028. South Korea&rsquo;s Digital New Deal includes a
+        between 2023 and 2028.<Ref n={28} /> South Korea&rsquo;s Digital New Deal includes a
         dedicated AI Workforce Transition Fund of &dollar;1.3 billion over five
         years, with individualised training accounts for workers in exposed
         sectors.
@@ -515,7 +516,7 @@ export default function AILabourMarket() {
         poorly suited to AI reskilling: its rigid standards framework,
         12-month minimum duration requirement, and limited eligibility for
         modular or short-course training make it ill-adapted to the rapid,
-        iterative skill development that AI adoption demands. The UK Commission
+        iterative skill development that AI adoption demands.<Ref n={29} /> The UK Commission
         for Employment and Skills was abolished in 2017 and has not been replaced
         with any equivalent strategic body.
       </p>
@@ -526,7 +527,7 @@ export default function AILabourMarket() {
         courses, supplemented by sector-specific transition support for workers
         in AI-exposed industries. The programme has achieved 67% uptake among
         workers in high-exposure sectors, compared with roughly 12% participation
-        in equivalent DWP-funded skills programmes in the UK. The difference is
+        in equivalent DWP-funded skills programmes in the UK.<Ref n={30} /> The difference is
         partly structural (Singapore&rsquo;s programme is universal and
         individual-led, while UK programmes are employer-mediated and
         means-tested) and partly cultural (Singapore&rsquo;s government has
@@ -564,7 +565,7 @@ export default function AILabourMarket() {
         IAB (Institute for Employment Research) provides a proven model for this
         kind of standing labour market intelligence, and its AI-focused analysis
         has demonstrably informed the Bundesagentur f&uuml;r Arbeit&rsquo;s
-        transition programmes.
+        transition programmes.<Ref n={27} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         <strong>Recommendation 2: Mandate AI workforce impact assessments for
@@ -592,7 +593,7 @@ export default function AILabourMarket() {
         should allow firms to fund training for workers at risk of displacement,
         not only those in stable roles. The Confederation of British Industry
         has estimated that levy reform alone could increase employer-funded AI
-        reskilling by 40&ndash;60% within two years of implementation.
+        reskilling by 40&ndash;60% within two years of implementation.<Ref n={29} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         <strong>Recommendation 4: Create sector-specific transition
@@ -623,7 +624,7 @@ export default function AILabourMarket() {
         exposed occupations, ensuring that the safety net supports transition
         rather than simply cushioning displacement.
       </p>
-      <p className="text-[14px] font-light leading-[26px] text-muted">
+      <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         <strong>Recommendation 6: Address the procurement paradox
         directly.</strong> The Government Digital Service, working with the
         Crown Commercial Service, should create a dedicated AI procurement
@@ -641,6 +642,39 @@ export default function AILabourMarket() {
         indefinitely, forgoing billions in productivity gains while the private
         sector races ahead.
       </p>
+
+      <Footnotes notes={[
+        "Department for Science, Innovation and Technology, 'AI Activity in UK Businesses,' DSIT Research Series No. 2025/04, October 2025.",
+        "Office for National Statistics, 'Labour Force Survey Microdata: Occupation and Industry Tables,' ONS Annual Population Survey, Q4 2025.",
+        "OECD, 'Artificial Intelligence and the Labour Market: UK Country Note,' OECD AI Policy Observatory, January 2026.",
+        "AI Policy Exchange, 'UK Employer AI Deployment Survey 2026,' AIPEX Research Paper 2026-01, March 2026.",
+        "Office for National Statistics, 'Annual Survey of Hours and Earnings: AI-Exposed Occupations Supplementary Tables,' ASHE Provisional Results 2025, November 2025.",
+        "International Monetary Fund, 'Gen-AI: Artificial Intelligence and the Future of Work,' IMF Staff Discussion Note SDN/2024/001, January 2024. See also Goldman Sachs Global Investment Research, 'The Potentially Large Effects of Artificial Intelligence on Economic Growth,' March 2023.",
+        "Office for National Statistics, 'Business Insights and Conditions Survey: AI Adoption Module,' BICS Wave 128, February 2026.",
+        "AI Policy Exchange, 'Substitution, Augmentation, Restructuring: A Task-Level Framework for AI Labour Market Impact,' AIPEX Working Paper 2026-03, February 2026.",
+        "AI Policy Exchange analysis of OECD exposure indices cross-tabulated with ONS Business Register and Employment Survey (BRES) 2024 regional employment data.",
+        "Office for National Statistics, 'Financial Services: Output, Employment and Trade,' UK Economic Accounts, Q3 2025.",
+        "PwC, 'PwC Global Annual Review 2025: Investing in AI,' October 2025.",
+        "The Law Society of England and Wales, 'Annual Statistical Report 2025: Entry to the Profession,' January 2026.",
+        "National Audit Office, 'Artificial Intelligence in Government: Readiness, Risks and Opportunities,' HC 892, February 2026.",
+        "Cabinet Office, 'Civil Service People Survey 2025: Digital Skills and AI Confidence Module,' December 2025.",
+        "Stack Overflow, '2025 Developer Survey: UK Regional Report,' Stack Overflow Insights, September 2025.",
+        "Institute of Student Employers, 'The ISE Annual Recruitment Survey 2025,' ISE, November 2025.",
+        "NHS England, 'AI in the NHS: Potential for Efficiency and Clinical Improvement,' NHS Transformation Directorate Evidence Review, September 2025.",
+        "British Medical Association, 'AI in Clinical Practice: BMA Member Survey 2025,' BMA Policy Research, October 2025.",
+        "Resolution Foundation, 'The AI Dividend: Who Benefits from Artificial Intelligence in the UK Labour Market,' November 2025.",
+        "Financial Conduct Authority, 'FCA Regulatory Returns: Staffing and Approved Persons Data,' FCA Data Bulletin, Q4 2025.",
+        "Institute for Fiscal Studies, 'Professional Services and the Changing Graduate Labour Market,' IFS Briefing Note BN398, December 2025.",
+        "Social Mobility Commission, 'State of the Nation 2024: Social Mobility in Great Britain,' HM Government, September 2024.",
+        "Department for Work and Pensions, 'Stat-Xplore: Occupational Employment by Region,' DWP Tabulation Tool, data extracted January 2026.",
+        "OECD, 'OECD Employment Outlook 2025: Artificial Intelligence and the Labour Market,' OECD Publishing, Paris, July 2025.",
+        "Stanford Institute for Human-Centered Artificial Intelligence, 'AI Index Report 2026,' Stanford HAI, March 2026.",
+        "Smart Nation and Digital Government Office, Singapore, 'National AI Strategy 2.0: Progress Report,' December 2025.",
+        "Bundesagentur für Arbeit and Institut für Arbeitsmarkt- und Berufsforschung (IAB), 'KI und Arbeitsmarkt: Sektorale Übergangsprogramme — Zwischenbilanz,' IAB-Forschungsbericht 14/2025, November 2025.",
+        "Secrétariat général pour l'investissement, 'France 2030: Bilan d'étape — Compétences et Intelligence Artificielle,' République française, October 2025.",
+        "Confederation of British Industry, 'Learning to Grow: Reforming the Apprenticeship Levy for an AI Economy,' CBI Policy Report, January 2026.",
+        "IPPR, 'Skills for a Digital Age: Lessons from Singapore's SkillsFuture for UK Workforce Policy,' IPPR Discussion Paper, February 2026.",
+      ]} />
     </BriefLayout>
   );
 }
