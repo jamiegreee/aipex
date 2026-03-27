@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
+import { CopyLinkButton, PrintButton } from "./SidebarActions";
 
 interface Section {
   id: string;
@@ -101,9 +102,7 @@ export default function BriefLayout({
             <p className="text-[11px] font-medium tracking-[0.06em] uppercase text-muted mb-4">
               Share
             </p>
-            <button className="block text-[14px] leading-[22px] py-1 hover:text-accent transition-colors">
-              Copy link
-            </button>
+            <CopyLinkButton />
             <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="block text-[14px] leading-[22px] py-1 hover:text-accent transition-colors">
               X / Twitter
             </a>
@@ -115,9 +114,7 @@ export default function BriefLayout({
             <p className="text-[11px] font-medium tracking-[0.06em] uppercase text-muted mb-4">
               Download
             </p>
-            <button className="px-4 py-2 border border-border text-[13px] hover:border-ink transition-colors">
-              PDF version
-            </button>
+            <PrintButton />
           </div>
         </aside>
       </section>
