@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -102,15 +103,14 @@ export default function About() {
       {/* Founder */}
       <section className="flex gap-16 w-full px-16 py-20 border-b border-border">
         <div className="w-[280px] shrink-0">
-          <div className="w-[280px] h-[340px] bg-border" />
-          <p className="text-[11px] text-muted mt-2">Photo placeholder</p>
+          <Image src="/jamie-green.png" alt="Jamie Green" width={280} height={340} className="object-cover w-[280px] h-[340px]" />
         </div>
         <div className="flex-1">
           <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent mb-2">
             Founder
           </p>
           <h2 className="text-[32px] font-normal leading-[44px] mb-6">
-            Jamie Woodhouse
+            Jamie Green
           </h2>
           <p className="text-[14px] font-light leading-[26px] text-muted mb-4">
             Jamie founded the AI Policy Exchange to bring operational experience to the AI

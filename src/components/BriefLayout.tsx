@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
@@ -53,9 +54,9 @@ export default function BriefLayout({
           {subtitle}
         </p>
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-border" />
+          <Image src="/jamie-green.png" alt="Jamie Green" width={40} height={40} className="rounded-full object-cover w-10 h-10" />
           <div>
-            <p className="text-[14px] font-medium">Jamie Woodhouse</p>
+            <p className="text-[14px] font-medium">Jamie Green</p>
             <p className="text-[12px] text-muted">Founder, AI Policy Exchange</p>
           </div>
         </div>
