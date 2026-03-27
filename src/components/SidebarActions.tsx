@@ -1,14 +1,20 @@
 "use client";
 
+import { useState } from "react";
+
 export function CopyLinkButton() {
+  const [copied, setCopied] = useState(false);
+
   return (
     <button
       onClick={() => {
         navigator.clipboard.writeText(window.location.href);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
       }}
       className="block text-[14px] leading-[22px] py-1 hover:text-accent transition-colors cursor-pointer"
     >
-      Copy link
+      {copied ? "Copied!" : "Copy link"}
     </button>
   );
 }
