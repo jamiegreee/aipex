@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #F5F2ED;
+  --color-cream-dark: #EAE5DC;
+  --color-ink: #1A1A18;
+  --color-muted: #8A8578;
+  --color-border: #DDD8CE;
+  --color-accent: #D4612A;
+  --color-dark: #2A2822;
+  --color-light: #E8E4DC;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+}
