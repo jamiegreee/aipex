@@ -12,7 +12,7 @@ const briefs = [
   {
     tag: "Economy & Labour",
     date: "March 2026",
-    readTime: "12 min read",
+    readTime: "25 min read",
     title: "What the AI transition means for the UK labour market — beyond the headlines",
     summary: "The debate about AI and jobs oscillates between utopian and apocalyptic. Neither is useful. This brief examines what the evidence actually shows about near-term labour market disruption.",
     href: "/research/ai-labour-market",
@@ -20,7 +20,7 @@ const briefs = [
   {
     tag: "Governance",
     date: "March 2026",
-    readTime: "10 min read",
+    readTime: "22 min read",
     title: 'Why "AI regulation" is the wrong frame — and what to do instead',
     summary: "AI governance is not about constraining a static technology \u2014 it\u2019s about building institutional capacity to manage a transition already underway.",
     href: "/research/ai-regulation-wrong-frame",
@@ -28,7 +28,7 @@ const briefs = [
   {
     tag: "State Capacity",
     date: "April 2026",
-    readTime: "9 min read",
+    readTime: "24 min read",
     title: "State capacity for AI: is Whitehall ready?",
     summary: 'Government talks about being "pro-innovation" on AI. But does the British state have the technical capacity and institutional knowledge to actually deliver?',
     href: "/research/state-capacity-ai",
