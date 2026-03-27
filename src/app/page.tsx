@@ -138,7 +138,7 @@ export default function Home() {
           people who govern them — because neither can succeed alone.
         </p>
         <Link
-          href="/about"
+          href="/charter"
           className="flex items-center w-fit px-7 py-3.5 border border-[#C4BEB2] text-light text-[12px] hover:border-light transition-colors mt-2"
         >
           Read Our Founding Charter &rarr;
