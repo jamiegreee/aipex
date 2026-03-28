@@ -23,14 +23,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jetbrainsMono.variable} antialiased`}>
       <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-DPM40ZB0PN"
+        src="https://www.googletagmanager.com/gtag/js?id=G-J1YPT21EYK"
         strategy="afterInteractive"
       />
       <Script id="gtag-init" strategy="afterInteractive">
         {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-DPM40ZB0PN');`}
+gtag('config', 'G-J1YPT21EYK');`}
       </Script>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
