@@ -564,9 +564,11 @@ export default function AILabourMarket() {
         urgency and calibrated to the fiscal and institutional constraints any
         realistic policy proposal has to acknowledge.
       </p>
+      <h3 className="text-[18px] font-medium leading-[28px] mt-8 mb-4">
+        Recommendation 1: Establish the AI Labour Market Observatory
+      </h3>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        <strong>Recommendation 1: Establish the AI Labour Market
-        Observatory.</strong> DSIT should create a standing analytical unit
+        DSIT should create a standing analytical unit
         combining real-time employer survey data, ONS labour force microdata,
         HMRC PAYE real-time information, and sector-level AI exposure modelling.
         The Observatory should publish quarterly dashboards disaggregated by
@@ -579,9 +581,12 @@ export default function AILabourMarket() {
         AI-focused analysis has demonstrably shaped the Bundesagentur f&uuml;r
         Arbeit&rsquo;s transition programmes.<Ref n={27} />
       </p>
+      <h3 className="text-[18px] font-medium leading-[28px] mt-8 mb-4">
+        Recommendation 2: Mandate AI workforce impact assessments for public
+        sector procurement
+      </h3>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        <strong>Recommendation 2: Mandate AI workforce impact assessments for
-        public sector procurement.</strong> All public sector procurement
+        All public sector procurement
         contracts above &pound;10 million that involve AI systems should be
         required to include a workforce impact assessment, modelled on
         environmental impact assessments. The assessment should estimate the
@@ -594,9 +599,12 @@ export default function AILabourMarket() {
         that could be extended to cover AI workforce considerations without
         building an entirely new compliance framework.
       </p>
+      <h3 className="text-[18px] font-medium leading-[28px] mt-8 mb-4">
+        Recommendation 3: Reform the Apprenticeship Levy into an AI-era Skills
+        Levy
+      </h3>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        <strong>Recommendation 3: Reform the Apprenticeship Levy into an AI-era
-        Skills Levy.</strong> The current Apprenticeship Levy should be reformed
+        The current Apprenticeship Levy should be reformed
         to let employers spend on short-course, modular AI reskilling programmes
         accredited by a new fast-track quality assurance process. The 12-month
         minimum duration requirement should be replaced with a competency-based
@@ -607,9 +615,11 @@ export default function AILabourMarket() {
         reform alone could increase employer-funded AI reskilling by
         40&ndash;60% within two years of implementation.<Ref n={29} />
       </p>
+      <h3 className="text-[18px] font-medium leading-[28px] mt-8 mb-4">
+        Recommendation 4: Create sector-specific transition compacts
+      </h3>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        <strong>Recommendation 4: Create sector-specific transition
-        compacts.</strong> For the five most exposed sectors identified in this
+        For the five most exposed sectors identified in this
         brief, the government should convene tripartite transition compacts
         bringing together employer associations, trade unions and professional
         bodies, and relevant government departments. Each compact should build a
@@ -621,9 +631,11 @@ export default function AILabourMarket() {
         Transformation Councils (more effective, thanks to genuine tripartite
         governance and dedicated funding).
       </p>
+      <h3 className="text-[18px] font-medium leading-[28px] mt-8 mb-4">
+        Recommendation 5: Introduce AI transition individual learning accounts
+      </h3>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        <strong>Recommendation 5: Introduce AI transition individual learning
-        accounts.</strong> Drawing on the Singaporean SkillsFuture model and the
+        Drawing on the Singaporean SkillsFuture model and the
         French Compte Personnel de Formation, the government should pilot
         individual learning accounts for workers in the most AI-exposed
         occupations. Each account would carry &pound;2,000&ndash;&pound;3,500
@@ -636,9 +648,11 @@ export default function AILabourMarket() {
         claimants in exposed occupations, so the safety net supports transition
         rather than just cushioning displacement.
       </p>
+      <h3 className="text-[18px] font-medium leading-[28px] mt-8 mb-4">
+        Recommendation 6: Address the procurement paradox directly
+      </h3>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        <strong>Recommendation 6: Address the procurement paradox
-        directly.</strong> The Government Digital Service, working with the
+        The Government Digital Service, working with the
         Crown Commercial Service, should create a dedicated AI procurement
         pathway for public sector bodies. This should include pre-approved AI
         vendor frameworks with streamlined due diligence, standardised data
