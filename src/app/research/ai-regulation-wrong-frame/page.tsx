@@ -36,67 +36,58 @@ export default function AIRegulationWrongFrame() {
         Executive Summary
       </h2>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        The dominant framing of AI policy as a question of &ldquo;regulation&rdquo;
-        is actively unhelpful. It implies that the primary task is to constrain a
-        defined technology within legal boundaries &ndash; an approach that worked
-        tolerably for previous technologies but fails fundamentally for AI.<Ref n={1} /> The
-        framing invites legislators to reach for familiar tools &ndash; product
-        safety rules, licensing regimes, sector-specific compliance requirements
-        &ndash; and in doing so obscures what is genuinely novel about the
-        challenge. AI is not a product category. It is a general-purpose
-        capability that is simultaneously transforming financial services,
-        healthcare, education, defence, public administration, and creative
-        industries.<Ref n={2} /> No single regulatory instrument can meaningfully govern
-        something that pervasive, and the attempt to build one produces either
-        legislation so abstract it is unenforceable, or so specific it is
-        obsolete before the ink dries.
+        Treating AI policy as a regulation problem gets the question wrong.
+        Regulation works when you can pin down what you are regulating: a drug,
+        a bond, a vehicle.<Ref n={1} /> AI is not a thing in that sense. The same model
+        drafts a legal brief one hour and summarises an MRI the next, and
+        whether the output matters depends almost entirely on where it lands.<Ref n={2} />
+        Ask Parliament to regulate that and you get one of two outcomes. Rules
+        abstract enough to be unenforceable, or rules specific enough to be out
+        of date before Royal Assent. Both have already happened in comparable
+        jurisdictions.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        This brief argues that the United Kingdom needs to reframe the
-        conversation from regulation to governance. The distinction is not
-        semantic. Regulation is a subset of governance: it concerns binding
-        rules and their enforcement. Governance is the broader system of
-        institutions, norms, processes, and capabilities through which a society
-        steers complex transitions.<Ref n={3} /> The UK already governs many domains that
-        resist simple regulation &ndash; monetary policy, public health
-        emergencies, cyber security &ndash; through adaptive institutional
-        arrangements rather than static rulebooks. AI demands the same approach.
+        The useful shift is from regulation to governance. These are not
+        synonyms. Regulation is a subset of governance, the subset concerned
+        with binding rules and their enforcement. Governance is the wider
+        apparatus: institutions, the people in them, the evaluation
+        infrastructure, the feedback loops with industry, the informal norms
+        that actually shape behaviour.<Ref n={3} /> The UK already governs plenty of things
+        that resist clean regulation. Monetary policy is not a rulebook, it is
+        the Bank of England making calls and being judged on them. Pandemic
+        response is not a statute. AI warrants the same sort of apparatus, not
+        another Act.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        We introduce two original frameworks. First, the &ldquo;Governance
-        Maturity Model&rdquo; &ndash; a four-level schema that maps where
-        different countries sit on the spectrum from reactive regulation to
-        adaptive governance, and identifies the institutional investments needed
-        to progress. Second, the concept of &ldquo;governance as
-        infrastructure&rdquo; &ndash; the argument that governance capacity
-        should be built and maintained like digital infrastructure, as a shared
-        platform capability rather than something assembled ad hoc in response to
-        each new AI application.
+        The brief proposes two frameworks. The first is a Governance Maturity
+        Model with four levels, from reactive regulation to adaptive governance,
+        and a diagnosis of where jurisdictions sit on that ladder. The second is
+        what we call governance as infrastructure: the argument that oversight
+        capacity should be built once, centrally, and shared across regulators,
+        on the same logic that the UK does not build a new broadband backbone
+        for every new digital service.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        We also identify what we call the &ldquo;regulatory lag paradox&rdquo;:
-        the observation that by the time a regulation is drafted, consulted upon,
-        legislated, and enforced, the technology it targets has already evolved
-        beyond the regulation&rsquo;s assumptions.<Ref n={4} /> This is not a temporary
-        problem that will resolve once AI &ldquo;matures.&rdquo; It is a
-        structural feature of a technology whose capabilities shift on a
-        timescale of months while legislative processes operate on a timescale of
-        years. The paradox is sharpest in jurisdictions that have invested most
-        heavily in comprehensive AI legislation &ndash; the EU being the most
-        prominent example.<Ref n={5} />
+        We also give a name to a familiar problem, the regulatory lag paradox.
+        By the time a rule has been drafted, consulted on, passed, and
+        operationalised, the capability it was written for has moved.<Ref n={4} /> That is
+        not a transition problem waiting to resolve itself once AI settles
+        down. Capability improves on monthly timescales; primary legislation
+        operates on a horizon of years. The gap widens fastest where governments
+        invest most heavily in comprehensive AI legislation, which is why it is
+        widest in the EU.<Ref n={5} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Our central recommendation is the creation of an AI Governance Capacity
-        Unit within the Cabinet Office, charged not with writing new rules but
-        with building the institutional competence that UK regulators and
-        government departments need to govern AI within their existing mandates.
-        This unit would coordinate technical secondments, develop shared
-        evaluation infrastructure, establish common standards for AI impact
-        assessment, and identify governance gaps before they become crises. The
-        goal is not to replace DSIT&rsquo;s policy function or the AI Safety
-        Institute&rsquo;s technical work, but to solve the coordination and
-        capacity problems that currently prevent the UK&rsquo;s sectoral
-        regulators from exercising effective oversight.<Ref n={6} />
+        Our headline recommendation is an AI Governance Capacity Unit inside the
+        Cabinet Office. Its job is not to write more rules. It is to make the
+        regulators the UK already has &mdash; Ofcom, the FCA, the CMA, the ICO,
+        the MHRA &mdash; capable of doing real AI oversight inside their
+        existing mandates. That means technical secondments, a shared evaluation
+        facility, a common impact-assessment method, and a standing function
+        that notices the governance gaps nobody has been asked to close. This
+        does not replace DSIT&rsquo;s policy role or AISI&rsquo;s technical
+        work. It sits between them, which is where the coordination problem
+        currently lives.<Ref n={6} />
       </p>
 
       {/* ── 1. The regulation trap ── */}
@@ -104,72 +95,66 @@ export default function AIRegulationWrongFrame() {
         1. The regulation trap
       </h2>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        The instinct to &ldquo;regulate AI&rdquo; is politically irresistible
-        but analytically confused. It assumes AI is a product category like
-        pharmaceuticals or financial instruments &ndash; something that can be
-        tested, approved, and monitored within a defined framework. This
-        assumption reflects a mental model of technology governance forged in the
-        twentieth century, when the objects of regulation were comparatively
-        stable. A new drug takes a decade to develop and then remains
-        substantially the same product for years. A financial instrument can be
-        formally described and its risk properties modelled. These
-        characteristics make traditional regulation viable: you can specify what
-        is being regulated, define acceptable behaviour, and enforce compliance
-        through inspection. AI shares none of these properties.<Ref n={7} />
+        &ldquo;Regulate AI&rdquo; is a slogan more than a policy position.
+        Politicians reach for it because it sounds decisive and because the
+        public response to any new technology is to ask what the government is
+        going to do about it. Fair enough, as far as it goes. But the word
+        regulation carries a twentieth-century assumption: that the thing being
+        regulated stays still long enough to be described. A drug takes a decade
+        to develop and is essentially the same molecule five years after
+        approval. A derivative can be written down and its risk properties
+        modelled. Those are the conditions that make regulation tractable. You
+        can specify the object, define what bad behaviour looks like, and
+        inspect for compliance. AI meets none of them.<Ref n={7} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Consider the definitional problem alone. Any regulation requires a
-        clear definition of its object. But what counts as &ldquo;AI&rdquo;?
-        The EU AI Act defines it as a &ldquo;machine-based system that is
-        designed to operate with varying levels of autonomy and that may exhibit
-        adaptiveness after deployment.&rdquo;<Ref n={8} /> This is broad enough to capture
-        almost any software with a feedback loop and narrow enough to miss
-        important uses of large language models that operate without traditional
-        autonomy. The UK&rsquo;s approach has wisely avoided a statutory
-        definition, but this creates its own problems: without a definition,
-        sectoral regulators must each decide what falls within their remit, and
-        the inevitable inconsistencies create arbitrage opportunities and
-        compliance confusion for firms operating across sectors.<Ref n={9} />
+        Start with the definition. You cannot regulate something until you have
+        said what it is. The EU AI Act had a go, defining an AI system as
+        &ldquo;a machine-based system that is designed to operate with varying
+        levels of autonomy and that may exhibit adaptiveness after
+        deployment.&rdquo;<Ref n={8} /> That sentence sweeps in most feedback-loop software
+        written since the 1970s while still missing plenty of current LLM use
+        where there is no meaningful autonomy involved. The UK has avoided a
+        statutory definition altogether, which spares it the error and hands the
+        problem to sectoral regulators, who now have to decide for themselves
+        what falls within their remit.<Ref n={9} /> Firms working across sectors get
+        inconsistency, compliance confusion, and, in due course, arbitrage.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        The deeper issue is what we term the &ldquo;regulatory lag
-        paradox.&rdquo; Traditional regulation assumes a relatively stable
-        relationship between the rule and its object. Environmental emissions
-        standards, building codes, food safety requirements &ndash; these all
-        regulate phenomena that change slowly relative to the legislative cycle.
-        AI capabilities, by contrast, shift on a timescale of months. When the
-        EU began drafting the AI Act in April 2021, GPT-3 had been released for
-        less than a year, ChatGPT did not exist, and the idea that AI systems
-        would be capable of writing legislation, generating photorealistic
-        imagery, or conducting scientific research was confined to speculative
-        futurism.<Ref n={10} /> By the time the Act received final approval in March 2024,
-        the technological landscape had transformed beyond recognition. The
-        Act&rsquo;s risk categories, compliance requirements, and enforcement
-        mechanisms were designed for a world that no longer existed.
+        The more fundamental problem is timing. Regulation assumes a reasonable
+        match between the pace of the rule and the pace of the thing it
+        governs. Emissions standards, food safety, building codes &mdash; the
+        underlying reality moves slowly enough that a multi-year legislative
+        cycle is fine. AI does not oblige. When the European Commission started
+        drafting the AI Act in April 2021, GPT-3 was less than a year old,
+        ChatGPT did not exist as a product, and the idea that language models
+        would be used to draft legislation or pass the bar exam was a
+        conference-panel hypothetical, not a policy concern.<Ref n={10} /> By March 2024,
+        when the Act cleared its final procedural hurdle, the world it was built
+        to govern was gone. The risk tiers, the provider obligations, the
+        enforcement architecture had all been drafted for a generation of models
+        that had already been superseded, twice.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        This is not a criticism of the EU&rsquo;s drafters, who were competent
-        and well-intentioned. It is a structural observation about the
-        mismatch between legislative timescales and technological change.
-        The paradox is self-reinforcing: the more comprehensive the regulation,
-        the longer it takes to draft and pass, and therefore the greater the gap
-        between the technology it was designed for and the technology it actually
-        governs. Narrow, targeted rules can be updated more quickly, but they
-        inevitably leave large areas of AI deployment ungoverned. There is no
-        sweet spot within the regulatory paradigm that resolves this tension.<Ref n={11} />
+        None of this is a criticism of the drafters. They were competent,
+        well-resourced, and working within the only process available to them.
+        The point is structural. The more comprehensive a regulation, the longer
+        it takes to produce, and the wider the gap between the technology it
+        imagined and the technology it actually governs. Narrow, targeted rules
+        can be updated faster, but they leave most of the deployment space
+        ungoverned. There is no version of the regulatory paradigm that resolves
+        this.<Ref n={11} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        The political economy of AI regulation compounds these problems.
-        Regulation creates compliance costs, and compliance costs create
-        lobbying incentives. The result is that AI regulation tends to be shaped
-        by the firms large enough to absorb compliance overhead &ndash; which
-        are, not coincidentally, the firms that already dominate the AI market.<Ref n={12} />
-        The EU AI Act&rsquo;s requirements for foundation model providers, for
-        instance, are substantially more manageable for a company with a
-        dedicated compliance team of hundreds than for a European startup
-        attempting to compete. Regulation intended to protect citizens can
-        inadvertently consolidate market power, an outcome that is neither
-        pro-innovation nor pro-safety.<Ref n={13} />
+        Then the political economy makes all of it worse. Compliance is
+        expensive. Expensive compliance creates lobbying incentives. The firms
+        that end up shaping AI regulation are therefore the firms large enough
+        to absorb it, which are, not coincidentally, the incumbents.<Ref n={12} /> A
+        foundation-model provider with a hundred-person legal and compliance
+        function finds the AI Act manageable. A six-person Paris startup does
+        not. Rules written to protect the public from concentrated AI capability
+        can end up protecting the firms that already have it. Whether you call
+        that pro-innovation or pro-safety is beside the point.<Ref n={13} />
       </p>
 
       {/* ── 2. Why AI breaks the regulatory model ── */}
@@ -178,75 +163,69 @@ export default function AIRegulationWrongFrame() {
       </h2>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The regulatory model that served the twentieth century rests on several
-        assumptions, each of which AI violates. The first is that the object
-        of regulation is identifiable and bounded. A car is a car; a bank is a
-        bank. But an AI system might be a medical diagnostic tool on Monday, a
+        assumptions, each of which AI violates. The first: the object of
+        regulation is identifiable and bounded. A car is a car; a bank is a
+        bank. An AI system might be a medical diagnostic tool on Monday, a
         legal research assistant on Tuesday, and a creative writing partner on
-        Wednesday &ndash; the same underlying model, accessed through different
-        interfaces, governed by different sectoral regulators, with entirely
-        different risk profiles depending on context of use.<Ref n={14} /> This is not an edge
-        case; it is the defining characteristic of general-purpose AI. No
-        previous technology has presented regulators with an object that shifts
-        its risk category depending on how it is deployed.
+        Wednesday. Same underlying model, different interfaces, different
+        sectoral regulators, entirely different risk profiles depending on
+        context.<Ref n={14} /> That is not an edge case. That is what
+        general-purpose AI is. No previous technology has handed regulators an
+        object whose risk category depends on how someone uses it.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        The second violated assumption is that the supply chain is legible.
-        Traditional regulation traces a clear path from manufacturer to end
-        user. Pharmaceutical regulation can identify who synthesised a compound,
-        who tested it, who approved it, and who prescribed it. AI supply chains
-        are far more diffuse. A frontier model is trained by one company on data
-        from thousands of sources, fine-tuned by another company for a specific
-        domain, deployed by a third through an API, integrated by a fourth into
-        a consumer-facing product, and customised by the end user through
-        prompting. Where in this chain does regulatory responsibility sit? The
-        EU AI Act attempts to distribute obligations across the chain, assigning
-        duties to &ldquo;providers&rdquo; and &ldquo;deployers,&rdquo;<Ref n={15} /> but the
-        practical enforceability of these distinctions is already being tested
-        by the reality of how AI systems are built, modified, and used.
+        The second: the supply chain is legible. Traditional regulation traces
+        a clear path from manufacturer to end user. Pharmaceutical regulation
+        can identify who synthesised a compound, who tested it, who approved
+        it, who prescribed it. AI supply chains are more diffuse. A frontier
+        model is trained by one company on data from thousands of sources,
+        fine-tuned by another for a specific domain, deployed by a third
+        through an API, integrated by a fourth into a consumer product,
+        customised by the end user through prompting. Where in that chain does
+        regulatory responsibility sit? The EU AI Act distributes obligations
+        across it, assigning duties to &ldquo;providers&rdquo; and
+        &ldquo;deployers,&rdquo;<Ref n={15} /> but the practical enforceability
+        of those distinctions is already being tested by how AI systems
+        actually get built and used.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        The third assumption is that risk can be assessed prior to deployment
-        and remains relatively stable thereafter. Pharmaceuticals undergo
-        multi-year clinical trials before reaching patients. Financial products
-        are stress-tested against defined scenarios. AI systems, particularly
-        those based on large language models, exhibit emergent behaviours that
-        are not predictable from their training data or architecture.<Ref n={16} /> A model
-        that passes every safety benchmark at the time of deployment may
-        develop unexpected capabilities or failure modes as it is exposed to
-        real-world inputs. The concept of pre-market approval, which underpins
-        most product safety regulation, assumes that the product that is
-        assessed is the product that is used. For adaptive AI systems, this
-        assumption does not hold.
+        The third: risk can be assessed before deployment and stays relatively
+        stable afterwards. Pharmaceuticals undergo multi-year clinical trials
+        before reaching patients. Financial products are stress-tested against
+        defined scenarios. AI systems, particularly those built on large
+        language models, exhibit emergent behaviours that are not predictable
+        from their training data or architecture.<Ref n={16} /> A model that
+        passes every safety benchmark at deployment may develop unexpected
+        capabilities or failure modes once exposed to real-world inputs.
+        Pre-market approval, which underpins most product safety regulation,
+        assumes that the product assessed is the product used. For adaptive AI
+        systems, it is not.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        The fourth assumption is that the regulated entity and the regulator
-        operate within a shared jurisdiction. AI models are trained in one
-        country, hosted in another, accessed globally through APIs, and fine-
-        tuned locally. A UK regulator attempting to enforce compliance against a
-        model hosted in the United States, trained on data from dozens of
-        jurisdictions, and accessed by UK users through a wrapper built by an
-        Indian startup, faces jurisdictional challenges that make conventional
-        enforcement mechanisms largely theoretical. This is not a new problem
-        &ndash; internet regulation faces similar difficulties &ndash; but the
-        speed of AI deployment and the opacity of AI supply chains make it
-        considerably more acute.
+        The fourth: the regulated entity and the regulator share a
+        jurisdiction. AI models are trained in one country, hosted in another,
+        accessed globally through APIs, fine-tuned locally. A UK regulator
+        trying to enforce compliance against a model hosted in the United
+        States, trained on data from dozens of jurisdictions, and accessed by
+        UK users through a wrapper built by an Indian startup, faces
+        jurisdictional problems that make conventional enforcement mechanisms
+        largely theoretical. Internet regulation has always faced a version of
+        this. The speed of AI deployment and the opacity of AI supply chains
+        make it considerably more acute.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Finally, regulation assumes that the regulator possesses &ndash; or can
-        acquire &ndash; sufficient expertise to evaluate compliance. For most
-        regulated industries, this is achievable: the FCA employs people who
-        understand financial instruments, the MHRA employs people who understand
-        pharmacology. But the technical frontier of AI is advancing so rapidly
-        that even well-resourced regulators struggle to maintain relevant
-        expertise.<Ref n={17} /> The AI Safety Institute has made significant investments in
-        technical evaluation capacity, but its mandate is focused on frontier
-        models and catastrophic risk.<Ref n={18} /> The sectoral regulators who must govern
-        the vast majority of AI deployments &ndash; Ofcom dealing with
-        AI-generated content, the FCA with AI in financial services, the CMA
-        with AI and competition, the ICO with AI and data protection &ndash;
-        face a persistent capability gap that cannot be closed by hiring alone,
-        because the relevant expertise is scarce and the private sector pays
-        multiples of public sector salaries.
+        The fifth: the regulator has the expertise to evaluate compliance, or
+        can acquire it. For most regulated industries, this holds. The FCA
+        employs people who understand financial instruments; the MHRA employs
+        people who understand pharmacology. But the technical frontier of AI is
+        moving so fast that even well-resourced regulators cannot keep pace.<Ref n={17} />
+        The AI Safety Institute has invested seriously in technical evaluation
+        capacity, but its mandate covers frontier models and catastrophic risk.<Ref n={18} />
+        The sectoral regulators who will govern the bulk of AI deployments,
+        Ofcom on AI-generated content, the FCA on AI in financial services, the
+        CMA on competition, the ICO on data protection, face a capability gap
+        that hiring will not close. The relevant expertise is scarce and the
+        private sector pays multiples of public sector salaries.
       </p>
 
       {/* ── 3. The governance alternative ── */}
@@ -257,84 +236,78 @@ export default function AIRegulationWrongFrame() {
         Governance is broader than regulation. Where regulation asks &ldquo;what
         rules should we write?&rdquo;, governance asks &ldquo;what institutions,
         processes, and capabilities do we need to manage this transition
-        well?&rdquo; This reframing is not a retreat from accountability or
-        oversight. It is a recognition that effective oversight of AI requires
-        instruments that regulation alone cannot provide: real-time technical
-        monitoring, adaptive standards that evolve with the technology,
-        cross-sector coordination, and institutional learning at a pace that
-        matches technological change.<Ref n={3} /> Regulation remains an important tool
-        within the governance toolkit, but it is one tool among many, and
-        treating it as the entirety of the response is like trying to manage a
-        pandemic with legislation alone.
+        well?&rdquo; The reframing is not a retreat from accountability.
+        Effective oversight of AI needs instruments that regulation alone
+        cannot provide: real-time technical monitoring, standards that evolve
+        with the technology, cross-sector coordination, and institutional
+        learning at a pace that matches technological change.<Ref n={3} />
+        Regulation remains an important tool in the governance toolkit. It is
+        one tool among many. Treating it as the entirety of the response is
+        like trying to manage a pandemic with legislation alone.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        We propose what we call the &ldquo;Governance Maturity Model&rdquo;
-        &ndash; a framework for assessing where jurisdictions sit on the
-        spectrum from reactive to adaptive AI governance. The model has four
-        levels. Level 1 is &ldquo;reactive regulation&rdquo;: the jurisdiction
+        We propose a Governance Maturity Model: a framework for assessing where
+        jurisdictions sit on the spectrum from reactive to adaptive AI
+        governance. Four levels. Level 1, reactive regulation: the jurisdiction
         has no AI-specific governance and responds to AI-related harms only
-        after they occur, using existing legal frameworks that may or may not be
-        adequate. Many developing countries and some US states sit here. Level 2
-        is &ldquo;prescriptive regulation&rdquo;: the jurisdiction has enacted
-        or is enacting comprehensive AI-specific legislation that defines risk
+        after they occur, using existing legal frameworks that may or may not
+        be adequate. Many developing countries and some US states sit here.
+        Level 2, prescriptive regulation: the jurisdiction has enacted or is
+        enacting comprehensive AI-specific legislation that defines risk
         categories, mandates compliance procedures, and establishes enforcement
-        mechanisms. The EU, following the AI Act, is the paradigmatic example.<Ref n={5} />
-        The strength of this level is legal certainty; the weakness is rigidity
+        mechanisms. The EU, through the AI Act, is the paradigmatic case.<Ref n={5} />
+        The strength of Level 2 is legal certainty. The weakness is rigidity,
         and the regulatory lag paradox described above.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Level 3 is &ldquo;coordinated oversight&rdquo;: the jurisdiction
-        distributes AI governance across existing sectoral regulators, with a
-        central coordinating function that ensures consistency and fills gaps.
-        The UK&rsquo;s current framework aspires to this level but has not yet
-        achieved it, because the coordinating function (currently split between
-        DSIT, AISI, and the Cabinet Office) lacks the authority and resources to
-        be effective.<Ref n={19} /> Level 4 is &ldquo;adaptive governance&rdquo;: the
-        jurisdiction has built the institutional infrastructure for continuous
-        learning and adaptation &ndash; real-time monitoring capabilities,
-        regulatory sandboxes that feed into policy, structured feedback loops
-        between industry and government, and the capacity to update governance
-        frameworks without primary legislation. Singapore, as we discuss in
-        Section 5, comes closest to this level, though no jurisdiction has fully
-        achieved it.<Ref n={20} />
+        Level 3, coordinated oversight: the jurisdiction distributes AI
+        governance across existing sectoral regulators, with a central
+        coordinating function that keeps consistency and fills gaps. The
+        UK&rsquo;s current framework aspires to Level 3 but has not reached
+        it, because the coordinating function, currently split between DSIT,
+        AISI, and the Cabinet Office, lacks the authority and resources.<Ref n={19} />
+        Level 4, adaptive governance: the jurisdiction has built the
+        institutional infrastructure for continuous learning and adaptation.
+        Real-time monitoring capabilities, regulatory sandboxes that feed into
+        policy, structured feedback loops between industry and government, and
+        the capacity to update governance frameworks without primary
+        legislation. Singapore, as Section 5 discusses, comes closest, though
+        no jurisdiction has fully got there.<Ref n={20} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        The Governance Maturity Model is not a simple hierarchy in which higher
-        levels are always better. Level 2 prescriptive regulation may be
-        appropriate for specific high-risk applications where legal certainty is
-        paramount &ndash; AI in criminal sentencing, for example, or autonomous
-        weapons systems. The argument is not that regulation is never the right
-        tool, but that a jurisdiction&rsquo;s overall approach to AI governance
-        should aspire to Level 3 or 4, deploying regulation selectively within
-        a broader adaptive framework rather than treating it as the default
-        instrument.
+        The Governance Maturity Model is not a strict hierarchy in which higher
+        levels are always better. Level 2 prescriptive regulation may be the
+        right choice for specific high-risk applications where legal certainty
+        is paramount, AI in criminal sentencing, for example, or autonomous
+        weapons systems. Regulation is sometimes the right tool. The argument
+        is that a jurisdiction&rsquo;s overall approach to AI governance should
+        aim at Level 3 or 4, using regulation selectively inside a broader
+        adaptive framework rather than treating it as the default instrument.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The second conceptual contribution of this brief is the idea of
-        &ldquo;governance as infrastructure.&rdquo; The analogy is deliberate.
-        The UK does not build a new broadband network for each digital service;
-        it invests in shared digital infrastructure that multiple applications
-        can use. Similarly, governance capacity should not be built from scratch
-        for each AI application or sector. The ability to evaluate an AI
-        model&rsquo;s reliability, to audit its training data provenance, to
-        assess its impact on a particular population &ndash; these are
-        capabilities that recur across every domain in which AI is deployed.
-        Building them as shared infrastructure, accessible to every regulator
-        and government department, is vastly more efficient than expecting each
-        body to develop its own capability independently.
+        governance as infrastructure. The analogy is deliberate. The UK does
+        not build a new broadband network for each digital service; it invests
+        in shared digital infrastructure that multiple applications can use.
+        Governance capacity should work the same way. The ability to evaluate
+        an AI model&rsquo;s reliability, to audit its training data provenance,
+        to assess its impact on a particular population: these capabilities
+        recur across every domain in which AI is deployed. Building them as
+        shared infrastructure, accessible to every regulator and government
+        department, is far more efficient than expecting each body to develop
+        its own capability from scratch.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        This infrastructure metaphor also illuminates a critical timing
-        question. You do not wait until traffic congestion is unbearable to
-        start building roads. You invest ahead of demand, accepting that the
-        infrastructure will be underutilised initially. The same logic applies
-        to governance capacity. The UK needs to invest now in the institutions,
-        skills, and processes that will be needed to govern AI over the coming
-        decade, rather than waiting for each governance failure to reveal the
-        next capability gap. The cost of building this infrastructure
-        proactively is a fraction of the cost of responding reactively to
-        governance failures &ndash; as the Post Office Horizon scandal
-        illustrates in a closely adjacent domain.<Ref n={21} />
+        The infrastructure metaphor also points to a timing question. You do
+        not wait until traffic congestion is unbearable before starting to
+        build roads. You invest ahead of demand, accepting that the
+        infrastructure will be underused at first. The same logic applies here.
+        The UK needs to invest now in the institutions, skills, and processes
+        that will be needed to govern AI over the coming decade, rather than
+        waiting for each governance failure to reveal the next capability gap.
+        The cost of building proactively is a fraction of the cost of cleaning
+        up after the fact, as the Post Office Horizon scandal illustrates in a
+        closely adjacent domain.<Ref n={21} />
       </p>
 
       {/* ── 4. Building institutional capacity ── */}
@@ -342,85 +315,84 @@ export default function AIRegulationWrongFrame() {
         4. Building institutional capacity
       </h2>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        The UK&rsquo;s &ldquo;pro-innovation&rdquo; approach to AI &ndash;
-        delegating oversight to existing sectoral regulators through five
-        cross-cutting principles (safety, transparency, fairness,
-        accountability, and contestability) &ndash; has the right instinct but
-        lacks the infrastructure to succeed.<Ref n={9} /> The approach was set out in the
-        March 2023 white paper and reinforced by subsequent policy statements,<Ref n={22} />
-        but the gap between the framework&rsquo;s ambition and the
-        regulators&rsquo; capacity to deliver it has widened rather than
-        narrowed. The fundamental problem is that the framework distributes
-        responsibility without distributing capability.
+        The UK&rsquo;s &ldquo;pro-innovation&rdquo; approach to AI, delegating
+        oversight to existing sectoral regulators through five cross-cutting
+        principles (safety, transparency, fairness, accountability,
+        contestability), has the right instinct but lacks the infrastructure to
+        succeed.<Ref n={9} /> The approach was set out in the March 2023 white
+        paper and reinforced by subsequent policy statements,<Ref n={22} /> but
+        the gap between the framework&rsquo;s ambition and the regulators&rsquo;
+        capacity to deliver it has widened rather than narrowed. The problem is
+        that the framework distributes responsibility without distributing
+        capability.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         Ofcom, the FCA, the CMA, and the ICO each face AI governance challenges
-        that are central to their mandates. Ofcom must address AI-generated
-        disinformation and deepfakes under its Online Safety Act responsibilities.
+        that sit at the centre of their mandates. Ofcom must address
+        AI-generated disinformation and deepfakes under the Online Safety Act.
         The FCA must govern the use of AI in credit decisions, algorithmic
-        trading, and customer service.<Ref n={23} /> The CMA must assess whether foundation
-        model providers are engaging in anti-competitive practices.<Ref n={24} /> The ICO must
-        enforce data protection principles against AI systems that process
-        personal data in ways that are technically opaque.<Ref n={25} /> Each of these
-        challenges requires deep technical understanding of how AI systems work
-        &ndash; not at the level of academic computer science, but at the
-        practical level of knowing what questions to ask, what evidence to
-        demand, and what claims to be sceptical of.
+        trading, and customer service.<Ref n={23} /> The CMA must assess whether
+        foundation model providers are engaging in anti-competitive practices.<Ref n={24} />
+        The ICO must enforce data protection principles against AI systems
+        that process personal data in ways that are technically opaque.<Ref n={25} />
+        Each of these challenges needs deep technical understanding of how AI
+        systems work, not academic computer science but the practical sort:
+        knowing what questions to ask, what evidence to demand, which vendor
+        claims deserve scepticism.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Most regulators do not currently have this capacity, and they cannot
-        build it independently. The talent market for people who combine
-        technical AI expertise with regulatory experience is vanishingly small.
-        The private sector absorbs the vast majority of technical AI talent at
-        salaries that public sector bodies cannot match. Even AISI, which has
-        been relatively successful at attracting technical staff, has benefited
-        from the novelty of its mission and its partial insulation from standard
-        civil service pay scales &ndash; advantages that are not available to
-        regulators operating under established HR frameworks.<Ref n={26} /> A strategy that
-        relies on each regulator independently recruiting and retaining AI
-        expertise is a strategy that will fail.
+        Most regulators do not have this capacity, and they cannot build it on
+        their own. The talent market for people who combine technical AI
+        expertise with regulatory experience is vanishingly small. The private
+        sector absorbs most technical AI talent at salaries public sector
+        bodies cannot match. Even AISI, which has done relatively well at
+        attracting technical staff, has benefited from the novelty of its
+        mission and a partial insulation from standard civil service pay
+        scales. Regulators operating under established HR frameworks have
+        neither.<Ref n={26} /> A strategy that relies on each regulator
+        independently recruiting and retaining AI expertise is a strategy that
+        will fail.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        The alternative is to build shared governance infrastructure. We propose
-        four components. First, a technical secondment programme that places AI
-        engineers from industry and AISI within key regulatory bodies for 12-
-        month rotations. These secondees would not write policy; they would
-        build the internal technical literacy of the host organisation, training
-        permanent staff and helping to develop AI-literate regulatory processes.
-        The model has precedents: the Government Digital Service pioneered a
-        similar approach to digital skills in the 2010s, and the FCA&rsquo;s
-        TechSprint programme has demonstrated the value of embedding technical
-        practitioners within regulatory teams.<Ref n={23} />
+        The alternative is to build shared governance infrastructure. We
+        propose four components. First, a technical secondment programme that
+        places AI engineers from industry and AISI within key regulatory bodies
+        for 12-month rotations. The secondees would not write policy. Their
+        job would be to build the host organisation&rsquo;s internal technical
+        literacy, train permanent staff, and help develop AI-literate
+        regulatory processes. The model has precedents. The Government Digital
+        Service pioneered a similar approach to digital skills in the 2010s.
+        The FCA&rsquo;s TechSprint programme has shown the value of embedding
+        technical practitioners within regulatory teams.<Ref n={23} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Second, shared AI evaluation infrastructure. Currently, any regulator
+        Second, shared AI evaluation infrastructure. At present, any regulator
         that wants to evaluate an AI system must build or procure its own
-        testing capability. This is inefficient and leads to inconsistent
-        standards. A central evaluation facility &ndash; building on AISI&rsquo;s
-        existing work but with a broader mandate covering deployed systems, not
-        just frontier models &ndash; would allow regulators to submit AI
-        systems for independent technical assessment against common benchmarks.<Ref n={18} />
-        This is analogous to how the National Physical Laboratory provides
-        shared measurement infrastructure, or how GCHQ&rsquo;s National Cyber
-        Security Centre provides shared cyber security assessment capability.
+        testing capability. That is inefficient and produces inconsistent
+        standards. A central evaluation facility, building on AISI&rsquo;s
+        existing work but with a broader mandate that covers deployed systems
+        as well as frontier models, would let regulators submit AI systems for
+        independent technical assessment against common benchmarks.<Ref n={18} />
+        The parallels are the National Physical Laboratory, which provides
+        shared measurement infrastructure, and GCHQ&rsquo;s National Cyber
+        Security Centre, which provides shared cyber security assessment
+        capability.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         Third, common standards for AI impact assessment. Each regulator is
-        currently developing its own approach to assessing the impact of AI
-        systems within its domain. The ICO has its AI and data protection risk
-        toolkit;<Ref n={25} /> the FCA is developing guidance on AI model risk management; the
-        CMA has published its own AI principles.<Ref n={24} /> While sector-specific
-        adaptation is appropriate, the underlying methodology for assessing AI
-        systems &ndash; evaluating training data quality, testing for bias,
-        assessing robustness, examining transparency &ndash; should be
-        standardised.<Ref n={27} /> DSIT should convene regulators to develop a common AI
-        impact assessment framework, with sector-specific modules that build on
-        a shared foundation. Fourth, a horizon-scanning and gap-identification
-        function within the Cabinet Office that continuously monitors the AI
-        governance landscape for emerging risks that fall between regulatory
-        mandates &ndash; the gaps that no existing regulator is responsible for,
-        which are precisely where the most dangerous governance failures tend to
-        occur.
+        currently developing its own approach to assessing AI systems within
+        its domain. The ICO has its AI and data protection risk toolkit.<Ref n={25} />
+        The FCA is developing guidance on AI model risk management. The CMA
+        has published its own AI principles.<Ref n={24} /> Sector-specific
+        adaptation is appropriate, but the underlying methodology, training
+        data quality, bias testing, robustness, transparency, should be
+        standardised.<Ref n={27} /> DSIT should convene regulators to develop a
+        common AI impact assessment framework, with sector-specific modules
+        that build on a shared foundation. Fourth, a horizon-scanning and
+        gap-identification function inside the Cabinet Office that continuously
+        watches for emerging AI governance risks that fall between regulatory
+        mandates. The gaps where no existing regulator is responsible are
+        exactly where the worst governance failures tend to happen.
       </p>
 
       {/* ── 5. International lessons ── */}
@@ -430,99 +402,97 @@ export default function AIRegulationWrongFrame() {
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         The EU AI Act is the world&rsquo;s most ambitious attempt at
         comprehensive AI regulation, and its implementation difficulties are
-        instructive for any jurisdiction considering a similar approach.<Ref n={5} /> The
-        Act classifies AI systems into risk tiers &ndash; unacceptable, high,
-        limited, and minimal &ndash; and imposes corresponding obligations
-        ranging from outright bans to transparency requirements.<Ref n={8} /> In theory,
-        this provides legal certainty and a clear compliance framework. In
-        practice, the implementation is revealing problems that were foreseeable
+        instructive for any jurisdiction considering a similar approach.<Ref n={5} />
+        The Act classifies AI systems into four risk tiers (unacceptable,
+        high, limited, minimal) and imposes corresponding obligations, ranging
+        from outright bans to transparency requirements.<Ref n={8} /> In
+        theory, that provides legal certainty and a clear compliance framework.
+        In practice, implementation is revealing problems that were foreseeable
         from the outset. Companies are struggling to classify their AI systems
         within the Act&rsquo;s risk categories, particularly where a single
-        model is used across multiple applications with different risk profiles.
-        The Act&rsquo;s provisions on foundation models, inserted late in the
-        legislative process in response to the emergence of ChatGPT, sit
-        uneasily with the rest of the framework and have generated significant
-        uncertainty about compliance requirements.<Ref n={13} />
+        model is used across multiple applications with different risk
+        profiles. The Act&rsquo;s provisions on foundation models, inserted
+        late in the legislative process in response to ChatGPT, sit uneasily
+        with the rest of the framework and have generated significant
+        uncertainty about compliance.<Ref n={13} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        More fundamentally, the EU is discovering that it lacks the enforcement
-        capacity to make the Act effective. The newly created AI Office has a
-        modest staff count and budget relative to the scale of its mandate.<Ref n={28} />
-        National competent authorities in member states are at varying stages of
-        readiness, with many yet to establish the technical infrastructure
+        More telling: the EU lacks the enforcement capacity to make the Act
+        effective. The newly created AI Office has a modest staff count and
+        budget relative to the scale of its mandate.<Ref n={28} /> National
+        competent authorities in member states are at varying stages of
+        readiness, and many have yet to establish the technical infrastructure
         needed to audit AI systems. The Act&rsquo;s requirement for
         &ldquo;conformity assessments&rdquo; of high-risk AI systems presumes
-        the existence of qualified auditors and agreed standards &ndash;
-        neither of which currently exist at scale. The European Commission has
-        acknowledged that full enforcement will take years, during which the
-        technology will have continued to evolve. The EU&rsquo;s experience
-        demonstrates Level 2 of the Governance Maturity Model in its purest
-        form: a comprehensive legal framework that is rigorous on paper but
-        faces structural challenges in implementation.
+        qualified auditors and agreed standards. Neither exists at scale. The
+        European Commission has acknowledged that full enforcement will take
+        years, during which the technology will have moved on. The EU&rsquo;s
+        experience demonstrates Level 2 of the Governance Maturity Model in
+        its purest form: a legal framework that is rigorous on paper and
+        structurally hard to implement.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        The United States has taken a markedly different path. The Biden
+        The United States has taken a very different path. The Biden
         administration&rsquo;s October 2023 Executive Order on AI was the most
-        significant federal AI policy intervention, establishing reporting
-        requirements for frontier model developers, directing agencies to
-        address AI risks within their domains, and investing in AI safety
-        research.<Ref n={29} /> The approach had the virtue of speed &ndash; an executive
-        order can be issued in weeks, whereas the EU AI Act took three years to
-        legislate &ndash; but also fundamental limitations. Executive orders are
-        reversible by subsequent administrations, as demonstrated when the Trump
-        administration rescinded the order shortly after taking office in
-        January 2025.<Ref n={30} /> This illustrates a different failure mode: governance that
-        is adaptive but impermanent, subject to political cycles rather than
-        building durable institutional capacity. The US currently lacks any
-        federal AI legislation, and the patchwork of state-level initiatives
-        &ndash; from Colorado&rsquo;s AI consumer protection act to
-        California&rsquo;s various proposals &ndash; creates precisely the kind
-        of fragmented, inconsistent governance landscape that comprehensive
-        approaches are intended to avoid.
+        significant federal AI policy intervention: it set reporting
+        requirements for frontier model developers, directed agencies to
+        address AI risks within their domains, and put money into AI safety
+        research.<Ref n={29} /> The approach had the virtue of speed. An
+        executive order can be issued in weeks; the EU AI Act took three years
+        to legislate. It also had fundamental limitations. Executive orders
+        are reversible by subsequent administrations, as the Trump
+        administration showed by rescinding the order shortly after taking
+        office in January 2025.<Ref n={30} /> That is a different failure
+        mode: governance that is adaptive but impermanent, tied to political
+        cycles rather than built into durable institutional capacity. The US
+        currently has no federal AI legislation, and the patchwork of
+        state-level initiatives (Colorado&rsquo;s AI consumer protection act,
+        California&rsquo;s various proposals, and others) produces exactly the
+        fragmented, inconsistent picture that comprehensive approaches are
+        meant to avoid.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Singapore offers the most instructive model for the UK. Rather than
-        pursuing comprehensive legislation, Singapore has built an adaptive
-        governance ecosystem through a combination of voluntary frameworks,
-        regulatory sandboxes, and institutional capacity-building.<Ref n={20} /> The
+        Singapore offers the most instructive model for the UK. Instead of
+        comprehensive legislation, Singapore has built an adaptive governance
+        ecosystem from a combination of voluntary frameworks, regulatory
+        sandboxes, and institutional capacity-building.<Ref n={20} /> The
         Infocomm Media Development Authority&rsquo;s Model AI Governance
-        Framework, first published in 2019 and regularly updated, provides
-        practical guidance that organisations can adopt incrementally.<Ref n={31} /> The
-        AI Verify foundation&rsquo;s testing framework offers a concrete tool
-        for assessing AI systems against governance principles. Crucially,
+        Framework, first published in 2019 and regularly updated, gives
+        organisations practical guidance they can adopt incrementally.<Ref n={31} />
+        AI Verify&rsquo;s testing framework offers a concrete tool for
+        assessing AI systems against governance principles. Alongside that,
         Singapore has invested in the institutional infrastructure that makes
-        these voluntary approaches effective: a well-resourced national AI
-        office, deep government-industry dialogue mechanisms, and a public
-        sector with genuine technical literacy at senior levels.
+        voluntary approaches stick: a well-resourced national AI office, deep
+        government-industry dialogue mechanisms, and a public sector with
+        genuine technical literacy at senior levels.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Singapore&rsquo;s approach represents something close to Level 4 on
-        the Governance Maturity Model &ndash; adaptive governance that can
-        evolve with the technology without requiring new legislation for each
-        development. Its limitations are also instructive: the model relies
-        heavily on government-industry trust, works best at the scale of a
-        city-state with a relatively small number of major AI deployers, and
-        depends on a quality of public sector that not every country can
-        replicate. The UK cannot simply copy Singapore&rsquo;s approach, but it
-        can learn from the underlying principles: invest in institutional
-        capacity first, use voluntary frameworks to build norms and
-        expectations, deploy regulation selectively for specific high-risk
-        applications, and maintain the flexibility to adapt as the technology
-        evolves.
+        Singapore&rsquo;s approach is close to Level 4 on the Governance
+        Maturity Model: adaptive governance that can evolve with the
+        technology without needing new legislation for each development. Its
+        limitations are also instructive. The model leans heavily on
+        government-industry trust, works best at the scale of a city-state
+        with relatively few major AI deployers, and depends on a quality of
+        public sector that not every country can replicate. The UK cannot
+        simply copy Singapore, but it can learn from the underlying
+        principles: invest in institutional capacity first, use voluntary
+        frameworks to build norms and expectations, deploy regulation
+        selectively for specific high-risk applications, and keep the
+        flexibility to adapt as the technology evolves.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Several other jurisdictions offer relevant lessons. Canada&rsquo;s
+        Several other jurisdictions are worth watching. Canada&rsquo;s
         Artificial Intelligence and Data Act, part of the broader Bill C-27,
         has faced sustained criticism for vague definitions and uncertain
-        enforcement mechanisms &ndash; a cautionary tale about legislating
-        without first building the institutional capacity to implement.<Ref n={32} /> Japan
-        has pursued a &ldquo;social principles&rdquo; approach, emphasising
-        human-centric AI development through non-binding guidelines and
-        industry self-governance, which has maintained flexibility but
-        raised questions about accountability.<Ref n={33} /> The common thread is that
-        jurisdictions which invested in institutional capacity before or
-        alongside legislative action have fared better than those which
-        legislated first and attempted to build capacity afterwards.
+        enforcement mechanisms. A cautionary tale about legislating before
+        building the institutional capacity to implement.<Ref n={32} /> Japan
+        has taken a &ldquo;social principles&rdquo; approach that pushes
+        human-centred AI development through non-binding guidelines and
+        industry self-governance. It has preserved flexibility but raised real
+        questions about accountability.<Ref n={33} /> The pattern: jurisdictions
+        that invested in institutional capacity before or alongside legislative
+        action have fared better than those that legislated first and tried to
+        build capacity afterwards.
       </p>
 
       {/* ── 6. Policy recommendations ── */}
@@ -531,115 +501,113 @@ export default function AIRegulationWrongFrame() {
       </h2>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
         Our recommendations are deliberately institutional rather than
-        legislative. The UK does not need more AI laws &ndash; it needs the
-        capacity to govern AI well within existing legal frameworks, adapting
-        as the technology evolves. The following six recommendations are ordered
-        by priority and feasibility, with the first three achievable within the
-        current Parliament and the latter three requiring longer-term investment.
+        legislative. The UK does not need more AI laws. It needs the capacity
+        to govern AI well within existing legal frameworks, and to adapt as
+        the technology evolves. The six recommendations below are ordered by
+        priority and feasibility. The first three are achievable within the
+        current Parliament; the last three need longer-term investment.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        First, establish the AI Governance Capacity Unit within the Cabinet
-        Office. This unit should be small (30&ndash;50 staff), technically
-        capable, and explicitly tasked with building cross-departmental AI
-        governance competence rather than centralising AI oversight. Its core
-        functions would include: coordinating the technical secondment programme
-        described below; managing shared evaluation infrastructure; convening
-        regulators to develop common standards; and conducting the horizon-
-        scanning function that identifies governance gaps. The unit should report
-        to a minister with genuine cross-departmental authority &ndash; the
-        Chancellor of the Duchy of Lancaster or equivalent &ndash; to avoid
-        being captured by any single department&rsquo;s priorities. Its
-        relationship with DSIT&rsquo;s AI policy team should be complementary:
-        DSIT leads on AI industrial strategy and international engagement; the
+        First, establish an AI Governance Capacity Unit within the Cabinet
+        Office. The unit should be small (30&ndash;50 staff), technically
+        capable, and tasked with building cross-departmental AI governance
+        competence, not centralising AI oversight. Its core functions:
+        coordinate the technical secondment programme below; manage shared
+        evaluation infrastructure; convene regulators on common standards; run
+        the horizon-scanning function that identifies governance gaps. The
+        unit should report to a minister with genuine cross-departmental
+        authority, the Chancellor of the Duchy of Lancaster or equivalent, to
+        avoid being captured by any single department&rsquo;s priorities. Its
+        relationship with DSIT&rsquo;s AI policy team should be complementary.
+        DSIT leads on AI industrial strategy and international engagement. The
         Cabinet Office unit leads on governance capacity and cross-departmental
         coordination.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Second, create the AI Technical Secondment Programme. This programme
+        Second, create an AI Technical Secondment Programme. The programme
         should place 50&ndash;100 AI engineers and researchers within key
-        regulatory bodies annually, funded centrally and administered by the
-        Governance Capacity Unit. Priority placements should be Ofcom (AI-
-        generated content and deepfakes), the FCA (AI in financial services),
-        the CMA (AI and market competition), the ICO (AI and data protection),
-        and the NHS (AI in clinical decision-making). Secondees should be drawn
-        from AISI, the Alan Turing Institute, and &ndash; critically &ndash;
-        industry, with appropriate conflict-of-interest protections.<Ref n={34} /> The
-        programme should be designed to build permanent institutional capacity,
-        not to create a permanent dependency on secondees: each placement should
-        include a knowledge transfer plan that trains permanent staff.
+        regulatory bodies each year, funded centrally and run by the Governance
+        Capacity Unit. Priority placements should be Ofcom (AI-generated
+        content and deepfakes), the FCA (AI in financial services), the CMA
+        (AI and market competition), the ICO (AI and data protection), and the
+        NHS (AI in clinical decision-making). Secondees should come from AISI,
+        the Alan Turing Institute, and, importantly, industry, with proper
+        conflict-of-interest protections.<Ref n={34} /> The programme should be
+        designed to build permanent institutional capacity, not a permanent
+        dependency on secondees. Every placement should include a knowledge
+        transfer plan that trains permanent staff.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Third, develop shared AI evaluation infrastructure. Building on
-        AISI&rsquo;s existing work on frontier model evaluation, create a
-        broader facility that regulators can access to assess AI systems against
-        sector-specific benchmarks.<Ref n={18} /> This facility should have the capacity to
-        evaluate not just frontier models but the deployed AI systems that
-        regulators actually encounter &ndash; fine-tuned models, compound AI
-        systems, AI-integrated products &ndash; against criteria that include
+        Third, build shared AI evaluation infrastructure. AISI&rsquo;s existing
+        work on frontier model evaluation is the obvious foundation. A broader
+        facility should be set up on top of it, one that regulators can use to
+        assess AI systems against sector-specific benchmarks.<Ref n={18} />
+        The facility needs to cover more than frontier models. The AI systems
+        regulators actually encounter, fine-tuned models, compound AI systems,
+        AI-integrated products, should be in scope, with criteria that cover
         reliability, bias, robustness, and transparency. The facility should
-        operate on a service model, with regulators able to commission
-        assessments as needed, and its methodologies should be open and
-        reproducible to build industry confidence and enable self-assessment.
+        run on a service model, so regulators can commission assessments as
+        needed. Its methodologies should be open and reproducible to build
+        industry confidence and let companies self-assess.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Fourth, mandate annual AI governance readiness assessments for all
-        government departments and regulators with significant AI exposure. These
-        assessments should evaluate: the organisation&rsquo;s technical
-        understanding of AI systems within its remit; the adequacy of its
-        processes for identifying and responding to AI-related risks; its
-        capacity to engage meaningfully with industry on AI governance questions;
-        and its ability to coordinate with other regulators on cross-cutting
-        issues. The assessments should be conducted by the Governance Capacity
-        Unit and published, creating both accountability and a benchmark for
-        measuring progress. This is not an exercise in bureaucratic compliance
-        &ndash; it is a diagnostic tool for identifying where governance
-        capacity is weakest and directing investment accordingly.
+        Fourth, require annual AI governance readiness assessments for all
+        government departments and regulators with significant AI exposure.
+        Each assessment should cover the organisation&rsquo;s technical
+        understanding of AI systems within its remit, the adequacy of its
+        processes for spotting and responding to AI-related risks, its
+        capacity to engage meaningfully with industry, and its ability to
+        coordinate with other regulators on cross-cutting issues. Assessments
+        should be run by the Governance Capacity Unit and published, which
+        creates both accountability and a baseline for measuring progress.
+        This is a diagnostic tool, not a compliance exercise: the point is to
+        find where governance capacity is weakest and direct investment there.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Fifth, convene the AI Governance Standards Board. This body, drawing
-        membership from regulators, industry, academia, and civil society,
-        should develop the common AI impact assessment framework described in
-        Section 4. The Board should operate on a model similar to the Financial
-        Reporting Council &ndash; independent of government but with statutory
-        recognition &ndash; and should be empowered to develop standards that
-        regulators can adopt within their own frameworks.<Ref n={27} /> The goal is
-        convergence without rigidity: a shared foundation that allows sector-
-        specific adaptation while preventing the fragmentation that currently
-        characterises UK AI governance. The Board should also serve as the
-        UK&rsquo;s interface with international AI standards processes,
-        ensuring that domestic governance standards are compatible with emerging
-        global norms.<Ref n={35} />
+        Fifth, convene an AI Governance Standards Board. The Board, with
+        membership drawn from regulators, industry, academia, and civil
+        society, should develop the common AI impact assessment framework
+        described in Section 4. It should operate on a model similar to the
+        Financial Reporting Council: independent of government but with
+        statutory recognition, and empowered to develop standards that
+        regulators can adopt within their own frameworks.<Ref n={27} />
+        Convergence without rigidity is the goal, a shared foundation that
+        allows sector-specific adaptation without the fragmentation that
+        currently characterises UK AI governance. The Board should also act as
+        the UK&rsquo;s interface with international AI standards processes, so
+        domestic governance standards stay compatible with emerging global
+        norms.<Ref n={35} />
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        Sixth, and most ambitiously, reorient the UK&rsquo;s international AI
+        Sixth, and most ambitiously: reorient the UK&rsquo;s international AI
         strategy around governance capacity rather than safety summitry. The
         Bletchley Park and Seoul summits established the UK as a convener on
         AI safety, but the follow-through has been uneven, and the space is
-        increasingly crowded with competing initiatives.<Ref n={36} /> The UK&rsquo;s
-        distinctive contribution should be in practical governance &ndash;
-        sharing the institutional models, evaluation methodologies, and
+        increasingly crowded with competing initiatives.<Ref n={36} /> The
+        UK&rsquo;s distinctive contribution should be practical governance:
+        share the institutional models, evaluation methodologies, and
         capacity-building approaches developed domestically with partner
-        countries, particularly in the Commonwealth and Global South where
-        AI governance capacity is most urgently needed. This is both a public
-        good and a strategic investment: countries that adopt UK-compatible
-        governance approaches become natural partners for trade, data-sharing,
-        and technology cooperation. DSIT and the FCDO should jointly develop
-        an AI Governance Partnership Programme that makes UK governance
-        expertise available to partner governments, funded through existing
-        ODA commitments.
+        countries, particularly in the Commonwealth and Global South where AI
+        governance capacity is most urgently needed. This is a public good and
+        a strategic investment. Countries that adopt UK-compatible governance
+        approaches become natural partners for trade, data-sharing, and
+        technology cooperation. DSIT and the FCDO should jointly develop an AI
+        Governance Partnership Programme that makes UK governance expertise
+        available to partner governments, funded through existing ODA
+        commitments.
       </p>
       <p className="text-[14px] font-light leading-[26px] text-muted">
-        These recommendations share a common logic: they treat governance
-        capacity as infrastructure, to be built proactively and maintained
-        continuously, rather than as a reactive response to individual AI
-        applications or crises. The UK has a genuine opportunity to pioneer an
-        approach to AI governance that is more effective than the EU&rsquo;s
-        prescriptive regulation, more durable than the US&rsquo;s executive
-        action, and more scalable than Singapore&rsquo;s city-state model. But
-        that opportunity will be lost if the debate remains trapped in the
-        binary of &ldquo;regulate versus not regulate.&rdquo; The question is
-        not whether to govern AI &ndash; it is how to build the institutions
-        capable of governing it well.
+        These recommendations share a logic. They treat governance capacity as
+        infrastructure, to be built ahead of time and maintained continuously,
+        rather than as a reactive response to individual AI applications or
+        crises. The UK has a real opportunity to pioneer an approach to AI
+        governance that is more effective than the EU&rsquo;s prescriptive
+        regulation, more durable than the US&rsquo;s executive action, and
+        more scalable than Singapore&rsquo;s city-state model. That
+        opportunity will be lost if the debate stays stuck in the binary of
+        &ldquo;regulate versus not regulate.&rdquo; The question is not
+        whether to govern AI. It is how to build the institutions capable of
+        governing it well.
       </p>
 
       <Footnotes notes={[
