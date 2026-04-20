@@ -190,9 +190,11 @@ export default function AILabourMarket() {
         differently. The analysis below draws on our employer survey data
         alongside published ONS and DSIT statistics.
       </p>
+      <h3 className="text-[18px] font-medium leading-[28px] mt-8 mb-4">
+        Financial and insurance activities
+      </h3>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        <strong>Financial and insurance activities (SIC 64&ndash;66).</strong> UK
-        financial services employs roughly 1.1 million people and contributes
+        UK financial services employs roughly 1.1 million people and contributes
         8.3% of economic output.<Ref n={10} /> It is the most exposed sector, and
         it is adopting fastest. DSIT&rsquo;s survey found that 68% of financial
         services firms with more than 50 employees had deployed at least one AI
@@ -209,10 +211,12 @@ export default function AILabourMarket() {
         entry ramp into financial careers for graduates outside the Russell
         Group.
       </p>
+      <h3 className="text-[18px] font-medium leading-[28px] mt-8 mb-4">
+        Professional, scientific, and technical activities
+      </h3>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        <strong>Professional, scientific, and technical activities (SIC
-        69&ndash;75).</strong> This sector covers legal services, accounting,
-        management consultancy, architecture, and engineering, and employs around
+        This sector covers legal services, accounting, management consultancy,
+        architecture, and engineering, and employs around
         2.9 million people across the UK. AI exposure is high (61% of
         task-hours) but adoption is bifurcated. Large firms in the &ldquo;Big
         Four&rdquo; and Magic Circle have invested heavily. PwC alone has
@@ -228,9 +232,12 @@ export default function AILabourMarket() {
         contract offers from Top 50 firms fell 14% year-on-year, the first
         decline not attributable to an economic downturn.<Ref n={12} />
       </p>
+      <h3 className="text-[18px] font-medium leading-[28px] mt-8 mb-4">
+        Public administration and defence
+      </h3>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        <strong>Public administration and defence (SIC 84).</strong> The public
-        sector is the starkest example of what we call the procurement paradox.
+        The public sector is the starkest example of what we call the
+        procurement paradox.
         53% of task-hours are exposed to AI, overwhelmingly in document
         processing, casework management, correspondence handling, and internal
         reporting. The productivity gains from adoption would be enormous: the
@@ -248,10 +255,12 @@ export default function AILabourMarket() {
         50 report low confidence in using AI tools, according to the Cabinet
         Office&rsquo;s 2025 People Survey.<Ref n={14} />
       </p>
+      <h3 className="text-[18px] font-medium leading-[28px] mt-8 mb-4">
+        Information and communication
+      </h3>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        <strong>Information and communication (SIC 58&ndash;63).</strong> The
-        technology sector is both the creator and a significant target of AI
-        disruption. The 59% exposure score reflects how much of the work
+        The technology sector is both the creator and a significant target of
+        AI disruption. The 59% exposure score reflects how much of the work
         (software development, content creation, data analysis, customer
         support) current AI systems can do partially or fully. What sets this
         sector apart is the speed of adoption: 79% of firms in our survey had
@@ -265,9 +274,11 @@ export default function AILabourMarket() {
         in the UK tech sector fell 23% between 2024 and 2025, per the Institute
         of Student Employers.<Ref n={16} />
       </p>
+      <h3 className="text-[18px] font-medium leading-[28px] mt-8 mb-4">
+        Health and social care
+      </h3>
       <p className="text-[14px] font-light leading-[26px] text-muted mb-6">
-        <strong>Health and social care (SIC 86&ndash;88).</strong> Health is a
-        paradox of a different kind. Technical exposure is moderate (37% of
+        Health is a paradox of a different kind. Technical exposure is moderate (37% of
         task-hours), concentrated in diagnostic imaging, clinical documentation,
         appointment scheduling, and back-office admin. The clinical case for AI
         adoption is overwhelming. NHS England&rsquo;s own analysis suggests
