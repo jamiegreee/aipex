@@ -2,89 +2,58 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { Arrow } from "@/components/Brand";
 
 export const metadata: Metadata = {
-  title: "Contact — AI Policy Exchange",
-  description: "Get in touch with the AI Policy Exchange.",
+  title: "Say hello",
+  description:
+    "Get in touch with AIPEX about the community, our first London gathering or hosting in another city.",
 };
 
 export default function Contact() {
   return (
-    <div className="flex flex-col w-full font-mono">
+    <>
       <Navigation />
-
-      <section className="flex flex-col gap-8 w-full px-6 sm:px-10 lg:px-16 pt-14 md:pt-[100px] pb-12 md:pb-[80px] border-b border-border">
-        <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
-          // Get in touch
-        </p>
-        <h1 className="text-[30px] md:text-[48px] font-light leading-[40px] md:leading-[64px] tracking-[-0.03em] max-w-[800px]">
-          Contact
-        </h1>
-        <p className="text-[15px] font-light leading-[26px] text-muted max-w-[580px]">
-          Whether you&apos;re interested in our research, the fellowship, joining
-          the community, or just want to say hello — we&apos;d like to hear from
-          you.
-        </p>
-      </section>
-
-      <section className="w-full px-6 sm:px-10 lg:px-16 py-10 md:py-16">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-16 max-w-[900px]">
-          <div className="flex-1">
-            <h2 className="text-[20px] font-normal leading-[30px] mb-4">General enquiries</h2>
-            <p className="text-[14px] font-light leading-[24px] text-muted mb-2">
-              For questions about the Exchange, our research, or partnership
-              opportunities.
+      <main id="main">
+        <section className="page-intro">
+          <div className="container">
+            <p className="label">Get in touch</p>
+            <h1>
+              It starts with
+              <br />
+              <em>a hello.</em>
+            </h1>
+            <p className="intro-description">
+              A question, an idea or an offer to help bring people
+              together—we&apos;d like to hear from you.
             </p>
-            <a href="mailto:hello@theaipex.org" className="text-[14px] text-accent hover:opacity-80 transition-opacity">
-              hello@theaipex.org
+          </div>
+        </section>
+        <section className="container contact-grid">
+          <div>
+            <h2>Let&apos;s talk.</h2>
+            <p>
+              Write to Jamie about joining the community, our first London
+              social or helping organise a future gathering.
+            </p>
+            <a className="contact-email" href="mailto:hello@theaipex.org">
+              hello@theaipex.org <Arrow diagonal />
             </a>
           </div>
-          <div className="flex-1">
-            <h2 className="text-[20px] font-normal leading-[30px] mb-4">Fellowship</h2>
-            <p className="text-[14px] font-light leading-[24px] text-muted mb-2">
-              For questions about the AI Governance Fellowship programme or
-              expressing interest in future cohorts.
+          <div className="contact-aside">
+            <h2>Want to join?</h2>
+            <p>
+              Tell us your name, city and what brings you to AI policy.
+              We&apos;ll share details of the first gathering when they&apos;re
+              ready.
             </p>
-            <a href="mailto:fellowship@theaipex.org" className="text-[14px] text-accent hover:opacity-80 transition-opacity">
-              fellowship@theaipex.org
-            </a>
+            <Link className="text-link" href="/community">
+              Join the exchange <Arrow />
+            </Link>
           </div>
-        </div>
-      </section>
-
-      <section className="w-full px-6 sm:px-10 lg:px-16 py-10 md:py-16 border-t border-border">
-        <h2 className="text-[20px] font-normal leading-[30px] mb-4">Find us elsewhere</h2>
-        <div className="flex gap-8">
-          <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-[14px] text-accent hover:opacity-80 transition-opacity">
-            X / Twitter &rarr;
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-[14px] text-accent hover:opacity-80 transition-opacity">
-            LinkedIn &rarr;
-          </a>
-        </div>
-      </section>
-
-      <section className="flex flex-col md:flex-row items-start md:items-center justify-between w-full px-6 sm:px-10 lg:px-16 py-10 md:py-12 gap-6 md:gap-0 border-t border-border">
-        <div className="max-w-[600px]">
-          <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
-            // Join the community
-          </p>
-          <h2 className="text-[24px] font-normal leading-[34px] mt-3">
-            Want to stay in the loop?
-          </h2>
-          <p className="text-[13px] text-muted mt-2">
-            Join our newsletter and Slack community for weekly AI policy analysis.
-          </p>
-        </div>
-        <Link
-          href="/community"
-          className="flex items-center px-7 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
-        >
-          Join the Exchange &rarr;
-        </Link>
-      </section>
-
+        </section>
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }

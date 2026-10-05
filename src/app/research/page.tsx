@@ -43,7 +43,7 @@ export default function Research() {
       {/* Hero */}
       <section className="flex flex-col gap-6 w-full px-6 sm:px-10 lg:px-16 pt-14 md:pt-[100px] pb-12 md:pb-[80px] border-b border-border">
         <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
-          // Publications
+          {"// Publications"}
         </p>
         <h1 className="text-[30px] md:text-[48px] font-light leading-[40px] md:leading-[64px] tracking-[-0.03em] max-w-[800px]">
           Research &amp; policy briefs

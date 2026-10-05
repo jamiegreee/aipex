@@ -1,233 +1,177 @@
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { Arrow } from "@/components/Brand";
+import ConversationArt from "@/components/ConversationArt";
+import LondonPoster from "@/components/LondonPoster";
+import JoinCallout from "@/components/JoinCallout";
 
-const pillars = [
-  { number: "01", label: "Economy & Labour" },
-  { number: "02", label: "State Capacity" },
-  { number: "03", label: "Geopolitics" },
-  { number: "04", label: "Democratic Governance" },
-];
-
-const briefs = [
+const questions = [
   {
-    tag: "Economy",
-    date: "2026.03.19",
-    title: "What the AI transition means for the UK labour market — beyond the headlines",
-    summary: "The debate about AI and jobs oscillates between utopian and apocalyptic. Neither is useful. This brief examines what the evidence actually shows about near-term labour market disruption.",
-    href: "/research/ai-labour-market",
+    title: "Work & the economy",
+    question: "Who benefits from the AI transition?",
   },
   {
-    tag: "Governance",
-    date: "2026.03.26",
-    title: 'Why "AI regulation" is the wrong frame — and what to do instead',
-    summary: "AI governance is not about constraining a static technology — it's about building institutional capacity to manage a transition already underway.",
-    href: "/research/ai-regulation-wrong-frame",
+    title: "Government & public services",
+    question: "What does an AI-ready state look like?",
   },
+  { title: "Power & accountability", question: "Who gets to shape the rules?" },
   {
-    tag: "State",
-    date: "2026.04.09",
-    title: "State capacity for AI: is Whitehall ready?",
-    summary: 'Government talks about being "pro-innovation" on AI. But does the British state have the technical capacity and institutional knowledge to actually deliver?',
-    href: "/research/state-capacity-ai",
+    title: "Security & global cooperation",
+    question: "How do we respond together?",
   },
 ];
 
 export default function Home() {
   return (
-    <div className="flex flex-col w-full font-mono">
+    <>
       <Navigation />
-
-      {/* Hero */}
-      <section className="flex flex-col gap-12 w-full px-6 sm:px-10 lg:px-16 pt-16 md:pt-[120px] pb-20 md:pb-[140px] border-b border-border">
-        <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
-          // Independent Policy Institute
-        </p>
-        <h1 className="text-[36px] sm:text-[48px] md:text-[72px] font-extralight leading-[44px] sm:leading-[58px] md:leading-[82px] tracking-[-0.04em] max-w-[900px]">
-          Navigating the AI transition
-        </h1>
-        <div className="flex flex-col gap-8">
-          <p className="text-[15px] font-light leading-[26px] text-muted max-w-[580px]">
-            How states, institutions, and economies adapt as AI capabilities
-            rapidly scale. We bring operational experience to governance
-            questions that matter.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/research"
-              className="flex items-center px-7 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
-            >
-              Read latest
-            </Link>
-            <Link
-              href="/community"
-              className="flex items-center px-7 py-3 border border-[#C4BEB2] text-[13px] hover:border-ink transition-colors"
-            >
-              Join community
-            </Link>
+      <main id="main">
+        <section className="hero container" aria-labelledby="hero-heading">
+          <div className="hero-copy">
+            <p className="label hero-label">
+              <span className="status-dot" /> A new community for AI & public
+              policy
+            </p>
+            <h1 id="hero-heading">
+              Big questions.
+              <br />
+              <em>
+                Better
+                <br className="hero-break" /> conversations.
+              </em>
+            </h1>
+            <p className="hero-description">
+              Bringing the policy community together to understand the changing
+              AI landscape and shape how we respond.
+            </p>
+            <div className="hero-actions">
+              <Link className="button" href="/community">
+                Join the exchange <Arrow />
+              </Link>
+              <Link className="text-link" href="/gatherings">
+                Our first gathering <Arrow diagonal />
+              </Link>
+            </div>
+            <p className="hero-footnote">
+              <span className="location-cross" aria-hidden="true">
+                ⌖
+              </span>{" "}
+              Starting in London. Open to different perspectives.
+            </p>
           </div>
-        </div>
-      </section>
-
-      {/* Pillars Strip */}
-      <section className="grid grid-cols-2 md:flex w-full border-b border-border">
-        {pillars.map((pillar, i) => (
-          <div
-            key={pillar.number}
-            className={`flex flex-col gap-2 flex-1 py-5 md:py-7 px-6 md:px-8 ${
-              i < pillars.length - 1 ? "md:border-r border-border" : ""
-            }`}
-          >
-            <span className="text-[11px] font-medium text-accent">
-              {pillar.number}
-            </span>
-            <span className="text-[15px]">{pillar.label}</span>
+          <div className="hero-art">
+            <ConversationArt />
           </div>
-        ))}
-      </section>
-
-      {/* Latest Research Header */}
-      <section className="flex items-center justify-between w-full px-6 sm:px-10 lg:px-16 pt-12 pb-8">
-        <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
-          // Latest Research
-        </p>
-        <Link href="/research" className="text-[13px] text-muted hover:text-ink transition-colors">
-          View all &rarr;
-        </Link>
-      </section>
-
-      {/* Brief Rows */}
-      {briefs.map((brief, i) => (
-        <article
-          key={i}
-          className={`flex flex-col md:flex-row items-start gap-4 md:gap-12 w-full px-6 sm:px-10 lg:px-16 py-8 border-t border-border ${
-            i === briefs.length - 1 ? "border-b" : ""
-          }`}
+        </section>
+        <section className="mission-section" aria-labelledby="mission-heading">
+          <div className="container mission-inner">
+            <p className="label">01 / Why we gather</p>
+            <div>
+              <h2 id="mission-heading">
+                AI is changing the world.
+                <br />
+                Let&apos;s make sense of it <em>together.</em>
+              </h2>
+              <div className="mission-copy">
+                <p>
+                  The questions AI raises reach across government, work,
+                  security and everyday life. Understanding them takes different
+                  kinds of experience.
+                </p>
+                <p>
+                  AIPEX brings people working in—and interested in—public policy
+                  into the same room. A place to exchange ideas, meet new people
+                  and work out what comes next.
+                </p>
+              </div>
+              <Link className="text-link" href="/about">
+                Meet the exchange <Arrow diagonal />
+              </Link>
+            </div>
+          </div>
+        </section>
+        <section
+          className="gathering-section container"
+          aria-labelledby="gathering-heading"
         >
-          <div className="w-full md:w-[140px] shrink-0">
-            <p className="text-[11px] font-medium tracking-[0.06em] uppercase text-accent">
-              {brief.tag}
-            </p>
-            <p className="text-[11px] text-muted mt-0.5">{brief.date}</p>
-          </div>
-          <div className="flex-1 max-w-[1029px]">
-            <h3 className="text-[20px] font-normal leading-[32px]">
-              {brief.title}
-            </h3>
-            <p className="text-[13px] font-light leading-[22px] text-muted mt-2">
-              {brief.summary}
-            </p>
-          </div>
-          <Link href={brief.href} className="text-[15px] text-accent shrink-0 hover:opacity-80 transition-opacity">
-            Read &rarr;
-          </Link>
-        </article>
-      ))}
-
-      {/* Founding Charter / Position Statement */}
-      <section className="flex flex-col w-full px-6 sm:px-10 lg:px-16 py-14 md:py-24 gap-8 bg-dark">
-        <p className="text-[11px] font-medium tracking-[3px] uppercase text-accent">
-          // Our Position
-        </p>
-        <h2 className="text-[26px] md:text-[36px] font-extralight leading-[1.3] text-light max-w-[1000px]">
-          AI governance cannot wait for perfect information. We believe in
-          learning by doing — iteratively.
-        </h2>
-        <p className="text-[14px] font-light leading-[1.6] text-muted max-w-[800px]">
-          The pace of AI development demands that policy frameworks evolve in
-          real time. We bring together the people who build these systems and the
-          people who govern them — because neither can succeed alone.
-        </p>
-        <Link
-          href="/charter"
-          className="flex items-center w-fit px-7 py-3.5 border border-[#C4BEB2] text-light text-[12px] hover:border-light transition-colors mt-2"
-        >
-          Read Our Founding Charter &rarr;
-        </Link>
-      </section>
-
-      {/* Get Involved CTA */}
-      <section className="flex flex-col w-full px-6 sm:px-10 lg:px-16 py-14 md:py-24 gap-8 border-b border-border">
-        <p className="text-[11px] font-medium tracking-[3px] uppercase text-accent">
-          // Get Involved
-        </p>
-        <h2 className="text-[30px] md:text-[48px] font-extralight leading-[1.15] max-w-[900px]">
-          The future of AI governance is being written now. Help us get it
-          right.
-        </h2>
-        <p className="text-[14px] font-light leading-[1.6] text-muted max-w-[680px]">
-          Join policymakers, researchers, and technologists shaping responsible
-          AI governance worldwide.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link
-            href="/community"
-            className="flex items-center px-7 py-3.5 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
-          >
-            Join the Exchange &rarr;
-          </Link>
-          <Link
-            href="/community"
-            className="flex items-center px-7 py-3.5 border border-[#C4BEB2] text-[13px] hover:border-ink transition-colors"
-          >
-            Subscribe to Updates &rarr;
-          </Link>
-        </div>
-        <p className="text-[11px] font-light text-[#A8A098]">
-          Free to join &middot; No spam &middot; Unsubscribe anytime
-        </p>
-      </section>
-
-      {/* Footer */}
-      <footer className="flex flex-col gap-10 w-full px-6 sm:px-10 lg:px-16 py-12 bg-cream-dark">
-        <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-0">
-          <div className="max-w-[340px]">
-            <Link href="/" className="text-[16px] font-medium block mb-4 hover:text-accent transition-colors">
-              AI Policy Exchange
+          <div className="section-heading">
+            <p className="label">02 / In good company</p>
+            <Link className="text-link" href="/gatherings">
+              Explore gatherings <Arrow diagonal />
             </Link>
-            <p className="text-[12px] font-light leading-[1.5] text-muted">
-              Bridging the gap between AI innovation and responsible governance
-              through research, dialogue, and actionable frameworks.
+          </div>
+          <div className="gathering-feature">
+            <LondonPoster />
+            <div className="gathering-copy">
+              <span className="pill">
+                <span className="status-dot" /> Our first gathering · In the
+                making
+              </span>
+              <h2 id="gathering-heading">
+                A big topic.
+                <br />
+                <em>An informal evening.</em>
+              </h2>
+              <p>
+                Meet people thinking about AI and public policy over a drink and
+                a good conversation. Bring your questions, your experience and
+                your curiosity.
+              </p>
+              <dl className="event-facts">
+                <div>
+                  <dt>Where</dt>
+                  <dd>London</dd>
+                </div>
+                <div>
+                  <dt>When</dt>
+                  <dd>Date & venue to be announced</dd>
+                </div>
+                <div>
+                  <dt>Who</dt>
+                  <dd>Policy people & curious minds</dd>
+                </div>
+              </dl>
+              <Link className="button" href="/community">
+                Be part of the first one <Arrow />
+              </Link>
+            </div>
+          </div>
+        </section>
+        <section
+          className="questions-section"
+          aria-labelledby="questions-heading"
+        >
+          <div className="container">
+            <div className="section-heading">
+              <p className="label">03 / Plenty to talk about</p>
+              <span className="label questions-aside">
+                A few conversation starters
+              </span>
+            </div>
+            <h2 id="questions-heading">
+              Different angles.
+              <br />
+              <em>Shared questions.</em>
+            </h2>
+            <div className="question-grid">
+              {questions.map(({ title, question }, i) => (
+                <div className="question-item" key={title}>
+                  <span className="label question-number">0{i + 1}</span>
+                  <h3>{title}</h3>
+                  <p>{question}</p>
+                </div>
+              ))}
+            </div>
+            <p className="questions-note">
+              You don&apos;t need to have all the answers. That&apos;s why
+              we&apos;re getting together.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-8 sm:gap-10 lg:gap-16">
-            <div className="flex flex-col gap-3.5">
-              <p className="text-[10px] font-medium tracking-[2px] uppercase text-[#A8A098]">
-                // Research
-              </p>
-              <Link href="/research" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Policy Briefs</Link>
-              <Link href="/research" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Working Papers</Link>
-              <Link href="/research" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Annual Report</Link>
-            </div>
-            <div className="flex flex-col gap-3.5">
-              <p className="text-[10px] font-medium tracking-[2px] uppercase text-[#A8A098]">
-                // Programs
-              </p>
-              <Link href="/community" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Roundtables</Link>
-              <Link href="/fellowship" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Fellowship</Link>
-              <Link href="/community" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Events Calendar</Link>
-            </div>
-            <div className="flex flex-col gap-3.5">
-              <p className="text-[10px] font-medium tracking-[2px] uppercase text-[#A8A098]">
-                // Organisation
-              </p>
-              <Link href="/about" className="text-[12px] font-light text-muted hover:text-ink transition-colors">About Us</Link>
-              <Link href="/about" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Team</Link>
-              <Link href="/contact" className="text-[12px] font-light text-muted hover:text-ink transition-colors">Contact</Link>
-            </div>
-          </div>
-        </div>
-        <div className="w-full h-px bg-border" />
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
-          <span className="text-[11px] font-light text-[#A8A098]">
-            &copy; 2026 AI Policy Exchange. All rights reserved.
-          </span>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="text-[11px] font-light text-[#A8A098] hover:text-ink transition-colors">Privacy Policy</Link>
-            <Link href="/privacy" className="text-[11px] font-light text-[#A8A098] hover:text-ink transition-colors">Terms of Use</Link>
-            <Link href="/privacy" className="text-[11px] font-light text-[#A8A098] hover:text-ink transition-colors">Accessibility</Link>
-          </div>
-        </div>
-      </footer>
-    </div>
+        </section>
+        <JoinCallout />
+      </main>
+      <Footer />
+    </>
   );
 }

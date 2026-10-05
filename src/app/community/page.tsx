@@ -2,131 +2,134 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { Arrow, ExchangeMark } from "@/components/Brand";
 
 export const metadata: Metadata = {
-  title: "Community — AI Policy Exchange",
-  description: "Join the next generation of AI governance practitioners.",
+  title: "Join the exchange",
+  description:
+    "Be part of a new community for AI and public policy. Express interest in our first London gathering or help bring AIPEX to your city.",
 };
 
+const interestEmail =
+  "mailto:hello@theaipex.org?subject=" +
+  encodeURIComponent("I'd like to join the AI Policy Exchange") +
+  "&body=" +
+  encodeURIComponent(
+    "Hi Jamie,\n\nI'd like to hear about AIPEX gatherings.\n\nMy name:\nMy city:\nMy interest in AI policy:\n\nPlease email me about upcoming AIPEX gatherings.\n",
+  );
 const benefits = [
   {
-    title: "Weekly newsletter",
-    description: "Curated AI policy analysis delivered every Monday. The developments that matter, the context you need, and the analysis you won\u2019t find elsewhere.",
+    title: "Meet people across policy",
+    body: "Exchange perspectives with people from government, technology, research, law and civil society.",
   },
   {
-    title: "Slack community",
-    description: "A private channel for discussion and networking with practitioners across technology, policy, civil service, and academia.",
+    title: "Explore the questions together",
+    body: "Bring what you know and what you're wondering about. There's room for different levels of experience.",
   },
   {
-    title: "Events & roundtables",
-    description: "Regular seminars, workshops, and roundtables with policymakers, technologists, and researchers working on AI governance.",
+    title: "Help shape the community",
+    body: "We're at the beginning. Your ideas and participation will help decide where the exchange goes next.",
+  },
+];
+const questions = [
+  {
+    question: "Do I need to work in AI policy?",
+    answer:
+      "No. You might work in another area of policy, build technology, study the field or simply want to understand it better. An interest in AI and public policy is enough.",
   },
   {
-    title: "Contribute to research",
-    description: "Opportunities to contribute to policy briefs, provide feedback on drafts, and shape the Exchange\u2019s research agenda.",
+    question: "When is the first gathering?",
+    answer:
+      "We're planning our first London social. The date and venue are still to be confirmed. Email us to express interest and we'll share the details when they're ready.",
+  },
+  {
+    question: "Can I join from outside London?",
+    answer:
+      "Yes. Tell us your city when you get in touch. We're starting in London and would love to hear from people interested in future gatherings elsewhere.",
+  },
+  {
+    question: "Can I help organise or host?",
+    answer:
+      "We'd welcome a conversation. If you can help bring people together, suggest a venue or host a future gathering, tell us what you have in mind.",
   },
 ];
 
 export default function Community() {
   return (
-    <div className="flex flex-col w-full font-mono">
+    <>
       <Navigation />
-
-      {/* Hero */}
-      <section className="flex flex-col gap-8 w-full px-6 sm:px-10 lg:px-16 pt-14 md:pt-[100px] pb-12 md:pb-[80px] border-b border-border">
-        <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
-          // Join the Exchange
-        </p>
-        <h1 className="text-[30px] md:text-[48px] font-light leading-[40px] md:leading-[64px] tracking-[-0.03em] max-w-[800px]">
-          A community for the next generation of AI governance
-        </h1>
-        <p className="text-[15px] font-light leading-[26px] text-muted max-w-[580px]">
-          The people shaping AI governance need a place to think together. The
-          Exchange brings practitioners from across sectors into one community —
-          to learn, debate, and build.
-        </p>
-      </section>
-
-      {/* Benefits */}
-      <section className="w-full px-6 sm:px-10 lg:px-16 py-10 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-          {benefits.map((benefit) => (
-            <div key={benefit.title} className="border border-border p-6 md:p-10">
-              <h2 className="text-[20px] font-normal leading-[30px] mb-3">
-                {benefit.title}
-              </h2>
-              <p className="text-[14px] font-light leading-[24px] text-muted">
-                {benefit.description}
-              </p>
+      <main id="main">
+        <section className="container join-page">
+          <div>
+            <p className="label">
+              <span className="status-dot" /> A new community, taking shape
+            </p>
+            <h1>
+              Bring your
+              <br />
+              <em>perspective.</em>
+            </h1>
+            <p className="join-page-description">
+              Meet people interested in AI and public policy. Exchange ideas,
+              build relationships and help shape the conversation.
+            </p>
+          </div>
+          <div className="join-panel">
+            <ExchangeMark />
+            <h2>
+              Be part of
+              <br />
+              <em>the first conversation.</em>
+            </h2>
+            <p>
+              We&apos;re planning our first London gathering. Send us a short
+              email with your name, city and what brings you to AI policy.
+            </p>
+            <a className="button" href={interestEmail}>
+              Register interest by email <Arrow diagonal />
+            </a>
+            <p className="email-alternative">
+              Or write to{" "}
+              <a href="mailto:hello@theaipex.org">hello@theaipex.org</a>
+            </p>
+            <p className="privacy-note">
+              Ask to hear about future gatherings when you email us. You can opt
+              out at any time by replying.{" "}
+              <Link href="/privacy">Privacy information</Link>.
+            </p>
+          </div>
+        </section>
+        <section
+          className="container join-benefits"
+          aria-label="Being part of AIPEX"
+        >
+          {benefits.map(({ title, body }, i) => (
+            <div key={title}>
+              <span className="label">0{i + 1}</span>
+              <h2>{title}</h2>
+              <p>{body}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Who is it for */}
-      <section className="w-full px-6 sm:px-10 lg:px-16 py-10 md:py-16 border-t border-border">
-        <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent mb-3">
-          Who is this for
-        </p>
-        <h2 className="text-[32px] font-light leading-[44px] mb-6 max-w-[600px]">
-          Anyone working on or interested in AI governance
-        </h2>
-        <div className="flex flex-col md:flex-row gap-6 md:gap-16 max-w-[900px]">
-          <div className="flex-1">
-            <p className="text-[14px] font-light leading-[24px] text-muted">
-              Policy professionals, civil servants, and regulators looking for
-              technical fluency and peer perspectives on AI governance challenges.
-            </p>
+        </section>
+        <section className="faq-section">
+          <div className="container faq-inner">
+            <h2>
+              A few things
+              <br />
+              <em>you might wonder.</em>
+            </h2>
+            <div className="faq-list">
+              {questions.map(({ question, answer }) => (
+                <details key={question}>
+                  <summary>{question}</summary>
+                  <p>{answer}</p>
+                </details>
+              ))}
+            </div>
           </div>
-          <div className="flex-1">
-            <p className="text-[14px] font-light leading-[24px] text-muted">
-              Technologists, researchers, lawyers, journalists, and anyone else
-              who wants to engage seriously with the governance side of the AI
-              transition.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="flex flex-col items-center w-full px-6 sm:px-10 lg:px-16 py-14 md:py-20 bg-dark">
-        <h2 className="text-[26px] md:text-[36px] font-light leading-[52px] text-light text-center max-w-[620px] mb-4">
-          Ready to join?
-        </h2>
-        <p className="text-[14px] text-muted text-center mb-8 max-w-[500px]">
-          Sign up to receive the weekly newsletter and get access to the Slack
-          community, events, and more.
-        </p>
-        <Link
-          href="/contact"
-          className="flex items-center px-8 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
-        >
-          Join the Exchange &rarr;
-        </Link>
-      </section>
-
-      {/* Fellowship pointer */}
-      <section className="flex flex-col md:flex-row items-start md:items-center justify-between w-full px-6 sm:px-10 lg:px-16 py-10 md:py-12 gap-6 md:gap-0 border-b border-border">
-        <div className="max-w-[600px]">
-          <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent">
-            // Go deeper
-          </p>
-          <h2 className="text-[24px] font-normal leading-[34px] mt-3">
-            Looking for the Fellowship programme?
-          </h2>
-          <p className="text-[13px] text-muted mt-2">
-            A 12-week structured programme for emerging AI governance leaders.
-          </p>
-        </div>
-        <Link
-          href="/fellowship"
-          className="flex items-center px-7 py-3 border border-border text-[13px] hover:border-ink transition-colors"
-        >
-          Learn more &rarr;
-        </Link>
-      </section>
-
+        </section>
+      </main>
       <Footer />
-    </div>
+    </>
   );
 }

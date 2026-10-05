@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Policy Exchange
 
-## Getting Started
+AIPEX brings the policy community together to understand the changing AI landscape and shape how we respond. The site introduces a new community, starting with informal gatherings in London.
 
-First, run the development server:
+## Local development
 
-```bash
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Run `npm run lint` and `npm run build` to check changes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Public pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/`: mission, community introduction, planned first gathering and invitation to join.
+- `/gatherings`: first London social, clearly labelled as being planned.
+- `/community`: registration of interest by email and common questions.
+- `/about`: purpose, approach and founder.
+- `/contact`: contact address and hosting enquiries.
+- `/privacy`: information handling for the current email-based community.
 
-## Learn More
+The primary join action opens a prefilled email to `hello@theaipex.org`; it does not save a signup in the browser or claim someone has registered. The visitor must send the email. No mailing-list provider or database is connected. Confirm that the existing contact mailbox is monitored before publishing.
 
-To learn more about Next.js, take a look at the following resources:
+The event date, venue, attendance fee and RSVP destination are not yet confirmed. Update the Gatherings page when they are ready. A future RSVP service can replace the email link.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Legacy research and fellowship URLs temporarily redirect to About and Community respectively. Research source files are retained for review, but the original claims are not promoted on the community site. The old charter URL redirects to About.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Design
 
-## Deploy on Vercel
+Newsreader display typography, DM Sans body text, IBM Plex Mono labels, a warm paper background and cobalt, pink and soft green accents. Fonts are served locally by Next.js. The conversation and London illustrations are original SVG/CSS components, with no stock attendee photography.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The site includes responsive navigation, visible keyboard focus, a skip link and reduced-motion support. Google Analytics from the previous design has been removed to match the current privacy information.
