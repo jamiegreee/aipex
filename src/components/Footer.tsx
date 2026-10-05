@@ -1,18 +1,41 @@
 import Link from "next/link";
+import { Arrow, ExchangeMark } from "./Brand";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col md:flex-row items-center justify-between w-full px-6 sm:px-10 lg:px-16 py-6 md:py-8 gap-4 md:gap-0 bg-cream-dark">
-      <span className="text-[11px] text-muted">
-        &copy; 2026 AI Policy Exchange
-      </span>
-      <a href="https://theaipex.org" target="_blank" rel="noopener noreferrer" className="text-[11px] text-muted hover:text-ink transition-colors">
-        theaipex.org
-      </a>
-      <div className="flex gap-6">
-        <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-[11px] text-muted hover:text-ink transition-colors">X</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-[11px] text-muted hover:text-ink transition-colors">LinkedIn</a>
-        <Link href="/privacy" className="text-[11px] text-muted hover:text-ink transition-colors">Privacy</Link>
+    <footer className="site-footer">
+      <div className="container">
+        <div className="footer-top">
+          <Link
+            className="brand footer-brand"
+            href="/"
+            aria-label="AIPEX — home"
+          >
+            <ExchangeMark />
+            <span className="brand-name">
+              AI Policy
+              <br />
+              Exchange.
+            </span>
+          </Link>
+          <p>
+            A changing world.
+            <br />A conversation worth having.
+          </p>
+          <Link className="text-link" href="/contact">
+            Say hello <Arrow diagonal />
+          </Link>
+        </div>
+        <div className="footer-wordmark" aria-hidden="true">
+          AIPEX<span>↗</span>
+        </div>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} AI Policy Exchange</span>
+          <span className="footer-location">
+            Starting in London. Thinking together.
+          </span>
+          <Link href="/privacy">Privacy</Link>
+        </div>
       </div>
     </footer>
   );
