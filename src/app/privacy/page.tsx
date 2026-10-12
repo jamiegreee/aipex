@@ -16,7 +16,7 @@ export default function Privacy() {
       <main id="main">
         <section className="page-intro">
           <div className="container">
-            <p className="label">Last updated: 4 October 2026</p>
+            <p className="label">Last updated: 13 October 2026</p>
             <h1>
               Your information.
               <br />
@@ -39,6 +39,32 @@ export default function Privacy() {
             by replying to any email.
           </p>
           <h2>The website</h2>
+          <h3>Learning accounts and course work</h3>
+          <p>
+            When you create a learning account, we store your email address,
+            optional name, enrolments, lesson progress, knowledge-check
+            responses and the written exercises you choose to save. We use these
+            to provide your account, let you resume courses and export your
+            portfolio. Written work is private to your account in the learning
+            interface. AIPEX’s operator and infrastructure providers may access
+            data when necessary to administer the service or resolve a support
+            issue.
+          </p>
+          <p>
+            Supabase provides authentication and database storage; Vercel hosts
+            the application. Account cookies maintain your sign-in session.
+            These are necessary for account features. We do not use saved course
+            work to train an AI model, and course exercises are not submitted to
+            an AI service for grading. Please do not enter confidential material
+            or personal information about other people in exercises.
+          </p>
+          <p>
+            We keep your learning record while your account remains active. You
+            can download your written work from My learning and request account
+            and learning-data deletion using the contact details below. Deleted
+            records may remain in infrastructure backups until those backups
+            expire.
+          </p>
           <p>
             This website does not use advertising or analytics cookies. Our
             hosting and email providers may process technical information needed

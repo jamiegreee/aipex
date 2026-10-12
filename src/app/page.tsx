@@ -30,27 +30,27 @@ export default function Home() {
         <section className="hero container" aria-labelledby="hero-heading">
           <div className="hero-copy">
             <p className="label hero-label">
-              <span className="status-dot" /> A new community for AI & public
-              policy
+              <span className="status-dot" /> Building AI policy capacity
             </p>
             <h1 id="hero-heading">
               Big questions.
               <br />
               <em>
                 Better
-                <br className="hero-break" /> conversations.
+                <br className="hero-break" /> policy.
               </em>
             </h1>
             <p className="hero-description">
-              Bringing the policy community together to understand the changing
-              AI landscape and shape how we respond.
+              Helping people understand, develop and deliver effective AI
+              policy. Through practical education and a community that learns
+              together.
             </p>
             <div className="hero-actions">
-              <Link className="button" href="/community">
-                Join the exchange <Arrow />
+              <Link className="button" href="/courses">
+                Explore the courses <Arrow />
               </Link>
-              <Link className="text-link" href="/gatherings">
-                Our first gathering <Arrow diagonal />
+              <Link className="text-link" href="/community">
+                Join the community <Arrow diagonal />
               </Link>
             </div>
             <p className="hero-footnote">
@@ -62,6 +62,37 @@ export default function Home() {
           </div>
           <div className="hero-art">
             <ConversationArt />
+          </div>
+        </section>
+        <section
+          className="home-learning container"
+          aria-labelledby="home-learning-heading"
+        >
+          <p className="label">Learn with AIPEX / Free & self-paced</p>
+          <h2 id="home-learning-heading">
+            From understanding AI
+            <br />
+            to <em>shaping its place in the world.</em>
+          </h2>
+          <div className="home-course-links">
+            <Link href="/courses/ai-policy-in-practice">
+              <span className="label">01 / 8–10 hours</span>
+              <h3>AI Policy in Practice</h3>
+              <p>
+                Frame problems, weigh evidence and write a recommendation that
+                can be delivered.
+              </p>
+              <span className="text-link">Explore the curriculum ↗</span>
+            </Link>
+            <Link href="/courses/governing-ai-in-public-services">
+              <span className="label">02 / 4–6 hours</span>
+              <h3>Governing AI in Public Services</h3>
+              <p>
+                Assess deployments, ask better procurement questions and design
+                meaningful oversight.
+              </p>
+              <span className="text-link">Explore the curriculum ↗</span>
+            </Link>
           </div>
         </section>
         <section className="mission-section" aria-labelledby="mission-heading">

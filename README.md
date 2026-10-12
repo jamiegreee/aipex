@@ -1,26 +1,32 @@
 # AI Policy Exchange
 
-AIPEX brings the policy community together to understand the changing AI landscape and shape how we respond. The site introduces a new community, starting with informal gatherings in London.
+AIPEX builds capacity to understand, develop and deliver effective AI policy through practical education and community.
 
 ## Local development
 
 ```sh
 npm ci
-npm run dev
+npm run dev -- --port 3100
 ```
 
-Open http://localhost:3000. Run `npm run lint` and `npm run build` to check changes.
+Open http://127.0.0.1:3100. Run `npm test`, `npm run lint` and `npm run build` to check changes. See [learning operations](docs/learning-operations.md) for the dedicated Supabase stack, integration tests, email delivery and production setup.
 
 ## Public pages
 
-- `/`: mission, community introduction, planned first gathering and invitation to join.
+- `/`: mission, courses, community and invitation to join.
+- `/courses`: free self-paced course catalogue.
+- `/courses/[course]`: full curriculum, enrolment and workbook download.
+- `/courses/[course]/[lesson]`: lesson, exercise, worked answer and knowledge checks.
+- `/learn`: authenticated dashboard, progress and saved work.
+- `/learn/portfolio`: private Markdown portfolio export.
+- `/signup`, `/login`, `/forgot-password`, `/reset-password`: account flows.
 - `/gatherings`: first London social, clearly labelled as being planned.
 - `/community`: registration of interest by email and common questions.
 - `/about`: purpose, approach and founder.
 - `/contact`: contact address and hosting enquiries.
-- `/privacy`: information handling for the current email-based community.
+- `/privacy`: account, course-work and community information handling.
 
-The primary join action opens a prefilled email to `hello@theaipex.org`; it does not save a signup in the browser or claim someone has registered. The visitor must send the email. No mailing-list provider or database is connected. Confirm that the existing contact mailbox is monitored before publishing.
+Community registration of interest opens a prefilled email to `hello@theaipex.org`; it is separate from learning accounts. Course accounts use Supabase Auth and row-level-security-protected database tables. Production accounts require a dedicated configured project and custom SMTP; the application does not substitute local storage for persistence.
 
 The event date, venue, attendance fee and RSVP destination are not yet confirmed. Update the Gatherings page when they are ready. A future RSVP service can replace the email link.
 

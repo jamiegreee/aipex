@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Arrow, ExchangeMark } from "./Brand";
 
 const links = [
+  { href: "/courses", label: "Courses" },
   { href: "/gatherings", label: "Gatherings" },
   { href: "/about", label: "About AIPEX" },
 ];
@@ -51,8 +52,8 @@ export default function Navigation() {
               {label}
             </Link>
           ))}
-          <Link href="/community" className="button button-small">
-            Join the exchange <Arrow />
+          <Link href="/learn" className="button button-small">
+            My learning <Arrow />
           </Link>
         </nav>
         <button
@@ -90,8 +91,11 @@ export default function Navigation() {
               <Arrow />
             </Link>
           ))}
+          <Link href="/learn" onClick={() => setOpen(false)}>
+            My learning <Arrow />
+          </Link>
           <Link href="/community" onClick={() => setOpen(false)}>
-            Join the exchange <Arrow />
+            Join the community <Arrow />
           </Link>
         </nav>
       )}
