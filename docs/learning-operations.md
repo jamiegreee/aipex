@@ -19,6 +19,10 @@ Run `npm test`, `npm run lint` and `npm run build`. Integration tests require th
 
 ## Production setup
 
+The owner approved `jamiegreee’s projects` for AIPEX and explicitly excluded Monty from this task. On 13 October 2026, Supabase's creation screen blocked a new project because the personal account already has two active free projects. No production AIPEX database has been created and no existing project or billing plan has been changed. Do not use or alter Monty, or pause another application to free a slot.
+
+The selected organisation's plan is managed by Vercel Marketplace and an upgrade would apply to its existing databases too. A separate AIPEX-only Pro organisation with one Micro instance would start at about $25/month within included allowances; upgrading the selected organisation and running its two existing databases plus AIPEX would be about $45/month total. These estimates exclude tax and usage overages. A billing/setup choice is pending before proceeding. See [organisation billing](https://supabase.com/docs/guides/platform/billing-on-supabase) and [compute pricing](https://supabase.com/docs/guides/platform/manage-your-usage/compute).
+
 1. Create a dedicated Supabase project in the owner's chosen organisation, preferably London (`eu-west-2`). Confirm applicable plan/compute cost before creation.
 2. Apply the migration in `supabase/migrations/`. Both public tables have RLS enabled. Only authenticated learners can select, insert and update their own rows. Anonymous users have no table access.
 3. Configure custom SMTP for public email verification and password recovery. Supabase's default sender only delivers to project-team addresses. Keep email confirmations enabled. Use an appropriate verified sender for AIPEX; never disable confirmation as a delivery workaround.
