@@ -37,3 +37,5 @@ Legacy research and fellowship URLs temporarily redirect to About and Community 
 Newsreader display typography, DM Sans body text, IBM Plex Mono labels, a warm paper background and cobalt, pink and soft green accents. Fonts are served locally by Next.js. The conversation and London illustrations are original SVG/CSS components, with no stock attendee photography.
 
 The site includes responsive navigation, visible keyboard focus, a skip link and reduced-motion support. Google Analytics from the previous design has been removed to match the current privacy information.
+
+Course source selection and lesson-by-lesson reading tasks are documented in [course sources](docs/course-sources.md). Every lesson links its teaching to at least two external sources; guidance, research and legal authority are distinguished.
