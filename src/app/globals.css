@@ -2456,6 +2456,9 @@ button:disabled {
 }
 
 /* Case-packet tables remain readable without widening the lesson on mobile. */
+.lesson-reader {
+  min-width: 0;
+}
 .lesson-table-scroll {
   overflow-x: auto;
   margin-block: 20px;
