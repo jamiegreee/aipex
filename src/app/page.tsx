@@ -85,7 +85,7 @@ export default function Home() {
               <span className="text-link">Explore the curriculum ↗</span>
             </Link>
             <Link href="/courses/governing-ai-in-public-services">
-              <span className="label">02 / 4–6 hours</span>
+              <span className="label">02 / 6–8 hours</span>
               <h3>Governing AI in Public Services</h3>
               <p>
                 Assess deployments, ask better procurement questions and design

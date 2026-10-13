@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/database";
 import { currentUser, authConfigured } from "@/lib/auth";
-import { findCourse } from "@/content/courses";
+import { findCourse, quizRevision } from "@/content/courses";
 import { allLessons, grade, wordCount } from "@/lib/courses";
 
 export const dynamic = "force-dynamic";
@@ -104,6 +104,14 @@ export async function POST(request: NextRequest) {
       { error: "We could not load your learning record. Try again." },
       500,
     );
+  if (body.quizRevision !== quizRevision)
+    return reply(
+      {
+        error:
+          "The course checks have changed. Keep a copy of your unsaved answer, then refresh this lesson before saving.",
+      },
+      409,
+    );
   const answers = body.answers;
   if (
     !Array.isArray(answers) ||
@@ -135,6 +143,7 @@ export async function POST(request: NextRequest) {
     lesson_slug: lesson.slug,
     response: body.response,
     quiz_answers: answers,
+    quiz_revision: quizRevision,
   };
   if (feedback) row.quiz_score = score;
   if (completed)

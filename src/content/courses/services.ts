@@ -6,7 +6,7 @@ export const services: Course = {
   subtitle: "Make better decisions about real deployments.",
   description:
     "Assess an AI proposal, ask better procurement questions, design meaningful oversight and decide when to launch, change or stop a public-service deployment.",
-  duration: "4–6 hours",
+  duration: "6–8 hours",
   theme: "pink",
   audience:
     "Public-service teams, commissioners, policy professionals and people scrutinising public-sector AI.",

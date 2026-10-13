@@ -13,7 +13,7 @@ export const resources = {
   },
   transparency: {
     title: "Algorithmic Transparency Recording Standard: hub and scope",
-    url: "https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub",
+    url: "https://www.gov.uk/government/publications/algorithmic-transparency-recording-standard-mandatory-scope-and-exemptions-policy/algorithmic-transparency-recording-standard-atrs-mandatory-scope-and-exemptions-policy",
   },
   nist: {
     title: "NIST AI Risk Management Framework: Core",
@@ -60,6 +60,26 @@ export const resources = {
     title:
       "Information Commissioner's Office: Data Protection Impact Assessments",
     url: "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/",
+  },
+  generative: {
+    title: "NIST: Generative AI Profile (July 2024)",
+    url: "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+  },
+  adm: {
+    title: "ICO: Automated decision-making (March 2026 draft guidance)",
+    url: "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/automated-decision-making/",
+  },
+  statistics: {
+    title: "NIST/SEMATECH: Confidence intervals for proportions",
+    url: "https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm",
+  },
+  recruitmentAudit: {
+    title: "ICO: AI in recruitment audit outcomes (2024)",
+    url: "https://ico.org.uk/media2/migrated/4031620/ai-in-recruitment-outcomes-report.pdf",
+  },
+  aiEvaluation: {
+    title: "UK Government: Impact evaluation of AI interventions",
+    url: "https://www.gov.uk/government/publications/the-magenta-book/guidance-on-the-impact-evaluation-of-ai-interventions-html",
   },
   assurance: {
     title: "DSIT: Introduction to AI assurance",

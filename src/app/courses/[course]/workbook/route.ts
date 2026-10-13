@@ -14,7 +14,9 @@ export async function GET(
       course.slug,
     ...allLessons(course).flatMap((l) => [
       `## ${l.title}`,
-      l.exercise,
+      "### Teaching and case materials\n" +
+        l.body.replace(/^##(#+)? /gm, (_, deeper) => `####${deeper ?? ""} `),
+      "### Exercise\n" + l.exercise,
       "### Review criteria\n" + l.rubric.map((x) => "- " + x).join("\n"),
       "### Guided reading\n" +
         l.resources
@@ -23,6 +25,10 @@ export async function GET(
               `- [${r.title}](${r.url}) — ${r.guidance ?? "Read alongside the exercise."}`,
           )
           .join("\n"),
+      ...(l.videos ?? []).map(
+        (v) =>
+          `### Optional video\n[${v.title}](${v.url}) · ${v.duration}\n${v.focus}\n${v.task}\n${v.accessibility}\n[Reading alternative](${v.textAlternative.url})`,
+      ),
       "### Your answer\n\n[Write your response here]",
     ]),
   ].join("\n\n");

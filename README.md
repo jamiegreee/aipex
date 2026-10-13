@@ -39,3 +39,6 @@ Newsreader display typography, DM Sans body text, IBM Plex Mono labels, a warm p
 The site includes responsive navigation, visible keyboard focus, a skip link and reduced-motion support. Google Analytics from the previous design has been removed to match the current privacy information.
 
 Course source selection and lesson-by-lesson reading tasks are documented in [course sources](docs/course-sources.md). Every lesson links its teaching to at least two external sources; guidance, research and legal authority are distinguished.
+
+
+The [course quality review](docs/course-quality-review.md) maps every lesson to checked source support and limitations. Regenerate the full Notion curricula and reading map with `npm run export:curricula -- /tmp/aipex-curricula.json`. See learning operations before deploying revised question editions.

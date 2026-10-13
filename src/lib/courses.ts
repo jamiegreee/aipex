@@ -4,6 +4,15 @@ export type Question = {
   answer: number;
   explanation: string;
 };
+export type LessonVideo = {
+  title: string;
+  url: string;
+  duration: string;
+  focus: string;
+  task: string;
+  textAlternative: { title: string; url: string };
+  accessibility: string;
+};
 export type Lesson = {
   slug: string;
   title: string;
@@ -16,6 +25,7 @@ export type Lesson = {
   questions: Question[];
   resources: { title: string; url: string; guidance?: string }[];
   minimumWords?: number;
+  videos?: LessonVideo[];
 };
 export type Course = {
   slug: string;

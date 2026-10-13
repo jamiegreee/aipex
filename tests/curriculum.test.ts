@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import CourseMarkdown from "../src/components/learning/CourseMarkdown";
+import { answersForRevision } from "../src/lib/course-revision";
 import test from "node:test";
-import { courses } from "../src/content/courses";
+import { courses, quizRevision } from "../src/content/courses";
 import { allLessons, grade, safeNext, wordCount } from "../src/lib/courses";
 
 test("both complete curricula have teaching, practice, checks and a capstone", () => {
@@ -113,4 +117,76 @@ test("post-login destinations cannot redirect to an external origin", () => {
   );
   assert.equal(wordCount(" \n one  two\tthree "), 3);
   assert.equal(wordCount(""), 0);
+});
+
+test("changed question editions preserve work without reinterpreting old option indexes", () => {
+  const saved = {
+    quiz_revision: "2026-10-13-initial",
+    quiz_answers: [1, 1],
+    response: "My saved work",
+    completed_at: "2026-10-13T12:00:00Z",
+  };
+  const before = structuredClone(saved);
+  assert.deepEqual(answersForRevision(saved, quizRevision), []);
+  assert.deepEqual(saved, before);
+  assert.deepEqual(
+    answersForRevision({ ...saved, quiz_revision: quizRevision }, quizRevision),
+    [1, 1],
+  );
+  assert.deepEqual(answersForRevision(undefined, quizRevision), []);
+  assert.deepEqual(
+    answersForRevision({ quiz_answers: [1, 1] }, quizRevision),
+    [],
+  );
+});
+
+test("all revised checks grade, and the capstone examples meet the requested length", () => {
+  for (const course of courses) {
+    for (const lesson of allLessons(course)) {
+      assert.ok(
+        grade(
+          lesson,
+          lesson.questions.map((q) => q.answer),
+        )!.every((f) => f.correct),
+      );
+      assert.ok(
+        grade(
+          lesson,
+          lesson.questions.map((q) => (q.answer + 1) % q.options.length),
+        )!.every((f) => !f.correct),
+      );
+    }
+    const capstone = allLessons(course).at(-1)!;
+    const words = wordCount(capstone.modelAnswer);
+    assert.ok(
+      words >= (course.slug === "ai-policy-in-practice" ? 600 : 500),
+      `${capstone.slug} example too short: ${words}`,
+    );
+    assert.ok(
+      words <= (course.slug === "ai-policy-in-practice" ? 900 : 800),
+      `${capstone.slug} example too long: ${words}`,
+    );
+  }
+});
+
+test("case tables render as accessible tables in teaching and worked answers", () => {
+  let tableLessons = 0;
+  for (const course of courses)
+    for (const lesson of allLessons(course)) {
+      for (const text of [lesson.body, lesson.modelAnswer]) {
+        const html = renderToStaticMarkup(
+          createElement(CourseMarkdown, null, text),
+        );
+        if (/^\|.*\|$/m.test(text)) {
+          tableLessons++;
+          assert.match(html, /<table>/);
+          assert.match(html, /<th>/);
+          assert.match(
+            html,
+            /role="region" aria-label="Case evidence table" tabindex="0"/,
+          );
+        }
+      }
+    }
+  assert.ok(tableLessons >= 10);
 });

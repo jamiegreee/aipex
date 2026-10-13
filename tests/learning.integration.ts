@@ -4,7 +4,7 @@ import {
   NeonPostgrestClient,
   fetchWithToken,
 } from "@neondatabase/postgrest-js";
-import { courses } from "../src/content/courses";
+import { courses, quizRevision } from "../src/content/courses";
 import { allLessons } from "../src/lib/courses";
 const origin = process.env.NEON_TEST_ORIGIN ?? "http://127.0.0.1:3100";
 assert.equal(
@@ -66,7 +66,7 @@ async function learner(label: string) {
     const res = await fetch(`${origin}/api/learning`, {
       method: "POST",
       headers: { "Content-Type": "application/json", origin, cookie: cookie() },
-      body: JSON.stringify(body),
+      body: JSON.stringify({ quizRevision, ...body }),
     });
     return { status: res.status, body: await res.json() };
   };

@@ -1,8 +1,6 @@
 # AIPEX course sources
 
-Reviewed 13 October 2026. All 24 lessons include explicit source connections and at least two distinct annotated external readings. This supplements the original AIPEX fictional cases and exercises; it does not change lesson slugs or completion requirements.
-
-Sources span UK government guidance, ICO regulator guidance, NIST, OECD, DRCF, independent Ada Lovelace Institute / AI Now / OGP research and the Model Cards / Datasheets papers. Source inclusion is not an endorsement. The Green Book and Magenta Book links point to the 2026 editions. The procurement URL is corrected. The AI Playbook’s older legal wording is explicitly distinguished from current ICO guidance.
+Reviewed 13 October 2026. Every lesson links its teaching method to multiple annotated external readings. See [the claim-to-source quality review](course-quality-review.md) for the support, scope and limitations checked. The case packets and operational thresholds are AIPEX fictional teaching assumptions, not findings or prescribed requirements from the publications. ICO ADM guidance is labelled draft and DPIA guidance is under review; the course distinguishes these from older Playbook legal wording. Selected readings are included in the workload; reading all publications in full is not required.
 
 ## AI Policy in Practice
 
@@ -14,7 +12,7 @@ Sources span UK government guidance, ICO regulator guidance, NIST, OECD, DRCF, i
 
 ### Objectives and a theory of change
 
-- [HM Treasury: The Magenta Book (2026)](https://www.gov.uk/government/publications/the-magenta-book/magenta-book-central-government-guidance-on-evaluation-html): Read section 2.2.1, Understanding the intervention. Mark a weak causal link and an assumption in your Northbridge theory of change.
+- [HM Treasury: The Magenta Book (2026)](https://www.gov.uk/government/publications/the-magenta-book/magenta-book-central-government-guidance-on-evaluation-html): Read section 2.2.1, Understand the Theory of Change. Mark a weak causal link and an assumption in your Northbridge theory of change.
 
 - [OECD: AI Principles](https://www.oecd.org/en/topics/ai-principles.html): Read the values-based principles. Choose a relevant outcome and explain how you would observe it; these principles are not a substitute for domestic law.
 
@@ -23,6 +21,8 @@ Sources span UK government guidance, ICO regulator guidance, NIST, OECD, DRCF, i
 - [Mitchell et al.: Model Cards for Model Reporting (2019)](https://arxiv.org/abs/1810.03993): Read the model-card reporting framework, especially intended use and evaluation. List three disclosures missing from Northbridge's supplier claim.
 
 - [NIST AI Risk Management Framework: Core](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/): Read MEASURE 2.1, 2.3 and 2.5. Ask whether the test population and conditions support the proposed recruitment use.
+
+- [ICO: AI in recruitment audit outcomes (2024)](https://ico.org.uk/media2/migrated/4031620/ai-in-recruitment-outcomes-report.pdf): Read the executive summary and fairness findings of the 2024 consensual audit. Identify a concrete evidence question for recruitment providers. These selected audits do not estimate market-wide prevalence or establish the current ADM rules.
 
 ### Research under uncertainty
 
@@ -35,6 +35,8 @@ Sources span UK government guidance, ICO regulator guidance, NIST, OECD, DRCF, i
 - [Digital Regulation Cooperation Forum: roles and remit](https://www.drcf.org.uk/about-us): Read Who we are, Members and How we work. Separate each member regulator's role from the forum's coordination function; follow remit links before making a real legal claim.
 
 - [OECD: AI Principles](https://www.oecd.org/en/topics/ai-principles.html): Read Accountability. Assign a responsible actor to each Northbridge decision, then identify the separate evidence needed to establish that actor's authority.
+
+- Optional video: [NIST: Introduction to the AI Risk Management Framework (2023)](https://www.nist.gov/video/introduction-nist-ai-risk-management-framework-ai-rmf-10-explainer-video) (6 min 31 sec). Use 00:53–01:25 for the framework’s voluntary scope, then 03:33–04:05 for GOVERN, MAP, MEASURE and MANAGE. The recording introduces the 2023 framework; its future-work statements are historical, not a current law or organisation update. Give one Northbridge action an owner under each function. Then name the separate instrument or agreement needed for that actor to act. Which proposed action remains outside Northbridge’s authority? English captions and Show Transcript in the publisher’s player. Reading alternative below.
 
 ### Stakeholders and legitimacy
 
@@ -64,6 +66,8 @@ Sources span UK government guidance, ICO regulator guidance, NIST, OECD, DRCF, i
 
 - [HM Treasury: The Magenta Book (2026)](https://www.gov.uk/government/publications/the-magenta-book/magenta-book-central-government-guidance-on-evaluation-html): Read the evaluation-design and interpretation material. Propose an outcome measure, a comparator and a limitation on the conclusion you could draw.
 
+- [UK Government: Impact evaluation of AI interventions](https://www.gov.uk/government/publications/the-magenta-book/guidance-on-the-impact-evaluation-of-ai-interventions-html): Read section 2.1 (evaluation approach) and section 2.3 (Establishing a baseline). Check the assumptions behind the packet’s difference-in-differences calculation. This evaluates interventions; it does not certify model accuracy.
+
 - [Government Digital Service: Service Standard](https://www.gov.uk/service-manual/service-standard): Read point 10 on defining success and publishing performance data. Decide which Northbridge measures should be shared and what context they need.
 
 ### Write a decision brief
@@ -88,6 +92,8 @@ Sources span UK government guidance, ICO regulator guidance, NIST, OECD, DRCF, i
 
 - [UK Government: AI Playbook](https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government/artificial-intelligence-playbook-for-the-uk-government-html): Read the guidance on choosing an AI use case and assessing suitability. Identify a credible improvement Eastmere could make without this tool.
 
+- Optional video: [NIST: Introduction to the AI Risk Management Framework (2023)](https://www.nist.gov/video/introduction-nist-ai-risk-management-framework-ai-rmf-10-explainer-video) (6 min 31 sec). Watch the overview, especially 02:05–02:37 on the people involved and 03:33–04:05 on the four functions. Use it to broaden Eastmere’s system map beyond the model. The recording is an introduction, not evidence that a particular deployment is safe. Map the service owner to GOVERN, residents and the workflow to MAP, task and reviewer tests to MEASURE, and pause/fallback decisions to MANAGE. Name one resident need the supplier’s demo does not address. English captions and Show Transcript in the publisher’s player. Reading alternative below.
+
 ### Purpose and system boundaries
 
 - [NIST AI Risk Management Framework: Core](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/): Read MAP 1 and 2. List users, affected residents, permitted uses and a context change that would require reassessment.
@@ -100,11 +106,15 @@ Sources span UK government guidance, ICO regulator guidance, NIST, OECD, DRCF, i
 
 - [UK Government: Data and AI Ethics Framework](https://www.gov.uk/government/publications/data-ethics-framework/data-and-ai-ethics-framework): Read Fairness and Societal impact. Identify an affected group and specify what evidence or participation is missing from the assessment.
 
+- [NIST: Generative AI Profile (July 2024)](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf): Read section 2.2 on confabulation and section 2.9 on information security. Add an input-manipulation failure pathway to the housing case; these are risk-management suggestions, not proof a safeguard works.
+
 ### Evaluate supplier evidence
 
-- [Mitchell et al.: Model Cards for Model Reporting (2019)](https://arxiv.org/abs/1810.03993): Read the reporting framework's evaluation material. Request results relevant to housing enquiries, including limitations and differences between groups.
+- [Mitchell et al.: Model Cards for Model Reporting (2019)](https://arxiv.org/abs/1810.03993): Read Model Cards sections 4.4–4.7: metrics, evaluation data and quantitative analyses. Request results relevant to housing enquiries, including limitations and differences between groups.
 
-- [Gebru et al.: Datasheets for Datasets (2021)](https://arxiv.org/abs/1803.09010): Read the questions on dataset composition, collection and recommended uses. Identify a data mismatch that could undermine the supplier's result.
+- [Gebru et al.: Datasheets for Datasets (2021)](https://arxiv.org/abs/1803.09010): Read sections 3.2–3.5 on dataset composition, collection and recommended uses. Identify a data mismatch that could undermine the supplier's result.
+
+- [NIST/SEMATECH: Confidence intervals for proportions](https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm): Read the small-sample confidence-interval discussion. Use the zero-of-ten thought experiment to explain why no observed misses does not establish zero risk; this is a statistics method, not an acceptance threshold.
 
 ### Procurement and contracts
 
@@ -114,19 +124,21 @@ Sources span UK government guidance, ICO regulator guidance, NIST, OECD, DRCF, i
 
 ### Data and access
 
-- [Information Commissioner's Office: Data Protection Impact Assessments](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/): Read what a DPIA assesses and how to carry one out. Map a resident-data flow and a question for Eastmere's data-protection lead; check current ICO update notices and applicable law.
+- [Information Commissioner's Office: Data Protection Impact Assessments](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/): Read What is a DPIA? and How do we do a DPIA? Map a resident-data flow and a question for the data-protection lead. The ICO marks this guidance under review after DUAA; a DPIA does not itself establish a lawful basis.
 
 - [Gebru et al.: Datasheets for Datasets (2021)](https://arxiv.org/abs/1803.09010): Read collection, processing, distribution and maintenance questions. Record retention, access and a change that would need review.
 
 ### Human review that works
 
-- [UK Government: AI Playbook](https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government/artificial-intelligence-playbook-for-the-uk-government-html): Read the operational Human oversight discussion. Design a review step that can detect an omitted urgent detail. Use current ICO guidance for legal requirements rather than relying on this playbook's older legal wording.
+- [UK Government: AI Playbook](https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government/artificial-intelligence-playbook-for-the-uk-government-html): Read the operational Human oversight discussion. Design a review step that can detect an omitted urgent detail. Its older Article 22 wording should not be used as a statement of current law.
 
 - [NIST AI Risk Management Framework: Core](https://airc.nist.gov/airmf-resources/airmf/5-sec-core/): Read GOVERN 2 and 3 on responsibilities and workforce practices. Specify training, escalation and the authority to override or pause a suggestion.
 
+- [ICO: Automated decision-making (March 2026 draft guidance)](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/automated-decision-making/): Read What does the UK GDPR say about ADM? and What are the ADM safeguards? Distinguish meaningful involvement before applying a decision from later human intervention. This March 2026 guidance remains labelled draft on 13 October 2026; check current law and final updates for a real case.
+
 ### Transparency and challenge
 
-- [Algorithmic Transparency Recording Standard: hub and scope](https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub): Use the hub's recording guidance and scope policy. Draft a plain-language tool description and check whether the standard is mandatory or voluntary for the organisation in a real case.
+- [Algorithmic Transparency Recording Standard: hub and scope](https://www.gov.uk/government/publications/algorithmic-transparency-recording-standard-mandatory-scope-and-exemptions-policy/algorithmic-transparency-recording-standard-atrs-mandatory-scope-and-exemptions-policy): Use the hub's recording guidance and scope policy. Draft a plain-language tool description and check whether the standard is mandatory or voluntary for the organisation in a real case.
 
 - [Ada Lovelace Institute, AI Now and OGP: Algorithmic accountability for the public sector (2021)](https://www.adalovelaceinstitute.org/report/algorithmic-accountability-public-sector/): Compare transparency and accountability-policy examples. Explain what a resident could do with Eastmere's disclosure and what challenge route is still needed.
 
