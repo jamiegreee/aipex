@@ -63,7 +63,7 @@ The checks cover verified sign-in, HttpOnly cookies, anonymous and cross-origin 
 
 Learners can export written work as Markdown from My learning. Identity-verified account deletion requests go to hello@theaipex.org. An authorised operator can delete the Neon Auth user; foreign-key cascades remove course records. Never delete an account just because a support email names its address.
 
-Keep lesson slugs stable so saved work remains attached. Review primary-source links when guidance changes and update the course edition for substantive changes. No advertising or analytics cookies are used, and exercise answers are not sent to an AI grading service.
+Keep lesson slugs stable so saved work remains attached. Review primary-source links when guidance changes and update the course edition for substantive changes. Exercise answers are not sent to an AI grading service. Optional Google Analytics loads only after explicit consent on the production domain; see `docs/analytics.md` for configuration and verification.
 
 Primary setup documentation: [Neon Next.js server auth](https://neon.com/docs/auth/reference/nextjs-server), [production checklist](https://neon.com/docs/auth/production-checklist), [Data API access control](https://neon.com/docs/data-api/access-control).
 

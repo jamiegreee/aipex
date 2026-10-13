@@ -66,10 +66,30 @@ export default function Privacy() {
             expire.
           </p>
           <p>
-            This website does not use advertising or analytics cookies. Our
-            hosting and email providers may process technical information needed
+            Our hosting and email providers may process technical information needed
             to deliver the website and correspondence, such as IP addresses and
             email delivery records.
+          </p>
+          <h3>Optional website analytics</h3>
+          <p>
+            If you choose “Allow analytics”, Google Analytics measures visits to
+            public AIPEX pages, including course reading pages. It receives page
+            addresses and titles, a shortened referring address, device and browser
+            information, and approximate location derived from your IP address.
+            Analytics cookies help distinguish visits. We do not send your name,
+            email address, saved answers or learning record to Google Analytics.
+            Account, sign-in and password-reset pages are excluded, and we remove
+            query strings and fragments from the page addresses we send.
+          </p>
+          <p>
+            Analytics stays off until you opt in. You can reject it and still use
+            the whole site, or change your choice through “Cookie preferences” at
+            the bottom of any page. We remember your choice for six months;
+            withdrawing consent stops collection and removes the analytics
+            cookies from this browser. It does not remove data already collected.
+            We keep advertising consent disabled. Google may process analytics
+            data outside the UK; see its{" "}
+            <a href="https://policies.google.com/privacy">privacy policy</a>.
           </p>
           <h2>Access, correction and deletion</h2>
           <p>

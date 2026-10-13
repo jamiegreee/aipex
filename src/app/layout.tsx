@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans, Newsreader, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
+import Analytics from "@/components/Analytics";
 
 const sans = DM_Sans({
   variable: "--font-body",
@@ -48,6 +50,7 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <Suspense fallback={null}><Analytics /></Suspense>
       </body>
     </html>
   );
