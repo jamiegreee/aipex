@@ -20,7 +20,7 @@ export default function Footer() {
           </Link>
           <p>
             A changing world.
-            <br />A conversation worth having.
+            <br />The capacity to respond.
           </p>
           <Link className="text-link" href="/contact">
             Say hello <Arrow diagonal />
@@ -32,7 +32,7 @@ export default function Footer() {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} AI Policy Exchange</span>
           <span className="footer-location">
-            Starting in London. Thinking together.
+            Learning online. Meeting in London.
           </span>
           <Link href="/privacy">Privacy</Link>
         </div>

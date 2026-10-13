@@ -8,7 +8,7 @@ import { Arrow } from "@/components/Brand";
 export const metadata: Metadata = {
   title: "About the exchange",
   description:
-    "AIPEX brings the policy community together to understand the changing AI landscape and shape how we respond.",
+    "AIPEX builds capacity to understand, develop and deliver effective AI policy through practical education and community.",
 };
 
 const principles = [
@@ -37,11 +37,11 @@ export default function About() {
             <h1>
               A changing landscape.
               <br />
-              <em>A shared conversation.</em>
+              <em>The capacity to respond.</em>
             </h1>
             <p className="intro-description">
-              AIPEX brings the policy community together to understand the
-              changing AI landscape and shape how we respond.
+              AIPEX helps build capacity to understand, develop and deliver
+              effective AI policy.
             </p>
           </div>
         </section>
@@ -66,13 +66,15 @@ export default function About() {
               community for people working in—and interested in—public policy.
             </p>
             <p>
-              Our first step is informal gatherings in London: an opportunity to
-              meet people, exchange ideas and build relationships. The community
-              will help shape what comes next.
+              Our self-paced courses turn the debate into practical policy work:
+              judging evidence, comparing interventions and governing
+              public-service deployments. Alongside education, informal
+              gatherings in London help people exchange ideas and build
+              relationships.
             </p>
             <p>Founded by Jamie Green.</p>
-            <Link className="text-link" href="/gatherings">
-              See how we&apos;re starting <Arrow diagonal />
+            <Link className="text-link" href="/courses">
+              Explore the courses <Arrow diagonal />
             </Link>
           </div>
         </section>
