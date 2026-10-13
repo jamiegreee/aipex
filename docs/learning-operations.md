@@ -30,6 +30,22 @@ Proxy refreshes validated sessions and preserves response cache-control headers.
 
 `scripts/configure-learning-auth.mjs` prepares confirmed-email settings and branded token-hash confirmation/recovery templates. Set `SUPABASE_PROJECT_REF` and, when applying, `SUPABASE_ACCESS_TOKEN` in the process environment. Optional SMTP configuration uses `AIPEX_SMTP_HOST`, `AIPEX_SMTP_PORT`, `AIPEX_SMTP_USER`, `AIPEX_SMTP_PASSWORD` and `AIPEX_SMTP_FROM`; all must be supplied together. Run without flags to inspect a credential-free summary, then use `--apply` for the explicitly chosen project. The script never prints credentials or response configuration. Keep these operator secrets out of Vercel app environments; the app needs only its publishable key.
 
+### Selected email provider: Resend
+
+The owner selected their existing personal Resend account. `theaipex.org` has been added in Ireland (`eu-west-1`); domain verification and SMTP configuration are still pending. The domain's authoritative DNS is managed in Hostinger. Existing inbound email uses iCloud Mail.
+
+Resend supplied these three required DNS records during setup on 13 October 2026. Check the domain dashboard for the current values before applying them:
+
+| Type | Host | Value | TTL |
+| --- | --- | --- | --- |
+| TXT | `resend._domainkey` | `p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDzY8IkVwFBTc4EoNuCyK8QoasDbXt/x4Ppxgx25pJQ2T4UMua0FmWuWWhVGhALdgW/zwQ066XpYXlSSa+qJYRz7m7wo+wiyVRrgahvDL/MACLEwtLC433JuuVOc8GSr8LhgvdjksNcxJ4HfSrMV3Nd4O94L0OlJsK3yq8CeC7tnwIDAQAB` | Auto |
+| CNAME | `rsend` | `rsend-euw1.forge.rmta.net` | 3600 |
+| CNAME | `send` | `send.forge.rmta.net` | 3600 |
+
+These configure sending only. Keep Resend receiving disabled and preserve the root domain's iCloud MX records. The DKIM value is a public verification key, not a private credential. Check for existing host records before adding anything; do not overwrite a conflicting record without investigating it. Leave email open/click tracking disabled for confirmation and recovery links.
+
+Once verified, use a sending-only API key scoped to this domain as the SMTP password. Store it securely in Supabase's SMTP configuration, not in application code or public environment variables. The [official Resend Supabase SMTP guide](https://resend.com/docs/send-with-supabase-smtp) specifies host `smtp.resend.com`, port `465`, username `resend` and the API key as password. The intended sender is `AIPEX <hello@theaipex.org>`.
+
 ## Support and upkeep
 
 The learner can export private written work from My learning as Markdown. Account deletion requests go to hello@theaipex.org as described in the privacy notice. An authorised operator can delete the Auth user through Supabase; foreign-key cascades remove enrolments and exercises. Verify the requester's identity before acting. Do not delete an account merely because a support email names an address.
