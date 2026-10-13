@@ -66,3 +66,8 @@ Learners can export written work as Markdown from My learning. Identity-verified
 Keep lesson slugs stable so saved work remains attached. Review primary-source links when guidance changes and update the course edition for substantive changes. No advertising or analytics cookies are used, and exercise answers are not sent to an AI grading service.
 
 Primary setup documentation: [Neon Next.js server auth](https://neon.com/docs/auth/reference/nextjs-server), [production checklist](https://neon.com/docs/auth/production-checklist), [Data API access control](https://neon.com/docs/data-api/access-control).
+
+
+## Revising course checks
+
+Apply `neon/migrations/20261013150000_quiz_revision.sql` before deploying the reviewed edition, then refresh the Data API schema. The additive `quiz_revision` column defaults old records and old-client writes to the initial edition. Current app writes specify `quizRevision`; UI restores selections only for matching editions and rejects stale submissions before saving. Written responses, scores and completion records are preserved. When changing question content or option order again, update `quizRevision` as well.

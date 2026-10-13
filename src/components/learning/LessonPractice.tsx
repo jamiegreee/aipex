@@ -12,6 +12,8 @@ type Props = {
   questions: { prompt: string; options: string[] }[];
   savedResponse: string;
   savedAnswers: number[];
+  quizRevision: string;
+  revisedChecks: boolean;
   initiallyComplete: boolean;
 };
 export default function LessonPractice(props: Props) {
@@ -77,6 +79,7 @@ export default function LessonPractice(props: Props) {
           response,
           answers,
           reviewed,
+          quizRevision: props.quizRevision,
         }),
       });
       const result = await res.json();
@@ -102,6 +105,13 @@ export default function LessonPractice(props: Props) {
       <p className="label">Put it into practice</p>
       <h2 id="practice-heading">Your turn.</h2>
       <p>{props.exercise}</p>
+      {props.revisedChecks && (
+        <p className="small-copy">
+          The checks have been revised. Your written work and any previous
+          completion are preserved; answer the new questions if you revisit this
+          lesson.
+        </p>
+      )}
       <p className="small-copy">
         Use the fictional case or anonymised examples. Don’t enter confidential
         information or personal details about other people.
@@ -123,7 +133,8 @@ export default function LessonPractice(props: Props) {
       />
       <div className="draft-bar">
         <span>
-          {wordCount(response)} words · minimum {props.minimum} to complete
+          {wordCount(response)} words · minimum {props.minimum} to record
+          completion
         </span>
         <span>
           {dirty
@@ -145,7 +156,9 @@ export default function LessonPractice(props: Props) {
         <h3>Review your answer</h3>
         <p>
           Use these criteria and the worked example below. Written exercises are
-          self-assessed.
+          self-assessed. The minimum word count records participation; aim for
+          the exercise’s requested scope and length, and check the substance of
+          your answer.
         </p>
         <ul>
           {props.rubric.map((item) => (

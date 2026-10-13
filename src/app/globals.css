@@ -2454,3 +2454,36 @@ button:disabled {
     font-size: 32px;
   }
 }
+
+/* Case-packet tables remain readable without widening the lesson on mobile. */
+.lesson-table-scroll {
+  overflow-x: auto;
+  margin-block: 20px;
+  border: 1px solid var(--color-border);
+}
+.lesson-prose table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 440px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.lesson-prose th,
+.lesson-prose td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--color-border);
+}
+.lesson-prose th {
+  background: var(--color-cream-dark);
+  font-weight: 600;
+}
+.lesson-videos h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+.lesson-videos > div > p {
+  margin-block: 12px;
+  line-height: 1.7;
+}

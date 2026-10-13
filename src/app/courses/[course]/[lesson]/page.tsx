@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import CourseMarkdown from "@/components/learning/CourseMarkdown";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import EnrollButton from "@/components/learning/EnrollButton";
 import LessonPractice from "@/components/learning/LessonPractice";
 import ReaderOutline from "@/components/learning/ReaderOutline";
-import { findCourse } from "@/content/courses";
+import { findCourse, quizRevision } from "@/content/courses";
 import { allLessons } from "@/lib/courses";
+import { answersForRevision } from "@/lib/course-revision";
 import { currentUser } from "@/lib/auth";
 import { learningData } from "@/lib/learning";
 type Params = { course: string; lesson: string };
@@ -123,13 +123,11 @@ export default async function LessonPage({
             </ul>
           </header>
           <div className="lesson-prose">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {lesson.body}
-            </ReactMarkdown>
+            <CourseMarkdown>{lesson.body}</CourseMarkdown>
           </div>
           {enrolled ? (
             <LessonPractice
-              key={lesson.slug}
+              key={`${lesson.slug}:${quizRevision}`}
               course={course.slug}
               lesson={lesson.slug}
               exercise={lesson.exercise}
@@ -140,7 +138,11 @@ export default async function LessonPage({
                 options: q.options,
               }))}
               savedResponse={saved?.response ?? ""}
-              savedAnswers={saved?.quiz_answers ?? []}
+              savedAnswers={answersForRevision(saved, quizRevision)}
+              quizRevision={quizRevision}
+              revisedChecks={Boolean(
+                saved && saved.quiz_revision !== quizRevision,
+              )}
               initiallyComplete={Boolean(saved?.completed_at)}
             />
           ) : (
@@ -171,13 +173,43 @@ export default async function LessonPage({
               Compare with a worked answer <span aria-hidden="true">+</span>
             </summary>
             <div className="lesson-prose">
-              <ReactMarkdown>{lesson.modelAnswer}</ReactMarkdown>
+              <CourseMarkdown>{lesson.modelAnswer}</CourseMarkdown>
             </div>
             <p className="small-copy">
               This is one defensible approach. Different recommendations can be
               sound if your reasoning, evidence and conditions support them.
             </p>
           </details>
+          {lesson.videos?.length ? (
+            <section
+              className="lesson-resources lesson-videos"
+              aria-labelledby="video-heading"
+            >
+              <p className="label">Optional video</p>
+              <h2 id="video-heading">Watch, then apply.</h2>
+              {lesson.videos.map((video) => (
+                <div key={video.url}>
+                  <a href={video.url} target="_blank" rel="noopener noreferrer">
+                    {video.title} ↗
+                  </a>
+                  <p className="small-copy">
+                    {video.duration} · {video.accessibility}
+                  </p>
+                  <p>{video.focus}</p>
+                  <p>
+                    <strong>Try this:</strong> {video.task}
+                  </p>
+                  <a
+                    href={video.textAlternative.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Read instead: {video.textAlternative.title} ↗
+                  </a>
+                </div>
+              ))}
+            </section>
+          ) : null}
           <section className="lesson-resources">
             <p className="label">Guided reading</p>
             <ul>

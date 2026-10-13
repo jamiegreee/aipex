@@ -89,7 +89,16 @@ export default async function CoursePage({
             </h2>
             <p>
               Read, apply, check and reflect. Each lesson includes an exercise,
-              worked answer and knowledge checks.
+              worked answer and knowledge checks. Read the selected sections,
+              work through the fictional evidence packet and explain a decision
+              before comparing with the example. Most time is spent on the
+              exercises, not reading the lesson text.
+            </p>
+            <p className="small-copy">
+              UK-led practical cases, with international frameworks and
+              research. For another jurisdiction, replace the institutional and
+              legal assumptions; this course is not a comprehensive survey of
+              global AI policy.
             </p>
             {enrolled && (
               <p className="progress-text">
@@ -97,15 +106,17 @@ export default async function CoursePage({
               </p>
             )}
             <p className="small-copy">
-              Edition {contentVersion} · Duration includes reading and practice.
+              Edition {contentVersion} · Time estimates include teaching,
+              selected external readings, case exercises and the capstone; pace
+              will vary.
             </p>
-          <a
+            <a
               href={`/courses/${course.slug}/workbook`}
               className="text-link"
-            download
+              download
             >
               Download exercise workbook ↓
-          </a>
+            </a>
           </div>
           <div className="module-list">
             {course.modules.map((module, i) => (

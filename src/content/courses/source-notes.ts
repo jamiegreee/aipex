@@ -1,5 +1,7 @@
 import type { Course, Lesson } from "@/lib/courses";
 import { resources as r } from "./resources";
+import { caseLabs } from "./case-labs";
+import { lessonVideos } from "./videos";
 
 // Reading selections and AIPEX application questions reviewed 13 October 2026.
 // The fictional cases and worked answers remain AIPEX's original teaching.
@@ -34,7 +36,7 @@ const notes: Record<string, SourceNote> = {
     readings: [
       read(
         r.magenta,
-        "Read section 2.2.1, Understanding the intervention. Mark a weak causal link and an assumption in your Northbridge theory of change.",
+        "Read section 2.2.1, Understand the Theory of Change. Mark a weak causal link and an assumption in your Northbridge theory of change.",
       ),
       read(
         r.oecd,
@@ -53,6 +55,10 @@ const notes: Record<string, SourceNote> = {
       read(
         r.nist,
         "Read MEASURE 2.1, 2.3 and 2.5. Ask whether the test population and conditions support the proposed recruitment use.",
+      ),
+      read(
+        r.recruitmentAudit,
+        "Read the executive summary and fairness findings of the 2024 consensual audit. Identify a concrete evidence question for recruitment providers. These selected audits do not estimate market-wide prevalence or establish the current ADM rules.",
       ),
     ],
   },
@@ -149,6 +155,10 @@ const notes: Record<string, SourceNote> = {
         "Read the evaluation-design and interpretation material. Propose an outcome measure, a comparator and a limitation on the conclusion you could draw.",
       ),
       read(
+        r.aiEvaluation,
+        "Read section 2.1 (evaluation approach) and section 2.3 (Establishing a baseline). Check the assumptions behind the packet’s difference-in-differences calculation. This evaluates interventions; it does not certify model accuracy.",
+      ),
+      read(
         r.service,
         "Read point 10 on defining success and publishing performance data. Decide which Northbridge measures should be shared and what context they need.",
       ),
@@ -226,6 +236,10 @@ const notes: Record<string, SourceNote> = {
         r.ethics,
         "Read Fairness and Societal impact. Identify an affected group and specify what evidence or participation is missing from the assessment.",
       ),
+      read(
+        r.generative,
+        "Read section 2.2 on confabulation and section 2.9 on information security. Add an input-manipulation failure pathway to the housing case; these are risk-management suggestions, not proof a safeguard works.",
+      ),
     ],
   },
   "evaluate-supplier-evidence": {
@@ -234,11 +248,15 @@ const notes: Record<string, SourceNote> = {
     readings: [
       read(
         r.modelCards,
-        "Read the reporting framework's evaluation material. Request results relevant to housing enquiries, including limitations and differences between groups.",
+        "Read Model Cards sections 4.4–4.7: metrics, evaluation data and quantitative analyses. Request results relevant to housing enquiries, including limitations and differences between groups.",
       ),
       read(
         r.datasheets,
-        "Read the questions on dataset composition, collection and recommended uses. Identify a data mismatch that could undermine the supplier's result.",
+        "Read sections 3.2–3.5 on dataset composition, collection and recommended uses. Identify a data mismatch that could undermine the supplier's result.",
+      ),
+      read(
+        r.statistics,
+        "Read the small-sample confidence-interval discussion. Use the zero-of-ten thought experiment to explain why no observed misses does not establish zero risk; this is a statistics method, not an acceptance threshold.",
       ),
     ],
   },
@@ -262,7 +280,7 @@ const notes: Record<string, SourceNote> = {
     readings: [
       read(
         r.dpia,
-        "Read what a DPIA assesses and how to carry one out. Map a resident-data flow and a question for Eastmere's data-protection lead; check current ICO update notices and applicable law.",
+        "Read What is a DPIA? and How do we do a DPIA? Map a resident-data flow and a question for the data-protection lead. The ICO marks this guidance under review after DUAA; a DPIA does not itself establish a lawful basis.",
       ),
       read(
         r.datasheets,
@@ -276,11 +294,15 @@ const notes: Record<string, SourceNote> = {
     readings: [
       read(
         r.playbook,
-        "Read the operational Human oversight discussion. Design a review step that can detect an omitted urgent detail. Use current ICO guidance for legal requirements rather than relying on this playbook's older legal wording.",
+        "Read the operational Human oversight discussion. Design a review step that can detect an omitted urgent detail. Its older Article 22 wording should not be used as a statement of current law.",
       ),
       read(
         r.nist,
         "Read GOVERN 2 and 3 on responsibilities and workforce practices. Specify training, escalation and the authority to override or pause a suggestion.",
+      ),
+      read(
+        r.adm,
+        "Read What does the UK GDPR say about ADM? and What are the ADM safeguards? Distinguish meaningful involvement before applying a decision from later human intervention. This March 2026 guidance remains labelled draft on 13 October 2026; check current law and final updates for a real case.",
       ),
     ],
   },
@@ -367,14 +389,28 @@ export function withSourceNotes(course: Course): Course {
       ...module,
       lessons: module.lessons.map((lesson): Lesson => {
         const note = notes[lesson.slug];
+        const lab = caseLabs[lesson.slug];
+        if (!lab) throw new Error(`Missing case lab for ${lesson.slug}`);
         if (!note) throw new Error(`Missing source notes for ${lesson.slug}`);
         const links = note.readings
           .map((source) => `[${source.title}](${source.url})`)
           .join("; ");
         return {
           ...lesson,
-          body: `${lesson.body}\n\n## Connect the reading to your practice\n\n${note.connection}\n\nSources for this comparison: ${links}. The application to this fictional case is AIPEX's teaching synthesis; it is not an endorsement by the source authors.`,
+          body: `${lesson.body}\n\n## Work the case\n\n**Case evidence:** the case documents, numbers and operating constraints are invented. External findings and methods are attributed separately. Keep illustrative methods examples separate from observations in the final case update.\n\n${lab.packet}\n\n## Connect the reading to your practice\n\n${note.connection}\n\nSources for this comparison: ${links}. The application to this fictional case is AIPEX's teaching synthesis; it is not an endorsement by the source authors.`,
           resources: note.readings,
+          exercise: `${lesson.exercise} ${lab.task}`,
+          modelAnswer: `${lesson.modelAnswer}\n\n### Work through the packet\n\n${lab.worked}`,
+          questions: lab.checks,
+          videos: lessonVideos[lesson.slug],
+          rubric: [
+            ...lesson.rubric,
+            "Uses the packet accurately and separates observations, illustrative assumptions and unresolved questions",
+          ],
+          minutes:
+            course.slug === "governing-ai-in-public-services"
+              ? lesson.minutes + (lesson.slug.startsWith("capstone-") ? 10 : 5)
+              : lesson.minutes,
         };
       }),
     })),

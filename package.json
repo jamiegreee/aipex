@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "tsx --test tests/curriculum.test.ts",
-    "test:integration": "node --env-file=.env.local --env-file=.env.test --import tsx tests/learning.integration.ts"
+    "test:integration": "node --env-file=.env.local --env-file=.env.test --import tsx tests/learning.integration.ts",
+    "export:curricula": "tsx scripts/export-notion-curricula.ts"
   },
   "dependencies": {
     "@neondatabase/auth": "0.6.0-beta",
