@@ -14,7 +14,7 @@ export type Lesson = {
   rubric: string[];
   modelAnswer: string;
   questions: Question[];
-  resources: { title: string; url: string }[];
+  resources: { title: string; url: string; guidance?: string }[];
   minimumWords?: number;
 };
 export type Course = {

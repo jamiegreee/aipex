@@ -28,11 +28,44 @@ test("both complete curricula have teaching, practice, checks and a capstone", (
         assert.equal(new Set(q.options).size, q.options.length);
         assert.ok(q.explanation.length > 40);
       }
-      assert.ok(lesson.resources.length > 0);
+      assert.ok(
+        lesson.resources.length >= 2,
+        `${lesson.slug} needs multiple external perspectives`,
+      );
       assert.ok(lesson.resources.every((r) => r.url.startsWith("https://")));
+      assert.equal(
+        new Set(lesson.resources.map((r) => r.url)).size,
+        lesson.resources.length,
+      );
+      for (const source of lesson.resources) {
+        assert.ok(!new URL(source.url).hostname.endsWith("theaipex.org"));
+        assert.ok(
+          source.guidance && source.guidance.length > 40,
+          `${lesson.slug} needs a specific reading task`,
+        );
+        assert.ok(
+          lesson.body.includes(source.url),
+          `${lesson.slug} must connect its sources to the teaching`,
+        );
+      }
     }
     assert.ok(lessons.at(-1)!.slug.startsWith("capstone-"));
     assert.ok(lessons.at(-1)!.minimumWords! >= 300);
+    const hosts = new Set(
+      lessons.flatMap((l) => l.resources.map((r) => new URL(r.url).hostname)),
+    );
+    assert.ok(
+      hosts.size >= 4,
+      `${course.slug} needs sources beyond a single publisher`,
+    );
+    assert.ok(
+      hosts.has("arxiv.org"),
+      `${course.slug} needs relevant original research`,
+    );
+    assert.ok(
+      hosts.has("www.adalovelaceinstitute.org"),
+      `${course.slug} needs an independent accountability perspective`,
+    );
   }
 });
 test("grading rejects incomplete, malformed and out-of-range answers", () => {

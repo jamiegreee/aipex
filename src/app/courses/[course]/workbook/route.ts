@@ -16,6 +16,13 @@ export async function GET(
       `## ${l.title}`,
       l.exercise,
       "### Review criteria\n" + l.rubric.map((x) => "- " + x).join("\n"),
+      "### Guided reading\n" +
+        l.resources
+          .map(
+            (r) =>
+              `- [${r.title}](${r.url}) — ${r.guidance ?? "Read alongside the exercise."}`,
+          )
+          .join("\n"),
       "### Your answer\n\n[Write your response here]",
     ]),
   ].join("\n\n");

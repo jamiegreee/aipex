@@ -179,19 +179,22 @@ export default async function LessonPage({
             </p>
           </details>
           <section className="lesson-resources">
-            <p className="label">Further reading</p>
+            <p className="label">Guided reading</p>
             <ul>
               {lesson.resources.map((r) => (
                 <li key={r.url}>
                   <a href={r.url} target="_blank" rel="noopener noreferrer">
                     {r.title} ↗
                   </a>
+                  {r.guidance && <p className="small-copy">{r.guidance}</p>}
                 </li>
               ))}
             </ul>
             <p className="small-copy">
-              Official sources for deeper reading. Check current versions for a
-              real decision.
+              Selected sections of external guidance and research. These are
+              reading tasks, not additional completion checks. Frameworks,
+              research and legal requirements have different authority; check
+              current guidance and its scope for a real decision.
             </p>
           </section>
           <nav className="lesson-pagination" aria-label="Lesson navigation">
