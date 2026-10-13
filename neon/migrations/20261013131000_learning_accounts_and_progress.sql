@@ -1,5 +1,10 @@
+-- Dedicated AIPEX database only. Enable Neon Auth and Data API first.
+-- Account IDs are UUIDs in the inspected managed Neon Auth schema.
+begin;
+
+grant usage on schema public to authenticated;
 create table public.course_enrollments (
-  user_id uuid not null references auth.users(id) on delete cascade,
+  user_id uuid not null references neon_auth."user"(id) on delete cascade,
   course_slug text not null check (course_slug in ('ai-policy-in-practice', 'governing-ai-in-public-services')),
   created_at timestamptz not null default now(),
   primary key (user_id, course_slug)
@@ -18,7 +23,7 @@ create table public.lesson_progress (
 );
 alter table public.course_enrollments enable row level security;
 alter table public.lesson_progress enable row level security;
-revoke all on public.course_enrollments, public.lesson_progress from anon;
+revoke all on public.course_enrollments, public.lesson_progress from public, anonymous;
 grant select, insert, update on public.course_enrollments, public.lesson_progress to authenticated;
 create policy enrollment_read_own on public.course_enrollments for select to authenticated using ((select auth.uid()) = user_id);
 create policy enrollment_create_own on public.course_enrollments for insert to authenticated with check ((select auth.uid()) = user_id);
@@ -34,6 +39,8 @@ begin
   return new;
 end;
 $$;
-revoke all on function public.set_progress_updated_at() from public, anon, authenticated;
+revoke all on function public.set_progress_updated_at() from public, anonymous, authenticated;
 create trigger lesson_progress_updated before update on public.lesson_progress
 for each row execute function public.set_progress_updated_at();
+
+commit;

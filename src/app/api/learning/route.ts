@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { createClient, authConfigured } from "@/lib/supabase/server";
+import { createClient } from "@/lib/database";
+import { currentUser, authConfigured } from "@/lib/auth";
 import { findCourse } from "@/content/courses";
 import { allLessons, grade, wordCount } from "@/lib/courses";
 
@@ -53,11 +54,8 @@ export async function POST(request: NextRequest) {
       503,
     );
   const client = await createClient();
-  const {
-    data: { user },
-    error: authError,
-  } = await client.auth.getUser();
-  if (authError || !user)
+  const user = await currentUser(true);
+  if (!user)
     return reply(
       { error: "Your session has expired. Sign in again to save your work." },
       401,

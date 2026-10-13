@@ -7,10 +7,12 @@ export default function AuthForm({
   mode,
   next,
   linkError = false,
+  resetToken = "",
 }: {
   mode: "login" | "signup" | "forgot" | "reset";
   next: string;
   linkError?: boolean;
+  resetToken?: string;
 }) {
   const [state, action, pending] = useActionState(
     mode === "reset" ? changePassword : authenticate,
@@ -21,6 +23,9 @@ export default function AuthForm({
     <form action={action} className="auth-form">
       <input type="hidden" name="mode" value={mode} />
       <input type="hidden" name="next" value={next} />
+      {mode === "reset" && (
+        <input type="hidden" name="token" value={resetToken} />
+      )}
       {linkError && (
         <p className="form-alert" role="alert">
           That email link has expired or could not be verified. Sign in or

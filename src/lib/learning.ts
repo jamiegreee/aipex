@@ -1,5 +1,5 @@
 import "server-only";
-import { createClient } from "./supabase/server";
+import { createClient } from "./database";
 export type Progress = {
   course_slug: string;
   lesson_slug: string;

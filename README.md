@@ -9,7 +9,7 @@ npm ci
 npm run dev -- --port 3100
 ```
 
-Open http://127.0.0.1:3100. Run `npm test`, `npm run lint` and `npm run build` to check changes. See [learning operations](docs/learning-operations.md) for the dedicated Supabase stack, integration tests, email delivery and production setup.
+Open http://127.0.0.1:3100. Run `npm test`, `npm run lint` and `npm run build` to check changes. See [learning operations](docs/learning-operations.md) for the Neon backend, integration tests, email delivery and production setup.
 
 ## Public pages
 
@@ -26,7 +26,7 @@ Open http://127.0.0.1:3100. Run `npm test`, `npm run lint` and `npm run build` t
 - `/contact`: contact address and hosting enquiries.
 - `/privacy`: account, course-work and community information handling.
 
-Community registration of interest opens a prefilled email to `hello@theaipex.org`; it is separate from learning accounts. Course accounts use Supabase Auth and row-level-security-protected database tables. Production accounts require a dedicated configured project and custom SMTP; the application does not substitute local storage for persistence.
+Community registration of interest opens a prefilled email to `hello@theaipex.org`; it is separate from learning accounts. Course accounts use Neon Auth and row-level-security-protected PostgreSQL tables. Account emails use Resend through Neon’s custom SMTP configuration; the application does not substitute local storage for persistence.
 
 The event date, venue, attendance fee and RSVP destination are not yet confirmed. Update the Gatherings page when they are ready. A future RSVP service can replace the email link.
 

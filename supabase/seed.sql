@@ -1,2 +1,0 @@
--- Course content is versioned in src/content/courses.
--- Learning records are created only by authenticated learners; no demo users are seeded.

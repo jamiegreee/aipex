@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { currentUser } from "@/lib/supabase/server";
+import { currentUser } from "@/lib/auth";
 import { learningData } from "@/lib/learning";
 import { courses, contentVersion } from "@/content/courses";
 import { allLessons } from "@/lib/courses";

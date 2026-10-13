@@ -1,43 +1,67 @@
-// Run only against the dedicated local AIPEX stack. Never deletes production data.
+// Uses two explicitly confirmed disposable AIPEX QA aliases. No account deletion.
 import assert from "node:assert/strict";
-import { randomUUID } from "node:crypto";
-import { createClient } from "@supabase/supabase-js";
-import { createServerClient } from "@supabase/ssr";
+import {
+  NeonPostgrestClient,
+  fetchWithToken,
+} from "@neondatabase/postgrest-js";
 import { courses } from "../src/content/courses";
 import { allLessons } from "../src/lib/courses";
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const origin = process.env.NEON_TEST_ORIGIN ?? "http://127.0.0.1:3100";
 assert.equal(
-  url,
-  "http://127.0.0.1:55421",
-  "Integration tests are restricted to the dedicated local database",
+  origin,
+  "http://127.0.0.1:3100",
+  "Run against the local AIPEX app only",
 );
-const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!;
-const admin = createClient(url, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
-  auth: { persistSession: false },
-});
-const origin = "http://127.0.0.1:3100";
-const id = randomUUID().slice(0, 8);
-const password = `Aipex-test-${randomUUID()}`;
-const users: string[] = [];
+assert.equal(
+  process.env.NEON_AUTH_BASE_URL,
+  process.env.NEON_TEST_AUTH_BASE_URL,
+  "Explicitly select the dedicated AIPEX test backend",
+);
+assert.ok(process.env.NEON_TEST_AUTH_BASE_URL?.includes("neonauth."));
 async function learner(label: string) {
-  const email = `aipex-${label}-${id}@example.test`;
-  const { data, error } = await admin.auth.admin.createUser({
+  const email = process.env[`NEON_TEST_EMAIL_${label.toUpperCase()}`]!;
+  const password = process.env.NEON_TEST_PASSWORD!;
+  assert.match(
     email,
-    password,
-    email_confirm: true,
-  });
-  assert.ifError(error);
-  users.push(data.user!.id);
+    /^green\.jcb\+aipex-qa-[a-z0-9-]+@gmail\.com$/,
+    "Use only disposable AIPEX QA aliases",
+  );
   const jar = new Map<string, string>();
-  const client = createServerClient(url, key, {
-    cookies: {
-      getAll: () => [...jar].map(([name, value]) => ({ name, value })),
-      setAll: (values) => values.forEach((c) => jar.set(c.name, c.value)),
-    },
+  const login = await fetch(`${origin}/api/auth/sign-in/email`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", origin },
+    body: JSON.stringify({ email, password }),
   });
-  const login = await client.auth.signInWithPassword({ email, password });
-  assert.ifError(login.error);
+  assert.equal(
+    login.status,
+    200,
+    "A verified QA learner must be able to sign in",
+  );
+  const data = await login.json();
+  assert.ok(data.user?.emailVerified, "Email verification is required");
+  const sessionCookies = login.headers.getSetCookie();
+  assert.ok(
+    sessionCookies.some(
+      (c) => c.includes("session_token") && /httponly/i.test(c),
+    ),
+    "Session cookies must be HttpOnly",
+  );
+  for (const c of sessionCookies) {
+    const [part] = c.split(";");
+    const i = part.indexOf("=");
+    jar.set(part.slice(0, i), part.slice(i + 1));
+  }
   const cookie = () => [...jar].map(([k, v]) => `${k}=${v}`).join("; ");
+  const tokenResponse = await fetch(`${origin}/api/auth/token`, {
+    headers: { origin, cookie: cookie() },
+  });
+  assert.equal(tokenResponse.status, 200);
+  const { token } = await tokenResponse.json();
+  assert.ok(token);
+  const client = new NeonPostgrestClient({
+    dataApiUrl: process.env.NEON_DATA_API_URL!,
+    options: { global: { fetch: fetchWithToken(async () => token) } },
+  });
   const post = async (body: object) => {
     const res = await fetch(`${origin}/api/learning`, {
       method: "POST",
@@ -46,7 +70,7 @@ async function learner(label: string) {
     });
     return { status: res.status, body: await res.json() };
   };
-  return { client, post, cookie, userId: data.user!.id };
+  return { client, post, cookie, userId: data.user.id };
 }
 async function main() {
   try {
@@ -175,83 +199,37 @@ async function main() {
       headers: { cookie: b.cookie() },
     });
     assert.ok(!(await otherPortfolio.text()).includes("Status: Completed"));
-    const confirmationEmail = `aipex-confirm-${id}@example.test`;
-    const generated = await admin.auth.admin.generateLink({
-      type: "signup",
-      email: confirmationEmail,
-      password,
-    });
-    assert.ifError(generated.error);
-    users.push(generated.data.user!.id);
-    const confirmation = await fetch(
-      `${origin}/auth/confirm?type=email&token_hash=${generated.data.properties!.hashed_token}`,
-      { redirect: "manual" },
-    );
-    assert.equal(confirmation.status, 307);
-    assert.equal(confirmation.headers.get("location"), `${origin}/learn`);
-    assert.ok(
-      confirmation.headers.getSetCookie().some((c) => c.includes("auth-token")),
-      "Confirmation must establish a session",
-    );
-    assert.ok(
-      confirmation.headers
-        .getSetCookie()
-        .filter((c) => c.includes("auth-token"))
-        .every((c) => /httponly/i.test(c)),
-      "Auth session cookies must be HttpOnly",
-    );
-    const resetPage = await fetch(`${origin}/reset-password`, {
-      headers: { cookie: a.cookie() },
-    });
-    const resetHtml = await resetPage.text();
-    const form = new FormData();
-    const decode = (s: string) =>
-      s
-        .replaceAll("&quot;", '"')
-        .replaceAll("&#x27;", "'")
-        .replaceAll("&lt;", "<")
-        .replaceAll("&gt;", ">")
-        .replaceAll("&amp;", "&");
-    let actionFields = 0;
-    for (const input of resetHtml.matchAll(/<input\b[^>]*>/g)) {
-      const name = input[0].match(/name="([^"]*)"/)?.[1];
-      if (!name?.startsWith("$ACTION")) continue;
-      form.append(
-        decode(name),
-        decode(input[0].match(/value="([^"]*)"/)?.[1] ?? ""),
-      );
-      actionFields++;
-    }
-    assert.ok(
-      actionFields > 0,
-      "Reset page must provide a progressively enhanced server action",
-    );
-    const newPassword = `Updated-local-${randomUUID()}`;
-    form.set("password", newPassword);
-    form.set("confirm", newPassword);
-    const reset = await fetch(`${origin}/reset-password`, {
+    const logout = await fetch(`${origin}/api/auth/sign-out`, {
       method: "POST",
-      headers: { origin, cookie: a.cookie() },
-      body: form,
-      redirect: "manual",
+      headers: {
+        origin,
+        cookie: a.cookie(),
+        "Content-Type": "application/json",
+      },
+      body: "{}",
     });
-    assert.equal(reset.status, 303);
+    assert.equal(logout.status, 200);
     assert.ok(
-      reset.headers.get("location")?.includes("/learn?password=updated"),
+      logout.headers
+        .getSetCookie()
+        .some((c) => c.includes("session_token") && /max-age=0/i.test(c)),
+      "Logout must clear the session cookie",
     );
-    const changedLogin = await a.client.auth.signInWithPassword({
-      email: `aipex-a-${id}@example.test`,
-      password: newPassword,
+    const afterLogout = await fetch(`${origin}/api/learning`, {
+      method: "POST",
+      headers: {
+        origin,
+        cookie: a.cookie(),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ action: "enroll", course: courses[0].slug }),
     });
-    assert.ifError(changedLogin.error);
+    assert.equal(afterLogout.status, 401, "Revoked session must not save work");
     console.log(
-      "Passed: authentication, confirmation, password update, CSRF, enrolment, saved drafts, grading, all 24 completions, dashboard, export and cross-user isolation.",
+      "Passed: verified sign-in, HttpOnly cookies, CSRF, enrolment, drafts, grading, all 24 completions, dashboard, portfolio export, cross-user RLS and logout revocation.",
     );
-  } finally {
-    for (const user of users) {
-      const { error } = await admin.auth.admin.deleteUser(user);
-      assert.ifError(error);
-    }
+  } catch (error) {
+    throw error;
   }
 }
 main().catch((error) => {

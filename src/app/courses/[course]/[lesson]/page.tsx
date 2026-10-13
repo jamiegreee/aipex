@@ -9,7 +9,7 @@ import LessonPractice from "@/components/learning/LessonPractice";
 import ReaderOutline from "@/components/learning/ReaderOutline";
 import { findCourse } from "@/content/courses";
 import { allLessons } from "@/lib/courses";
-import { currentUser } from "@/lib/supabase/server";
+import { currentUser } from "@/lib/auth";
 import { learningData } from "@/lib/learning";
 type Params = { course: string; lesson: string };
 export async function generateMetadata({

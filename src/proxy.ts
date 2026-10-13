@@ -1,42 +1,20 @@
-import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { createAuth, authConfigured } from "@/lib/auth";
 
 export async function proxy(request: NextRequest) {
-  let response = NextResponse.next({ request });
-  if (
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
-  )
+  if (!authConfigured()) return NextResponse.next();
+  // Public previews remain available. Authenticated requests get cookie refresh.
+  const signedIn = request.cookies
+    .getAll()
+    .some((c) => c.name.endsWith("neon-auth.session_token"));
+  if (signedIn || request.nextUrl.pathname.startsWith("/learn")) {
+    const response = await createAuth().middleware({ loginUrl: "/login" })(
+      request,
+    );
+    response.headers.set("Cache-Control", "private, no-store");
     return response;
-  const client = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
-    {
-      cookieOptions: {
-        httpOnly: true,
-        secure: (
-          process.env.NEXT_PUBLIC_SITE_URL || "https://theaipex.org"
-        ).startsWith("https:"),
-        sameSite: "lax",
-      },
-      cookies: {
-        getAll: () => request.cookies.getAll(),
-        setAll: (values, headers) => {
-          values.forEach(({ name, value }) => request.cookies.set(name, value));
-          response = NextResponse.next({ request });
-          values.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options),
-          );
-          Object.entries(headers).forEach(([name, value]) =>
-            response.headers.set(name, value),
-          );
-        },
-      },
-    },
-  );
-  await client.auth.getClaims();
-  response.headers.set("Cache-Control", "private, no-store");
-  return response;
+  }
+  return NextResponse.next();
 }
 export const config = {
   matcher: [
@@ -46,7 +24,5 @@ export const config = {
     "/signup",
     "/forgot-password",
     "/reset-password",
-    "/auth/:path*",
-    "/api/learning/:path*",
   ],
 };

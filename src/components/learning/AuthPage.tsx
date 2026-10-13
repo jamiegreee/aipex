@@ -2,7 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AuthForm from "./AuthForm";
 import { safeNext } from "@/lib/courses";
-import { currentUser } from "@/lib/supabase/server";
+import { currentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 export default async function AuthPage({
@@ -10,7 +10,13 @@ export default async function AuthPage({
   searchParams,
 }: {
   mode: "login" | "signup" | "forgot" | "reset";
-  searchParams: Promise<{ next?: string; error?: string }>;
+  searchParams: Promise<{
+    next?: string;
+    error?: string;
+    token?: string;
+    password?: string;
+    confirmed?: string;
+  }>;
 }) {
   const params = await searchParams;
   const next = safeNext(params.next);
@@ -50,7 +56,17 @@ export default async function AuthPage({
                   ? "Reset your password"
                   : "Update your password"}
           </h2>
-          {mode === "reset" && !user ? (
+          {mode === "login" && params.password === "updated" && (
+            <p className="form-success" role="status">
+              Your password has been updated. Sign in with your new password.
+            </p>
+          )}
+          {mode === "login" && params.confirmed === "yes" && (
+            <p className="form-success" role="status">
+              Email confirmation finished. Sign in to start learning.
+            </p>
+          )}
+          {mode === "reset" && (!params.token || params.token.length > 2048) ? (
             <p className="form-alert">
               Open the link in your password reset email first.{" "}
               <a href="/forgot-password">Request a new link</a>.
@@ -60,6 +76,7 @@ export default async function AuthPage({
               mode={mode}
               next={next}
               linkError={params.error === "link"}
+              resetToken={params.token ?? ""}
             />
           )}
         </div>

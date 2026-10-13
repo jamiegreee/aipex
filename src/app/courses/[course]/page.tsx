@@ -6,7 +6,7 @@ import CourseArt from "@/components/learning/CourseArt";
 import EnrollButton from "@/components/learning/EnrollButton";
 import { findCourse, contentVersion } from "@/content/courses";
 import { allLessons } from "@/lib/courses";
-import { currentUser } from "@/lib/supabase/server";
+import { currentUser } from "@/lib/auth";
 import { learningData } from "@/lib/learning";
 export async function generateMetadata({
   params,

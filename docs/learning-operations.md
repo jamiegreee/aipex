@@ -1,59 +1,68 @@
 # AIPEX learning
 
-Two original self-paced courses, twelve lessons each, are defined in `src/content/courses/`. Every lesson includes teaching, objectives, a written exercise, self-review rubric, worked answer, two knowledge checks and primary-source reading. Course edition: 2026-10-13.
+Two original self-paced courses, twelve lessons each, live in `src/content/courses/`. Every lesson includes teaching, objectives, a written exercise, a self-review rubric, worked answer, two knowledge checks and primary-source reading. Course edition: 2026-10-13.
 
-The catalogue and first lesson of each course are public. Accounts are needed for the remaining lessons. Enrolment enables saved written work and checks; readers can take lessons in any order. All checks must pass, the written response must meet the minimum word count, and the learner must confirm self-review to complete a lesson. Written work is not AI-graded or externally accredited. Later edits preserve the completion record.
+The catalogue and first lesson of each course are public. Accounts unlock the remaining lessons and enrolment enables saved work. Readers may take lessons in any order. Completion requires passing both checks, meeting the response’s minimum word count, and confirming self-review. Written work is not AI-graded or externally accredited. Later edits preserve completion.
 
-## Local development
+## Infrastructure
 
-Use Node 22 or newer and Docker. Install with `npm ci`. The dedicated Supabase stack uses project ID `aipex-learning` and ports 55420–55429, separate from other projects.
+- Vercel: existing `aipex` application in `jamiegreees-projects`.
+- Neon: dedicated **AIPEX** organisation, **AIPEX Learning** project `empty-block-17582000`, London AWS region, Free plan. Production branch `br-dawn-union-zamwo3z4`, database `neondb`.
+- Neon Auth: managed accounts with verified email and verification links; application name AIPEX.
+- Neon Data API: authenticated queries with table privileges and per-learner RLS. Automatic public-schema grants were turned off when enabling the API.
+- Resend: existing personal account, verified `theaipex.org`, Ireland sending region. Sender `AIPEX <hello@theaipex.org>`. Sending-only key **AIPEX account emails**, restricted to this domain, stored in Neon SMTP.
+- Hostinger manages DNS. Existing iCloud inbound mail is retained.
+
+The owner selected Neon’s free backend with Vercel to avoid a Supabase paid upgrade or maintaining another service on the VPS. Monty and other applications are outside this task.
+
+## Development
+
+Use Node 22 or newer; run `npm ci`. Copy `.env.example` to ignored `.env.local` and fill the branch-specific Auth and Data API endpoints. Generate the cookie secret with `openssl rand -base64 48`. Keep secrets out of Git.
 
 ```sh
-supabase start -x realtime,storage-api,imgproxy,postgres-meta,studio,edge-runtime,logflare,vector,supavisor
 npm run dev -- --port 3100
+npm test
+npm run lint
+npm run build
+npm audit --omit=dev
 ```
 
-Copy `.env.example` to `.env.local`, with the local API URL and publishable key from `supabase status`. Do not commit credentials. The local email inbox is at http://127.0.0.1:55424. Email confirmation is enabled locally to exercise the real signup flow.
+For local tests, explicitly allow `http://127.0.0.1:3100` in the branch’s Auth trusted domains. Remove this from the production branch after launch checks. Development should use a dedicated child branch and its own Auth configuration, not learners’ production records.
 
-Run `npm test`, `npm run lint` and `npm run build`. Integration tests require the dedicated local service-role key in ignored `.env.test` as `SUPABASE_SERVICE_ROLE_KEY`; run `npm run test:integration`. They refuse non-local databases, create disposable learners and clean those learners up. Tests cover all 24 completions, failed checks, short responses, self-review, saved drafts, dashboard, exports, unauthenticated/cross-origin access and cross-user RLS denial. The deployed app does not use a service-role key.
+## Database setup
 
-## Production setup
+Enable Neon Auth and Data API for the chosen AIPEX branch, leaving blanket public-schema access off. Apply `neon/migrations/20261013131000_learning_accounts_and_progress.sql` once, as the database operator. The inspected Neon Auth `user.id` column is UUID; enrolments reference it with cascading deletion. Refresh the Data API schema cache after applying migrations.
 
-The owner approved `jamiegreee’s projects` for AIPEX and explicitly excluded Monty from this task. On 13 October 2026, Supabase's creation screen blocked a new project because the personal account already has two active free projects. No production AIPEX database has been created and no existing project or billing plan has been changed. Do not use or alter Monty, or pause another application to free a slot.
+Both course tables enable RLS before authenticated privileges are granted. Learners can select, insert and update only their own rows; anonymous and PUBLIC roles have no privileges. Composite primary keys begin with `user_id`, supporting ownership queries. The app deploys no owner database connection or privileged API key: each query carries the learner’s Neon JWT.
 
-The selected organisation's plan is managed by Vercel Marketplace and an upgrade would apply to its existing databases too. A separate AIPEX-only Pro organisation with one Micro instance would start at about $25/month within included allowances; upgrading the selected organisation and running its two existing databases plus AIPEX would be about $45/month total. These estimates exclude tax and usage overages. A billing/setup choice is pending before proceeding. See [organisation billing](https://supabase.com/docs/guides/platform/billing-on-supabase) and [compute pricing](https://supabase.com/docs/guides/platform/manage-your-usage/compute).
+Completion is a private participation record, not a tamper-proof professional credential. Authenticated learners can also access their own records through the Data API, so course work is self-assessed rather than independently certified.
 
-1. Create a dedicated Supabase project in the owner's chosen organisation, preferably London (`eu-west-2`). Confirm applicable plan/compute cost before creation.
-2. Apply the migration in `supabase/migrations/`. Both public tables have RLS enabled. Only authenticated learners can select, insert and update their own rows. Anonymous users have no table access.
-3. Configure custom SMTP for public email verification and password recovery. Supabase's default sender only delivers to project-team addresses. Keep email confirmations enabled. Use an appropriate verified sender for AIPEX; never disable confirmation as a delivery workaround.
-4. Set Auth Site URL to `https://theaipex.org` and allow `https://theaipex.org/auth/callback`. Add specifically authorised preview callback URLs if testing preview accounts. Default Supabase confirmation and recovery templates use the PKCE `/auth/callback` flow. If using token-hash templates instead, use `/auth/confirm?token_hash={{ .TokenHash }}&type=email` (signup) or `type=recovery&next=/reset-password` (recovery). Token-hash confirmation also works when a user opens the email on a different device; see the setup script.
-5. In Vercel production configure `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` and `NEXT_PUBLIC_SITE_URL=https://theaipex.org`. Use the same dedicated database for authorised previews only. Never point production at localhost or a different organisation's application database.
-6. Verify a real signup, confirmation, sign-in, draft save, completion, logout and password recovery against the production project before promoting the app. Confirm RLS and review Supabase security advisors. Audit with `npm audit --omit=dev`.
+## Accounts and email
 
-Proxy refreshes validated sessions and preserves response cache-control headers. Auth cookies are HttpOnly, SameSite Lax and Secure on HTTPS deployments. Server reads and writes independently check the current authenticated user. Sensitive routes are dynamic and exports use private/no-store caching. Knowledge-check answers are graded server-side; the reader client receives only prompts and options until submission. Course completion is a learner's private participation record, not a tamper-proof professional credential.
+In branch Auth settings, set application name AIPEX, require email verification, choose verification links, and trust the exact website origin. Production uses `https://theaipex.org` and `https://www.theaipex.org`. Trust specific preview origins only for testing, never a wildcard across arbitrary Vercel projects. Disable Allow Localhost in production once testing is done.
 
-`scripts/configure-learning-auth.mjs` prepares confirmed-email settings and branded token-hash confirmation/recovery templates. Set `SUPABASE_PROJECT_REF` and, when applying, `SUPABASE_ACCESS_TOKEN` in the process environment. Optional SMTP configuration uses `AIPEX_SMTP_HOST`, `AIPEX_SMTP_PORT`, `AIPEX_SMTP_USER`, `AIPEX_SMTP_PASSWORD` and `AIPEX_SMTP_FROM`; all must be supplied together. Run without flags to inspect a credential-free summary, then use `--apply` for the explicitly chosen project. The script never prints credentials or response configuration. Keep these operator secrets out of Vercel app environments; the app needs only its publishable key.
+Neon SMTP uses host `smtp.resend.com`, port `465`, username `resend`, password the restricted Resend key, sender email `hello@theaipex.org`, sender name AIPEX. The key is stored only in Neon SMTP and ignored local operator configuration; Vercel does not need it. Email click/open tracking is not configured.
 
-### Selected email provider: Resend
+Hostinger’s Resend sending records were saved and verified on 13 October 2026: TXT `resend._domainkey`, CNAME `rsend` to `rsend-euw1.forge.rmta.net`, CNAME `send` to `send.forge.rmta.net`, TTL 3600. The domain dashboard is the source of truth for the public DKIM key. Keep Resend receiving disabled and preserve existing iCloud MX, SPF and DKIM records.
 
-The owner selected their existing personal Resend account. `theaipex.org` has been added in Ireland (`eu-west-1`); domain verification and SMTP configuration are still pending. The domain's authoritative DNS is managed in Hostinger. Existing inbound email uses iCloud Mail.
+Signup requests a confirmation email, then the learner signs in after confirmation. Reset emails lead to `/reset-password?token=...`; reset tokens are sent server-side to Neon, then the learner signs in with the updated password. Neon and Next.js handle auth cookies and server actions. Cookies are HttpOnly and SameSite Lax; HTTPS deployment is required for production. Server reads and writes independently check a verified account. Private routes are dynamic; portfolio exports use private/no-store caching. Knowledge-check grading runs on the server.
 
-Resend supplied these three required DNS records during setup on 13 October 2026. Check the domain dashboard for the current values before applying them:
+## Vercel configuration
 
-| Type | Host | Value | TTL |
-| --- | --- | --- | --- |
-| TXT | `resend._domainkey` | `p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDzY8IkVwFBTc4EoNuCyK8QoasDbXt/x4Ppxgx25pJQ2T4UMua0FmWuWWhVGhALdgW/zwQ066XpYXlSSa+qJYRz7m7wo+wiyVRrgahvDL/MACLEwtLC433JuuVOc8GSr8LhgvdjksNcxJ4HfSrMV3Nd4O94L0OlJsK3yq8CeC7tnwIDAQAB` | Auto |
-| CNAME | `rsend` | `rsend-euw1.forge.rmta.net` | 3600 |
-| CNAME | `send` | `send.forge.rmta.net` | 3600 |
+Set `NEON_AUTH_BASE_URL`, `NEON_DATA_API_URL`, `NEON_AUTH_COOKIE_SECRET` and `NEXT_PUBLIC_SITE_URL=https://theaipex.org` in production. Preview deployments need matching site origins and branch endpoints. Do not put owner database credentials, SMTP passwords or management API tokens in application environments.
 
-These configure sending only. Keep Resend receiving disabled and preserve the root domain's iCloud MX records. The DKIM value is a public verification key, not a private credential. Check for existing host records before adding anything; do not overwrite a conflicting record without investigating it. Leave email open/click tracking disabled for confirmation and recovery links.
+Before promoting, verify real signup, confirmation, login, saved drafts, completions, logout and password reset against the dedicated backend. Review Data API advisors and test cross-user isolation. Run the build, lint, curriculum tests and production dependency audit.
 
-Once verified, use a sending-only API key scoped to this domain as the SMTP password. Store it securely in Supabase's SMTP configuration, not in application code or public environment variables. The [official Resend Supabase SMTP guide](https://resend.com/docs/send-with-supabase-smtp) specifies host `smtp.resend.com`, port `465`, username `resend` and the API key as password. The intended sender is `AIPEX <hello@theaipex.org>`.
+## Integration checks
 
-## Support and upkeep
+`npm run test:integration` runs against the local Next.js app backed by explicitly selected Neon endpoints. Ignored `.env.test` supplies `NEON_TEST_AUTH_BASE_URL`, `NEON_TEST_ORIGIN=http://127.0.0.1:3100`, `NEON_TEST_EMAIL_A`, `NEON_TEST_EMAIL_B` and `NEON_TEST_PASSWORD`. Accounts must be disposable AIPEX QA aliases in the owner’s Gmail inbox and have completed real confirmation first. No production learner accounts are used or deleted by this runner.
 
-The learner can export private written work from My learning as Markdown. Account deletion requests go to hello@theaipex.org as described in the privacy notice. An authorised operator can delete the Auth user through Supabase; foreign-key cascades remove enrolments and exercises. Verify the requester's identity before acting. Do not delete an account merely because a support email names an address.
+The checks cover verified sign-in, HttpOnly cookies, anonymous and cross-origin denial, repeat enrolment, failed checks, short responses, self-review, draft saves, all 24 completions, dashboard, portfolio exports, cross-user reads/writes and session revocation at logout. Test confirmation and reset email delivery separately through the real signup and recovery flows; never switch off verification to make tests pass.
 
-Review primary-source links and content when guidance changes. Update the course edition for substantive curriculum changes. Preserve lesson slugs to keep saved work attached; if removing a lesson or changing completion requirements, plan a migration and communicate it. The application has no analytics or advertising cookies and does not send exercise answers to AI services.
+## Support
 
-Production dependency audit is clean after updating Next.js to 16.4.0. npm currently reports a transitive development-only `braces` advisory through Next's ESLint plugin; the suggested force fix would downgrade the framework's lint configuration. Do not use `npm audit fix --force` to hide that report.
+Learners can export written work as Markdown from My learning. Identity-verified account deletion requests go to hello@theaipex.org. An authorised operator can delete the Neon Auth user; foreign-key cascades remove course records. Never delete an account just because a support email names its address.
+
+Keep lesson slugs stable so saved work remains attached. Review primary-source links when guidance changes and update the course edition for substantive changes. No advertising or analytics cookies are used, and exercise answers are not sent to an AI grading service.
+
+Primary setup documentation: [Neon Next.js server auth](https://neon.com/docs/auth/reference/nextjs-server), [production checklist](https://neon.com/docs/auth/production-checklist), [Data API access control](https://neon.com/docs/data-api/access-control).

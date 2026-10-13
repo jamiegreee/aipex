@@ -51,8 +51,8 @@ export default function Privacy() {
             issue.
           </p>
           <p>
-            Supabase provides authentication and database storage; Vercel hosts
-            the application. Account cookies maintain your sign-in session.
+            Neon provides authentication and database storage; Vercel hosts
+            the application and Resend sends account emails. Account cookies maintain your sign-in session.
             These are necessary for account features. We do not use saved course
             work to train an AI model, and course exercises are not submitted to
             an AI service for grading. Please do not enter confidential material

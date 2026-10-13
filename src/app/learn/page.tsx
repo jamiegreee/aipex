@@ -6,7 +6,7 @@ import CourseArt from "@/components/learning/CourseArt";
 import EnrollButton from "@/components/learning/EnrollButton";
 import { courses } from "@/content/courses";
 import { allLessons } from "@/lib/courses";
-import { currentUser } from "@/lib/supabase/server";
+import { currentUser } from "@/lib/auth";
 import { learningData } from "@/lib/learning";
 import { signOut } from "@/app/auth/actions";
 export const metadata = {
@@ -25,8 +25,8 @@ export default async function Dashboard({
   const params = await searchParams;
   const totalCompleted = data.progress.filter((p) => p.completed_at).length;
   const name =
-    typeof user.user_metadata.name === "string"
-      ? user.user_metadata.name.trim().slice(0, 80)
+    typeof user.name === "string"
+      ? user.name.trim().slice(0, 80)
       : "";
   return (
     <>
