@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
 import { courses } from "@/content/courses";
+import { gatheringsEnabled } from "@/lib/site";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     "",
     "/about",
     "/community",
-    "/gatherings",
+    ...(gatheringsEnabled ? ["/gatherings"] : []),
     "/courses",
     ...courses.map((c) => `/courses/${c.slug}`),
   ].map((path) => ({

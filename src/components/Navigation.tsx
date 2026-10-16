@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Arrow, ExchangeMark } from "./Brand";
+import { gatheringsEnabled } from "@/lib/site";
 
 const links = [
   { href: "/courses", label: "Courses" },
-  { href: "/gatherings", label: "Gatherings" },
+  ...(gatheringsEnabled ? [{ href: "/gatherings", label: "Gatherings" }] : []),
   { href: "/about", label: "About AIPEX" },
 ];
 

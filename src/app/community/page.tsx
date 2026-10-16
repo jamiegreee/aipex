@@ -7,7 +7,7 @@ import { Arrow, ExchangeMark } from "@/components/Brand";
 export const metadata: Metadata = {
   title: "Join the exchange",
   description:
-    "Be part of a new community for AI and public policy. Express interest in our first London gathering or help bring AIPEX to your city.",
+    "Help shape AIPEX's learning community. Share your interests, course feedback and ideas for building AI policy capacity.",
 };
 
 const interestEmail =
@@ -15,12 +15,12 @@ const interestEmail =
   encodeURIComponent("I'd like to join the AI Policy Exchange") +
   "&body=" +
   encodeURIComponent(
-    "Hi Jamie,\n\nI'd like to hear about AIPEX gatherings.\n\nMy name:\nMy city:\nMy interest in AI policy:\n\nPlease email me about upcoming AIPEX gatherings.\n",
+    "Hi Jamie,\n\nI'd like to be part of AIPEX's learning community.\n\nMy name:\nMy interest in AI policy:\nMy feedback or ideas:\n",
   );
 const benefits = [
   {
-    title: "Meet people across policy",
-    body: "Exchange perspectives with people from government, technology, research, law and civil society.",
+    title: "Learn across disciplines",
+    body: "Explore perspectives from government, technology, research, law and civil society.",
   },
   {
     title: "Explore the questions together",
@@ -38,19 +38,19 @@ const questions = [
       "No. You might work in another area of policy, build technology, study the field or simply want to understand it better. An interest in AI and public policy is enough.",
   },
   {
-    question: "When is the first gathering?",
+    question: "How can I get started?",
     answer:
-      "We're planning our first London social. The date and venue are still to be confirmed. Email us to express interest and we'll share the details when they're ready.",
+      "Our free online courses are open now. Work through lessons at your own pace and create an account to save exercises and track your progress.",
   },
   {
-    question: "Can I join from outside London?",
+    question: "Can I take part from anywhere?",
     answer:
-      "Yes. Tell us your city when you get in touch. We're starting in London and would love to hear from people interested in future gatherings elsewhere.",
+      "Yes. The courses are online and self-paced. They use UK policy examples while developing skills that can be applied in other settings.",
   },
   {
-    question: "Can I help organise or host?",
+    question: "Can I help develop AIPEX?",
     answer:
-      "We'd welcome a conversation. If you can help bring people together, suggest a venue or host a future gathering, tell us what you have in mind.",
+      "We'd welcome your ideas, course feedback or subject expertise. Tell us what you would find useful and how you might like to contribute.",
   },
 ];
 
@@ -70,8 +70,8 @@ export default function Community() {
               <em>perspective.</em>
             </h1>
             <p className="join-page-description">
-              Meet people interested in AI and public policy. Exchange ideas,
-              build relationships and help shape the conversation.
+              Share your interests, exchange ideas and help shape a learning
+              community for AI and public policy.
             </p>
           </div>
           <div className="join-panel">
@@ -79,11 +79,11 @@ export default function Community() {
             <h2>
               Be part of
               <br />
-              <em>the first conversation.</em>
+              <em>what comes next.</em>
             </h2>
             <p>
-              We&apos;re planning our first London gathering. Send us a short
-              email with your name, city and what brings you to AI policy.
+              Send us a short email with your name, what brings you to AI policy
+              and any feedback or ideas you would like to share.
             </p>
             <a className="button" href={interestEmail}>
               Register interest by email <Arrow diagonal />
@@ -93,8 +93,8 @@ export default function Community() {
               <a href="mailto:hello@theaipex.org">hello@theaipex.org</a>
             </p>
             <p className="privacy-note">
-              Ask to hear about future gatherings when you email us. You can opt
-              out at any time by replying.{" "}
+              If you would like occasional AIPEX updates, ask when you email us.
+              You can opt out at any time by replying.{" "}
               <Link href="/privacy">Privacy information</Link>.
             </p>
           </div>

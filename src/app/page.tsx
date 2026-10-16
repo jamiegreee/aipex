@@ -5,6 +5,7 @@ import { Arrow } from "@/components/Brand";
 import ConversationArt from "@/components/ConversationArt";
 import LondonPoster from "@/components/LondonPoster";
 import JoinCallout from "@/components/JoinCallout";
+import { gatheringsEnabled } from "@/lib/site";
 
 const questions = [
   {
@@ -57,7 +58,7 @@ export default function Home() {
               <span className="location-cross" aria-hidden="true">
                 ⌖
               </span>{" "}
-              Starting in London. Open to different perspectives.
+              Free, self-paced learning. Open to different perspectives.
             </p>
           </div>
           <div className="hero-art">
@@ -97,7 +98,7 @@ export default function Home() {
         </section>
         <section className="mission-section" aria-labelledby="mission-heading">
           <div className="container mission-inner">
-            <p className="label">01 / Why we gather</p>
+            <p className="label">01 / Why we learn</p>
             <div>
               <h2 id="mission-heading">
                 AI is changing the world.
@@ -111,9 +112,9 @@ export default function Home() {
                   kinds of experience.
                 </p>
                 <p>
-                  AIPEX brings people working in—and interested in—public policy
-                  into the same room. A place to exchange ideas, meet new people
-                  and work out what comes next.
+                  AIPEX helps people working in—and interested in—public policy
+                  build the knowledge and judgement to act. A place to explore
+                  ideas, practise policy skills and work out what comes next.
                 </p>
               </div>
               <Link className="text-link" href="/about">
@@ -122,62 +123,66 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section
-          className="gathering-section container"
-          aria-labelledby="gathering-heading"
-        >
-          <div className="section-heading">
-            <p className="label">02 / In good company</p>
-            <Link className="text-link" href="/gatherings">
-              Explore gatherings <Arrow diagonal />
-            </Link>
-          </div>
-          <div className="gathering-feature">
-            <LondonPoster />
-            <div className="gathering-copy">
-              <span className="pill">
-                <span className="status-dot" /> Our first gathering · In the
-                making
-              </span>
-              <h2 id="gathering-heading">
-                A big topic.
-                <br />
-                <em>An informal evening.</em>
-              </h2>
-              <p>
-                Meet people thinking about AI and public policy over a drink and
-                a good conversation. Bring your questions, your experience and
-                your curiosity.
-              </p>
-              <dl className="event-facts">
-                <div>
-                  <dt>Where</dt>
-                  <dd>London</dd>
-                </div>
-                <div>
-                  <dt>When</dt>
-                  <dd>Date & venue to be announced</dd>
-                </div>
-                <div>
-                  <dt>Who</dt>
-                  <dd>Policy people & curious minds</dd>
-                </div>
-              </dl>
-              <Link className="button" href="/community">
-                Be part of the first one <Arrow />
+        {gatheringsEnabled && (
+          <section
+            className="gathering-section container"
+            aria-labelledby="gathering-heading"
+          >
+            <div className="section-heading">
+              <p className="label">02 / In good company</p>
+              <Link className="text-link" href="/gatherings">
+                Explore gatherings <Arrow diagonal />
               </Link>
             </div>
-          </div>
-        </section>
+            <div className="gathering-feature">
+              <LondonPoster />
+              <div className="gathering-copy">
+                <span className="pill">
+                  <span className="status-dot" /> Our first gathering · In the
+                  making
+                </span>
+                <h2 id="gathering-heading">
+                  A big topic.
+                  <br />
+                  <em>An informal evening.</em>
+                </h2>
+                <p>
+                  Meet people thinking about AI and public policy over a drink and
+                  a good conversation. Bring your questions, your experience and
+                  your curiosity.
+                </p>
+                <dl className="event-facts">
+                  <div>
+                    <dt>Where</dt>
+                    <dd>London</dd>
+                  </div>
+                  <div>
+                    <dt>When</dt>
+                    <dd>Date & venue to be announced</dd>
+                  </div>
+                  <div>
+                    <dt>Who</dt>
+                    <dd>Policy people & curious minds</dd>
+                  </div>
+                </dl>
+                <Link className="button" href="/community">
+                  Be part of the first one <Arrow />
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
         <section
           className="questions-section"
           aria-labelledby="questions-heading"
         >
           <div className="container">
             <div className="section-heading">
-              <p className="label">03 / Plenty to talk about</p>
+              <p className="label">
+                {gatheringsEnabled ? "03" : "02"} / Questions to explore
+              </p>
               <span className="label questions-aside">
-                A few conversation starters
+                Different perspectives on AI policy
               </span>
             </div>
             <h2 id="questions-heading">
@@ -195,8 +200,8 @@ export default function Home() {
               ))}
             </div>
             <p className="questions-note">
-              You don&apos;t need to have all the answers. That&apos;s why
-              we&apos;re getting together.
+              You don&apos;t need to have all the answers. Start with a question
+              and build your understanding.
             </p>
           </div>
         </section>

@@ -68,9 +68,8 @@ export default function About() {
             <p>
               Our self-paced courses turn the debate into practical policy work:
               judging evidence, comparing interventions and governing
-              public-service deployments. Alongside education, informal
-              gatherings in London help people exchange ideas and build
-              relationships.
+              public-service deployments. We are developing a community that
+              learns together and exchanges perspectives across disciplines.
             </p>
             <p>Founded by Jamie Green.</p>
             <Link className="text-link" href="/courses">

@@ -12,19 +12,19 @@ export default function JoinCallout() {
           <h2 id="join-heading">
             Come curious.
             <br />
-            <em>Leave connected.</em>
+            <em>Build your judgement.</em>
           </h2>
         </div>
         <div className="join-callout-copy">
           <p>
-            We&apos;re just getting started. Help shape the community and be
-            part of the first conversation.
+            Explore practical AI policy courses, work through real decisions
+            and develop skills you can use.
           </p>
-          <Link className="button" href="/community">
-            Join the exchange <Arrow />
+          <Link className="button" href="/courses">
+            Explore the courses <Arrow />
           </Link>
           <span className="join-note">
-            London first. More cities as we grow.
+            Free, online and self-paced.
           </span>
         </div>
       </div>
