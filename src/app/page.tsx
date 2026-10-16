@@ -5,7 +5,7 @@ import { Arrow } from "@/components/Brand";
 import ConversationArt from "@/components/ConversationArt";
 import LondonPoster from "@/components/LondonPoster";
 import JoinCallout from "@/components/JoinCallout";
-import { gatheringsEnabled } from "@/lib/site";
+import { communityEnabled, gatheringsEnabled } from "@/lib/site";
 
 const questions = [
   {
@@ -43,16 +43,18 @@ export default function Home() {
             </h1>
             <p className="hero-description">
               Helping people understand, develop and deliver effective AI
-              policy. Through practical education and a community that learns
-              together.
+              policy. Free, self-paced courses with practical exercises,
+              worked examples and sources to explore.
             </p>
             <div className="hero-actions">
               <Link className="button" href="/courses">
                 Explore the courses <Arrow />
               </Link>
-              <Link className="text-link" href="/community">
-                Join the community <Arrow diagonal />
-              </Link>
+              {communityEnabled && (
+                <Link className="text-link" href="/community">
+                  Join the community <Arrow diagonal />
+                </Link>
+              )}
             </div>
             <p className="hero-footnote">
               <span className="location-cross" aria-hidden="true">
@@ -103,7 +105,7 @@ export default function Home() {
               <h2 id="mission-heading">
                 AI is changing the world.
                 <br />
-                Let&apos;s make sense of it <em>together.</em>
+                Build the skills to <em>respond.</em>
               </h2>
               <div className="mission-copy">
                 <p>
@@ -118,7 +120,7 @@ export default function Home() {
                 </p>
               </div>
               <Link className="text-link" href="/about">
-                Meet the exchange <Arrow diagonal />
+                About AIPEX <Arrow diagonal />
               </Link>
             </div>
           </div>

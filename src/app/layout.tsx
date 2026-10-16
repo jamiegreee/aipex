@@ -26,11 +26,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://theaipex.org"),
   title: { default: "AIPEX — AI Policy Exchange", template: "%s — AIPEX" },
   description:
-    "Building capacity to understand, develop and deliver effective AI policy. Free practical courses and a growing policy community.",
+    "Free, self-paced courses to understand, develop and deliver effective AI policy. Build practical skills with cases, exercises and worked examples.",
   openGraph: {
     title: "AIPEX — AI Policy Exchange",
     description:
-      "Practical AI policy education and a growing community. Understand the landscape and build the capacity to act.",
+      "Free, self-paced AI policy courses. Understand the landscape, practise your judgement and build the capacity to act.",
     type: "website",
     locale: "en_GB",
   },

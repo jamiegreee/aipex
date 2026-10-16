@@ -7,7 +7,7 @@ import { Arrow } from "@/components/Brand";
 export const metadata: Metadata = {
   title: "Say hello",
   description:
-    "Get in touch with AIPEX about our courses, learning community or ideas for building AI policy capacity.",
+    "Get in touch with AIPEX about our courses, learning accounts or ideas for improving practical AI policy education.",
 };
 
 export default function Contact() {
@@ -33,21 +33,21 @@ export default function Contact() {
           <div>
             <h2>Let&apos;s talk.</h2>
             <p>
-              Write to Jamie about our courses, joining the learning community
-              or contributing your expertise.
+              Write to Jamie with course feedback, questions about your learning
+              account or an offer to contribute subject expertise.
             </p>
             <a className="contact-email" href="mailto:hello@theaipex.org">
               hello@theaipex.org <Arrow diagonal />
             </a>
           </div>
           <div className="contact-aside">
-            <h2>Want to join?</h2>
+            <h2>Ready to learn?</h2>
             <p>
-              Tell us your name, what brings you to AI policy and what you would
-              find useful as part of the learning community.
+              Explore two free, self-paced courses. Read the lessons online and
+              create an account to save your exercises and track your progress.
             </p>
-            <Link className="text-link" href="/community">
-              Join the exchange <Arrow />
+            <Link className="text-link" href="/courses">
+              Explore the courses <Arrow />
             </Link>
           </div>
         </section>

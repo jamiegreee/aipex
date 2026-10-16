@@ -32,7 +32,7 @@ export default function Footer() {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} AI Policy Exchange</span>
           <span className="footer-location">
-            Practical education. Shared perspectives.
+            Free, online and self-paced.
           </span>
           <Link href="/privacy">Privacy</Link>
         </div>

@@ -8,21 +8,21 @@ import { Arrow } from "@/components/Brand";
 export const metadata: Metadata = {
   title: "About the exchange",
   description:
-    "AIPEX builds capacity to understand, develop and deliver effective AI policy through practical education and community.",
+    "AIPEX builds capacity to understand, develop and deliver effective AI policy through free, practical online courses.",
 };
 
 const principles = [
   {
     title: "Curiosity comes first.",
-    body: "You can arrive with questions, a different perspective or a willingness to listen. We learn by making room for each other.",
+    body: "Start with questions and explore the evidence. You do not need to have every answer before you begin.",
   },
   {
     title: "Different views belong.",
-    body: "AI policy involves real disagreements. We welcome thoughtful discussion across disciplines, backgrounds and points of view.",
+    body: "AI policy involves real disagreements. Examine competing arguments and draw on evidence from different disciplines and points of view.",
   },
   {
-    title: "Relationships matter.",
-    body: "Good conversations take trust. We want to build a community where people get to know one another and keep showing up.",
+    title: "Practice matters.",
+    body: "Turn understanding into decisions. Work through cases, compare your reasoning with worked examples and build a portfolio of policy work.",
   },
 ];
 
@@ -51,7 +51,7 @@ export default function About() {
             <h2>
               Understanding AI
               <br />
-              takes <em>all of us.</em>
+              takes <em>practice.</em>
             </h2>
           </div>
           <div>
@@ -62,14 +62,16 @@ export default function About() {
               understanding of people&apos;s lives.
             </p>
             <p>
-              We want to bring those perspectives together. AIPEX is a new
-              community for people working in—and interested in—public policy.
+              AIPEX develops practical online courses for people working
+              in—and interested in—public policy. Learn at your own pace,
+              wherever you are.
             </p>
             <p>
               Our self-paced courses turn the debate into practical policy work:
               judging evidence, comparing interventions and governing
-              public-service deployments. We are developing a community that
-              learns together and exchanges perspectives across disciplines.
+              public-service deployments. Each course combines sourced teaching,
+              fictional cases, written exercises and worked examples to help you
+              apply what you learn.
             </p>
             <p>Founded by Jamie Green.</p>
             <Link className="text-link" href="/courses">

@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "How AIPEX handles information you share when contacting us about the community.",
+    "How AIPEX handles information you share when using our courses, creating a learning account or contacting us.",
 };
 
 export default function Privacy() {
@@ -27,14 +27,14 @@ export default function Privacy() {
         <section className="container prose-page">
           <h2>Contacting AIPEX</h2>
           <p>
-            AIPEX is a founder-led community run by Jamie Green. When you email
+            AIPEX is an AI policy education project founded by Jamie Green. When you email
             us, we receive your email address and the information you choose to
             include, such as your name, city and interest in AI policy.
           </p>
           <h2>How we use your information</h2>
           <p>
             We use your message to respond to your enquiry and develop our
-            courses and community. If you ask to hear about AIPEX updates, we
+            courses. If you ask to hear about AIPEX updates, we
             use your email address to send those updates. You can ask us to stop
             by replying to any email.
           </p>
