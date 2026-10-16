@@ -3,6 +3,8 @@ import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Arrow, ExchangeMark } from "@/components/Brand";
+import { redirect } from "next/navigation";
+import { communityEnabled } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Join the exchange",
@@ -55,6 +57,8 @@ const questions = [
 ];
 
 export default function Community() {
+  if (!communityEnabled) redirect("/courses");
+
   return (
     <>
       <Navigation />

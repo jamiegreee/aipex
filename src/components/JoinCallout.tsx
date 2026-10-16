@@ -7,7 +7,7 @@ export default function JoinCallout() {
       <div className="container join-callout-inner">
         <div>
           <span className="label">
-            There&apos;s a place for your perspective
+            Practical AI policy education
           </span>
           <h2 id="join-heading">
             Come curious.

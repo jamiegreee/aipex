@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Arrow, ExchangeMark } from "./Brand";
-import { gatheringsEnabled } from "@/lib/site";
+import { communityEnabled, gatheringsEnabled } from "@/lib/site";
 
 const links = [
   { href: "/courses", label: "Courses" },
@@ -95,9 +95,11 @@ export default function Navigation() {
           <Link href="/learn" onClick={() => setOpen(false)}>
             My learning <Arrow />
           </Link>
-          <Link href="/community" onClick={() => setOpen(false)}>
-            Join the community <Arrow />
-          </Link>
+          {communityEnabled && (
+            <Link href="/community" onClick={() => setOpen(false)}>
+              Join the community <Arrow />
+            </Link>
+          )}
         </nav>
       )}
     </header>
