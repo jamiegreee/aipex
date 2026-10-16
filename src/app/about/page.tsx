@@ -73,7 +73,6 @@ export default function About() {
               fictional cases, written exercises and worked examples to help you
               apply what you learn.
             </p>
-            <p>Founded by Jamie Green.</p>
             <Link className="text-link" href="/courses">
               Explore the courses <Arrow diagonal />
             </Link>
