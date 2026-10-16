@@ -6,6 +6,7 @@ The October community redesign removed the original Google tag from the root lay
 - Web stream: theaipex.org (`14269438474`), measurement ID `G-J1YPT21EYK`.
 - Production domains only: theaipex.org and www.theaipex.org. Previews and localhost send nothing.
 - Basic consent: do not load Google code until the visitor selects Allow analytics. The preference cookie expires after six months. Rejecting or withdrawing stops measurement and clears GA cookies. Advertising consent remains denied.
+- Preferences appear in a compact, full-width bottom banner with Allow and Reject choices. After choosing, visitors can reopen the banner using Cookie preferences at the bottom of the page.
 - Explicit public-route allowlist: public site and course reading pages. No account/auth/API routes, learning records, exercise responses or user IDs. Only manual page views; no automatic forms, outbound links, downloads or history events.
 - Page addresses exclude query strings and fragments; external referrers retain only their origin, internal referrers must be an allowed public page. This prevents reset tokens and private paths from entering analytics. Global page fields are also sanitised for standard session/engagement events.
 - **Keep enhanced measurement OFF in the web stream.** The application disables automatic page views (`send_page_view: false`) and sends one view on first consent/load and on subsequent Next.js pathname changes. Turning on automatic history detection risks duplicates and unsanitised URLs.
