@@ -60,13 +60,15 @@ export default function Analytics() {
       )}
       {show ? (
         <section className="analytics-choice" aria-label="Analytics preferences">
-          <div>
-            <h2>Help us improve AIPEX?</h2>
-            <p>With your permission, we use Google Analytics to understand which public pages people visit. Your account details and course answers stay out of analytics. <Link href="/privacy">Privacy details</Link></p>
-          </div>
-          <div className="analytics-actions">
-            <button className="button button-small button-outline" onClick={() => choose("rejected")}>Reject analytics</button>
-            <button className="button button-small" onClick={() => choose("accepted")}>Allow analytics</button>
+          <div className="container analytics-choice-inner">
+            <div>
+              <h2>Cookie preferences</h2>
+              <p>We use optional Google Analytics cookies to understand visits to public pages. Account details and course answers stay private. <Link href="/privacy">Privacy details</Link></p>
+            </div>
+            <div className="analytics-actions">
+              <button className="button button-small button-outline" onClick={() => choose("rejected")}>Reject analytics</button>
+              <button className="button button-small" onClick={() => choose("accepted")}>Allow analytics</button>
+            </div>
           </div>
         </section>
       ) : (
