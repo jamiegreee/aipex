@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import LondonPoster from "@/components/LondonPoster";
 import JoinCallout from "@/components/JoinCallout";
 import { Arrow } from "@/components/Brand";
+import { redirect } from "next/navigation";
+import { gatheringsEnabled } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Gatherings",
@@ -13,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function Gatherings() {
+  if (!gatheringsEnabled) redirect("/courses");
+
   return (
     <>
       <Navigation />

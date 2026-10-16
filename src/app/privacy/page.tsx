@@ -16,7 +16,7 @@ export default function Privacy() {
       <main id="main">
         <section className="page-intro">
           <div className="container">
-            <p className="label">Last updated: 13 October 2026</p>
+            <p className="label">Last updated: 16 October 2026</p>
             <h1>
               Your information.
               <br />
@@ -33,8 +33,8 @@ export default function Privacy() {
           </p>
           <h2>How we use your information</h2>
           <p>
-            We use your message to respond to your enquiry and organise
-            community gatherings. If you ask to hear about future gatherings, we
+            We use your message to respond to your enquiry and develop our
+            courses and community. If you ask to hear about AIPEX updates, we
             use your email address to send those updates. You can ask us to stop
             by replying to any email.
           </p>

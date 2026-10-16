@@ -52,8 +52,8 @@ export default function ConversationArt() {
           <em>Common ground.</em>
         </p>
         <span className="art-edition label">
-          London
-          <br />& beyond
+          Learn
+          <br />& exchange
         </span>
       </div>
     </div>
