@@ -5,7 +5,7 @@ import { policyCases } from "@/content/policy-cases";
 export const metadata = {
   title: "AI policy case library",
   description:
-    "Examine real policy decisions and fictional practice cases. Source-backed evidence, decision questions and worked approaches, connected to practical AI policy tools.",
+    "Examine documented AI and automated-decision policy cases. Source-backed evidence, decision questions and worked approaches, connected to practical AI policy tools.",
 };
 export default function Cases() {
   return (
@@ -33,9 +33,10 @@ export default function Cases() {
           <div className="case-method">
             <p>
               <strong>Documented cases</strong> draw on dated primary accounts,
-              with limits made explicit. <strong>Practice cases</strong> are
-              original fictional scenarios for testing your judgement. Each
-              connects to a working tool.
+              with reported facts separated from AIPEX analysis. Each connects
+              to a working tool. This is a small, UK-focused collection, not a
+              map of the whole field; the 2020 grading case concerns statistical
+              standardisation rather than generative AI.
             </p>
           </div>
           <CaseBrowser cases={policyCases} />

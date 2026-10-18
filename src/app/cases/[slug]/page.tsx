@@ -58,15 +58,22 @@ export default async function CasePage({ params }: Props) {
           <article className="case-reading">
             <h2>The setting</h2>
             <p>{c.context}</p>
+            <div className="case-limits">
+              <h3>The decision context</h3>
+              <p>{c.decisionContext}</p>
+            </div>
             <h2>The evidence to examine</h2>
             {c.evidence.map((e) => (
               <section className="case-evidence" key={e.title}>
+                <p className="label">
+                  {e.source ? "Reported evidence" : "AIPEX analysis"}
+                </p>
                 <h3>{e.title}</h3>
                 <p>{e.text}</p>
                 {e.source && (
                   <a className="small-copy" href={`#source-${e.source}`}>
                     Source: {policySources[e.source].publisher},{" "}
-                    {policySources[e.source].title} ↓
+                    {policySources[e.source].title} · {e.location} ↓
                   </a>
                 )}
               </section>
@@ -79,6 +86,11 @@ export default async function CasePage({ params }: Props) {
               <p className="label">Try the decision first</p>
               <h2>Your task.</h2>
               <p>{c.question}</p>
+              <ol className="case-task-list">
+                {c.tasks.map((task) => (
+                  <li key={task}>{task}</li>
+                ))}
+              </ol>
               <Link
                 className="text-link"
                 href={`/tools/${c.tool}?case=${c.slug}`}
@@ -107,10 +119,7 @@ export default async function CasePage({ params }: Props) {
           <h2>Another angle.</h2>
           <div className="case-grid">
             {policyCases
-              .filter(
-                (x) =>
-                  x.slug !== c.slug && (x.tool === c.tool || x.kind !== c.kind),
-              )
+              .filter((x) => x.slug !== c.slug)
               .sort(
                 (a, b) => Number(b.tool === c.tool) - Number(a.tool === c.tool),
               )

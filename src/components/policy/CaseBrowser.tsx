@@ -4,11 +4,9 @@ import Link from "next/link";
 import type { PolicyCase } from "@/content/policy-cases";
 export default function CaseBrowser({ cases }: { cases: PolicyCase[] }) {
   const [query, setQuery] = useState("");
-  const [kind, setKind] = useState("All cases");
   const [topic, setTopic] = useState("All topics");
   const results = cases.filter(
     (c) =>
-      (kind === "All cases" || c.kind === kind) &&
       (topic === "All topics" || c.topic === topic) &&
       `${c.title} ${c.summary} ${c.topic} ${c.context} ${c.jurisdiction}`
         .toLowerCase()
@@ -26,18 +24,6 @@ export default function CaseBrowser({ cases }: { cases: PolicyCase[] }) {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Try recruitment, review or chatbot"
           />
-        </div>
-        <div>
-          <label htmlFor="case-kind">Case type</label>
-          <select
-            id="case-kind"
-            value={kind}
-            onChange={(e) => setKind(e.target.value)}
-          >
-            {["All cases", "Practice case", "Documented case"].map((s) => (
-              <option key={s}>{s}</option>
-            ))}
-          </select>
         </div>
         <div>
           <label htmlFor="case-topic">Topic</label>
@@ -82,7 +68,6 @@ export default function CaseBrowser({ cases }: { cases: PolicyCase[] }) {
             className="button button-outline"
             onClick={() => {
               setQuery("");
-              setKind("All cases");
               setTopic("All topics");
             }}
           >

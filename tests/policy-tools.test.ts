@@ -1,3 +1,6 @@
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import OptionsComparison from "../src/components/policy/OptionsComparison";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
@@ -5,12 +8,13 @@ import {
   classificationMetrics,
   caseDraftToResume,
   emptyWorkspace,
+  isRetiredPracticeCase,
   validWorkspace,
   workspaceGaps,
 } from "../src/lib/policy-workspace";
 import { workspaceMarkdown } from "../src/lib/policy-export";
 import { policyTools, findTool } from "../src/content/policy-tools";
-import { policyCases } from "../src/content/policy-cases";
+import { policyCases, findCase } from "../src/content/policy-cases";
 import { policySources } from "../src/content/policy-sources";
 import { courses } from "../src/content/courses";
 import { allLessons } from "../src/lib/courses";
@@ -131,7 +135,7 @@ test("exports include optional metric inputs as well as the derived result", () 
   assert.ok(md.includes("Recall: 75.0%"));
   assert.ok(md.includes("baseline accuracy: 92.0%"));
 });
-test("a case-based export retains its original evidence references and fictional status", () => {
+test("a case-based export retains evidence references and labels retired teaching material", () => {
   const w = emptyWorkspace("assess-evidence", randomUUID());
   w.caseSlug = "govuk-chat";
   assert.ok(workspaceMarkdown(w).includes(policySources.chat2024.url));
@@ -139,7 +143,16 @@ test("a case-based export retains its original evidence references and fictional
     workspaceMarkdown(w).includes("not a statement of present performance"),
   );
   w.caseSlug = "screening-accuracy";
-  assert.ok(workspaceMarkdown(w).includes("fictional teaching assumptions"));
+  assert.ok(
+    workspaceMarkdown(w).includes("retired fictional AIPEX teaching case"),
+  );
+  assert.ok(
+    !workspaceMarkdown(w).includes(
+      "https://theaipex.org/cases/screening-accuracy",
+    ),
+  );
+  assert.ok(isRetiredPracticeCase(w.caseSlug));
+  assert.equal(findCase(w.caseSlug), undefined);
 });
 test("every source reference and related lesson resolves; case types cover each tool", () => {
   for (const t of policyTools) {
@@ -152,9 +165,6 @@ test("every source reference and related lesson resolves; case types cover each 
     assert.ok(
       allLessons(course).some((l) => l.slug === t.lesson),
       t.lesson,
-    );
-    assert.ok(
-      policyCases.some((c) => c.tool === t.slug && c.kind === "Practice case"),
     );
     assert.ok(
       policyCases.some(
@@ -179,4 +189,60 @@ test("every source reference and related lesson resolves; case types cover each 
       ),
     );
   }
+});
+
+test("public case library is documented, locates reported claims and keeps analysis separate", () => {
+  assert.equal(policyCases.length, 3);
+  for (const c of policyCases) {
+    assert.equal(c.kind, "Documented case");
+    assert.equal(isRetiredPracticeCase(c.slug), false);
+    assert.ok(c.decisionContext.length > 50);
+    assert.equal(c.tasks.length, 3);
+    for (const e of c.evidence.filter((e) => e.source)) {
+      assert.ok(e.location, `${c.slug}: ${e.title} needs a source locator`);
+    }
+  }
+});
+
+test("worked analyses use documented cases without manufacturing classifier counts or resolved approvals", () => {
+  for (const tool of policyTools) {
+    const sourceCase = findCase(tool.exampleCase)!;
+    assert.equal(sourceCase.kind, "Documented case");
+    assert.equal(sourceCase.tool, tool.slug);
+    assert.equal(tool.reviewChecks.length, 4);
+    const w = emptyWorkspace(tool.slug, randomUUID());
+    w.caseSlug = tool.exampleCase;
+    w.fields = Object.fromEntries(tool.fields.map((f) => [f.id, f.example]));
+    if (tool.exampleOptions) w.options = tool.exampleOptions;
+    assert.ok(validWorkspace(w));
+    assert.equal(classificationMetrics(w.matrix), null);
+    assert.ok(tool.fields.every((f) => f.reading.length > 30));
+    const exported = workspaceMarkdown(w);
+    for (const check of tool.reviewChecks) assert.ok(exported.includes(check));
+    for (const id of sourceCase.sources)
+      assert.ok(exported.includes(policySources[id].url));
+    assert.ok(!/Northbridge|Eastmere|96%/.test(exported));
+    if (tool.slug === "compare-options") {
+      assert.ok(w.options.every((o) => o.gate === "unknown"));
+      assert.ok(exported.includes("Essential conditions unresolved"));
+    }
+  }
+});
+
+test("comparison table preserves conditions and safely renders user-entered option text", () => {
+  const options = emptyWorkspace("compare-options", randomUUID()).options;
+  options[1].name = '<script>alert("draft")</script>';
+  options[1].benefits = "Only supported for the tested population";
+  options[1].gate = "not-met";
+  const html = renderToStaticMarkup(
+    createElement(OptionsComparison, { options }),
+  );
+  assert.ok(html.includes('scope="col"'));
+  assert.ok(html.includes('scope="row"'));
+  assert.ok(html.includes('tabindex="0"'));
+  assert.ok(html.includes("Only supported for the tested population"));
+  assert.ok(html.includes("Not met — explain consequences"));
+  assert.ok(html.includes("Unresolved — evidence needed"));
+  assert.ok(html.includes("Not yet drafted"));
+  assert.ok(!html.includes("<script>"));
 });

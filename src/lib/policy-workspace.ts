@@ -163,3 +163,12 @@ export function workspaceGaps(w: Workspace, fieldIds: string[]) {
   }
   return gaps;
 }
+
+// Preserve the provenance of learners’ older drafts without republishing retired cases.
+export function isRetiredPracticeCase(slug?: string): boolean {
+  return [
+    "screening-accuracy",
+    "a-route-to-review",
+    "caseworker-copilot",
+  ].includes(slug ?? "");
+}

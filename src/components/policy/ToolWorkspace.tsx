@@ -2,12 +2,13 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { PolicyTool } from "@/content/policy-tools";
-import type { PolicyCase } from "@/content/policy-cases";
+import { findCase, type PolicyCase } from "@/content/policy-cases";
 import { policySources } from "@/content/policy-sources";
 import {
   classificationMetrics,
   caseDraftToResume,
   emptyOption,
+  isRetiredPracticeCase,
   emptyWorkspace,
   validWorkspace,
   workspaceGaps,
@@ -16,6 +17,7 @@ import {
 } from "@/lib/policy-workspace";
 import { percentage, workspaceMarkdown } from "@/lib/policy-export";
 import BriefPreview from "./BriefPreview";
+import OptionsComparison from "./OptionsComparison";
 
 type Draft = { document: Workspace; accountRevision: string | null };
 type AccountDraft = { document: Workspace; updated_at: string };
@@ -51,6 +53,7 @@ export default function ToolWorkspace({
   const changedElsewhere = useRef(false);
   const draft = drafts.find((d) => d.document.id === current);
   const w = draft?.document;
+  const workingCase = w?.caseSlug ? findCase(w.caseSlug) : undefined;
   const storageKey = `aipex-policy-v1-${tool.slug}`;
   const steps = tool.fields
     .flatMap((f) => [
@@ -105,8 +108,10 @@ export default function ToolWorkspace({
         document.title = initialCase.title;
         document.caseSlug = initialCase.slug;
         document.fields = { ...initialCase.seed };
-        if (initialCase.slug === "screening-accuracy")
-          document.matrix = { tp: "60", fp: "20", fn: "20", tn: "900" };
+        if (initialCase.slug === tool.exampleCase && tool.exampleOptions)
+          document.options = tool.exampleOptions.map((o) =>
+            emptyOption(o.id, o.name),
+          );
       }
       saved = [...saved, { document, accountRevision: null }];
       selected = document.id;
@@ -118,7 +123,13 @@ export default function ToolWorkspace({
         : saved[0].document.id,
     );
     setReady(true);
-  }, [storageKey, tool.slug, initialCase]);
+  }, [
+    storageKey,
+    tool.slug,
+    tool.exampleCase,
+    tool.exampleOptions,
+    initialCase,
+  ]);
 
   useEffect(() => {
     if (!ready || !storageReadable.current || changedElsewhere.current) return;
@@ -201,29 +212,20 @@ export default function ToolWorkspace({
     }
     const document = emptyWorkspace(tool.slug, crypto.randomUUID());
     if (example) {
-      document.caseSlug =
-        tool.slug === "assess-evidence"
-          ? "screening-accuracy"
-          : tool.slug === "compare-options"
-            ? "a-route-to-review"
-            : "caseworker-copilot";
-      document.title =
-        tool.slug === "plan-oversight"
-          ? "Worked example · Eastmere"
-          : "Worked example · Northbridge";
+      document.caseSlug = tool.exampleCase;
+      document.title = `Worked analysis · ${tool.exampleTitle}`;
       document.fields = Object.fromEntries(
         tool.fields.map((f) => [f.id, f.example]),
       );
-      if (tool.slug === "assess-evidence")
-        document.matrix = { tp: "60", fp: "20", fn: "20", tn: "900" };
-      if (tool.slug === "compare-options") document.options = exampleOptions();
+      if (tool.exampleOptions)
+        document.options = tool.exampleOptions.map((o) => ({ ...o }));
     }
     setDrafts((ds) => [...ds, { document, accountRevision: null }]);
     setCurrent(document.id);
     setActive(0);
     setMessage(
       example
-        ? "Opened the fictional worked example as a separate draft. Your earlier work is retained."
+        ? "Opened an AIPEX analysis of a documented case as a separate draft. Suggested controls and next steps are proposals, not reported actions. Your earlier work is retained."
         : "New draft created. Your earlier work is retained.",
     );
   }
@@ -380,6 +382,22 @@ export default function ToolWorkspace({
           </button>
         </div>
       </div>
+      {workingCase && (
+        <p className="container case-context-note">
+          Draft source:{" "}
+          <Link href={`/cases/${workingCase.slug}`}>{workingCase.title}</Link>.{" "}
+          Reported facts come from the dated case sources. Your interpretations,
+          proposed controls and next steps are analysis, not reported
+          arrangements.
+        </p>
+      )}
+      {isRetiredPracticeCase(w.caseSlug) && (
+        <p className="container workspace-message">
+          This saved draft uses a retired fictional teaching case. Your work is
+          retained; its case facts are invented. Open the worked example to
+          start a separate analysis of a documented case.
+        </p>
+      )}
       {message && (
         <p className="container workspace-message" role="status">
           {message}
@@ -507,13 +525,16 @@ export default function ToolWorkspace({
                 placeholder="Record your reasoning, evidence and unresolved questions…"
               />
               <details>
-                <summary>See a fictional worked example</summary>
+                <summary>See a source-based worked analysis</summary>
                 <p>{field.example}</p>
                 <p className="small-copy">
-                  Original AIPEX teaching example. Adapt the reasoning to your
-                  own context; it is not evidence about a real organisation.
+                  {tool.exampleNote}{" "}
+                  <Link href={`/cases/${tool.exampleCase}`}>
+                    Read the case and its evidence ↗
+                  </Link>
                 </p>
               </details>
+              <p className="small-copy field-reading">{field.reading}</p>
               <p className="field-sources">
                 Method informed by:{" "}
                 {field.sources.map((id, i) => (
@@ -530,95 +551,109 @@ export default function ToolWorkspace({
           {step.id === "options" && (
             <>
               <p>
-                Keep a realistic baseline. Compare at least two alternatives,
-                including a non-AI or non-regulatory approach where relevant.
-                Mark essential conditions against the evidence you recorded;
-                this tool does not score or rank policies.
+                Keep a realistic baseline (or a dated historical comparator).
+                Compare at least two alternatives, including a non-AI or
+                non-regulatory approach where relevant. Mark essential
+                conditions against the evidence you recorded; this tool does not
+                score or rank policies.
               </p>
+              <OptionsComparison options={w.options} />
               <div className="option-stack">
                 {w.options.map((o, i) => (
-                  <fieldset className="option-card" key={o.id}>
-                    <legend>{i === 0 ? "Baseline" : `Alternative ${i}`}</legend>
-                    <label htmlFor={`option-${o.id}-name`}>Option name</label>
-                    <input
-                      id={`option-${o.id}-name`}
-                      maxLength={160}
-                      value={o.name}
-                      onChange={(e) =>
-                        updateOption(o.id, "name", e.target.value)
-                      }
-                    />
-                    {(
-                      [
+                  <details className="option-editor" key={o.id}>
+                    <summary>
+                      Edit {i === 0 ? "baseline" : `alternative ${i}`} ·{" "}
+                      {o.name || "Unnamed option"}
+                    </summary>
+                    <fieldset className="option-card">
+                      <legend>
+                        {i === 0 ? "Baseline" : `Alternative ${i}`}
+                      </legend>
+                      <label htmlFor={`option-${o.id}-name`}>Option name</label>
+                      <input
+                        id={`option-${o.id}-name`}
+                        maxLength={160}
+                        value={o.name}
+                        onChange={(e) =>
+                          updateOption(o.id, "name", e.target.value)
+                        }
+                      />
+                      {(
                         [
-                          "mechanism",
-                          "Mechanism: how would it change outcomes?",
-                        ],
-                        [
-                          "benefits",
-                          "Benefits: outcome, evidence and who benefits",
-                        ],
-                        [
-                          "costs",
-                          "Costs and burdens: public, private and ongoing",
-                        ],
-                        [
-                          "distribution",
-                          "Distribution: who loses, access and exceptional cases",
-                        ],
-                        [
-                          "delivery",
-                          "Delivery: authority, owner, resources and timing",
-                        ],
-                        [
-                          "uncertainty",
-                          "Uncertainty: assumptions, evidence gaps and sensitivity",
-                        ],
-                      ] as const
-                    ).map(([key, label]) => (
-                      <div key={key}>
-                        <label htmlFor={`option-${o.id}-${key}`}>{label}</label>
-                        <textarea
-                          id={`option-${o.id}-${key}`}
-                          rows={3}
-                          maxLength={12000}
-                          value={o[key]}
-                          onChange={(e) =>
-                            updateOption(o.id, key, e.target.value)
-                          }
-                        />
-                      </div>
-                    ))}
-                    <label htmlFor={`gate-${o.id}`}>Essential conditions</label>
-                    <select
-                      id={`gate-${o.id}`}
-                      value={o.gate}
-                      onChange={(e) =>
-                        updateOption(o.id, "gate", e.target.value)
-                      }
-                    >
-                      <option value="unknown">
-                        Unresolved — evidence needed
-                      </option>
-                      <option value="met">
-                        All met — explain evidence above
-                      </option>
-                      <option value="not-met">Not met — explain above</option>
-                    </select>
-                    {i > 0 && w.options.length > 3 && (
-                      <button
-                        type="button"
-                        className="text-link"
-                        onClick={() =>
-                          update({
-                            options: w.options.filter((x) => x.id !== o.id),
-                          })
+                          [
+                            "mechanism",
+                            "Mechanism: how would it change outcomes?",
+                          ],
+                          [
+                            "benefits",
+                            "Benefits: outcome, evidence and who benefits",
+                          ],
+                          [
+                            "costs",
+                            "Costs and burdens: public, private and ongoing",
+                          ],
+                          [
+                            "distribution",
+                            "Distribution: who loses, access and exceptional cases",
+                          ],
+                          [
+                            "delivery",
+                            "Delivery: authority, owner, resources and timing",
+                          ],
+                          [
+                            "uncertainty",
+                            "Uncertainty: assumptions, evidence gaps and sensitivity",
+                          ],
+                        ] as const
+                      ).map(([key, label]) => (
+                        <div key={key}>
+                          <label htmlFor={`option-${o.id}-${key}`}>
+                            {label}
+                          </label>
+                          <textarea
+                            id={`option-${o.id}-${key}`}
+                            rows={3}
+                            maxLength={12000}
+                            value={o[key]}
+                            onChange={(e) =>
+                              updateOption(o.id, key, e.target.value)
+                            }
+                          />
+                        </div>
+                      ))}
+                      <label htmlFor={`gate-${o.id}`}>
+                        Essential conditions
+                      </label>
+                      <select
+                        id={`gate-${o.id}`}
+                        value={o.gate}
+                        onChange={(e) =>
+                          updateOption(o.id, "gate", e.target.value)
                         }
                       >
-                        Remove this alternative
-                      </button>
-                    )}
-                  </fieldset>
+                        <option value="unknown">
+                          Unresolved — evidence needed
+                        </option>
+                        <option value="met">
+                          All met — explain evidence above
+                        </option>
+                        <option value="not-met">Not met — explain above</option>
+                      </select>
+                      {i > 0 && w.options.length > 3 && (
+                        <button
+                          type="button"
+                          className="text-link"
+                          onClick={() =>
+                            update({
+                              options: w.options.filter((x) => x.id !== o.id),
+                            })
+                          }
+                        >
+                          Remove this alternative
+                        </button>
+                      )}
+                    </fieldset>
+                  </details>
                 ))}
               </div>
               <button
@@ -801,6 +836,24 @@ export default function ToolWorkspace({
                     </p>
                   )}
               </div>
+              <section
+                className="brief-review"
+                aria-labelledby="reasoning-checks"
+              >
+                <h3 id="reasoning-checks">Before you rely on this brief</h3>
+                <p>
+                  Review these questions with a colleague. Text in every section
+                  is not a pass or a verified judgement.
+                </p>
+                <ul>
+                  {tool.reviewChecks.map((check) => (
+                    <li key={check}>{check}</li>
+                  ))}
+                </ul>
+              </section>
+              {w.tool === "compare-options" && (
+                <OptionsComparison options={w.options} />
+              )}
               <div className="workspace-export">
                 <button
                   className="button"
@@ -929,59 +982,4 @@ export default function ToolWorkspace({
       options: w.options.map((o) => (o.id === id ? { ...o, [key]: value } : o)),
     });
   }
-}
-
-function exampleOptions(): PolicyOption[] {
-  return [
-    {
-      id: "baseline",
-      name: "Business as usual",
-      mechanism: "Retain existing notice and review arrangements.",
-      benefits:
-        "No implementation delay; preserves existing staff allocation. No demonstrated improvement in review access.",
-      costs:
-        "Current operating costs plus unresolved applicant time and uncorrected-error burdens; establish baseline costs.",
-      distribution:
-        "Applicants unable to understand notices or use digital routes may remain excluded.",
-      delivery:
-        "Current service owners continue. Record access and correction powers remain absent.",
-      uncertainty:
-        "Unrecorded demand and consequences of errors are unknown. Improve the log to establish the baseline.",
-      gate: "not-met",
-    },
-    {
-      id: "option-1",
-      name: "Clearer notices; existing review",
-      mechanism:
-        "Rewrite notices and test comprehension; keep existing review process.",
-      benefits:
-        "Could improve understanding of the route. Does not itself enable reconsideration.",
-      costs:
-        "Writing, user testing and staff familiarisation; possible increased requests without more capacity.",
-      distribution:
-        "Test notices with applicants using assisted and non-digital channels.",
-      delivery:
-        "Service owner can investigate notice changes; confirm approval requirements.",
-      uncertainty:
-        "Demand response and comprehension gains need testing; reviewer access remains unresolved.",
-      gate: "not-met",
-    },
-    {
-      id: "option-2",
-      name: "Staffed review pilot",
-      mechanism:
-        "Combine clear notices with a trained reviewer who can inspect reasons and correct material errors.",
-      benefits:
-        "Tests meaningful reconsideration and access, subject to authority and delivery conditions.",
-      costs:
-        "Protected staff time, training, record access, support and evaluation. Estimate low/high demand costs.",
-      distribution:
-        "Provide assisted access and examine who uses the route, who cannot, and who obtains remedies.",
-      delivery:
-        "Service lead must confirm agreements, budget and correction powers before any pilot approval.",
-      uncertainty:
-        "Take-up, review quality and cost remain uncertain. A bounded pilot and scheduled review can test them.",
-      gate: "unknown",
-    },
-  ];
 }

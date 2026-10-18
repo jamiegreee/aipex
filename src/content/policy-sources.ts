@@ -26,7 +26,7 @@ export const policySources = {
     title: "AI Risk Management Framework: Core",
     publisher: "NIST",
     url: "https://airc.nist.gov/airmf-resources/airmf/5-sec-core/",
-    location: "GOVERN 2; MAP 2 and 5; MEASURE 2; MANAGE 2.4 and 4",
+    location: "GOVERN 1–3, 5–6; MAP 1–2; MEASURE 2–3; MANAGE 2–4",
     note: "A voluntary US framework for organising risk management. It does not establish legal authority or certify a deployment as safe.",
   },
   playbook: {
@@ -35,7 +35,7 @@ export const policySources = {
     url: "https://www.gov.uk/government/publications/ai-playbook-for-the-uk-government/artificial-intelligence-playbook-for-the-uk-government-html",
     location:
       "Human oversight; testing and evaluation; managing the AI lifecycle",
-    note: "Practical public-sector guidance. Apply it to the actual service and obtain the specialist decisions required in your organisation.",
+    note: "Used here for operational oversight and lifecycle guidance. Its legal descriptions reflect its publication context; check current law and regulatory guidance with the responsible specialists. A completed plan is not legal clearance.",
   },
   cards: {
     title: "Model Cards for Model Reporting (2019)",
@@ -49,7 +49,7 @@ export const policySources = {
     publisher: "Information Commissioner’s Office",
     url: "https://ico.org.uk/media2/migrated/4031620/ai-in-recruitment-outcomes-report.pdf",
     location:
-      "Scope of audits; accuracy, fairness, transparency and data minimisation findings",
+      "Report pp. 5, 9–10 (scope); p. 20 (data separation); pp. 24–25 (Organisation A and bias monitoring)",
     note: "Historical findings from selected consensual audits conducted August 2023–May 2024. Generative AI was outside scope. Findings do not estimate prevalence across the recruitment market or state current law.",
   },
   chat2024: {
@@ -72,7 +72,7 @@ export const policySources = {
     publisher: "Ofqual",
     url: "https://www.gov.uk/government/publications/standardisation-of-grades-in-general-qualifications-in-summer-2020-outliers",
     location:
-      "Explanation of the standardisation approach and subsequent grade policy",
+      "December 2020 report: analysis of students for whom standardisation might be unreliable",
     note: "A retrospective official account of statistical grade standardisation. This was not a generative AI system.",
   },
   gradesAnalysis: {
@@ -80,7 +80,7 @@ export const policySources = {
     publisher: "Ofqual",
     url: "https://www.gov.uk/government/publications/evaluation-of-centre-assessment-grades-and-grading-gaps-in-summer-2020/grading-gaps-in-summer-2020-who-was-affected-by-differences-between-centre-assessment-grades-and-calculated-grades",
     location:
-      "Differences between centre assessment and calculated grades; interpretation and limitations",
+      "Executive summary and Introduction: grading method, 13–17 August 2020 chronology and limits of grade comparisons",
     note: "Official retrospective analysis. Centre assessment grades are a comparator, not observed examination outcomes.",
   },
 } as const;

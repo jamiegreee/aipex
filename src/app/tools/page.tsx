@@ -62,9 +62,9 @@ export default function Tools() {
             </div>
             <div>
               <p>
-                Each tool includes a complete fictional worked example. You can
-                also explore a documented event or practice scenario, then carry
-                the case into a fresh workspace.
+                Each tool includes an AIPEX worked analysis of a documented
+                case, with unknowns left visible. Explore the original evidence,
+                then carry the case into a fresh workspace.
               </p>
               <p>
                 Work without signing in. Browser drafts, editable project files
