@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import {
   classificationMetrics,
+  caseDraftToResume,
   emptyWorkspace,
   validWorkspace,
   workspaceGaps,
@@ -14,6 +15,40 @@ import { policySources } from "../src/content/policy-sources";
 import { courses } from "../src/content/courses";
 import { allLessons } from "../src/lib/courses";
 import { isAnalyticsPage } from "../src/lib/analytics";
+
+test("case reloads resume the selected edited copy, or the latest copy when arriving from another draft", () => {
+  const original = {
+    document: {
+      ...emptyWorkspace("assess-evidence", randomUUID()),
+      caseSlug: "screening-accuracy",
+    },
+  };
+  const edited = {
+    document: {
+      ...original.document,
+      id: randomUUID(),
+      fields: { claim: "My developed reasoning" },
+    },
+  };
+  const other = { document: emptyWorkspace("assess-evidence", randomUUID()) };
+  const drafts = [original, edited, other];
+  assert.equal(
+    caseDraftToResume(drafts, edited.document.id, "screening-accuracy"),
+    edited,
+  );
+  assert.equal(
+    caseDraftToResume(drafts, original.document.id, "screening-accuracy"),
+    original,
+  );
+  assert.equal(
+    caseDraftToResume(drafts, other.document.id, "screening-accuracy"),
+    edited,
+  );
+  assert.equal(
+    caseDraftToResume(drafts, other.document.id, "govuk-chat"),
+    undefined,
+  );
+});
 
 test("classification counts use the correct denominators and expose the trivial baseline", () => {
   const result = classificationMetrics({

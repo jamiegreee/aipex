@@ -33,6 +33,17 @@ export function emptyOption(id: string, name = ""): PolicyOption {
     gate: "unknown",
   };
 }
+export function caseDraftToResume<T extends { document: Workspace }>(
+  drafts: T[],
+  selectedId: string,
+  caseSlug: string,
+): T | undefined {
+  return (
+    drafts.find(
+      (d) => d.document.id === selectedId && d.document.caseSlug === caseSlug,
+    ) ?? [...drafts].reverse().find((d) => d.document.caseSlug === caseSlug)
+  );
+}
 export function emptyWorkspace(tool: ToolSlug, id: string): Workspace {
   return {
     version: 1,
