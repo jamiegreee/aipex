@@ -6,6 +6,7 @@ import type { PolicyCase } from "@/content/policy-cases";
 import { policySources } from "@/content/policy-sources";
 import {
   classificationMetrics,
+  caseDraftToResume,
   emptyOption,
   emptyWorkspace,
   validWorkspace,
@@ -96,8 +97,7 @@ export default function ToolWorkspace({
       );
     }
     const caseDraft =
-      initialCase &&
-      saved.find((d) => d.document.caseSlug === initialCase.slug);
+      initialCase && caseDraftToResume(saved, selected, initialCase.slug);
     if (caseDraft) selected = caseDraft.document.id;
     if ((initialCase && !caseDraft) || !saved.length) {
       const document = emptyWorkspace(tool.slug, crypto.randomUUID());
