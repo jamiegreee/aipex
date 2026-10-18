@@ -1,6 +1,6 @@
 # Policy tools and case library: quality review
 
-Reviewed 18 October 2026. Scope: all three public tools, every field prompt and worked analysis, the complete public case library, exports and case-to-tool paths. This is an AIPEX editorial/source review, not independent accreditation, a legal opinion or observed user research.
+Initial review, 18 October 2026, before the later [international expansion](international-case-library.md). Scope: all three public tools, every field prompt and worked analysis, the complete public case library, exports and case-to-tool paths. This is an AIPEX editorial/source review, not independent accreditation, a legal opinion or observed user research.
 
 ## Changes made
 

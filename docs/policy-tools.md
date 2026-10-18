@@ -1,12 +1,12 @@
 # Policy tools and case library
 
-Published routes: `/tools`, three `/tools/[tool]` workspaces, `/cases` and six `/cases/[slug]` pages. The homepage and navigation connect all three tools, cases and the existing courses. Gatherings and community recruitment remain hidden.
+Published routes: `/tools`, three `/tools/[tool]` workspaces, `/cases` and nine `/cases/[slug]` pages. The homepage and navigation connect all three tools, cases and the existing courses. Gatherings and community recruitment remain hidden.
 
 ## Editorial method
 
 Tool definitions and examples live in `src/content/policy-tools.ts`. Each prompt identifies its supporting sources. The source registry records publisher, URL, relevant sections, scope and a review date (18 October 2026). The tools are original AIPEX working aids, not official appraisal, legal-compliance or deployment-approval systems.
 
-The case library contains three documented cases: the ICO's 2023–2024 recruitment audits, the 2024 and March 2026 GDS accounts of GOV.UK Chat, and England's 2020 statistical grade standardisation. Each distinguishes reported facts, limits and AIPEX analysis. Historical findings are not presented as current service performance or law. Do not replace or embellish reported facts without checking the linked primary source.
+The case library contains nine documented cases across seven countries: three UK cases, plus Robodebt (Australia), SyRI (Netherlands), Rite Aid (United States), IRCC visa analytics (Canada), retinal-image validation (Singapore) and Victor (Brazil). Each distinguishes reported facts, limits and AIPEX analysis. See [the international source-support audit](international-case-library.md). Country/topic filters combine with evidence-aware text search. Historical findings are not presented as current service performance or law. Do not replace or embellish reported facts without checking the linked primary source.
 
 Preserve documented case/tool slugs. The three fictional case routes were removed at the founder’s request on 18 October 2026; they return 404 and are absent from the sitemap. Older learner drafts remain readable and exportable with a retired-fictional-material notice; do not delete saved work. Review source support when guidance changes. Check evidence citations within each case, field source references, course links and exported case provenance. The test suite checks those references resolve.
 

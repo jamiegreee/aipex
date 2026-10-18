@@ -6,6 +6,7 @@ export type PolicyCase = {
   kind: "Documented case";
   topic: string;
   jurisdiction: string;
+  country: string;
   period: string;
   minutes: number;
   summary: string;
@@ -32,6 +33,7 @@ export const policyCases: PolicyCase[] = [
     kind: "Documented case",
     topic: "Evidence & evaluation",
     jurisdiction: "United Kingdom",
+    country: "United Kingdom",
     period: "2024–2026 reports",
     minutes: 15,
     summary:
@@ -90,6 +92,7 @@ export const policyCases: PolicyCase[] = [
     kind: "Documented case",
     topic: "Oversight & deployment",
     jurisdiction: "United Kingdom",
+    country: "United Kingdom",
     period: "2023–2024 audits",
     minutes: 15,
     summary:
@@ -153,6 +156,7 @@ export const policyCases: PolicyCase[] = [
     kind: "Documented case",
     topic: "Policy design",
     jurisdiction: "England",
+    country: "United Kingdom",
     period: "2020–2021 reports",
     minutes: 15,
     summary:
@@ -204,6 +208,370 @@ export const policyCases: PolicyCase[] = [
         "Make competing objectives explicit: credible outcomes, individual treatment, understandable decisions and timely challenge.",
       evidence:
         "Ofqual’s 2020 outliers report and later grading-gap analysis. Cancelled examinations provide no observed ground truth.",
+    },
+  },
+  {
+    slug: "robodebt",
+    title: "Robodebt: oversight beyond the model",
+    country: "Australia",
+    kind: "Documented case",
+    topic: "Policy design",
+    jurisdiction: "Australia",
+    period: "2023 inquiry recommendations",
+    minutes: 20,
+    summary:
+      "Compare transparency, review rights and independent scrutiny after a welfare-debt inquiry.",
+    context:
+      "Australia’s Royal Commission into the Robodebt Scheme reported on 7 July 2023. This case examines its proposed institutional safeguards for automated public administration; it is not a generative-AI deployment case.",
+    decisionContext:
+      "A retrospective policy-design exercise using the inquiry’s recommendations. The options you develop are AIPEX analysis, not a reconstruction of Cabinet deliberations or evidence that recommended reforms were implemented.",
+    evidence: [
+      {
+        title: "Lawful implementation and evidence for assumptions",
+        text: "Recommendation 15.1 distinguishes legislative change needed to implement a proposal lawfully from authorising expenditure. Recommendation 15.5 calls for documenting the assumptions and data behind compliance budget measures.",
+        source: "robodebt",
+        location: "Recommendations 15.1 and 15.5",
+      },
+      {
+        title: "Transparency and challenge",
+        text: "Recommendation 17.1 proposes a consistent framework for government automation, routes to review, understandable public explanations and access to rules and algorithms for independent scrutiny.",
+        source: "robodebt",
+        location: "Recommendation 17.1",
+      },
+      {
+        title: "Independent monitoring",
+        text: "Recommendation 17.2 proposes a new or expanded body able to monitor and audit automated decision-making, including fairness and usability.",
+        source: "robodebt",
+        location: "Recommendation 17.2",
+      },
+    ],
+    limits:
+      "Recommendations identify reforms the inquiry considered necessary; they do not demonstrate implementation or quantify each reform’s costs and benefits. The record used here does not establish current Australian legal requirements.",
+    question:
+      "Which combination of review, transparency and independent scrutiny would address distinct failure mechanisms, and what powers would each require?",
+    tasks: [
+      "Establish the documented baseline before comparing reforms. Mark missing information about existing capacity and powers as unknown; do not invent a baseline that makes a preferred reform win.",
+      "Compare an accessible challenge route, independent technical scrutiny and an audit institution as separate or combined interventions. Specify what each can detect, prevent and remedy.",
+      "Identify authority, staffing, access to records and enforcement powers as conditions. Explain whose burden increases and what evidence could reverse your preference.",
+    ],
+    approach: [
+      "Separate the failure mechanisms: a technically reproducible rule can still lack lawful authority, and a published rule can still be difficult for a person to challenge. Match the proposed intervention to the mechanism.",
+      "Compare costs and access on the same time horizon. Ask who can require a response or correction; an advisory panel without that power is different from a review body able to change an outcome.",
+      "Recommend a conditional package only where powers and delivery are evidenced. Define how people’s experience and correction of errors will be evaluated, rather than counting publications or audits alone.",
+    ],
+    sources: ["robodebt", "green", "magenta"],
+    tool: "compare-options",
+    seed: {
+      problem:
+        "Retrospective Robodebt inquiry exercise: compare the institutional safeguards proposed in the 2023 report. Establish the historical baseline before appraising reforms.",
+      objectives:
+        "Separate lawful implementation, understandable explanations, usable challenge and independent scrutiny. Identify the outcome each reform is meant to change.",
+      evidence:
+        "Royal Commission recommendations 15.1, 15.5, 17.1 and 17.2. Recommendations are not evidence of implementation; costs and local delivery capacity remain unknown.",
+    },
+  },
+  {
+    slug: "syri",
+    title: "SyRI: fraud detection and the right to privacy",
+    country: "Netherlands",
+    kind: "Documented case",
+    topic: "Policy design",
+    jurisdiction: "Netherlands",
+    period: "5 February 2020 court account",
+    minutes: 20,
+    summary:
+      "Examine why a legitimate policy aim does not settle whether a data-driven intervention is justified.",
+    context:
+      "SyRI was a Dutch statutory instrument for detecting risks of fraud involving welfare, allowances and taxes. The Hague District Court’s February 2020 account explains why the legislation failed its privacy-rights assessment.",
+    decisionContext:
+      "A retrospective analysis of a particular judgment, using the court’s Dutch-language summary paraphrased in English. This is an automated risk-indication case; no claim about a particular machine-learning architecture is needed.",
+    evidence: [
+      {
+        title: "The court’s test",
+        text: "The court assessed the legislation under Article 8(2) of the European Convention on Human Rights: the balance between its public purpose and interference with private life.",
+        source: "syri",
+        location:
+          "Toets and Bijzondere verantwoordelijkheid bij nieuwe technologieën",
+      },
+      {
+        title: "The court’s conclusion",
+        text: "The court found the SyRI legislation insufficiently transparent and verifiable, and held that it did not achieve the required fair balance.",
+        source: "syri",
+        location: "Inzet SyRI onvoldoende inzichtelijk en controleerbaar",
+      },
+      {
+        title: "The policy purpose remains a separate question",
+        text: "The account identifies fraud prevention as the public purpose; it does not treat that purpose as sufficient justification for the particular intrusion.",
+        source: "syri",
+        location:
+          "Opening account and Inzet SyRI onvoldoende inzichtelijk en controleerbaar",
+      },
+    ],
+    limits:
+      "The summary is not the full judgment, an assessment of every fraud-detection system, or a statement of current law in another country. It does not supply accuracy, cost or fraud-recovery estimates for comparing alternative designs.",
+    question:
+      "What would a defensible options appraisal need beyond a claim that the system could detect more fraud?",
+    tasks: [
+      "Define the fraud problem and evidence of need separately from the choice to link data or generate risk indications. Identify whose privacy and access to services are affected.",
+      "Compare proportionate investigative and administrative alternatives. For each, specify data needed, safeguards, ability to challenge and the evidence required to justify intrusion.",
+      "Identify essential rights and authority conditions before weighing benefits. Record which facts the court summary leaves unknown and which require the full judgment or specialist advice.",
+    ],
+    approach: [
+      "Do not turn a legitimate objective into automatic approval for the mechanism. Describe the proposed data use and the people exposed, including those for whom no wrongdoing is established.",
+      "Keep essential conditions distinct from a weighted benefits score. More detections cannot by themselves establish lawful, proportionate treatment or adequate avenues of challenge.",
+      "Present an evidence request and alternatives, rather than declare a replacement system lawful from this summary. A comparison needs effectiveness and distributional evidence as well as scrutiny of safeguards.",
+    ],
+    sources: ["syri", "green"],
+    tool: "compare-options",
+    seed: {
+      problem:
+        "Retrospective SyRI review: separate the fraud-prevention objective from the particular data-use and risk-indication mechanism examined by the court.",
+      conditions:
+        "Identify privacy, authority, transparency and challenge conditions. Do not treat a claimed effectiveness benefit as satisfying these conditions.",
+      evidence:
+        "The Hague District Court’s 5 February 2020 summary. It describes a specific rights assessment, not comparative accuracy or cost estimates.",
+    },
+  },
+  {
+    slug: "rite-aid-facial-recognition",
+    title: "Rite Aid: when a match alert becomes an accusation",
+    country: "United States",
+    kind: "Documented case",
+    topic: "Oversight & deployment",
+    jurisdiction: "United States",
+    period: "2023 complaint; 2024 settlement order",
+    minutes: 20,
+    summary:
+      "Trace the controls needed between a facial-recognition alert and action against a person.",
+    context:
+      "The US Federal Trade Commission brought a complaint about Rite Aid’s facial-recognition practices in December 2023. Read the regulator’s allegations alongside the modified settlement order, which contains a neither-admit-nor-deny provision.",
+    decisionContext:
+      "A historical enforcement case about image quality, testing and operational reliance. Allegations in the complaint are not presented as findings after a contested trial, and settlement terms are not evidence of later compliance.",
+    evidence: [
+      {
+        title: "Regulator allegations: input quality and testing",
+        text: "The FTC alleged use of poor-quality enrolment images and a failure to assess accuracy before deployment, including during a pilot.",
+        source: "riteComplaint",
+        location: "Paragraph 22 and paragraphs 50–55",
+      },
+      {
+        title: "Regulator allegation: uneven errors",
+        text: "The FTC alleged a failure to assess or monitor whether accuracy varied by the subject’s race or gender.",
+        source: "riteComplaint",
+        location: "Paragraph 43",
+      },
+      {
+        title: "Settlement terms",
+        text: "The modified order specifies a five-year facial-recognition prohibition, deletion requirements and a monitoring programme for covered biometric systems. It states that the respondents neither admit nor deny the allegations, subject to its stated exceptions.",
+        source: "riteOrder",
+        location: "Introductory findings; sections I–III",
+      },
+    ],
+    limits:
+      "A complaint records allegations; a settlement imposes terms without establishing every allegation through a trial. These materials do not provide a general deployment threshold, a current compliance assessment or a calculation of the prohibition’s remaining duration.",
+    question:
+      "What controls are needed before staff may act on an alert, and what should happen when a control fails?",
+    tasks: [
+      "Map capture, watchlist enrolment, matching, staff interpretation and action as separate stages. Identify where a person could be wrongly accused and what evidence would reveal it.",
+      "Specify input-quality checks, deployment-like testing and trained review with correction authority. Include group coverage, denominators, complaints and records of remedial action.",
+      "Define who can stop reliance, remove an unreliable enrolment and investigate an incident. Distinguish a proposed local control from a remedy actually specified in the order.",
+    ],
+    approach: [
+      "Treat the alert as a claim requiring investigation, rather than an established identity or wrongdoing. The policy problem includes staff behaviour and the enrolment process, not only the model.",
+      "Require evidence that controls detect errors under actual capture conditions. A supplier disclaimer or nominal human reviewer does not demonstrate effective checks.",
+      "Give an operational owner authority to suspend reliance and remedy errors. Use the settlement as a concrete control-design reference, while checking the rules applicable to any different organisation or jurisdiction.",
+    ],
+    sources: ["riteComplaint", "riteOrder", "nist"],
+    tool: "plan-oversight",
+    seed: {
+      service:
+        "Historical Rite Aid facial-recognition case. Map enrolment, image capture, matching and staff action separately; FTC complaint statements remain allegations.",
+      review:
+        "Design checks between an alert and action against a person, including evidence access and correction authority. Do not infer an actual current control from the settlement.",
+      monitoring:
+        "Request deployment-like test results, group denominators and incident/remedial-action logs. Separate complaint allegations from the order’s specified terms.",
+    },
+  },
+  {
+    slug: "canada-visa-analytics",
+    title: "Canada’s visa analytics: which decision is automated?",
+    country: "Canada",
+    kind: "Documented case",
+    topic: "Oversight & deployment",
+    jurisdiction: "Canada",
+    period: "2022 briefing; later published inventory",
+    minutes: 20,
+    summary:
+      "Distinguish automated eligibility, triage and a human’s final decision in a multi-stage service.",
+    context:
+      "IRCC’s May 2022 briefing describes advanced analytics for temporary resident visa applications from China and India. Its department-maintained technology inventory provides a further account of declared functions and links to algorithmic impact assessments.",
+    decisionContext:
+      "A review of a published departmental workflow and its declared safeguards, not independent verification. The detailed claims below are dated to the 2022 briefing. This advanced-analytics workflow is distinct from the Excel-based Chinook processing aid.",
+    evidence: [
+      {
+        title: "An automated intermediate determination",
+        text: "IRCC described the system positively determining eligibility for routine applications before an officer assessed admissibility and made the final visa decision. It said the system did not refuse or recommend refusing applications.",
+        source: "ircc2022",
+        location:
+          "Key Messages; Supplementary Messages: use of advanced data analytics",
+      },
+      {
+        title: "Declared checks",
+        text: "The briefing describes review of rules and redirecting a proportion of positively determined applications for full human review. These are departmental descriptions, not control-effectiveness results.",
+        source: "ircc2022",
+        location: "Supplementary Messages: review of rules and feedback loop",
+      },
+      {
+        title: "Public documentation",
+        text: "The inventory identifies overseas visitor-visa eligibility automation, retains the officer’s admissibility/final-decision role and links to an algorithmic impact assessment.",
+        source: "irccInventory",
+        location:
+          "Automated decision making: Visitor visa for overseas applications row",
+      },
+    ],
+    limits:
+      "A published impact assessment or declared human decision point is not proof of fairness, effective challenge or reduced end-to-end waiting times. Do not assume every intermediate decision is manual, or that the 2022 workflow describes every current visa system.",
+    question:
+      "Where must oversight operate when an officer makes the final decision but earlier processing stages are automated?",
+    tasks: [
+      "Draw the stages: triage, positive eligibility determination, admissibility and final decision. Specify which decision the human makes and which assumptions they receive from earlier stages.",
+      "Request evidence behind sampled human review: coverage, reasons for disagreement, corrections and action after failure. Examine applicants routed to different processing paths.",
+      "Design change control, challenge and monitoring around the whole workflow. Separate declared governance from evidence that it changes outcomes.",
+    ],
+    approach: [
+      "Avoid a binary automated-versus-human label for the whole service. Locate the intermediate determinations that can affect subsequent attention, delay or scrutiny.",
+      "Treat the published workflow as a starting point for targeted questions. Ask whether review sampling can detect important errors and whether reviewers can change the relevant determination.",
+      "Compare end-to-end experience and distributions across processing paths. Assign owners to the evidence gaps before concluding that a final human decision provides sufficient oversight.",
+    ],
+    sources: ["ircc2022", "irccInventory", "nist"],
+    tool: "plan-oversight",
+    seed: {
+      service:
+        "IRCC’s documented 2022 temporary-resident-visa analytics workflow: triage and positive eligibility determination precede officer admissibility review and final decision.",
+      authority:
+        "Separate authority for intermediate eligibility determinations from responsibility for admissibility and the final visa decision. The source is a departmental account.",
+      monitoring:
+        "Request evidence behind the declared human-review feedback loop, including sampling coverage, disagreements, corrections and the response to failures.",
+    },
+  },
+  {
+    slug: "singapore-retinal-screening",
+    title: "Singapore’s retinal AI: accuracy is not a health outcome",
+    country: "Singapore",
+    kind: "Documented case",
+    topic: "Evidence & evaluation",
+    jurisdiction: "Singapore · with external validation cohorts",
+    period: "2017 diagnostic-validation study",
+    minutes: 20,
+    summary:
+      "Read a strong diagnostic result carefully before claiming benefits for a screening service.",
+    context:
+      "Ting and colleagues’ 2017 JAMA study evaluated a deep-learning system using retinal photographs from Singapore and external cohorts. It provides a documented diagnostic-validation case, rather than a claim that every later product version improves patient outcomes.",
+    decisionContext:
+      "Assess the published study at its stated endpoint and threshold. Any proposed service expansion, staffing arrangement or follow-up evaluation is AIPEX analysis, not a deployment reported by this paper.",
+    evidence: [
+      {
+        title: "Keep the denominator straight",
+        text: "The primary validation dataset contained 71,896 images from 14,880 patients. Images, eyes and patients are different units; the study also examined external datasets.",
+        source: "retina",
+        location: "Abstract; Table 1: primary validation dataset",
+      },
+      {
+        title: "Threshold and trade-off",
+        text: "For referable diabetic retinopathy, the primary validation reported sensitivity of 90.5% (95% CI 87.3–93.0) and specificity of 91.6% (91.0–92.2). Trained graders had specificity of 99.3%.",
+        source: "retina",
+        location: "Table 4: referable diabetic retinopathy",
+      },
+      {
+        title: "The authors’ boundary",
+        text: "The authors called for further research on healthcare applicability and improved vision outcomes. Reference standards varied across external datasets; several authors disclosed a related patent interest.",
+        source: "retina",
+        location: "Limitations; Conclusions; Conflict of Interest Disclosures",
+      },
+    ],
+    limits:
+      "Diagnostic validation is not a trial showing improved vision or a general clinical recommendation. Referral workload depends on prevalence, threshold and downstream capacity. Do not reverse-engineer exact classifier counts from rounded percentages or treat images as independent patients.",
+    question:
+      "What additional evidence would justify moving from diagnostic performance to a claim of improved screening outcomes?",
+    tasks: [
+      "Record target condition, operating threshold, reference standard, unit of analysis and uncertainty. Compare sensitivity and specificity, rather than summarising both as accuracy.",
+      "Assess implications for missed cases and extra referrals in the intended population. Request actual counts and patient-level workflow data; do not fabricate a matrix from rounded results.",
+      "Specify a comparison of the full screening pathway: timely referral, attendance, clinical outcomes, workload and access. Identify what the validation study supports and what remains to test.",
+    ],
+    approach: [
+      "Preserve the evidence for diagnostic performance while respecting its endpoint. A useful classifier can still have uncertain benefits once referral and treatment capacity are considered.",
+      "Compare errors at an appropriate threshold and prevalence. Similar sensitivity alongside lower specificity can change the burden on later assessment; the final service design matters.",
+      "Recommend an evaluation of the intended pathway with clinical and operational expertise. Record patient-level outcomes and who is excluded, rather than translate a laboratory metric directly into a rollout decision.",
+    ],
+    sources: ["retina", "cards", "evaluation"],
+    tool: "assess-evidence",
+    seed: {
+      claim:
+        "Assess the 2017 Singapore-led retinal-image validation study before making claims about screening-service benefits. Diagnostic performance and improved vision are different endpoints.",
+      population:
+        "Primary validation: 71,896 images from 14,880 patients. Keep images, eyes and patients separate; examine reference standards and external cohorts.",
+      results:
+        "Referable diabetic retinopathy: sensitivity 90.5% (95% CI 87.3–93.0), specificity 91.6% (91.0–92.2). Request exact counts; leave the optional binary calculator blank.",
+    },
+  },
+  {
+    slug: "brazil-victor",
+    title: "Brazil’s Victor: faster classification, faster justice?",
+    country: "Brazil",
+    kind: "Documented case",
+    topic: "Evidence & evaluation",
+    jurisdiction: "Brazil",
+    period: "19 August 2026 court account",
+    minutes: 15,
+    summary:
+      "Separate a dramatic task-time claim from the outcomes of a judicial service.",
+    context:
+      "Brazil’s Supremo Tribunal Federal describes Victor as a classifier supporting the handling of appeals and their possible correspondence with general-repercussion themes. The source is the court’s own Portuguese-language account, paraphrased here in English.",
+    decisionContext:
+      "An appraisal of a dated institutional claim, not an independent benchmark or a claim that AI decides appeals. Victor is distinct from the court’s similarly named VitorIA tool.",
+    evidence: [
+      {
+        title: "The reported task-time claim",
+        text: "The court’s August 2026 article attributes to a World Bank report a reduction from 40 minutes to five seconds for linking appeals to general-repercussion themes.",
+        source: "victor",
+        location:
+          "Opening paragraphs: attributed 40-minute/five-second comparison",
+      },
+      {
+        title: "What the system does",
+        text: "The article describes Victor as analysing an appeal and indicating a possible correspondence with themes; it does not decide the case’s classification. Other stages still require human work.",
+        source: "victor",
+        location:
+          "Como funciona and the paragraph on the initial analysis stage",
+      },
+      {
+        title: "AIPEX reading question",
+        text: "A reduction in one processing task leaves questions about checking, rework, queueing and the eventual experience of people seeking justice.",
+      },
+    ],
+    limits:
+      "The cited article does not provide a reproducible timing protocol, sample distribution or a causal estimate of total case duration. Its attributed benchmark has not been independently reproduced by AIPEX. It does not establish judicial quality, fairness or present performance across all appeals.",
+    question:
+      "What would make a task-time comparison meaningful evidence for a wider court-service decision?",
+    tasks: [
+      "Define the task boundary and comparator: staff activity, machine processing, checking and rework. Ask whether the timing covers comparable cases and resources.",
+      "Request classification errors, difficult or novel themes and effects on downstream staff decisions. Identify when an incorrect label can be detected and corrected.",
+      "Propose measures of end-to-end delay, workload and treatment of different case types. Keep the reported efficiency claim distinct from a claim about access to justice.",
+    ],
+    approach: [
+      "Quote the timing as an attributed institutional claim about a bounded task. Do not divide the two numbers and present the ratio as a measured improvement in court efficiency.",
+      "Ask for the timing protocol and an error/rework analysis before accepting a net saving. Organisation-wide benefits depend on whether that task is a real bottleneck.",
+      "Use a bounded comparison of the actual workflow, with correction and escalation for novel cases. Preserve human legal responsibility while examining whether early labels influence later judgement.",
+    ],
+    sources: ["victor", "evaluation", "magenta"],
+    tool: "assess-evidence",
+    seed: {
+      claim:
+        "STF’s 19 August 2026 article attributes a 40-minute-to-five-second task comparison to a World Bank report. Assess the boundary of that claim, not a fabricated end-to-end benchmark.",
+      comparison:
+        "Request the timing protocol, comparable cases/resources and whether checking, rework and queueing were counted.",
+      transfer:
+        "Victor supports classification; judicial judgement remains human. Ask about novel themes, incorrect labels and effects on the rest of the workflow.",
     },
   },
 ];

@@ -114,25 +114,36 @@ export default function Home() {
             <em>takes practice.</em>
           </h2>
           <div className="case-grid">
-            {policyCases.map((c) => (
-              <article className="case-card" key={c.slug}>
-                <p className="label">
-                  {c.kind} / {c.minutes} min
-                </p>
-                <h3>
-                  <Link href={`/cases/${c.slug}`}>{c.title}</Link>
-                </h3>
-                <p>{c.summary}</p>
-                <Link className="text-link" href={`/cases/${c.slug}`}>
-                  Examine the case ↗
-                </Link>
-              </article>
-            ))}
+            {policyCases
+              .filter((c) =>
+                [
+                  "robodebt",
+                  "singapore-retinal-screening",
+                  "brazil-victor",
+                ].includes(c.slug),
+              )
+              .map((c) => (
+                <article className="case-card" key={c.slug}>
+                  <p className="label">
+                    {c.kind} / {c.minutes} min
+                  </p>
+                  <h3>
+                    <Link href={`/cases/${c.slug}`}>{c.title}</Link>
+                  </h3>
+                  <p>{c.summary}</p>
+                  <p className="small-copy">
+                    {c.jurisdiction} · {c.period}
+                  </p>
+                  <Link className="text-link" href={`/cases/${c.slug}`}>
+                    Examine the case ↗
+                  </Link>
+                </article>
+              ))}
           </div>
           <p className="policy-section-note">
-            Documented decisions, dated primary sources and explicit limits.
-            Examine the evidence, try the decision and compare your reasoning
-            with an AIPEX analysis.
+            Documented decisions from the UK and beyond, dated primary sources
+            and explicit limits. Examine the evidence, try the decision and
+            compare your reasoning with an AIPEX analysis.
           </p>
         </section>
         <section

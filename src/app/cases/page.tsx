@@ -34,9 +34,10 @@ export default function Cases() {
             <p>
               <strong>Documented cases</strong> draw on dated primary accounts,
               with reported facts separated from AIPEX analysis. Each connects
-              to a working tool. This is a small, UK-focused collection, not a
-              map of the whole field; the 2020 grading case concerns statistical
-              standardisation rather than generative AI.
+              to a working tool. Explore cases from different countries, sectors
+              and kinds of evidence. This is a selected teaching collection, not
+              a worldwide inventory. Some cases concern rules-based or
+              statistical automation rather than generative AI.
             </p>
           </div>
           <CaseBrowser cases={policyCases} />
