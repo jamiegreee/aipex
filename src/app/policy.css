@@ -175,7 +175,7 @@
 }
 .case-filters {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 22px;
   margin: 32px 0 18px;
 }
@@ -1012,4 +1012,19 @@
   min-width: 135px;
   width: 150px;
   background: #eeeee5;
+}
+
+.case-results-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.case-results-toolbar .case-result-count {
+  margin-bottom: 0;
+}
+.case-results-toolbar .text-link {
+  font-size: 13px;
 }

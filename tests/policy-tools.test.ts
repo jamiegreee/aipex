@@ -1,3 +1,4 @@
+import { filterPolicyCases } from "../src/lib/policy-case-search";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import OptionsComparison from "../src/components/policy/OptionsComparison";
@@ -192,7 +193,7 @@ test("every source reference and related lesson resolves; case types cover each 
 });
 
 test("public case library is documented, locates reported claims and keeps analysis separate", () => {
-  assert.equal(policyCases.length, 3);
+  assert.ok(policyCases.length >= 9);
   for (const c of policyCases) {
     assert.equal(c.kind, "Documented case");
     assert.equal(isRetiredPracticeCase(c.slug), false);
@@ -245,4 +246,53 @@ test("comparison table preserves conditions and safely renders user-entered opti
   assert.ok(html.includes("Unresolved — evidence needed"));
   assert.ok(html.includes("Not yet drafted"));
   assert.ok(!html.includes("<script>"));
+});
+
+test("international cases keep distinct jurisdictions and support combined search filters", () => {
+  assert.equal(new Set(policyCases.map((c) => c.country)).size, 7);
+  assert.equal(
+    new Set(policyCases.map((c) => c.slug)).size,
+    policyCases.length,
+  );
+  const canadian = filterPolicyCases(policyCases, { country: "Canada" });
+  assert.deepEqual(
+    canadian.map((c) => c.slug),
+    ["canada-visa-analytics"],
+  );
+  assert.equal(
+    filterPolicyCases(policyCases, {
+      country: "Canada",
+      topic: "Policy design",
+    }).length,
+    0,
+  );
+  assert.deepEqual(
+    filterPolicyCases(policyCases, {
+      query: "  FaCiAl  ",
+      country: "United States",
+    }).map((c) => c.slug),
+    ["rite-aid-facial-recognition"],
+  );
+  assert.equal(filterPolicyCases(policyCases, {}).length, policyCases.length);
+  assert.equal(
+    filterPolicyCases(policyCases, { country: "United Kingdom" }).length,
+    3,
+  );
+});
+
+test("every international case carries its primary references and locators into the exported brief", () => {
+  for (const c of policyCases.filter((c) => c.country !== "United Kingdom")) {
+    const w = emptyWorkspace(c.tool, randomUUID());
+    w.caseSlug = c.slug;
+    w.fields = c.seed;
+    assert.ok(validWorkspace(w));
+    const md = workspaceMarkdown(w);
+    for (const e of c.evidence.filter((e) => e.source)) {
+      const source = policySources[e.source!];
+      assert.ok(md.includes(source.url));
+      assert.ok(md.includes(source.location));
+    }
+    assert.equal(classificationMetrics(w.matrix), null);
+    assert.ok(!md.includes("fictional"));
+  }
 });

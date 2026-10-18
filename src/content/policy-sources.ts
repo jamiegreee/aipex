@@ -83,5 +83,70 @@ export const policySources = {
       "Executive summary and Introduction: grading method, 13–17 August 2020 chronology and limits of grade comparisons",
     note: "Official retrospective analysis. Centre assessment grades are a comparator, not observed examination outcomes.",
   },
+  robodebt: {
+    title: "Robodebt Royal Commission: report and recommendations (2023)",
+    publisher: "Royal Commission into the Robodebt Scheme",
+    url: "https://robodebt.royalcommission.gov.au/publications/report",
+    location:
+      "Published 7 July 2023; recommendations 10.1, 15.1, 15.5, 17.1 and 17.2",
+    note: "Primary inquiry recommendations concerning Australia's income-compliance scheme. Recommendations are proposals in a dated report, not proof of implementation or a statement of current Australian law. This is a conventional automation/governance case, not generative AI.",
+  },
+  syri: {
+    title: "SyRI legislation and Article 8: the court's account (2020)",
+    publisher: "The Hague District Court / Rechtspraak",
+    url: "https://www.rechtspraak.nl/organisatie-en-contact/organisatie/rechtbanken/rechtbank-den-haag/nieuws/2020/02/syri-wetgeving-in-strijd-met-het-europees-verdrag-voor-de-rechten-voor-de-mens",
+    location:
+      "5 February 2020; sections Toets and Inzet SyRI onvoldoende inzichtelijk en controleerbaar; links to ECLI:NL:RBDHA:2020:865",
+    note: "The court's Dutch-language summary of its judgment. AIPEX paraphrases it in English. The ruling concerns the particular SyRI legislation and privacy safeguards, not a prohibition of all algorithmic fraud detection. Consult the judgment for legal reliance.",
+  },
+  riteComplaint: {
+    title: "FTC v. Rite Aid: complaint (2023)",
+    publisher: "US Federal Trade Commission",
+    url: "https://www.ftc.gov/system/files/ftc_gov/pdf/2023190_riteaid_complaint_filed.pdf",
+    location:
+      "19 December 2023; paragraphs 22, 43 and 50–55 on image quality, demographic monitoring and pre-deployment testing",
+    note: "A regulator's allegations, not findings established after a contested trial. Read alongside the settlement document; it neither provides a universal error threshold nor evaluates current products.",
+  },
+  riteOrder: {
+    title: "Rite Aid: modified decision and order (2024)",
+    publisher: "US Federal Trade Commission",
+    url: "https://www.ftc.gov/system/files/ftc_gov/pdf/c4308riteaidmodifiedorder.pdf",
+    location:
+      "Introductory findings; sections I (five-year prohibition), II (deletion), III (monitoring programme)",
+    note: "Settlement terms, including a neither-admit-nor-deny provision. The prohibition is measured from the order's effective date; this historical case does not calculate its present status or infer later compliance.",
+  },
+  ircc2022: {
+    title: "Advanced analytics for temporary resident visa applications (2022)",
+    publisher: "Immigration, Refugees and Citizenship Canada",
+    url: "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/committees/ollo-may-16-2022/advanced-data-analytics.html",
+    location:
+      "16 May 2022 briefing; Key Messages, Supplementary Messages and Background",
+    note: "The department's description of its workflow and safeguards, not an independent impact evaluation. Positive eligibility determinations are distinct from final visa decisions. Do not conflate this system with the separate Excel-based Chinook tool.",
+  },
+  irccInventory: {
+    title: "Uses of technology across IRCC",
+    publisher: "Immigration, Refugees and Citizenship Canada",
+    url: "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/digital-transparency-advanced-data-analytics/uses-technology.html",
+    location:
+      "Inventory row: Visitor visa for overseas applications; algorithmic impact assessment links",
+    note: "A department-maintained inventory inspected 18 October 2026. It documents declared functions and assessment links, not independent confirmation that controls work or outcomes improve. The case's detailed workflow claims are dated to the 2022 briefing.",
+  },
+  retina: {
+    title:
+      "Development and Validation of a Deep Learning System for Diabetic Retinopathy (2017)",
+    publisher: "Ting et al. / JAMA",
+    url: "https://jamanetwork.com/journals/jama/fullarticle/2665775",
+    location:
+      "Abstract; Table 4 (primary validation); Limitations; Conclusions; doi:10.1001/jama.2017.18152",
+    note: "Primary diagnostic-validation study using Singapore and external datasets. Retinal images, eyes and patients have different denominators. This is not a randomised trial of patient outcomes or evidence about every later SELENA/SELENA+ product version. Several authors disclosed a related patent interest.",
+  },
+  victor: {
+    title: "Victor and the boundary of judicial automation (2026)",
+    publisher: "Brazil's Supremo Tribunal Federal",
+    url: "https://noticias.stf.jus.br/postsnoticias/banco-mundial-cita-ferramenta-de-ia-do-stf-como-exemplo-de-eficiencia-juridica/",
+    location:
+      "19 August 2026; opening account of the 40-minute/five-second claim and Como funciona",
+    note: "Court-authored Portuguese-language account, paraphrased by AIPEX in English. Its timing claim concerns an initial classification task and attributes the comparison to a World Bank report. It is not treated here as an independently reproduced evaluation of total case duration or judicial quality. Victor and VitorIA are distinct tools.",
+  },
 } as const;
 export type SourceId = keyof typeof policySources;

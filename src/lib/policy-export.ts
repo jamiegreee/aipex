@@ -79,7 +79,9 @@ export function workspaceMarkdown(w: Workspace) {
     lines.push("\n## Starting case references\n");
     for (const id of startingCase.sources) {
       const s = policySources[id];
-      lines.push(`- ${s.publisher}: [${s.title}](${s.url}). ${s.note}`);
+      lines.push(
+        `- ${s.publisher}: [${s.title}](${s.url}). ${s.location}. ${s.note}`,
+      );
     }
   }
   lines.push(
