@@ -2,33 +2,18 @@ import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Arrow } from "@/components/Brand";
-import ConversationArt from "@/components/ConversationArt";
-import LondonPoster from "@/components/LondonPoster";
-import JoinCallout from "@/components/JoinCallout";
-import { communityEnabled, gatheringsEnabled } from "@/lib/site";
-
-const questions = [
-  {
-    title: "Work & the economy",
-    question: "Who benefits from the AI transition?",
-  },
-  {
-    title: "Government & public services",
-    question: "What does an AI-ready state look like?",
-  },
-  { title: "Power & accountability", question: "Who gets to shape the rules?" },
-  {
-    title: "Security & global cooperation",
-    question: "How do we respond together?",
-  },
-];
+import { policyTools } from "@/content/policy-tools";
+import { policyCases } from "@/content/policy-cases";
 
 export default function Home() {
   return (
     <>
       <Navigation />
       <main id="main">
-        <section className="hero container" aria-labelledby="hero-heading">
+        <section
+          className="hero container policy-home-hero"
+          aria-labelledby="hero-heading"
+        >
           <div className="hero-copy">
             <p className="label hero-label">
               <span className="status-dot" /> Building AI policy capacity
@@ -36,46 +21,128 @@ export default function Home() {
             <h1 id="hero-heading">
               Big questions.
               <br />
-              <em>
-                Better
-                <br className="hero-break" /> policy.
-              </em>
+              <em>Better policy.</em>
             </h1>
             <p className="hero-description">
-              Helping people understand, develop and deliver effective AI
-              policy. Free, self-paced courses with practical exercises,
-              worked examples and sources to explore.
+              Build the judgement to act. Practical tools, cases and free
+              courses for people shaping how AI is governed.
             </p>
             <div className="hero-actions">
-              <Link className="button" href="/courses">
-                Explore the courses <Arrow />
+              <Link className="button" href="/tools">
+                Find a tool <Arrow />
               </Link>
-              {communityEnabled && (
-                <Link className="text-link" href="/community">
-                  Join the community <Arrow diagonal />
-                </Link>
-              )}
+              <Link className="text-link" href="/courses">
+                Explore the courses <Arrow diagonal />
+              </Link>
             </div>
             <p className="hero-footnote">
-              <span className="location-cross" aria-hidden="true">
-                ⌖
-              </span>{" "}
-              Free, self-paced learning. Open to different perspectives.
+              Open resources. Practical questions. Work worth doing.
             </p>
           </div>
-          <div className="hero-art">
-            <ConversationArt />
+          <aside
+            className="home-workbench"
+            aria-label="Choose your starting question"
+          >
+            <p className="label">On your desk / A decision to make</p>
+            <h2>
+              Where do
+              <br />
+              <em>you begin?</em>
+            </h2>
+            {policyTools.map((t) => (
+              <Link key={t.slug} href={`/tools/${t.slug}`}>
+                <span className="label">{t.number}</span>
+                <span>
+                  {t.shortTitle}
+                  <small>{t.time} · A brief to take away</small>
+                </span>
+                <span aria-hidden="true">↗</span>
+              </Link>
+            ))}
+            <p>No account needed to start.</p>
+          </aside>
+        </section>
+        <section className="policy-band" aria-labelledby="home-tools-heading">
+          <div className="container">
+            <div className="section-heading">
+              <p className="label">01 / Use a tool</p>
+              <Link className="text-link" href="/tools">
+                The policy workbench ↗
+              </Link>
+            </div>
+            <h2 className="policy-section-title" id="home-tools-heading">
+              From a difficult question
+              <br />
+              to a <em>working brief.</em>
+            </h2>
+            <div className="home-tool-grid">
+              {policyTools.map((t) => (
+                <article key={t.slug}>
+                  <p className="label">
+                    {t.number} / {t.time}
+                  </p>
+                  <h3>
+                    <Link href={`/tools/${t.slug}`}>{t.shortTitle}.</Link>
+                  </h3>
+                  <p>{t.description}</p>
+                  <Link className="text-link" href={`/tools/${t.slug}`}>
+                    Open workspace ↗
+                  </Link>
+                </article>
+              ))}
+            </div>
+            <p className="policy-section-note">
+              Structured prompts, complete worked examples and primary sources.
+              Save drafts, compare your reasoning and export something you can
+              develop further.
+            </p>
           </div>
         </section>
         <section
-          className="home-learning container"
+          className="container home-cases"
+          aria-labelledby="home-cases-heading"
+        >
+          <div className="section-heading">
+            <p className="label">02 / Examine a case</p>
+            <Link className="text-link" href="/cases">
+              See all six cases ↗
+            </Link>
+          </div>
+          <h2 className="policy-section-title" id="home-cases-heading">
+            Good judgement
+            <br />
+            <em>takes practice.</em>
+          </h2>
+          <div className="case-grid">
+            {[policyCases[0], policyCases[3], policyCases[2]].map((c) => (
+              <article className="case-card" key={c.slug}>
+                <p className="label">
+                  {c.kind} / {c.minutes} min
+                </p>
+                <h3>
+                  <Link href={`/cases/${c.slug}`}>{c.title}</Link>
+                </h3>
+                <p>{c.summary}</p>
+                <Link className="text-link" href={`/cases/${c.slug}`}>
+                  Examine the case ↗
+                </Link>
+              </article>
+            ))}
+          </div>
+          <p className="policy-section-note">
+            Documented events and clearly labelled fictional scenarios. Examine
+            the evidence, try the decision and read a worked approach.
+          </p>
+        </section>
+        <section
+          className="home-learning container policy-home-learning"
           aria-labelledby="home-learning-heading"
         >
-          <p className="label">Learn with AIPEX / Free & self-paced</p>
+          <p className="label">03 / Learn the craft · Free & self-paced</p>
           <h2 id="home-learning-heading">
-            From understanding AI
+            Build a foundation.
             <br />
-            to <em>shaping its place in the world.</em>
+            <em>Put it to work.</em>
           </h2>
           <div className="home-course-links">
             <Link href="/courses/ai-policy-in-practice">
@@ -100,23 +167,19 @@ export default function Home() {
         </section>
         <section className="mission-section" aria-labelledby="mission-heading">
           <div className="container mission-inner">
-            <p className="label">01 / Why we learn</p>
+            <p className="label">An enduring purpose</p>
             <div>
               <h2 id="mission-heading">
-                AI is changing the world.
+                Understanding AI.
                 <br />
-                Build the skills to <em>respond.</em>
+                <em>Building public judgement.</em>
               </h2>
               <div className="mission-copy">
                 <p>
-                  The questions AI raises reach across government, work,
-                  security and everyday life. Understanding them takes different
-                  kinds of experience.
-                </p>
-                <p>
-                  AIPEX helps people working in—and interested in—public policy
-                  build the knowledge and judgement to act. A place to explore
-                  ideas, practise policy skills and work out what comes next.
+                  AIPEX is building capacity to understand, develop and deliver
+                  effective AI policy. We begin with useful work: careful
+                  teaching, questions that can be examined and resources people
+                  can put into practice.
                 </p>
               </div>
               <Link className="text-link" href="/about">
@@ -125,89 +188,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {gatheringsEnabled && (
-          <section
-            className="gathering-section container"
-            aria-labelledby="gathering-heading"
-          >
-            <div className="section-heading">
-              <p className="label">02 / In good company</p>
-              <Link className="text-link" href="/gatherings">
-                Explore gatherings <Arrow diagonal />
-              </Link>
-            </div>
-            <div className="gathering-feature">
-              <LondonPoster />
-              <div className="gathering-copy">
-                <span className="pill">
-                  <span className="status-dot" /> Our first gathering · In the
-                  making
-                </span>
-                <h2 id="gathering-heading">
-                  A big topic.
-                  <br />
-                  <em>An informal evening.</em>
-                </h2>
-                <p>
-                  Meet people thinking about AI and public policy over a drink and
-                  a good conversation. Bring your questions, your experience and
-                  your curiosity.
-                </p>
-                <dl className="event-facts">
-                  <div>
-                    <dt>Where</dt>
-                    <dd>London</dd>
-                  </div>
-                  <div>
-                    <dt>When</dt>
-                    <dd>Date & venue to be announced</dd>
-                  </div>
-                  <div>
-                    <dt>Who</dt>
-                    <dd>Policy people & curious minds</dd>
-                  </div>
-                </dl>
-                <Link className="button" href="/community">
-                  Be part of the first one <Arrow />
-                </Link>
-              </div>
-            </div>
-          </section>
-        )}
-        <section
-          className="questions-section"
-          aria-labelledby="questions-heading"
-        >
-          <div className="container">
-            <div className="section-heading">
-              <p className="label">
-                {gatheringsEnabled ? "03" : "02"} / Questions to explore
-              </p>
-              <span className="label questions-aside">
-                Different perspectives on AI policy
-              </span>
-            </div>
-            <h2 id="questions-heading">
-              Different angles.
-              <br />
-              <em>Shared questions.</em>
-            </h2>
-            <div className="question-grid">
-              {questions.map(({ title, question }, i) => (
-                <div className="question-item" key={title}>
-                  <span className="label question-number">0{i + 1}</span>
-                  <h3>{title}</h3>
-                  <p>{question}</p>
-                </div>
-              ))}
-            </div>
-            <p className="questions-note">
-              You don&apos;t need to have all the answers. Start with a question
-              and build your understanding.
-            </p>
-          </div>
-        </section>
-        <JoinCallout />
       </main>
       <Footer />
     </>
