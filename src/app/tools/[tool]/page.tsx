@@ -51,12 +51,13 @@ export default async function ToolPage({ params, searchParams }: Props) {
           </details>
           {initialCase && (
             <p className="case-context-note">
-              Starting from{" "}
+              Case entry:{" "}
               <Link href={`/cases/${initialCase.slug}`}>
                 {initialCase.title}
               </Link>
-              . Case facts start your assessment. Returning to this case reopens
-              its browser draft, so you can keep developing your reasoning.
+              . Returning to this case reopens its browser draft. If you switch
+              drafts below, the draft source note identifies the work currently
+              open.
             </p>
           )}
         </header>

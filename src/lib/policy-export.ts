@@ -1,5 +1,9 @@
 import type { Workspace } from "./policy-workspace";
-import { classificationMetrics, workspaceGaps } from "./policy-workspace";
+import {
+  classificationMetrics,
+  isRetiredPracticeCase,
+  workspaceGaps,
+} from "./policy-workspace";
 import { findTool } from "@/content/policy-tools";
 import { policySources, reviewedOn } from "@/content/policy-sources";
 import { findCase } from "@/content/policy-cases";
@@ -20,7 +24,14 @@ export function workspaceMarkdown(w: Workspace) {
     lines.splice(
       4,
       0,
-      `Starting case: [${startingCase.title}](https://theaipex.org/cases/${startingCase.slug}) · ${startingCase.kind}. ${startingCase.kind === "Practice case" ? "All case facts and numbers are fictional teaching assumptions." : "Case facts are from dated reports, not a statement of present performance."}`,
+      `Starting case: [${startingCase.title}](https://theaipex.org/cases/${startingCase.slug}) · ${startingCase.kind}. Case facts are from dated reports, not a statement of present performance. AIPEX interpretations, proposed controls and next steps are analysis, not reported arrangements.`,
+      "",
+    );
+  if (isRetiredPracticeCase(w.caseSlug))
+    lines.splice(
+      4,
+      0,
+      "Starting material: a retired fictional AIPEX teaching case. Its invented facts are preserved in this learner draft; they are not evidence about a real organisation.",
       "",
     );
   for (const f of tool.fields)
@@ -31,7 +42,7 @@ export function workspaceMarkdown(w: Workspace) {
   if (w.tool === "compare-options") {
     lines.push(
       "\n## Options comparison\n",
-      "Essential-condition status is recorded by the author, not verified by AIPEX. Business as usual is retained as a benchmark even when it fails conditions.",
+      "Essential-condition status is recorded by the author, not verified by AIPEX. The baseline (business as usual, or a dated historical comparator) is retained as a benchmark even when it fails conditions.",
     );
     for (const o of w.options) {
       lines.push(
@@ -84,6 +95,10 @@ export function workspaceMarkdown(w: Workspace) {
         `Essential conditions unresolved or not met: ${unresolved.map((o) => `${o.name} (${o.gate})`).join("; ")}. Explain the consequences in your recommendation.`,
       );
   }
+  lines.push(
+    "\n## Before relying on this brief\n",
+    ...tool.reviewChecks.map((check) => `- ${check}`),
+  );
   lines.push(
     "\n## Framework sources\n",
     `AIPEX original working aid; sources last reviewed ${reviewedOn}. These references inform the method, not the truth of statements entered above.`,

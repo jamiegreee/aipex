@@ -175,7 +175,7 @@
 }
 .case-filters {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.2fr;
+  grid-template-columns: 2fr 1fr;
   gap: 22px;
   margin: 32px 0 18px;
 }
@@ -926,4 +926,90 @@
 }
 .workspace-outline ol {
   max-width: 100%;
+}
+
+/* Keep comparison across options visible without making the editor wider than a phone. */
+.options-comparison {
+  margin-block: 28px;
+}
+.options-comparison h3 {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.comparison-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  border: 1px solid var(--color-border);
+}
+.comparison-scroll:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.options-comparison table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.options-comparison caption {
+  text-align: left;
+  padding: 16px;
+  color: var(--color-muted);
+}
+.options-comparison th,
+.options-comparison td {
+  padding: 16px;
+  vertical-align: top;
+  text-align: left;
+  border-top: 1px solid var(--color-border);
+  min-width: 220px;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+.options-comparison th {
+  font-weight: 500;
+  background: #eeeee5;
+}
+.options-comparison th[scope="row"] {
+  min-width: 150px;
+}
+.case-task-list {
+  padding-left: 24px;
+  margin-block: 18px 26px;
+}
+.case-task-list li {
+  margin-bottom: 16px;
+}
+.workspace-field .field-reading {
+  margin-top: 20px;
+}
+.workspace-field details a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.option-editor {
+  border-block: 1px solid var(--color-border);
+  margin-bottom: 16px;
+}
+.option-editor > summary {
+  cursor: pointer;
+  padding: 18px 8px;
+  font-weight: 500;
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+.option-editor .option-card {
+  margin-bottom: 0;
+  border: 0;
+}
+
+.options-comparison th[scope="row"],
+.options-comparison thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 135px;
+  width: 150px;
+  background: #eeeee5;
 }
