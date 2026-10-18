@@ -5,6 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     "",
     "/about",
+    "/charter",
     ...(communityEnabled ? ["/community"] : []),
     ...(gatheringsEnabled ? ["/gatherings"] : []),
     "/courses",

@@ -34,6 +34,7 @@ export default function Footer() {
           <span className="footer-location">
             Free, online and self-paced.
           </span>
+          <Link href="/charter">Founding charter</Link>
           <Link href="/privacy">Privacy</Link>
         </div>
       </div>
