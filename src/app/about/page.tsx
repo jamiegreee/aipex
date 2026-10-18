@@ -109,7 +109,7 @@ export default function About() {
                 exercises and worked examples.
               </p>
               <p>
-                Our first task is to find out how well they help people do
+                Alongside the courses, our public tools and case library help people examine evidence, compare options and plan oversight. Our first task is to find out how well these resources help people do
                 policy work: invite independent scrutiny, learn from participants
                 and improve. The standards we establish now should be worthy of
                 the institution we hope others will inherit.

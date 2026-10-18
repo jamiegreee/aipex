@@ -16,7 +16,7 @@ export default function Privacy() {
       <main id="main">
         <section className="page-intro">
           <div className="container">
-            <p className="label">Last updated: 16 October 2026</p>
+            <p className="label">Last updated: 18 October 2026</p>
             <h1>
               Your information.
               <br />
@@ -70,6 +70,9 @@ export default function Privacy() {
             to deliver the website and correspondence, such as IP addresses and
             email delivery records.
           </p>
+          <h3>Policy tool drafts</h3>
+          <p>Tools save drafts in your browser’s local storage, including on shared devices. You can remove an individual browser draft from its workspace. Downloads and imports happen on your device. Clearing browser data also removes these local copies.</p>
+          <p>Choosing Save to account sends that draft to our Neon database, associated with your account. Account copies are private in the interface and are subject to the same administrative access, account-deletion and backup arrangements described above. Browser-draft removal does not delete a separately saved account copy. You can request deletion of account drafts using the contact details below. Tool text is not sent to an AI service.</p>
           <h3>Optional website analytics</h3>
           <p>
             If you choose “Allow analytics”, Google Analytics measures visits to

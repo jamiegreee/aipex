@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Newsreader, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import "./policy.css";
 import { Suspense } from "react";
 import Analytics from "@/components/Analytics";
 
@@ -26,11 +27,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://theaipex.org"),
   title: { default: "AIPEX — AI Policy Exchange", template: "%s — AIPEX" },
   description:
-    "Free, self-paced courses to understand, develop and deliver effective AI policy. Build practical skills with cases, exercises and worked examples.",
+    "Practical tools, source-backed cases and free courses to understand, develop and deliver effective AI policy.",
   openGraph: {
     title: "AIPEX — AI Policy Exchange",
     description:
-      "Free, self-paced AI policy courses. Understand the landscape, practise your judgement and build the capacity to act.",
+      "Practical tools, cases and free AI policy courses. Build the judgement and capacity to act.",
     type: "website",
     locale: "en_GB",
   },

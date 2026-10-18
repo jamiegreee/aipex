@@ -33,16 +33,17 @@ export default async function AuthPage({
       <Navigation />
       <main id="main" className="container auth-page">
         <div className="auth-intro">
-          <p className="label">AIPEX / Learning</p>
+          <p className="label">AIPEX / Your practice</p>
           <h1>{titles[mode]}</h1>
           <p>
-            Practical AI policy courses. Your pace, your notes, your next step.
+            Practical AI policy courses and tools. Keep your progress, notes and
+            working drafts together in your account.
           </p>
           <div className="auth-note">
             <span className="label">Free to learn</span>
             <p>
-              Two courses. Twenty-four lessons. A portfolio of policy work you
-              can keep developing.
+              Save course exercises and policy tool drafts, return to your work
+              and download a copy whenever you need it.
             </p>
           </div>
         </div>

@@ -7,6 +7,8 @@ import { Arrow, ExchangeMark } from "./Brand";
 import { communityEnabled, gatheringsEnabled } from "@/lib/site";
 
 const links = [
+  { href: "/tools", label: "Tools" },
+  { href: "/cases", label: "Case library" },
   { href: "/courses", label: "Courses" },
   ...(gatheringsEnabled ? [{ href: "/gatherings", label: "Gatherings" }] : []),
   { href: "/about", label: "About AIPEX" },
@@ -48,7 +50,7 @@ export default function Navigation() {
             <Link
               key={href}
               href={href}
-              aria-current={pathname === href ? "page" : undefined}
+              aria-current={(pathname === href || pathname.startsWith(`${href}/`)) ? "page" : undefined}
             >
               {label}
             </Link>
@@ -85,7 +87,7 @@ export default function Navigation() {
             <Link
               key={href}
               href={href}
-              aria-current={pathname === href ? "page" : undefined}
+              aria-current={(pathname === href || pathname.startsWith(`${href}/`)) ? "page" : undefined}
               onClick={() => setOpen(false)}
             >
               {label}

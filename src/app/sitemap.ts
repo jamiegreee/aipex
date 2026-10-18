@@ -1,4 +1,6 @@
 import type { MetadataRoute } from "next";
+import { policyTools } from "@/content/policy-tools";
+import { policyCases } from "@/content/policy-cases";
 import { courses } from "@/content/courses";
 import { communityEnabled, gatheringsEnabled } from "@/lib/site";
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -6,6 +8,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/about",
     "/charter",
+    "/tools",
+    "/cases",
+    ...policyTools.map(t => `/tools/${t.slug}`),
+    ...policyCases.map(c => `/cases/${c.slug}`),
     ...(communityEnabled ? ["/community"] : []),
     ...(gatheringsEnabled ? ["/gatherings"] : []),
     "/courses",

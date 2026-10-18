@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx --test tests/curriculum.test.ts",
+    "test": "tsx --test tests/*.test.ts",
     "test:integration": "node --env-file=.env.local --env-file=.env.test --import tsx tests/learning.integration.ts",
     "export:curricula": "tsx scripts/export-notion-curricula.ts"
   },
