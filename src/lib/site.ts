@@ -2,7 +2,7 @@
 // This controls the homepage feature, navigation, route and sitemap together.
 export const gatheringsEnabled = false;
 
-// Pause community recruitment while the website focuses on public resources.
+// The former community landing page is retired; new applications use /membership.
 export const communityEnabled = false;
 
 // Keep teaching material and saved progress ready for a future return.

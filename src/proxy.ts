@@ -37,6 +37,8 @@ export const config = {
     "/tools/:path*",
     "/learn/:path*",
     "/account",
+    "/membership/:path*",
+    "/admin/:path*",
     "/login",
     "/signup",
     "/forgot-password",
