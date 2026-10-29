@@ -10,9 +10,9 @@ export default function JoinCallout() {
             Founding membership / The first 50
           </span>
           <h2 id="join-heading">
-            Help shape
+            Join
             <br />
-            <em>the founding group.</em>
+            <em>the community.</em>
           </h2>
         </div>
         <div className="join-callout-copy">

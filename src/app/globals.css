@@ -107,6 +107,10 @@ h2 {
 em {
   font-weight: 400;
 }
+/* Headline emphasis is carried by colour, not italics. */
+:is(h1, h2, h3, h4, h5, h6, .poster-title) em {
+  font-style: normal;
+}
 .container {
   width: min(100% - 112px, 1280px);
   margin-inline: auto;
