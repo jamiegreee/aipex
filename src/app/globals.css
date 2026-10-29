@@ -2099,6 +2099,47 @@ button:disabled {
   font-size: 12px;
   margin-top: 12px;
 }
+.account-settings {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: clamp(36px, 7vw, 100px);
+  margin-top: 40px;
+  padding-block: 36px;
+  border-block: 1px solid var(--color-border);
+}
+.account-settings > section { min-width: 0; }
+.account-settings h2 {
+  font-size: clamp(32px, 3vw, 40px);
+  margin-block: 12px 24px;
+  line-height: 1.12;
+}
+.account-settings section > p:not(.label) {
+  font-size: 14px;
+  color: var(--color-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.account-profile-form { max-width: 520px; }
+.account-profile-form .button {
+  width: auto;
+  margin-block: 24px 0;
+}
+.account-email { margin-block: 24px 0; }
+.account-email dt { font-size: 13px; font-weight: 500; }
+.account-email dd {
+  font-size: 15px;
+  margin: 9px 0 0;
+  overflow-wrap: anywhere;
+}
+.account-profile-form .form-alert,
+.account-profile-form .form-success { margin-top: 20px; }
+@media (max-width: 700px) {
+  .account-settings { grid-template-columns: minmax(0, 1fr); }
+  .account-settings > section + section {
+    padding-top: 30px;
+    border-top: 1px solid var(--color-border);
+  }
+}
 .dashboard-stats {
   display: flex;
   gap: 50px;
