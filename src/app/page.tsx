@@ -16,16 +16,17 @@ export default function Home() {
         >
           <div className="hero-copy">
             <p className="label hero-label">
-              <span className="status-dot" /> Building AI policy capacity
+              <span className="status-dot" /> For governments and policymakers
             </p>
             <h1 id="hero-heading">
-              Big questions.
+              Helping governments
               <br />
-              <em>Better policy.</em>
+              <em>prepare for advanced AI.</em>
             </h1>
             <p className="hero-description">
-              Build the judgement to act. Practical tools and source-backed
-              cases for people shaping how AI is governed.
+              AIPEX helps governments and policymakers understand, plan for and
+              respond to the effects of advanced artificial intelligence on
+              public institutions, the economy and society.
             </p>
             <div className="hero-actions">
               <Link className="button" href="/tools">
@@ -36,7 +37,7 @@ export default function Home() {
               </Link>
             </div>
             <p className="hero-footnote">
-              Open resources. Practical questions. Work worth doing.
+              Independent judgement, grounded in evidence.
             </p>
           </div>
           <aside
@@ -151,16 +152,22 @@ export default function Home() {
             <p className="label">An enduring purpose</p>
             <div>
               <h2 id="mission-heading">
-                Understanding AI.
+                Plan for change.
                 <br />
-                <em>Building public judgement.</em>
+                <em>Build the capacity to respond.</em>
               </h2>
               <div className="mission-copy">
                 <p>
-                  AIPEX is building capacity to understand, develop and deliver
-                  effective AI policy. We begin with useful work: careful
-                  teaching, questions that can be examined and resources people
-                  can put into practice.
+                  Preparing for advanced AI means looking beyond individual
+                  deployments to the changes more capable systems could bring.
+                  Our purpose is to help governments anticipate those changes,
+                  weigh policy responses and build the institutions needed to act.
+                </p>
+                <p>
+                  We begin with practical tools and documented cases that help
+                  policymakers examine evidence, compare options and plan
+                  oversight. These resources provide a foundation for judgement
+                  as capabilities and evidence change.
                 </p>
               </div>
               <Link className="text-link" href="/about">

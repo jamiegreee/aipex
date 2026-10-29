@@ -5,7 +5,7 @@ export const charterSections = [
     "id": "our-purpose",
     "title": "Our purpose",
     "paragraphs": [
-      "AIPEX exists to advance understanding and public judgement about artificial intelligence, and to develop the people and institutions responsible for governing it.",
+      "AIPEX exists to help governments and policymakers understand, plan for and respond to the effects of advanced artificial intelligence. Our purpose is to strengthen public judgement and the capacity of institutions to act in the public interest.",
       "We begin with an ambition to build an institution that serves generations beyond our own. We want AIPEX to endure for a thousand years and more, remaining useful as the questions before society change. Its reputation must rest on work that deserves trust."
     ]
   },

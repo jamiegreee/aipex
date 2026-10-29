@@ -19,8 +19,8 @@ export default function Footer() {
             </span>
           </Link>
           <p>
-            A changing world.
-            <br />The capacity to respond.
+            Advanced AI.
+            <br />The public capacity to respond.
           </p>
           <Link className="text-link" href="/contact">
             Say hello <Arrow diagonal />
@@ -32,7 +32,7 @@ export default function Footer() {
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} AI Policy Exchange</span>
           <span className="footer-location">
-            Building AI policy capacity.
+            Helping governments prepare for advanced AI.
           </span>
           <Link href="/charter">Founding charter</Link>
           <Link href="/privacy">Privacy</Link>

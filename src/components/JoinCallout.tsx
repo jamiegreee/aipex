@@ -7,18 +7,18 @@ export default function JoinCallout() {
       <div className="container join-callout-inner">
         <div>
           <span className="label">
-            Practical AI policy resources
+            For governments and policymakers
           </span>
           <h2 id="join-heading">
-            Come curious.
+            Plan for change.
             <br />
-            <em>Build your judgement.</em>
+            <em>Build the capacity to act.</em>
           </h2>
         </div>
         <div className="join-callout-copy">
           <p>
-            Examine evidence, compare policy options and plan oversight with
-            practical tools and documented cases.
+            Begin with the decisions in front of you. Examine evidence, compare
+            policy responses and plan oversight with our open tools and cases.
           </p>
           <Link className="button" href="/tools">
             Explore the tools <Arrow />
