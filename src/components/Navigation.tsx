@@ -21,6 +21,8 @@ type NavCta = { href: string; label: string };
 export default function Navigation({ cta }: { cta?: NavCta } = {}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  // Don't repeat the call to action as a plain link.
+  const navLinks = links.filter(({ href }) => href !== cta?.href);
 
   useEffect(() => {
     function closeOnEscape(event: KeyboardEvent) {
@@ -50,7 +52,7 @@ export default function Navigation({ cta }: { cta?: NavCta } = {}) {
           </span>
         </Link>
         <nav className="desktop-nav" aria-label="Main navigation">
-          {links.map(({ href, label }) => (
+          {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
@@ -88,7 +90,7 @@ export default function Navigation({ cta }: { cta?: NavCta } = {}) {
           className="mobile-nav container"
           aria-label="Mobile navigation"
         >
-          {links.map(({ href, label }) => (
+          {navLinks.map(({ href, label }) => (
             <Link
               key={href}
               href={href}

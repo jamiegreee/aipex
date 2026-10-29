@@ -12,16 +12,6 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-const codes: Record<string, string> = {
-  "United Kingdom": "GBR",
-  Australia: "AUS",
-  Netherlands: "NLD",
-  "United States": "USA",
-  Canada: "CAN",
-  Singapore: "SGP",
-  Brazil: "BRA",
-};
-
 const countryCount = new Set(policyCases.map((c) => c.country)).size;
 
 // An illustrative, unquantified picture of the thesis: capability compounds
@@ -64,96 +54,40 @@ function GapChart() {
 export default function ConceptB() {
   return (
     <div className="cb">
-      <Navigation cta={{ href: "/community", label: "Join the exchange" }} />
+      <Navigation cta={{ href: "/membership", label: "Join the exchange" }} />
       <main id="main">
         <section className="container cb-hero" aria-labelledby="cb-h1">
           <div>
             <p className="label cb-kicker">
-              <span /> A community for the people making AI policy
+              <span /> The community for people who make AI policy
             </p>
             <h1 id="cb-h1">
               Preparing government for advanced AI, <em>together.</em>
             </h1>
             <p className="cb-lede">
-              AIPEX is an exchange for public servants, regulators and advisers
-              working on advanced AI. We compare notes, test our judgement on
-              real decisions and build the tools governments will need,
-              together.
+              AIPEX is an online community for the public servants, regulators
+              and advisers working on AI. Join us on Slack to compare notes
+              with peers, share what&rsquo;s working and ask the questions
+              you&rsquo;re wrestling with.
             </p>
             <div className="cb-actions">
-              <Link className="button" href="/community">
+              <Link className="button" href="/membership">
                 Join the exchange <Arrow />
               </Link>
               <Link className="cb-link" href="/tools">
-                Explore the tools <Arrow diagonal />
+                Browse the tools first <Arrow diagonal />
               </Link>
             </div>
+            <p className="cb-join-note">
+              Join the community to learn and shape AI policy together.
+            </p>
           </div>
           <GapChart />
         </section>
 
-        <section className="cb-pipeline" aria-labelledby="cb-tools">
-          <div className="container">
-            <div className="cb-section-head">
-              <p className="label">01 / Shared tools</p>
-              <h2 id="cb-tools">
-                From a difficult question <em>to a working brief.</em>
-              </h2>
-            </div>
-            <ol className="cb-steps">
-              {policyTools.map((t) => (
-                <li key={t.slug}>
-                  <Link href={`/tools/${t.slug}`}>
-                    <span className="cb-step-node">{t.number}</span>
-                    <span className="label cb-muted">{t.time}</span>
-                    <h3>{t.shortTitle}</h3>
-                    <p>{t.description}</p>
-                    <span className="cb-out">
-                      <span className="label">Output</span> {t.output}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ol>
-            <p className="cb-note">
-              Free to use on your own and better with others. Tell us where
-              they fall short, and we&rsquo;ll improve them together.
-            </p>
-          </div>
-        </section>
-
-        <section className="container cb-cases" aria-labelledby="cb-cases-h">
-          <div className="cb-section-head">
-            <p className="label">02 / Case library</p>
-            <h2 id="cb-cases-h">
-              Learn from <em>decisions already made.</em>
-            </h2>
-            <Link className="cb-link" href="/cases">
-              All {policyCases.length} cases <Arrow diagonal />
-            </Link>
-          </div>
-          <p className="cb-cases-intro">
-            {policyCases.length} documented decisions from {countryCount}{" "}
-            countries. Examine the evidence, make the call, then compare your
-            reasoning with ours and with your peers&rsquo;.
-          </p>
-          <div className="cb-case-grid">
-            {policyCases.map((c) => (
-              <Link key={c.slug} href={`/cases/${c.slug}`} className="cb-case">
-                <span className="cb-code">{codes[c.country] ?? c.country}</span>
-                <span className="label cb-muted">
-                  {c.topic} · {c.minutes} min
-                </span>
-                <h3>{c.title}</h3>
-                <span className="cb-period">{c.period}</span>
-              </Link>
-            ))}
-          </div>
-        </section>
-
         <section className="cb-mission" aria-labelledby="cb-mission-h">
           <div className="container">
-            <p className="label">An enduring purpose</p>
+            <p className="label">Why a community</p>
             <h2 id="cb-mission-h">
               Capacity is built by people, <em>not papers.</em>
             </h2>
@@ -165,13 +99,50 @@ export default function ConceptB() {
               pressure-test their judgement and build the institutions needed to
               act.
             </p>
-            <Link className="cb-link" href="/about">
-              About AIPEX <Arrow diagonal />
+            <div className="cb-actions">
+              <Link className="button" href="/membership">
+                Join the exchange <Arrow />
+              </Link>
+              <Link className="cb-link" href="/about">
+                About AIPEX <Arrow diagonal />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="cb-resources" aria-labelledby="cb-tools">
+          <div className="container">
+            <div className="cb-section-head">
+              <p className="label">Open resources</p>
+              <h2 id="cb-tools">
+                From a difficult question <em>to a working brief.</em>
+              </h2>
+            </div>
+            <ul className="cb-tool-list">
+              {policyTools.map((t) => (
+                <li key={t.slug}>
+                  <Link href={`/tools/${t.slug}`}>
+                    <span className="cb-tool-num">{t.number}</span>
+                    <span className="cb-tool-name">{t.shortTitle}</span>
+                    <span className="cb-tool-desc">{t.description}</span>
+                    <span className="label">{t.time}</span>
+                    <Arrow />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link className="cb-case-link" href="/cases">
+              <span>
+                <span className="label">Case library</span>
+                {policyCases.length} documented decisions from {countryCount}{" "}
+                countries
+              </span>
+              <Arrow diagonal />
             </Link>
           </div>
         </section>
       </main>
-      <Footer tagline="The people preparing government for it." />
+      <Footer tagline="Worked out together." />
     </div>
   );
 }
