@@ -62,10 +62,12 @@
   align-items: start;
   margin-bottom: 56px;
 }
+.cb-cases .cb-section-head { margin-bottom: 48px; }
 .cb-section-head .label { padding-top: 14px; }
 .cb-section-head > a { padding-top: 14px; }
 .cb-section-head h2 { font-size: clamp(38px, 4.4vw, 64px); line-height: 1; }
 .cb-section-head h2 em { display: block; }
+.cb-cases-intro { color: var(--color-muted); font-size: 17px; max-width: 58ch; margin: -24px 0 40px; }
 
 .cb-pipeline { background: var(--cb-panel); border-block: 1px solid var(--color-border); padding: 96px 0; }
 .cb-steps {

@@ -22,6 +22,8 @@ const codes: Record<string, string> = {
   Brazil: "BRA",
 };
 
+const countryCount = new Set(policyCases.map((c) => c.country)).size;
+
 // An illustrative, unquantified picture of the thesis: capability compounds
 // while institutional capacity grows in steps. Not a data series.
 function GapChart() {
@@ -47,9 +49,9 @@ function GapChart() {
           className="cb-capacity"
           d="M0 340 H120 V318 H260 V290 H400 V262 H520 V230 H600"
         />
-        <text x="420" y="60" className="cb-chart-label">Capability</text>
-        <text x="408" y="290" className="cb-chart-label cb-muted">
-          Capacity to respond
+        <text x="405" y="60" className="cb-chart-label">AI capability</text>
+        <text x="408" y="298" className="cb-chart-label cb-muted">
+          What governments can do
         </text>
         <text x="500" y="200" className="cb-chart-label cb-accent">
           the gap
@@ -62,27 +64,28 @@ function GapChart() {
 export default function ConceptB() {
   return (
     <div className="cb">
-      <Navigation />
+      <Navigation cta={{ href: "/community", label: "Join the exchange" }} />
       <main id="main">
         <section className="container cb-hero" aria-labelledby="cb-h1">
           <div>
             <p className="label cb-kicker">
-              <span /> For governments and policymakers
+              <span /> A community for the people making AI policy
             </p>
             <h1 id="cb-h1">
-              Helping governments <em>prepare for advanced AI.</em>
+              Preparing government for advanced AI, <em>together.</em>
             </h1>
             <p className="cb-lede">
-              AIPEX helps governments and policymakers understand, plan for and
-              respond to the effects of advanced artificial intelligence on
-              public institutions, the economy and society.
+              AIPEX is an exchange for public servants, regulators and advisers
+              working on advanced AI. We compare notes, test our judgement on
+              real decisions and build the tools governments will need,
+              together.
             </p>
             <div className="cb-actions">
-              <Link className="button" href="/tools">
-                Find a tool <Arrow />
+              <Link className="button" href="/community">
+                Join the exchange <Arrow />
               </Link>
-              <Link className="cb-link" href="/cases">
-                Explore the case library <Arrow diagonal />
+              <Link className="cb-link" href="/tools">
+                Explore the tools <Arrow diagonal />
               </Link>
             </div>
           </div>
@@ -92,7 +95,7 @@ export default function ConceptB() {
         <section className="cb-pipeline" aria-labelledby="cb-tools">
           <div className="container">
             <div className="cb-section-head">
-              <p className="label">01 / The workbench</p>
+              <p className="label">01 / Shared tools</p>
               <h2 id="cb-tools">
                 From a difficult question <em>to a working brief.</em>
               </h2>
@@ -113,8 +116,8 @@ export default function ConceptB() {
               ))}
             </ol>
             <p className="cb-note">
-              Structured prompts, complete worked examples and primary sources.
-              No account needed to start.
+              Free to use on your own and better with others. Tell us where
+              they fall short, and we&rsquo;ll improve them together.
             </p>
           </div>
         </section>
@@ -123,12 +126,17 @@ export default function ConceptB() {
           <div className="cb-section-head">
             <p className="label">02 / Case library</p>
             <h2 id="cb-cases-h">
-              Good judgement <em>takes practice.</em>
+              Learn from <em>decisions already made.</em>
             </h2>
             <Link className="cb-link" href="/cases">
               All {policyCases.length} cases <Arrow diagonal />
             </Link>
           </div>
+          <p className="cb-cases-intro">
+            {policyCases.length} documented decisions from {countryCount}{" "}
+            countries. Examine the evidence, make the call, then compare your
+            reasoning with ours and with your peers&rsquo;.
+          </p>
           <div className="cb-case-grid">
             {policyCases.map((c) => (
               <Link key={c.slug} href={`/cases/${c.slug}`} className="cb-case">
@@ -147,13 +155,15 @@ export default function ConceptB() {
           <div className="container">
             <p className="label">An enduring purpose</p>
             <h2 id="cb-mission-h">
-              Plan for change. <em>Build the capacity to respond.</em>
+              Capacity is built by people, <em>not papers.</em>
             </h2>
             <p>
               Preparing for advanced AI means looking beyond individual
-              deployments to the changes more capable systems could bring. Our
-              purpose is to help governments anticipate those changes, weigh
-              policy responses and build the institutions needed to act.
+              deployments to the changes more capable systems could bring. No
+              single department will work this out alone. AIPEX brings together
+              the people who will have to, so they can compare notes,
+              pressure-test their judgement and build the institutions needed to
+              act.
             </p>
             <Link className="cb-link" href="/about">
               About AIPEX <Arrow diagonal />
@@ -161,7 +171,7 @@ export default function ConceptB() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer tagline="The people preparing government for it." />
     </div>
   );
 }

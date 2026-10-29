@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { Arrow, ExchangeMark } from "./Brand";
 
-export default function Footer() {
+export default function Footer({
+  tagline = "The public capacity to respond.",
+}: {
+  tagline?: string;
+} = {}) {
   return (
     <footer className="site-footer">
       <div className="container">
@@ -20,7 +24,8 @@ export default function Footer() {
           </Link>
           <p>
             Advanced AI.
-            <br />The public capacity to respond.
+            <br />
+            {tagline}
           </p>
           <Link className="text-link" href="/contact">
             Say hello <Arrow diagonal />

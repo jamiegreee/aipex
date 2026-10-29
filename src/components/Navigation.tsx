@@ -13,7 +13,11 @@ const links = [
   { href: "/about", label: "About AIPEX" },
 ];
 
-export default function Navigation() {
+type NavCta = { href: string; label: string };
+
+// A page can swap the account button for its own call to action; the
+// account link then moves into the plain links.
+export default function Navigation({ cta }: { cta?: NavCta } = {}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -54,8 +58,9 @@ export default function Navigation() {
               {label}
             </Link>
           ))}
-          <Link href="/account" className="button button-small">
-            My account <Arrow />
+          {cta && <Link href="/account">My account</Link>}
+          <Link href={cta?.href ?? "/account"} className="button button-small">
+            {cta?.label ?? "My account"} <Arrow />
           </Link>
         </nav>
         <button
@@ -93,6 +98,11 @@ export default function Navigation() {
               <Arrow />
             </Link>
           ))}
+          {cta && (
+            <Link href={cta.href} onClick={() => setOpen(false)}>
+              {cta.label} <Arrow />
+            </Link>
+          )}
           <Link href="/account" onClick={() => setOpen(false)}>
             My account <Arrow />
           </Link>
