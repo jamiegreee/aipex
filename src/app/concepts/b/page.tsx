@@ -59,10 +59,10 @@ export default function ConceptB() {
         <section className="container cb-hero" aria-labelledby="cb-h1">
           <div>
             <p className="label cb-kicker">
-              <span /> The community for people who make AI policy
+              <span /> Founding membership now open
             </p>
             <h1 id="cb-h1">
-              Preparing government for advanced AI, <em>together.</em>
+              The community for AI policy professionals
             </h1>
             <p className="cb-lede">
               AIPEX is an online community for the public servants, regulators
