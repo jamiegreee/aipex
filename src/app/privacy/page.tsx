@@ -40,7 +40,7 @@ export default function Privacy() {
           </p>
           <h2>The website</h2>
           <h3>Membership applications</h3>
-          <p>When you apply for membership, we store your verified account email, name, role, organisation, country or region, optional LinkedIn profile, policy interests and the written answers you submit. Jamie Green uses these to review your application and administer membership. We record the decision, reviewer and time to keep a reliable record of approvals.</p>
+          <p>When you apply for membership, we store your verified account email, name, role, organisation, country or region, optional LinkedIn profile, policy interests and the written answers you submit. We use these to review your application and administer membership. We record the decision, reviewer and time to keep a reliable record of approvals.</p>
           <p>Applications and membership status are private to you and the authorised reviewer in the interface. We do not publish a member directory or share your application with other members. Membership is in a personal capacity; it does not imply endorsement by an employer. Please do not include confidential employer information or sensitive personal details.</p>
           <p>We retain your application and decision while your account remains active. You can request a copy, correction, withdrawal or deletion by emailing hello@theaipex.org from your account address. Application and review pages are excluded from Google Analytics, and application text is not sent to an AI service. Decisions appear in My account; there is no automatic decision email at present.</p>
           <h3>Accounts and saved work</h3>
