@@ -8,7 +8,7 @@ import { Arrow } from "@/components/Brand";
 export const metadata: Metadata = {
   title: "About the exchange",
   description:
-    "AIPEX is building an enduring institution for AI policy understanding and public judgement. We begin with practical tools and source-backed cases.",
+    "AIPEX exists to help governments and policymakers prepare for advanced artificial intelligence and respond to its effects on public institutions, the economy and society.",
 };
 
 const principles = [
@@ -40,9 +40,9 @@ export default function About() {
               <em>A practical beginning.</em>
             </h1>
             <p className="intro-description">
-              AIPEX exists to advance understanding and public judgement about
-              artificial intelligence, and to develop the people and institutions
-              responsible for governing it.
+              AIPEX exists to help governments and policymakers understand,
+              plan for and respond to the effects of advanced artificial
+              intelligence.
             </p>
           </div>
         </section>
@@ -63,10 +63,16 @@ export default function About() {
               the work of building it still ahead of us.
             </p>
             <p>
-              Its reputation should grow from careful teaching, independent
-              judgement and work that helps people make better decisions. As
-              capacity develops, education could sit alongside research,
-              practical policy projects and public resources, each held to
+              Our focus is on what increasingly capable AI could mean for
+              public institutions, the economy and society, and the choices
+              governments need to prepare for. We want to strengthen the
+              judgement and institutional capacity needed to make those choices
+              as the evidence changes.
+            </p>
+            <p>
+              Its reputation should grow from independent judgement and useful
+              work. As capacity develops, research, practical policy projects
+              and public resources should inform one another, each held to
               standards that others can examine and challenge.
             </p>
             <p>
@@ -98,12 +104,12 @@ export default function About() {
           <div className="container secondary-inner">
             <div>
               <p className="label">Where we begin</p>
-              <h2 id="beginning-heading">Learning through<br /><em>policy work.</em></h2>
+              <h2 id="beginning-heading">A foundation for<br /><em>public decisions.</em></h2>
             </div>
             <div>
               <p>
                 Today, AIPEX offers practical tools and a library of documented
-                cases for people working in, or interested in, public policy.
+                cases for policymakers and people working in public institutions.
                 They help people examine evidence, compare options and plan
                 oversight, with primary sources and worked analyses.
               </p>

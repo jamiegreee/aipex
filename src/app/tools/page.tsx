@@ -21,9 +21,9 @@ export default function Tools() {
               <em>workable.</em>
             </h1>
             <p className="intro-description">
-              Three working aids for the decisions in front of you. Examine the
-              evidence, make the trade-offs visible and leave with a brief you
-              can use.
+              Three working aids for policymakers and public institutions.
+              Examine evidence, compare policy responses and plan oversight,
+              leaving with a brief you can develop as the evidence changes.
             </p>
           </div>
         </header>
