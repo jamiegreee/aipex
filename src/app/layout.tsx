@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, Newsreader, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import "./policy.css";
+import "./membership.css";
 import { Suspense } from "react";
 import Analytics from "@/components/Analytics";
 

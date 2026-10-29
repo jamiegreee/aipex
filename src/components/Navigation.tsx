@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Arrow, ExchangeMark } from "./Brand";
-import { communityEnabled, gatheringsEnabled } from "@/lib/site";
+import { gatheringsEnabled } from "@/lib/site";
 
 const links = [
+  { href: "/membership", label: "Membership" },
   { href: "/tools", label: "Tools" },
   { href: "/cases", label: "Case library" },
   ...(gatheringsEnabled ? [{ href: "/gatherings", label: "Gatherings" }] : []),
@@ -106,11 +107,6 @@ export default function Navigation({ cta }: { cta?: NavCta } = {}) {
           <Link href="/account" onClick={() => setOpen(false)}>
             My account <Arrow />
           </Link>
-          {communityEnabled && (
-            <Link href="/community" onClick={() => setOpen(false)}>
-              Join the community <Arrow />
-            </Link>
-          )}
         </nav>
       )}
     </header>

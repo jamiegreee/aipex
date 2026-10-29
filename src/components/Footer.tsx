@@ -39,6 +39,7 @@ export default function Footer({
           <span className="footer-location">
             Helping governments prepare for advanced AI.
           </span>
+          <Link href="/membership">Membership</Link>
           <Link href="/charter">Founding charter</Link>
           <Link href="/privacy">Privacy</Link>
         </div>

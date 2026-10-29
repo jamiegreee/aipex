@@ -29,15 +29,15 @@ export default function Home() {
               public institutions, the economy and society.
             </p>
             <div className="hero-actions">
-              <Link className="button" href="/tools">
-                Find a tool <Arrow />
+              <Link className="button" href="/membership">
+                Apply for membership <Arrow />
               </Link>
-              <Link className="text-link" href="/cases">
-                Explore the case library <Arrow diagonal />
+              <Link className="text-link" href="/tools">
+                Explore the tools <Arrow diagonal />
               </Link>
             </div>
             <p className="hero-footnote">
-              Independent judgement, grounded in evidence.
+              Founding community · Our first 50 members · Applications reviewed individually.
             </p>
           </div>
           <aside
