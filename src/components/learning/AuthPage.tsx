@@ -21,6 +21,7 @@ export default async function AuthPage({
   const params = await searchParams;
   const next = safeNext(params.next);
   const applying = next === "/membership" || next.startsWith("/membership/");
+  const resettingPassword = mode === "forgot" || mode === "reset";
   const user = await currentUser();
   if (user && (mode === "login" || mode === "signup")) redirect(next);
   const titles = {
@@ -34,15 +35,15 @@ export default async function AuthPage({
       <Navigation />
       <main id="main" className="container auth-page">
         <div className="auth-intro">
-          <p className="label">{applying ? "AIPEX / Membership application" : "AIPEX / Your practice"}</p>
+          <p className="label">{resettingPassword ? "AIPEX / Account access" : applying ? "AIPEX / Membership application" : "AIPEX / Your practice"}</p>
           <h1>{titles[mode]}</h1>
           <p>
-            {applying ? "Create and verify your account, then tell us about your work and why you’d like to join. We review your application before granting membership." : "Practical tools for AI policy decisions. Save your working drafts to your account and return to them when you need them."}
+            {resettingPassword ? mode === "forgot" ? "Enter your account email and we’ll send you a link to reset your password." : "Choose a new password for your AIPEX account." : applying ? "Create and verify your account, then tell us about your work and why you’d like to join. We review your application before granting membership." : "Practical tools for AI policy decisions. Save your working drafts to your account and return to them when you need them."}
           </p>
           <div className="auth-note">
-            <span className="label">{applying ? "Membership is reviewed" : "Your work, saved"}</span>
+            <span className="label">{resettingPassword ? "Your account" : applying ? "Membership is reviewed" : "Your work, saved"}</span>
             <p>
-              {applying ? "Creating an account lets you apply and check your status. It does not grant membership; you become a member only after approval." : "Save policy tool drafts, return to your work and download a copy whenever you need it."}
+              {resettingPassword ? "Your profile and membership stay with your account when you reset your password." : applying ? "Creating an account lets you apply and check your status. It does not grant membership; you become a member only after approval." : "Save policy tool drafts, return to your work and download a copy whenever you need it."}
             </p>
           </div>
         </div>
