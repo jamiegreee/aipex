@@ -1,9 +1,12 @@
 import { findCourse, contentVersion } from "@/content/courses";
 import { allLessons } from "@/lib/courses";
+import { notFound } from "next/navigation";
+import { coursesEnabled } from "@/lib/site";
 export async function GET(
   _: Request,
   { params }: { params: Promise<{ course: string }> },
 ) {
+  if (!coursesEnabled) notFound();
   const course = findCourse((await params).course);
   if (!course) return new Response("Course not found", { status: 404 });
   const text = [

@@ -3,6 +3,7 @@ import { createClient } from "@/lib/database";
 import { currentUser, authConfigured } from "@/lib/auth";
 import { findCourse, quizRevision } from "@/content/courses";
 import { allLessons, grade, wordCount } from "@/lib/courses";
+import { coursesEnabled } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 const reply = (body: object, status = 200) =>
@@ -11,6 +12,7 @@ const reply = (body: object, status = 200) =>
     headers: { "Cache-Control": "private, no-store" },
   });
 export async function POST(request: NextRequest) {
+  if (!coursesEnabled) return reply({ error: "Not found." }, 404);
   // Next's internal URL can use localhost while the browser uses 127.0.0.1.
   // Compare to the actual request Host, which a cross-origin browser cannot set.
   let origin: URL;

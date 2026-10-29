@@ -127,9 +127,9 @@ export default function AuthForm({
       )}
       {signup && (
         <p className="small-copy">
-          Your email and learning work are saved to your account. Read our{" "}
+          Your email and the drafts you choose to save are stored in your account. Read our{" "}
           <Link href="/privacy">privacy notice</Link>. Please use fictional or
-          anonymised examples in exercises.
+          anonymised examples in your drafts.
         </p>
       )}
       {mode === "login" && (

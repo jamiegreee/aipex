@@ -110,11 +110,13 @@ test("post-login destinations cannot redirect to an external origin", () => {
     null,
     1,
   ])
-    assert.equal(safeNext(input), "/learn");
+    assert.equal(safeNext(input), "/tools");
   assert.equal(
-    safeNext("/courses/ai-policy-in-practice"),
-    "/courses/ai-policy-in-practice",
+    safeNext("/tools/assess-evidence?case=govuk-chat"),
+    "/tools/assess-evidence?case=govuk-chat",
   );
+  for (const path of ["/courses", "/courses/ai-policy-in-practice", "/learn", "/learn/portfolio", "/about/../courses?source=old-link"])
+    assert.equal(safeNext(path), "/tools", "hidden destinations fall back to tools");
   assert.equal(wordCount(" \n one  two\tthree "), 3);
   assert.equal(wordCount(""), 0);
 });

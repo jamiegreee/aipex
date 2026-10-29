@@ -8,7 +8,7 @@ import { Arrow } from "@/components/Brand";
 export const metadata: Metadata = {
   title: "About the exchange",
   description:
-    "AIPEX is building an enduring institution for AI policy education, understanding and public judgement. We begin with free, practical online courses.",
+    "AIPEX is building an enduring institution for AI policy understanding and public judgement. We begin with practical tools and source-backed cases.",
 };
 
 const principles = [
@@ -102,14 +102,13 @@ export default function About() {
             </div>
             <div>
               <p>
-                Today, AIPEX offers two free, self-paced online courses for
-                people working in, or interested in, public policy. They cover
-                practical policy development and the governance of AI in public
-                services, combining sourced teaching, fictional cases, written
-                exercises and worked examples.
+                Today, AIPEX offers practical tools and a library of documented
+                cases for people working in, or interested in, public policy.
+                They help people examine evidence, compare options and plan
+                oversight, with primary sources and worked analyses.
               </p>
               <p>
-                Alongside the courses, our public tools and case library help people examine evidence, compare options and plan oversight. Our first task is to find out how well these resources help people do
+                Our first task is to find out how well these resources help people do
                 policy work: invite independent scrutiny, learn from participants
                 and improve. The standards we establish now should be worthy of
                 the institution we hope others will inherit.

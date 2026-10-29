@@ -4,10 +4,10 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   async redirects() {
     return [
-      // Keep legacy URLs useful while the site focuses on courses.
+      // Keep legacy URLs useful while the site focuses on public resources.
       // The original research source remains in the repository for review.
       { source: "/research/:path*", destination: "/about", permanent: false },
-      { source: "/fellowship", destination: "/courses", permanent: false },
+      { source: "/fellowship", destination: "/about", permanent: false },
     ];
   },
 };

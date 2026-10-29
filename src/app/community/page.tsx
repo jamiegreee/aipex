@@ -9,7 +9,7 @@ import { communityEnabled } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Join the exchange",
   description:
-    "Help shape AIPEX's learning community. Share your interests, course feedback and ideas for building AI policy capacity.",
+    "Share your interests, feedback on our resources and ideas for building AI policy capacity.",
 };
 
 const interestEmail =
@@ -57,7 +57,7 @@ const questions = [
 ];
 
 export default function Community() {
-  if (!communityEnabled) redirect("/courses");
+  if (!communityEnabled) redirect("/tools");
 
   return (
     <>

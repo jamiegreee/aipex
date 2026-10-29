@@ -71,16 +71,10 @@ export default async function ToolPage({ params, searchParams }: Props) {
           <section className="policy-next">
             <h2>Go further.</h2>
             <p>
-              Develop the underlying skills through the related course, or
-              examine another case.
+              Examine a documented decision and try applying this tool to
+              another case.
             </p>
             <div className="workspace-actions">
-              <Link
-                className="text-link"
-                href={`/courses/${tool.course}/${tool.lesson}`}
-              >
-                Related course lesson ↗
-              </Link>
               <Link className="text-link" href="/cases">
                 Case library ↗
               </Link>

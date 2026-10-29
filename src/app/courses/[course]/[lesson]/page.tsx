@@ -11,12 +11,14 @@ import { allLessons } from "@/lib/courses";
 import { answersForRevision } from "@/lib/course-revision";
 import { currentUser } from "@/lib/auth";
 import { learningData } from "@/lib/learning";
+import { coursesEnabled } from "@/lib/site";
 type Params = { course: string; lesson: string };
 export async function generateMetadata({
   params,
 }: {
   params: Promise<Params>;
 }) {
+  if (!coursesEnabled) notFound();
   const p = await params;
   const c = findCourse(p.course);
   const l = c && allLessons(c).find((x) => x.slug === p.lesson);
@@ -30,6 +32,7 @@ export default async function LessonPage({
 }: {
   params: Promise<Params>;
 }) {
+  if (!coursesEnabled) notFound();
   const p = await params;
   const course = findCourse(p.course);
   if (!course) notFound();

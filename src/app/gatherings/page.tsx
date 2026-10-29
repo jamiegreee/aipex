@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function Gatherings() {
-  if (!gatheringsEnabled) redirect("/courses");
+  if (!gatheringsEnabled) redirect("/tools");
 
   return (
     <>

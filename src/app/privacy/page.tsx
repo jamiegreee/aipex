@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "How AIPEX handles information you share when using our courses, creating a learning account or contacting us.",
+    "How AIPEX handles information you share when using our policy tools, creating an account or contacting us.",
 };
 
 export default function Privacy() {
@@ -16,7 +16,7 @@ export default function Privacy() {
       <main id="main">
         <section className="page-intro">
           <div className="container">
-            <p className="label">Last updated: 18 October 2026</p>
+            <p className="label">Last updated: 29 October 2026</p>
             <h1>
               Your information.
               <br />
@@ -34,18 +34,18 @@ export default function Privacy() {
           <h2>How we use your information</h2>
           <p>
             We use your message to respond to your enquiry and develop our
-            courses. If you ask to hear about AIPEX updates, we
+            resources. If you ask to hear about AIPEX updates, we
             use your email address to send those updates. You can ask us to stop
             by replying to any email.
           </p>
           <h2>The website</h2>
-          <h3>Learning accounts and course work</h3>
+          <h3>Accounts and saved work</h3>
           <p>
-            When you create a learning account, we store your email address,
-            optional name, enrolments, lesson progress, knowledge-check
-            responses and the written exercises you choose to save. We use these
-            to provide your account, let you resume courses and export your
-            portfolio. Written work is private to your account in the learning
+            When you create an account, we store your email address, optional
+            name and the work you choose to save. We use these to provide your
+            account and let you return to your drafts. Existing written
+            exercises, progress records and responses previously saved to your
+            account remain stored. Saved work is private to your account in the
             interface. AIPEX’s operator and infrastructure providers may access
             data when necessary to administer the service or resolve a support
             issue.
@@ -53,15 +53,15 @@ export default function Privacy() {
           <p>
             Neon provides authentication and database storage; Vercel hosts
             the application and Resend sends account emails. Account cookies maintain your sign-in session.
-            These are necessary for account features. We do not use saved course
-            work to train an AI model, and course exercises are not submitted to
-            an AI service for grading. Please do not enter confidential material
-            or personal information about other people in exercises.
+            These are necessary for account features. We do not use saved work
+            to train an AI model or submit it to an AI service for grading.
+            Please do not enter confidential material or personal information
+            about other people in your drafts.
           </p>
           <p>
-            We keep your learning record while your account remains active. You
-            can download your written work from My learning and request account
-            and learning-data deletion using the contact details below. Deleted
+            We keep your saved records while your account remains active. You
+            can request a copy of previously saved work, or account and data
+            deletion, using the contact details below. Deleted
             records may remain in infrastructure backups until those backups
             expire.
           </p>
@@ -76,11 +76,11 @@ export default function Privacy() {
           <h3>Optional website analytics</h3>
           <p>
             If you choose “Allow analytics”, Google Analytics measures visits to
-            public AIPEX pages, including course reading pages. It receives page
+            public AIPEX pages. It receives page
             addresses and titles, a shortened referring address, device and browser
             information, and approximate location derived from your IP address.
             Analytics cookies help distinguish visits. We do not send your name,
-            email address, saved answers or learning record to Google Analytics.
+            email address, saved work or progress records to Google Analytics.
             Account, sign-in and password-reset pages are excluded, and we remove
             query strings and fragments from the page addresses we send.
           </p>

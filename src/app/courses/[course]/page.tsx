@@ -8,11 +8,13 @@ import { findCourse, contentVersion } from "@/content/courses";
 import { allLessons } from "@/lib/courses";
 import { currentUser } from "@/lib/auth";
 import { learningData } from "@/lib/learning";
+import { coursesEnabled } from "@/lib/site";
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ course: string }>;
 }) {
+  if (!coursesEnabled) notFound();
   const c = findCourse((await params).course);
   return { title: c?.title ?? "Course", description: c?.description };
 }
@@ -21,6 +23,7 @@ export default async function CoursePage({
 }: {
   params: Promise<{ course: string }>;
 }) {
+  if (!coursesEnabled) notFound();
   const course = findCourse((await params).course);
   if (!course) notFound();
   const user = await currentUser();

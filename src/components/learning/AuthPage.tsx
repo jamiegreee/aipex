@@ -36,14 +36,14 @@ export default async function AuthPage({
           <p className="label">AIPEX / Your practice</p>
           <h1>{titles[mode]}</h1>
           <p>
-            Practical AI policy courses and tools. Keep your progress, notes and
-            working drafts together in your account.
+            Practical tools for AI policy decisions. Save your working drafts
+            to your account and return to them when you need them.
           </p>
           <div className="auth-note">
-            <span className="label">Free to learn</span>
+            <span className="label">Your work, saved</span>
             <p>
-              Save course exercises and policy tool drafts, return to your work
-              and download a copy whenever you need it.
+              Save policy tool drafts, return to your work and download a copy
+              whenever you need it.
             </p>
           </div>
         </div>
@@ -64,7 +64,7 @@ export default async function AuthPage({
           )}
           {mode === "login" && params.confirmed === "yes" && (
             <p className="form-success" role="status">
-              Email confirmation finished. Sign in to start learning.
+              Email confirmation finished. Sign in to save your work.
             </p>
           )}
           {mode === "reset" && (!params.token || params.token.length > 2048) ? (
