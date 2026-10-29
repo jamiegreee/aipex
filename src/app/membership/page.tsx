@@ -46,13 +46,10 @@ export default async function Membership() {
               <li>A serious interest in how advanced AI could affect public institutions, the economy and society.</li>
               <li>A willingness to share useful experience and engage constructively across different views.</li>
             </ul>
-            <h3>Help build the founding group</h3>
-            <p>Founding members will help shape the questions the community examines, exchange practical experience and build working relationships across institutions.</p>
-            <p>We’re starting with 50 members so the first group can develop through considered introductions and useful conversation. Each application is personally reviewed by Jamie Green.</p>
             <h3>How it works</h3>
             <ol>
               <li>Verify your email and tell us about your work and interests.</li>
-              <li>Jamie reviews your application for relevance to the founding group.</li>
+              <li>We review your application.</li>
               <li>Check your decision in <Link href="/account">My account</Link>.</li>
             </ol>
             <p className="small-copy">Applications are private. Membership is in a personal capacity and does not imply endorsement by your employer. Please leave out confidential work information.</p>

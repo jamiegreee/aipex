@@ -37,7 +37,7 @@ export default async function AuthPage({
           <p className="label">{applying ? "AIPEX / Membership application" : "AIPEX / Your practice"}</p>
           <h1>{titles[mode]}</h1>
           <p>
-            {applying ? "Create and verify your account, then tell us about your work and why you’d like to join. Jamie personally reviews every membership application." : "Practical tools for AI policy decisions. Save your working drafts to your account and return to them when you need them."}
+            {applying ? "Create and verify your account, then tell us about your work and why you’d like to join. We review your application before granting membership." : "Practical tools for AI policy decisions. Save your working drafts to your account and return to them when you need them."}
           </p>
           <div className="auth-note">
             <span className="label">{applying ? "Membership is reviewed" : "Your work, saved"}</span>
