@@ -92,18 +92,10 @@ export default function MembershipForm({ user, initialValues }: Props) {
         tabIndex={-1}
         role="status"
       >
-        <p className="label">Application received</p>
-        <h2>Your application is saved.</h2>
+        <h2>Application received.</h2>
         <p>
-          We review your application and show the decision in My account.
+          We will review your application and get back to you soon.
         </p>
-        <p>
-          Membership is confirmed only after approval. Your application details
-          stay private.
-        </p>
-        <Link className="button" href="/account">
-          View my application <span aria-hidden="true">→</span>
-        </Link>
       </div>
     );
   }
