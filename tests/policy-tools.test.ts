@@ -17,8 +17,6 @@ import { workspaceMarkdown } from "../src/lib/policy-export";
 import { policyTools, findTool } from "../src/content/policy-tools";
 import { policyCases, findCase } from "../src/content/policy-cases";
 import { policySources } from "../src/content/policy-sources";
-import { courses } from "../src/content/courses";
-import { allLessons } from "../src/lib/courses";
 import { isAnalyticsPage } from "../src/lib/analytics";
 
 test("case reloads resume the selected edited copy, or the latest copy when arriving from another draft", () => {
@@ -155,17 +153,12 @@ test("a case-based export retains evidence references and labels retired teachin
   assert.ok(isRetiredPracticeCase(w.caseSlug));
   assert.equal(findCase(w.caseSlug), undefined);
 });
-test("every source reference and related lesson resolves; case types cover each tool", () => {
+test("every source reference resolves and documented cases cover each tool", () => {
   for (const t of policyTools) {
     for (const id of [...t.sources, ...t.fields.flatMap((f) => f.sources)])
       assert.ok(policySources[id]);
     assert.ok(
       t.fields.every((f) => f.sources.every((id) => t.sources.includes(id))),
-    );
-    const course = courses.find((c) => c.slug === t.course)!;
-    assert.ok(
-      allLessons(course).some((l) => l.slug === t.lesson),
-      t.lesson,
     );
     assert.ok(
       policyCases.some(

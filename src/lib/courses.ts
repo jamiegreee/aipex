@@ -1,3 +1,5 @@
+import { coursesEnabled } from "./site";
+
 export type Question = {
   prompt: string;
   options: string[];
@@ -61,10 +63,14 @@ export function grade(lesson: Lesson, answers: unknown) {
     explanation: q.explanation,
   }));
 }
-export function safeNext(value: unknown, fallback = "/learn") {
-  return typeof value === "string" &&
+export function safeNext(value: unknown, fallback = coursesEnabled ? "/learn" : "/tools") {
+  const destination = typeof value === "string" &&
     /^\/(?!\/)/.test(value) &&
     !/[\\\u0000-\u0020\u007f]/.test(value)
     ? value
     : fallback;
+  const path = new URL(destination, "https://theaipex.org").pathname;
+  return !coursesEnabled && /^\/(courses|learn)(\/|$)/.test(path)
+    ? fallback
+    : destination;
 }

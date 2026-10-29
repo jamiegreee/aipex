@@ -7,7 +7,7 @@ import { Arrow } from "@/components/Brand";
 export const metadata: Metadata = {
   title: "Say hello",
   description:
-    "Get in touch with AIPEX about our courses, learning accounts or ideas for improving practical AI policy education.",
+    "Get in touch with AIPEX about our policy tools, case library, accounts or ideas for building AI policy capacity.",
 };
 
 export default function Contact() {
@@ -24,7 +24,7 @@ export default function Contact() {
               <em>a hello.</em>
             </h1>
             <p className="intro-description">
-              A question, course feedback or an idea for AIPEX—we&apos;d like to
+              A question, feedback on our resources or an idea for AIPEX—we&apos;d like to
               hear from you.
             </p>
           </div>
@@ -33,7 +33,7 @@ export default function Contact() {
           <div>
             <h2>Let&apos;s talk.</h2>
             <p>
-              Write to Jamie with course feedback, questions about your learning
+              Write to Jamie with feedback on our resources, questions about your
               account or an offer to contribute subject expertise.
             </p>
             <a className="contact-email" href="mailto:hello@theaipex.org">
@@ -41,13 +41,13 @@ export default function Contact() {
             </a>
           </div>
           <div className="contact-aside">
-            <h2>Ready to learn?</h2>
+            <h2>A decision on your desk?</h2>
             <p>
-              Explore two free, self-paced courses. Read the lessons online and
-              create an account to save your exercises and track your progress.
+              Use our practical tools to assess evidence, compare policy options
+              or plan oversight. Start without an account and export your work.
             </p>
-            <Link className="text-link" href="/courses">
-              Explore the courses <Arrow />
+            <Link className="text-link" href="/tools">
+              Explore the tools <Arrow />
             </Link>
           </div>
         </section>

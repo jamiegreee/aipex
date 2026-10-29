@@ -63,7 +63,7 @@ export default function Analytics() {
           <div className="container analytics-choice-inner">
             <div>
               <h2>Cookie preferences</h2>
-              <p>We use optional Google Analytics cookies to understand visits to public pages. Account details and course answers stay private. <Link href="/privacy">Privacy details</Link></p>
+              <p>We use optional Google Analytics cookies to understand visits to public pages. Account details and saved work stay private. <Link href="/privacy">Privacy details</Link></p>
             </div>
             <div className="analytics-actions">
               <button className="button button-small button-outline" onClick={() => choose("rejected")}>Reject analytics</button>

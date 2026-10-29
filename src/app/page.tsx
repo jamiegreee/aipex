@@ -24,15 +24,15 @@ export default function Home() {
               <em>Better policy.</em>
             </h1>
             <p className="hero-description">
-              Build the judgement to act. Practical tools, cases and free
-              courses for people shaping how AI is governed.
+              Build the judgement to act. Practical tools and source-backed
+              cases for people shaping how AI is governed.
             </p>
             <div className="hero-actions">
               <Link className="button" href="/tools">
                 Find a tool <Arrow />
               </Link>
-              <Link className="text-link" href="/courses">
-                Explore the courses <Arrow diagonal />
+              <Link className="text-link" href="/cases">
+                Explore the case library <Arrow diagonal />
               </Link>
             </div>
             <p className="hero-footnote">
@@ -145,37 +145,6 @@ export default function Home() {
             and explicit limits. Examine the evidence, try the decision and
             compare your reasoning with an AIPEX analysis.
           </p>
-        </section>
-        <section
-          className="home-learning container policy-home-learning"
-          aria-labelledby="home-learning-heading"
-        >
-          <p className="label">03 / Learn the craft · Free & self-paced</p>
-          <h2 id="home-learning-heading">
-            Build a foundation.
-            <br />
-            <em>Put it to work.</em>
-          </h2>
-          <div className="home-course-links">
-            <Link href="/courses/ai-policy-in-practice">
-              <span className="label">01 / 8–10 hours</span>
-              <h3>AI Policy in Practice</h3>
-              <p>
-                Frame problems, weigh evidence and write a recommendation that
-                can be delivered.
-              </p>
-              <span className="text-link">Explore the curriculum ↗</span>
-            </Link>
-            <Link href="/courses/governing-ai-in-public-services">
-              <span className="label">02 / 6–8 hours</span>
-              <h3>Governing AI in Public Services</h3>
-              <p>
-                Assess deployments, ask better procurement questions and design
-                meaningful oversight.
-              </p>
-              <span className="text-link">Explore the curriculum ↗</span>
-            </Link>
-          </div>
         </section>
         <section className="mission-section" aria-labelledby="mission-heading">
           <div className="container mission-inner">

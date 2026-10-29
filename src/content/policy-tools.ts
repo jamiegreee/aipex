@@ -24,8 +24,6 @@ export type PolicyTool = {
   exampleOptions?: PolicyOption[];
   reviewChecks: string[];
   sources: SourceId[];
-  course: string;
-  lesson: string;
 };
 // An AIPEX comparison of documented grading approaches, not an official appraisal.
 export const gradingExampleOptions: PolicyOption[] = [
@@ -94,8 +92,6 @@ export const policyTools: PolicyTool[] = [
     time: "20–30 minutes",
     scope:
       "For a specific claim about an AI system or intervention. Record the study and version you reviewed. A technical performance result alone does not establish effectiveness, fairness or suitability in your service.",
-    course: "ai-policy-in-practice",
-    lesson: "audit-an-evidence-claim",
     sources: ["magenta", "evaluation", "cards", "recruitment"],
     exampleCase: "govuk-chat",
     exampleTitle: "GOV.UK Chat evidence review",
@@ -199,8 +195,6 @@ export const policyTools: PolicyTool[] = [
     time: "30–45 minutes",
     scope:
       "An early-stage qualitative appraisal, informed by the Green Book. Use a proportionate economic appraisal and your organisation’s approval process where required. The tool records reasoning; it does not calculate a preferred policy.",
-    course: "ai-policy-in-practice",
-    lesson: "build-a-real-options-set",
     sources: ["green", "magenta"],
     exampleOptions: gradingExampleOptions,
     exampleCase: "grades-2020",
@@ -294,8 +288,6 @@ export const policyTools: PolicyTool[] = [
     time: "30–45 minutes",
     scope:
       "For one bounded deployment and lifecycle stage. An oversight plan supports governance discussions; it does not authorise deployment or determine legal compliance. Record the approvals your organisation needs separately.",
-    course: "governing-ai-in-public-services",
-    lesson: "human-review-that-works",
     sources: ["nist", "playbook", "evaluation"],
     exampleCase: "recruitment-audits",
     exampleTitle: "Recruitment audits: oversight analysis",

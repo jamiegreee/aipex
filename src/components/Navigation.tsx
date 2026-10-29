@@ -9,7 +9,6 @@ import { communityEnabled, gatheringsEnabled } from "@/lib/site";
 const links = [
   { href: "/tools", label: "Tools" },
   { href: "/cases", label: "Case library" },
-  { href: "/courses", label: "Courses" },
   ...(gatheringsEnabled ? [{ href: "/gatherings", label: "Gatherings" }] : []),
   { href: "/about", label: "About AIPEX" },
 ];
@@ -55,8 +54,8 @@ export default function Navigation() {
               {label}
             </Link>
           ))}
-          <Link href="/learn" className="button button-small">
-            My learning <Arrow />
+          <Link href="/account" className="button button-small">
+            My account <Arrow />
           </Link>
         </nav>
         <button
@@ -94,8 +93,8 @@ export default function Navigation() {
               <Arrow />
             </Link>
           ))}
-          <Link href="/learn" onClick={() => setOpen(false)}>
-            My learning <Arrow />
+          <Link href="/account" onClick={() => setOpen(false)}>
+            My account <Arrow />
           </Link>
           {communityEnabled && (
             <Link href="/community" onClick={() => setOpen(false)}>

@@ -4,7 +4,10 @@ import { learningData } from "@/lib/learning";
 import { courses, contentVersion } from "@/content/courses";
 import { allLessons } from "@/lib/courses";
 import { siteUrl } from "@/lib/site-url";
+import { coursesEnabled } from "@/lib/site";
+import { notFound } from "next/navigation";
 export async function GET(request: NextRequest) {
+  if (!coursesEnabled) notFound();
   const user = await currentUser();
   if (!user)
     return NextResponse.redirect(new URL("/login?next=/learn", siteUrl()));

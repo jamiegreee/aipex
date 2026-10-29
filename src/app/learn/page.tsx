@@ -9,8 +9,9 @@ import { allLessons } from "@/lib/courses";
 import { currentUser } from "@/lib/auth";
 import { learningData } from "@/lib/learning";
 import { signOut } from "@/app/auth/actions";
+import { coursesEnabled } from "@/lib/site";
 export const metadata = {
-  title: "My learning",
+  title: "My account",
   robots: { index: false, follow: false },
 };
 export const dynamic = "force-dynamic";
@@ -19,6 +20,7 @@ export default async function Dashboard({
 }: {
   searchParams: Promise<{ password?: string }>;
 }) {
+  if (!coursesEnabled) redirect("/tools");
   const user = await currentUser();
   if (!user) redirect("/login?next=/learn");
   const data = await learningData(user.id);

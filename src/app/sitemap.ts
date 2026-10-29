@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { policyTools } from "@/content/policy-tools";
 import { policyCases } from "@/content/policy-cases";
 import { courses } from "@/content/courses";
-import { communityEnabled, gatheringsEnabled } from "@/lib/site";
+import { communityEnabled, coursesEnabled, gatheringsEnabled } from "@/lib/site";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     "",
@@ -14,8 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...policyCases.map(c => `/cases/${c.slug}`),
     ...(communityEnabled ? ["/community"] : []),
     ...(gatheringsEnabled ? ["/gatherings"] : []),
-    "/courses",
-    ...courses.map((c) => `/courses/${c.slug}`),
+    ...(coursesEnabled ? ["/courses", ...courses.map((c) => `/courses/${c.slug}`)] : []),
   ].map((path) => ({
     url: `https://theaipex.org${path}`,
     changeFrequency: "monthly",

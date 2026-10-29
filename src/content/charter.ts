@@ -22,7 +22,7 @@ export const charterSections = [
     "title": "Education in the public interest",
     "paragraphs": [
       "We will help people develop the knowledge, skills and judgement to act responsibly. Our teaching should connect technical understanding with the realities of public institutions and people’s lives.",
-      "We will judge education by what learners come to understand and become able to do. We will use demanding, transparent standards and seek ways for capable people to participate regardless of wealth or existing connections. Our first courses are free; future programmes should retain a clear commitment to access.",
+      "We will judge education by what learners come to understand and become able to do. We will use demanding, transparent standards and seek ways for capable people to participate regardless of wealth or existing connections. Our public resources are free; future programmes should retain a clear commitment to access.",
       "The public purpose of this work extends beyond individual advancement. We want better-informed decisions, more capable institutions and a wider ability to understand and question how AI is governed."
     ]
   },
@@ -71,7 +71,7 @@ export const charterSections = [
     "id": "where-we-begin",
     "title": "Where we begin",
     "paragraphs": [
-      "We begin with two online courses and the task of finding out whether they help people do better policy work. Our immediate responsibility is to teach carefully, invite independent scrutiny, learn from participants and improve.",
+      "We begin with practical tools and documented cases, and the task of finding out whether they help people do better policy work. Our immediate responsibility is to examine evidence carefully, invite independent scrutiny, learn from people using the resources and improve.",
       "The standards established in this first work should be worthy of the institution we hope others will inherit."
     ]
   }

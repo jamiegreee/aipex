@@ -75,7 +75,7 @@ export async function authenticate(
     const { error } = await auth.signUp.email({
       email,
       password,
-      name: name || "Learner",
+      name: name || "AIPEX member",
       callbackURL,
     });
     if (error)
@@ -85,7 +85,7 @@ export async function authenticate(
       };
     return {
       message:
-        "Check your email to confirm your account, then sign in to start learning. If you already have an account, sign in instead.",
+        "Check your email to confirm your account, then sign in to save your work. If you already have an account, sign in instead.",
       confirmationEmail: email,
     };
   }

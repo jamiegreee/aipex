@@ -7,7 +7,7 @@ export default function JoinCallout() {
       <div className="container join-callout-inner">
         <div>
           <span className="label">
-            Practical AI policy education
+            Practical AI policy resources
           </span>
           <h2 id="join-heading">
             Come curious.
@@ -17,14 +17,14 @@ export default function JoinCallout() {
         </div>
         <div className="join-callout-copy">
           <p>
-            Explore practical AI policy courses, work through real decisions
-            and develop skills you can use.
+            Examine evidence, compare policy options and plan oversight with
+            practical tools and documented cases.
           </p>
-          <Link className="button" href="/courses">
-            Explore the courses <Arrow />
+          <Link className="button" href="/tools">
+            Explore the tools <Arrow />
           </Link>
           <span className="join-note">
-            Free, online and self-paced.
+            Open resources. No account needed to start.
           </span>
         </div>
       </div>

@@ -1,15 +1,21 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { coursesEnabled } from "@/lib/site";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import CourseArt from "@/components/learning/CourseArt";
 import { courses, contentVersion } from "@/content/courses";
 import { allLessons } from "@/lib/courses";
-export const metadata = {
-  title: "AI policy courses",
-  description:
-    "Free, self-paced courses in practical AI policy and governing AI in public services. Full lessons, exercises and saved progress.",
-};
+export function generateMetadata() {
+  if (!coursesEnabled) notFound();
+  return {
+    title: "AI policy courses",
+    description:
+      "Free, self-paced courses in practical AI policy and governing AI in public services. Full lessons, exercises and saved progress.",
+  };
+}
 export default function Courses() {
+  if (!coursesEnabled) notFound();
   return (
     <>
       <Navigation />
