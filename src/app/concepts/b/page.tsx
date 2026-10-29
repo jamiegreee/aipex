@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Arrow, ExchangeMark } from "@/components/Brand";
+import { Arrow } from "@/components/Brand";
 import { policyTools } from "@/content/policy-tools";
 import { policyCases } from "@/content/policy-cases";
 import "./concept-b.css";
@@ -50,7 +51,7 @@ function GapChart() {
         <text x="408" y="290" className="cb-chart-label cb-muted">
           Capacity to respond
         </text>
-        <text x="500" y="200" className="cb-chart-label cb-pink">
+        <text x="500" y="200" className="cb-chart-label cb-accent">
           the gap
         </text>
       </svg>
@@ -62,19 +63,7 @@ function GapChart() {
 export default function ConceptB() {
   return (
     <div className="cb">
-      <header className="cb-header container">
-        <Link href="/" className="cb-brand" aria-label="AIPEX — home">
-          <ExchangeMark /> AIPEX
-        </Link>
-        <nav aria-label="Main navigation">
-          <Link href="/tools">Tools</Link>
-          <Link href="/cases">Case library</Link>
-          <Link href="/about">About</Link>
-          <Link href="/account" className="cb-pill">
-            My account
-          </Link>
-        </nav>
-      </header>
+      <Navigation />
       <main id="main">
         <section className="container cb-hero" aria-labelledby="cb-h1">
           <div>
@@ -90,7 +79,7 @@ export default function ConceptB() {
               public institutions, the economy and society.
             </p>
             <div className="cb-actions">
-              <Link className="cb-button" href="/tools">
+              <Link className="button" href="/tools">
                 Find a tool <Arrow />
               </Link>
               <Link className="cb-link" href="/cases">
