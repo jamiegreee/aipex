@@ -55,7 +55,6 @@ function GapChart() {
           the gap
         </text>
       </svg>
-      <figcaption className="label">Fig. 1 — Illustrative, not to scale</figcaption>
     </figure>
   );
 }

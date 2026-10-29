@@ -36,7 +36,7 @@
   margin: 0;
   border: 1px solid var(--color-border);
   background: var(--cb-panel);
-  padding: 24px 24px 16px;
+  padding: 24px;
 }
 .cb-chart svg { width: 100%; height: auto; display: block; overflow: visible; }
 .cb-grid { stroke: var(--color-border); stroke-dasharray: 2 6; }
@@ -54,7 +54,6 @@
 .cb-chart-label { fill: var(--color-ink); font: 500 13px var(--font-label), monospace; }
 .cb-chart-label.cb-muted { fill: var(--color-muted); }
 .cb-chart-label.cb-accent { fill: var(--color-accent); }
-.cb-chart figcaption { margin-top: 12px; }
 
 .cb-section-head {
   display: grid;
