@@ -8,7 +8,6 @@ import { gatheringsEnabled } from "@/lib/site";
 
 const links = [
   { href: "/membership", label: "Membership" },
-  { href: "/tools", label: "Tools" },
   { href: "/cases", label: "Case library" },
   ...(gatheringsEnabled ? [{ href: "/gatherings", label: "Gatherings" }] : []),
   { href: "/about", label: "About AIPEX" },

@@ -873,7 +873,6 @@
   body > header,
   body > footer,
   .analytics-choice,
-  .analytics-settings,
   .skip-link {
     display: none !important;
   }

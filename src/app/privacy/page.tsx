@@ -90,8 +90,8 @@ export default function Privacy() {
           </p>
           <p>
             Analytics stays off until you opt in. You can reject it and still use
-            the whole site, or change your choice through “Cookie preferences” at
-            the bottom of any page. We remember your choice for six months;
+            the whole site, or change your choice through “Cookie preferences” in
+            the footer of any page. We remember your choice for six months;
             withdrawing consent stops collection and removes the analytics
             cookies from this browser. It does not remove data already collected.
             We keep advertising consent disabled. Google may process analytics

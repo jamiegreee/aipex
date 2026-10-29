@@ -20,15 +20,15 @@
 .analytics-choice p { font-size: 13px; }
 .analytics-choice a { text-decoration: underline; }
 .analytics-actions { display: flex; flex-shrink: 0; gap: 12px; }
-.analytics-settings {
-  display: block;
-  padding: 16px 24px;
-  margin-inline: auto;
+.footer-cookie-button {
+  padding: 0;
   border: 0;
-  background: transparent;
-  color: var(--color-ink);
-  font-size: 12px;
-  text-decoration: underline;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+}
+.footer-cookie-button:hover {
+  color: var(--lime);
 }
 @media (max-width: 800px) {
   .analytics-choice-inner { gap: 12px; flex-direction: column; align-items: stretch; }
@@ -1261,9 +1261,6 @@ a:hover .arrow {
     gap: 14px;
     font-size: 9px;
     padding-block: 20px;
-  }
-  .footer-location {
-    display: none;
   }
   .page-intro {
     padding-block: 43px 35px;

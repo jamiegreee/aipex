@@ -59,7 +59,7 @@ export default function MembershipForm({ user, initialValues }: Props) {
     return (
       <div className="membership-account-step">
         <p className="label">Before you apply</p>
-        <h2>Begin with a verified email.</h2>
+        <h2>Join now.</h2>
         <p>
           Create an account and confirm your email, then return here to submit
           your application. This lets you keep track of the decision privately.
