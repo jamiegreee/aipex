@@ -20,11 +20,12 @@ export default async function AuthPage({
 }) {
   const params = await searchParams;
   const next = safeNext(params.next);
+  const applying = next === "/membership" || next.startsWith("/membership/");
   const user = await currentUser();
   if (user && (mode === "login" || mode === "signup")) redirect(next);
   const titles = {
     login: "Welcome back.",
-    signup: "Start building your policy practice.",
+    signup: applying ? "Start your application." : "Start building your policy practice.",
     forgot: "A fresh start.",
     reset: "Choose a new password.",
   };
@@ -33,17 +34,15 @@ export default async function AuthPage({
       <Navigation />
       <main id="main" className="container auth-page">
         <div className="auth-intro">
-          <p className="label">AIPEX / Your practice</p>
+          <p className="label">{applying ? "AIPEX / Membership application" : "AIPEX / Your practice"}</p>
           <h1>{titles[mode]}</h1>
           <p>
-            Practical tools for AI policy decisions. Save your working drafts
-            to your account and return to them when you need them.
+            {applying ? "Create and verify your account, then tell us about your work and why you’d like to join. Jamie personally reviews every membership application." : "Practical tools for AI policy decisions. Save your working drafts to your account and return to them when you need them."}
           </p>
           <div className="auth-note">
-            <span className="label">Your work, saved</span>
+            <span className="label">{applying ? "Membership is reviewed" : "Your work, saved"}</span>
             <p>
-              Save policy tool drafts, return to your work and download a copy
-              whenever you need it.
+              {applying ? "Creating an account lets you apply and check your status. It does not grant membership; you become a member only after approval." : "Save policy tool drafts, return to your work and download a copy whenever you need it."}
             </p>
           </div>
         </div>

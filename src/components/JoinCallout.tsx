@@ -7,24 +7,25 @@ export default function JoinCallout() {
       <div className="container join-callout-inner">
         <div>
           <span className="label">
-            For governments and policymakers
+            Founding membership / The first 50
           </span>
           <h2 id="join-heading">
-            Plan for change.
+            Help shape
             <br />
-            <em>Build the capacity to act.</em>
+            <em>the founding group.</em>
           </h2>
         </div>
         <div className="join-callout-copy">
           <p>
-            Begin with the decisions in front of you. Examine evidence, compare
-            policy responses and plan oversight with our open tools and cases.
+            A community of policymakers preparing governments for advanced AI.
+            Bring your experience, exchange ideas and help set the questions
+            we examine together. Every application is personally reviewed.
           </p>
-          <Link className="button" href="/tools">
-            Explore the tools <Arrow />
+          <Link className="button" href="/membership">
+            Apply for membership <Arrow />
           </Link>
           <span className="join-note">
-            Open resources. No account needed to start.
+            Membership is by application and approval.
           </span>
         </div>
       </div>
