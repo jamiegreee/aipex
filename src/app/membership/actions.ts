@@ -1,15 +1,31 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { after } from "next/server";
 import { currentUser } from "@/lib/auth";
 import { createClient } from "@/lib/database";
 import { parseMembershipForm } from "@/lib/membership";
+import { membershipReviewer } from "@/lib/membership-server";
+import { dispatchMembershipEmails, prepareMembershipEmailDispatch } from "@/lib/membership-email-server";
 
 export type MembershipActionState = {
   errors?: Record<string, string>;
   error?: string;
   success?: boolean;
+  notice?: string;
 };
+
+async function scheduleMembershipEmails(userId: string) {
+  try {
+    const dispatch = await prepareMembershipEmailDispatch();
+    after(async () => {
+      try { await dispatch(userId); }
+      catch { console.error("Membership emails remain queued; check the membership review page."); }
+    });
+  } catch {
+    console.error("Membership emails remain queued; check the membership review page.");
+  }
+}
 
 export async function submitMembership(
   _: MembershipActionState,
@@ -32,6 +48,7 @@ export async function submitMembership(
       return {
         error: "Your application could not be saved. Your answers are still here. Please try again, or contact hello@theaipex.org if the problem continues.",
       };
+    await scheduleMembershipEmails(user.id);
     revalidatePath("/membership");
     revalidatePath("/account");
     return { success: true };
@@ -76,11 +93,29 @@ export async function reviewMembership(
         return { error: "This account does not have permission to review applications." };
       return { error: "The decision could not be saved. Refresh to check the current status before trying again." };
     }
+    await scheduleMembershipEmails(userId);
     revalidatePath("/admin/membership");
     revalidatePath("/account");
     revalidatePath("/membership");
     return { success: true };
   } catch {
     return { error: "We could not confirm the decision was saved. Refresh and check the current status before trying again." };
+  }
+}
+
+export async function retryMembershipEmails(): Promise<MembershipActionState> {
+  try {
+    const user = await currentUser(true);
+    if (!user || !(await membershipReviewer())) return { error: "Sign in with your reviewer account to send queued emails." };
+    const result = await dispatchMembershipEmails();
+    revalidatePath("/admin/membership");
+    if (result.failed || result.unconfirmed) {
+      return { error: "Some emails could not be confirmed. Saved applications and decisions are unchanged. Check the queue status before retrying." };
+    }
+    return { success: true, notice: result.accepted
+      ? `${result.accepted} queued email${result.accepted === 1 ? "" : "s"} accepted by Resend. Inbox delivery may take a moment.`
+      : "No emails are ready to send. Recent attempts may still be processing or waiting for their retry time." };
+  } catch {
+    return { error: "Queued emails could not be sent. Check the email configuration and try again shortly. Applications and decisions are still saved." };
   }
 }

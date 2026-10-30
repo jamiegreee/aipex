@@ -96,6 +96,25 @@ Use disposable, genuinely email-verified test accounts in an isolated Neon child
 
 ## Email and privacy
 
-Existing Neon SMTP provides signup and recovery emails. Its Resend key is stored with Neon, not in the deployed app. This membership migration does not create application-receipt or decision emails. Present status through the account page and state the actual notification workflow; do not promise automated email unless separately configured and tested.
+Neon SMTP continues to provide signup and recovery emails using its existing key. Membership notifications use a separate Resend sending-only key restricted to `theaipex.org`, from the existing Resend account tied to `green.jcb@gmail.com`. The fallback authorised by Jamie is a new account tied to `hello@theaipex.org`, only if the original account cannot be used; do not provision or switch to another account automatically.
+
+Apply `neon/migrations/20261030170000_membership_emails.sql` to the same AIPEX production branch. It adds a private transactional outbox: the first application insert queues the founder alert and applicant receipt; a pending-to-approved or pending-to-declined transition queues that decision email. Retried submissions and stale decisions do not create duplicate events. Historical records are not emailed automatically.
+
+Set server-only `RESEND_API_KEY` and `MEMBERSHIP_EMAIL_DISPATCH_SECRET` in the AIPEX Vercel production environment. Generate a cryptographically random dispatch secret of at least 32 characters. As the database operator, separately store only its SHA-256 hash in `membership_email_settings`:
+
+```sql
+insert into public.membership_email_settings (singleton, dispatch_secret_hash)
+values (true, pg_catalog.decode('HEX_SHA256_OF_DISPATCH_SECRET', 'hex'));
+```
+
+Do not put the raw secret in SQL history, logs, public variables, source control or chat. The app still has no owner database URL or management token. Claiming or acknowledging an email requires both the server-only dispatch secret and a verified applicant/reviewer JWT. Applicants can dispatch their own notifications; only reviewers can dispatch other applicants' notifications or inspect aggregate queue counts. Direct outbox/settings access is revoked from application roles. Preview deployments do not send membership emails.
+
+Emails use `AIPEX <hello@theaipex.org>` with replies to `hello@theaipex.org`. Founder alerts go only to `green.jcb@gmail.com`. Applicant recipients are derived from the verified application record. Founder alerts contain the name, role, organisation and authenticated review link, not the written application. No recipient, sender or email body is accepted from browser inputs.
+
+Server actions schedule delivery with Next.js `after` after the application or decision is committed. Each immutable version-one event uses its UUID as the Resend idempotency key. Concurrent dispatch uses row locks and five-minute leases. Failed requests remain queued with backoff, up to five attempts. Queued attempts can be retried using **Send queued emails** in the reviewer page; there is no unattended cron worker. Permanent errors and unconfirmed attempts nearing the provider's 24-hour idempotency window require manual investigation; do not clear their state, generate a fresh key or blindly resend them. Preserve version-one email content for retries, and introduce a new template version for future content changes.
+
+The reviewer page distinguishes queued/processing emails from those accepted by Resend. Provider acceptance is not proof of inbox placement. Verify real delivery in Resend and the recipient inbox. Email failures must not undo an application/decision or imply it failed to save. Applicants continue to see their saved status in My account.
+
+Run `bash tests/membership-emails.database.test.sh` for isolated transactional, permission, retry and concurrency checks; the test never connects to Neon. The content and delivery unit tests stub the provider and never send real mail. For live checks, use only clearly labelled QA applications and genuine verified owner-controlled email aliases. Never approve or decline a real applicant merely to test an email. Do not backfill all historical applications; any selected QA backfill must be explicit and use the same event uniqueness rules.
 
 Do not publish member details or add applicants to third-party groups automatically. Requests for a copy or deletion should follow the existing identity-verified support process at `hello@theaipex.org`. Before opening recruitment, publish the application-data purpose and retention arrangements in Privacy. Keep administrative access limited to the intended reviewer and necessary infrastructure operators.

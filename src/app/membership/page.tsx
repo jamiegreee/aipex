@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 export default async function Membership() {
   const user = await currentUser();
