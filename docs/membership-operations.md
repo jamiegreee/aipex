@@ -94,6 +94,14 @@ Use disposable, genuinely email-verified test accounts in an isolated Neon child
 5. A stale review cannot overwrite an earlier decision. Two simultaneous approvals for the final place cannot exceed the configured limit; test this in an isolated branch with a small temporary limit.
 6. Applicants see their own saved status. No queue, names, affiliations, application text or reviewer audit is exposed publicly or sent to analytics.
 
+## Archive disposable test applications
+
+Apply `neon/migrations/20261030190000_archive_test_applications.sql` before deploying the queue's archive filter. It adds an operator-only `archived_at` timestamp; it does not archive any records automatically. The reviewer queue and counts exclude archived applications, and database checks reject attempts to review them, including from an already-open review page.
+
+Only pending applications can be archived. As the database operator, identify each disposable test by its account ID and confirmed test details, then set `archived_at` and advance `updated_at` together. Check the exact affected rows before committing. Never archive real applications merely to clean up a test run. Restore an archived test by clearing `archived_at` and advancing `updated_at` again.
+
+Archiving leaves the application, Auth account, reviewer access, decision audits and email delivery history intact. It sends no application or decision emails and does not free or grant a member place. Applicants retain access to their own saved status; archive management is not exposed through the Data API or reviewer UI. Run `bash tests/membership-archive.database.test.sh` for isolated permission, queue-count, review-guard and restoration checks.
+
 ## Email and privacy
 
 Neon SMTP continues to provide signup and recovery emails using its existing key. Membership notifications use a separate Resend sending-only key restricted to `theaipex.org`, from the existing Resend account tied to `green.jcb@gmail.com`. The fallback authorised by Jamie is a new account tied to `hello@theaipex.org`, only if the original account cannot be used; do not provision or switch to another account automatically.
