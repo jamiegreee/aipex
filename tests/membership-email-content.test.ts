@@ -101,7 +101,7 @@ test("recipient addresses cannot introduce headers, extra recipients, or display
 
 test("unsupported event identifiers and future template versions fail closed", () => {
   assert.throws(() => buildMembershipEmail({ ...event("application_received"), id: "not-an-event" }), /unsupported_membership_email_event/);
-  assert.throws(() => buildMembershipEmail({ ...event("application_received"), template_version: 3 }), /unsupported_membership_email_event/);
+  assert.throws(() => buildMembershipEmail({ ...event("application_received"), template_version: 4 }), /unsupported_membership_email_event/);
   assert.throws(() => buildMembershipEmail({ ...event("application_received"), kind: "arbitrary" as MembershipEmailKind }), /unsupported_membership_email_event/);
 });
 
@@ -149,5 +149,46 @@ test("version-two approval is concise and confirmation accurately points to My a
     const payload = buildMembershipEmail({ ...event(kind), template_version: 2, applicant_name: '<img src="https://evil.example/pixel">' });
     assert.equal([...payload.html.matchAll(/<img\b/g)].length, 1, "applicants cannot inject another image");
     assert.ok(payload.html.includes("&lt;img"));
+  }
+});
+
+test("historical version-two payloads remain byte-for-byte stable for provider retries", () => {
+  const hashes = {
+    founder_alert: "3b9ee3d313c56ce1ea6ab9e50cfb4e27513904d781557fc209a1b55f8ae611d3",
+    application_received: "7171bda3e9f7212513e0e0b48ad37ae61979f568ad28c36ca7744592ebfa356f",
+    application_approved: "9f67a6df4eaa0e984fc97189ce9b472cedb1029a26c8710fe65111cf8b4bb640",
+    application_declined: "6838a5a9b5db3c8ed9c2e712d68ec0ab26aede639be712ff71766ba8288c8856",
+  };
+  for (const kind of Object.keys(hashes) as MembershipEmailKind[]) {
+    const payload = buildMembershipEmail({ ...event(kind), template_version: 2 });
+    assert.equal(createHash("sha256").update(JSON.stringify(payload)).digest("hex"), hashes[kind]);
+  }
+});
+
+test("version-three approval invites approved members through the fixed authenticated Slack gateway", () => {
+  const input = { ...event("application_approved"), template_version: 3 };
+  const payload = buildMembershipEmail(input);
+  assert.deepEqual(payload.to, [input.recipient_email]);
+  assert.equal(payload.subject, "Welcome to AIPEX");
+  for (const body of [payload.html, payload.text]) {
+    assert.ok(body.includes("Join our Slack community to meet other members and take part in the conversation."));
+    assert.ok(body.includes("Join the Slack community"));
+    assert.ok(body.includes("https://theaipex.org/community/slack"));
+    assert.ok(!body.includes("join.slack.com"), "the reusable Slack bearer link is never included in email content");
+    assert.ok(!body.includes("share the next steps"));
+  }
+  assert.equal([...payload.html.matchAll(/<img\b/g)].length, 1);
+  assert.ok(payload.html.includes('src="https://theaipex.org/brand/aipex-mark-email-v1.png"'));
+  const links = [...payload.html.matchAll(/href="([^"]+)"/g)].map(match => match[1]);
+  assert.deepEqual(links, ["https://theaipex.org/community/slack", "mailto:hello@theaipex.org"]);
+  assert.deepEqual(buildMembershipEmail(input), payload, "retries retain an identical body and fixed gateway");
+});
+
+test("only approval emails gain Slack access; all other version-three messages match version two", () => {
+  for (const kind of ["founder_alert", "application_received", "application_declined"] as const) {
+    const payload = buildMembershipEmail({ ...event(kind), template_version: 3 });
+    assert.deepEqual(payload, buildMembershipEmail({ ...event(kind), template_version: 2 }));
+    assert.ok(!payload.html.includes("/community/slack"));
+    assert.ok(!payload.text.includes("Slack"));
   }
 });
