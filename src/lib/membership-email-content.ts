@@ -4,6 +4,7 @@
  * Recipients and application details must never come from browser form fields.
  */
 import { buildMembershipEmail as buildMembershipEmailV1 } from "./membership-email-content-v1";
+import { buildMembershipEmail as buildMembershipEmailV2 } from "./membership-email-content-v2";
 
 export const membershipEmailFrom = "AIPEX <hello@theaipex.org>";
 export const membershipEmailReplyTo = "hello@theaipex.org";
@@ -101,8 +102,11 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
   if (event.template_version === undefined || event.template_version === 1) {
     return buildMembershipEmailV1(event);
   }
+  if (event.template_version === 2) {
+    return buildMembershipEmailV2(event);
+  }
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/iu.test(event.id) ||
-    !kinds.has(event.kind) || event.template_version !== 2) {
+    !kinds.has(event.kind) || event.template_version !== 3) {
     throw new Error("unsupported_membership_email_event");
   }
   const recipient = checkedRecipient(event.recipient_email);
@@ -149,9 +153,11 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
       paragraphs = [
         greeting,
         "Your application for AIPEX membership has been approved. Welcome to the community.",
+        "Join our Slack community to meet other members and take part in the conversation.",
         "The AIPEX team",
       ];
-      linkText = "Open your AIPEX account";
+      link = "https://theaipex.org/community/slack";
+      linkText = "Join the Slack community";
       break;
     case "application_declined":
       subject = "Your AIPEX membership application";

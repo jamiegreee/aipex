@@ -129,4 +129,68 @@ select public.test_error('select * from public.membership_email_outbox','42501')
 reset role;
 select public.test_assert((select count(*)=2 and bool_and(template_version=1 and status='sent') from public.membership_email_outbox where applicant_user_id='00000000-0000-0000-0000-000000000001'),'original events stay version one and are not reclaimed with the new batch');
 SQL
+# Capture both delivered and retriable version-two events before rolling out
+# Slack invitations. Schema-only migration must not rewrite either kind.
+"${version_psql[@]}" >"$version_pg_root/v3-fixtures.log" <<'SQL'
+update public.membership_email_outbox set status='sent', provider_id='version-two-original-provider-receipt', sent_at=clock_timestamp(), lease_token=null, lease_expires_at=null
+  where template_version=2 and kind='application_received' and recipient_email='new-approved@invalid.test';
+update public.membership_email_outbox set status='pending', last_error='simulated_rate_limit', lease_token=null, lease_expires_at=null
+  where template_version=2 and kind='founder_alert' and applicant_name='New version-two approval applicant';
+update public.membership_email_outbox set next_attempt_at=clock_timestamp()-interval '1 minute'
+  where template_version=2 and status='pending';
+create table public.test_before_v3_snapshot as select * from public.membership_email_outbox;
+select public.test_assert((select count(*)=1 from public.membership_email_outbox where template_version=2 and status='sent'),'version-two delivered fixture exists');
+select public.test_assert((select count(*)=1 from public.membership_email_outbox where template_version=2 and status='pending'),'version-two retriable fixture exists');
+insert into neon_auth."user" (id,email,"emailVerified") values
+ ('00000000-0000-0000-0000-000000000004','version-three-approved@invalid.test',true),
+ ('00000000-0000-0000-0000-000000000006','version-three-declined@invalid.test',true);
+SQL
+
+"${version_psql[@]}" -f "$version_repo_root/neon/migrations/20261031190000_membership_email_template_v3.sql" >"$version_pg_root/v3-migration.log" 2>&1
+
+"${version_psql[@]}" >"$version_pg_root/v3-checks.log" <<'SQL'
+select public.test_assert(
+  (select jsonb_agg(to_jsonb(e) order by event_id) from public.membership_email_outbox e)
+  = (select jsonb_agg(to_jsonb(e) order by event_id) from public.test_before_v3_snapshot e),
+  'version-three migration leaves every existing version-one and version-two event field unchanged');
+select public.test_assert(not has_table_privilege('authenticated','public.membership_email_outbox','SELECT,INSERT,UPDATE,DELETE'),'version-three migration grants no authenticated outbox access');
+select public.test_assert(not has_table_privilege('anonymous','public.membership_email_outbox','SELECT,INSERT,UPDATE,DELETE'),'version-three migration grants no anonymous outbox access');
+select public.test_error('update public.membership_email_outbox set template_version=4','23514');
+
+set role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000005',false);
+create temp table v2_retry_after_v3 as select * from public.claim_membership_emails('version-test-secret-with-more-than-thirty-two-characters','00000000-0000-0000-0000-000000000002',10);
+select public.test_assert((select count(*)=1 and bool_and(template_version=2 and kind='founder_alert' and attempts=2) from v2_retry_after_v3),'pending version-two event is still claimed as version two');
+reset role;
+select public.test_assert(
+  (select to_jsonb(e)-'status'-'attempts'-'next_attempt_at'-'lease_token'-'lease_expires_at'-'last_attempt_at'-'last_error' from public.membership_email_outbox e where event_id=(select event_id from v2_retry_after_v3))
+  = (select to_jsonb(e)-'status'-'attempts'-'next_attempt_at'-'lease_token'-'lease_expires_at'-'last_attempt_at'-'last_error' from public.test_before_v3_snapshot e where event_id=(select event_id from v2_retry_after_v3)),
+  'version-two retry retains its original event ID, content snapshot, first attempt and version');
+select public.test_assert(
+  (select to_jsonb(e) from public.membership_email_outbox e where provider_id='version-two-original-provider-receipt')
+  = (select to_jsonb(e) from public.test_before_v3_snapshot e where provider_id='version-two-original-provider-receipt'),
+  'delivered version-two event and provider receipt remain untouched');
+
+set role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000004',false);
+select public.submit_membership(public.test_application('Version-three approval applicant'));
+select public.submit_membership(public.test_application('Duplicate version-three application'));
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000006',false);
+select public.submit_membership(public.test_application('Version-three decline applicant'));
+reset role;
+select public.test_assert((select count(*)=4 and bool_and(template_version=3) from public.membership_email_outbox where applicant_user_id in ('00000000-0000-0000-0000-000000000004','00000000-0000-0000-0000-000000000006')),'new submissions create exactly two version-three events each without replacing duplicate snapshots');
+select public.test_assert((select count(*)=2 and bool_and(recipient_email='green.jcb@gmail.com') from public.membership_email_outbox where template_version=3 and kind='founder_alert'),'version-three founder alerts retain their fixed recipient');
+
+set role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000005',false);
+select public.review_membership('00000000-0000-0000-0000-000000000004','approved',(select updated_at from public.membership_applications where user_id='00000000-0000-0000-0000-000000000004'));
+select public.review_membership('00000000-0000-0000-0000-000000000006','declined',(select updated_at from public.membership_applications where user_id='00000000-0000-0000-0000-000000000006'));
+create temp table v3_claim as select * from public.claim_membership_emails('version-test-secret-with-more-than-thirty-two-characters',null,10);
+select public.test_assert((select count(*)=6 and bool_and(template_version=3) from v3_claim),'new application and decision events are all claimed as version three');
+select public.test_assert((select count(*)=1 and bool_and(recipient_email='version-three-approved@invalid.test') from v3_claim where kind='application_approved'),'version-three approval targets only the verified approved applicant');
+select public.test_assert((select count(*)=1 and bool_and(recipient_email='version-three-declined@invalid.test') from v3_claim where kind='application_declined'),'version-three decline targets the verified declined applicant');
+select public.test_error('select * from public.membership_email_outbox','42501');
+reset role;
+select public.test_assert((select count(*)=2 and bool_and(template_version=1 and status='sent') from public.membership_email_outbox where applicant_user_id='00000000-0000-0000-0000-000000000001'),'original version-one events remain delivered and are not reclaimed after version-three rollout');
+SQL
 printf 'Membership email version checks passed (disposable PostgreSQL 15; no external database or email used).\n'
