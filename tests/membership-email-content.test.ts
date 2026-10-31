@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import test from "node:test";
 import {
   buildMembershipEmail,
@@ -100,6 +101,53 @@ test("recipient addresses cannot introduce headers, extra recipients, or display
 
 test("unsupported event identifiers and future template versions fail closed", () => {
   assert.throws(() => buildMembershipEmail({ ...event("application_received"), id: "not-an-event" }), /unsupported_membership_email_event/);
-  assert.throws(() => buildMembershipEmail({ ...event("application_received"), template_version: 2 }), /unsupported_membership_email_event/);
+  assert.throws(() => buildMembershipEmail({ ...event("application_received"), template_version: 3 }), /unsupported_membership_email_event/);
   assert.throws(() => buildMembershipEmail({ ...event("application_received"), kind: "arbitrary" as MembershipEmailKind }), /unsupported_membership_email_event/);
+});
+
+test("historical version-one payloads remain byte-for-byte stable for provider retries", () => {
+  const hashes = {
+    founder_alert: "72004ff2500943c263e9c4e75b901e5c7e910cb50d3c074df0901d0ec4a2183a",
+    application_received: "8e734a44352a685e9cd9051f37729df5bc33013e8d09d282115df8ab7829d066",
+    application_approved: "1628d0fe0afd4e59d96c9f02413aa206553fb3d81c19e5c23a33ddc55c5239b0",
+    application_declined: "021668babfe7720d9a505636d9269dd25d6064eab33f9128e9a2f671522e17e1",
+  };
+  for (const kind of Object.keys(hashes) as MembershipEmailKind[]) {
+    const payload = buildMembershipEmail(event(kind));
+    assert.equal(createHash("sha256").update(JSON.stringify(payload)).digest("hex"), hashes[kind]);
+    assert.deepEqual(buildMembershipEmail({ ...event(kind), template_version: undefined }), payload);
+  }
+});
+
+test("version-two emails use the shared public logo and retain readable fallback branding", () => {
+  for (const kind of ["founder_alert", "application_received", "application_approved", "application_declined"] as const) {
+    const input = { ...event(kind), template_version: 2 };
+    const payload = buildMembershipEmail(input);
+    const images = [...payload.html.matchAll(/<img\b[^>]+>/g)].map(match => match[0]);
+    assert.equal(images.length, 1);
+    assert.ok(images[0].includes('src="https://theaipex.org/brand/aipex-mark-email-v1.png"'));
+    assert.ok(images[0].includes('width="40" height="40"'));
+    assert.ok(!images[0].includes(input.id) && !images[0].includes(input.recipient_email));
+    assert.ok(payload.html.includes("AI Policy<br>Exchange."));
+    assert.ok(payload.text.includes("AI Policy Exchange"));
+    assert.deepEqual(payload.to, [input.recipient_email]);
+    assert.deepEqual(buildMembershipEmail(input), payload);
+  }
+});
+
+test("version-two approval is concise and confirmation accurately points to My account", () => {
+  const approval = buildMembershipEmail({ ...event("application_approved"), template_version: 2 });
+  const receipt = buildMembershipEmail({ ...event("application_received"), template_version: 2 });
+  for (const body of [approval.html, approval.text]) {
+    assert.ok(body.includes("has been approved"));
+    assert.ok(!body.includes("exchanging practical experience"));
+    assert.ok(!body.includes("share the next steps"));
+  }
+  assert.ok(receipt.text.includes("You can check your application status in My account."));
+  assert.ok(receipt.html.includes('href="https://theaipex.org/account"'));
+  for (const kind of ["founder_alert", "application_received", "application_approved", "application_declined"] as const) {
+    const payload = buildMembershipEmail({ ...event(kind), template_version: 2, applicant_name: '<img src="https://evil.example/pixel">' });
+    assert.equal([...payload.html.matchAll(/<img\b/g)].length, 1, "applicants cannot inject another image");
+    assert.ok(payload.html.includes("&lt;img"));
+  }
 });

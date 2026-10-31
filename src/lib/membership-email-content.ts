@@ -1,8 +1,10 @@
 /**
- * Pure, deterministic version-one content for transactional membership emails.
+ * Deterministic, versioned content for transactional membership emails.
  * Call only with an immutable event claimed from the private database outbox.
  * Recipients and application details must never come from browser form fields.
  */
+import { buildMembershipEmail as buildMembershipEmailV1 } from "./membership-email-content-v1";
+
 export const membershipEmailFrom = "AIPEX <hello@theaipex.org>";
 export const membershipEmailReplyTo = "hello@theaipex.org";
 export const membershipReviewRecipient = "green.jcb@gmail.com";
@@ -79,7 +81,10 @@ function documentHtml(title: string, content: string, link: string, linkText: st
 <body style="margin:0;padding:32px 16px;background:#f5f4ef;color:#22221f;font-family:Arial,Helvetica,sans-serif;font-size:16px">
 <table role="presentation" style="width:100%;border-collapse:collapse"><tr><td align="center">
 <table role="presentation" style="width:100%;max-width:600px;border-collapse:collapse;background:#fff"><tr><td style="padding:36px 28px;border-top:3px solid #3549d8">
-<p style="margin:0 0 28px;font-size:14px;font-weight:bold;letter-spacing:1px;color:#3549d8">AI POLICY EXCHANGE</p>
+<table role="presentation" style="margin:0 0 28px;border-collapse:collapse"><tr>
+<td style="padding:0 12px 0 0;vertical-align:middle"><img src="https://theaipex.org/brand/aipex-mark-email-v1.png" width="40" height="40" alt="" style="display:block;border:0;width:40px;height:40px"></td>
+<td style="padding:0;vertical-align:middle;font-size:16px;font-weight:bold;line-height:1.1;color:#22221f">AI Policy<br>Exchange.</td>
+</tr></table>
 <h1 style="margin:0 0 24px;font-size:28px;line-height:1.25;font-weight:normal">${escapeHtml(title)}</h1>
 ${content}
 <p style="margin:28px 0"><a href="${link}" style="display:inline-block;padding:13px 18px;background:#3549d8;color:#fff;text-decoration:none;font-weight:bold;line-height:1.4">${escapeHtml(linkText)}</a></p>
@@ -91,8 +96,13 @@ ${content}
 }
 
 export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEmailPayload {
+  // Retried outbox events keep the exact body originally sent to the provider.
+  // New copy is a new version; missing versions retain the historical default.
+  if (event.template_version === undefined || event.template_version === 1) {
+    return buildMembershipEmailV1(event);
+  }
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/iu.test(event.id) ||
-    !kinds.has(event.kind) || (event.template_version !== undefined && event.template_version !== 1)) {
+    !kinds.has(event.kind) || event.template_version !== 2) {
     throw new Error("unsupported_membership_email_event");
   }
   const recipient = checkedRecipient(event.recipient_email);
@@ -129,7 +139,7 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
       paragraphs = [
         greeting,
         "We’ve received your application for AIPEX membership. We will review your application and get back to you soon.",
-        "You can see the current status in your AIPEX account.",
+        "You can check your application status in My account.",
         "The AIPEX team",
       ];
       break;
@@ -139,7 +149,6 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
       paragraphs = [
         greeting,
         "Your application for AIPEX membership has been approved. Welcome to the community.",
-        "We look forward to exchanging practical experience on helping governments prepare for advanced AI. We will share the next steps with you soon.",
         "The AIPEX team",
       ];
       linkText = "Open your AIPEX account";
