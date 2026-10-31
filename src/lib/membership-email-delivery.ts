@@ -47,7 +47,7 @@ export async function sendMembershipEmail(
     return { providerId: body.id };
   } catch {
     // A timeout may follow provider acceptance. Retry only with the same event
-    // key and immutable v1 content; SQL stops retries before the 24-hour edge.
+    // key and immutable versioned content; SQL stops retries before the 24-hour edge.
     return { error: "resend_unconfirmed_response", retryable: true };
   }
 }
