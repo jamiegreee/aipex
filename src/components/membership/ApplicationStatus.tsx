@@ -1,4 +1,5 @@
 import type { MembershipApplication } from "@/lib/membership";
+import Link from "next/link";
 
 export default function ApplicationStatus({ application }: { application: MembershipApplication }) {
   const approved = application.status === "approved";
@@ -9,11 +10,12 @@ export default function ApplicationStatus({ application }: { application: Member
       <h2 id="membership-status-heading">{approved ? "Welcome to AIPEX." : declined ? "Your application has been reviewed." : "Application received."}</h2>
       <p>
         {approved
-          ? "We’ve approved your founding membership. Thank you for helping shape a community preparing governments for advanced AI. We’ll share the next steps as the founding group takes shape."
+          ? "Your AIPEX membership is approved. Join the community on Slack to meet other members and take part in the conversation."
           : declined
-            ? "We’re unable to offer you a place in this founding group. Your AIPEX account and access to the public tools remain available."
+            ? "We’re unable to offer you membership at this stage. Your AIPEX account remains available."
             : "We will review your application and get back to you soon."}
       </p>
+      {approved && <Link className="button" href="/community/slack">Join the Slack community →</Link>}
     </section>
   );
 }

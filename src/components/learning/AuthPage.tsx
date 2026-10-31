@@ -19,31 +19,50 @@ export default async function AuthPage({
   }>;
 }) {
   const params = await searchParams;
-  const next = safeNext(params.next);
+  const next = safeNext(params.next, "/account");
   const applying = next === "/membership" || next.startsWith("/membership/");
+  const openingSlack = next === "/community/slack";
   const resettingPassword = mode === "forgot" || mode === "reset";
   const user = await currentUser();
   if (user && (mode === "login" || mode === "signup")) redirect(next);
   const titles = {
     login: "Welcome back.",
-    signup: applying ? "Start your application." : "Start building your policy practice.",
+    signup: applying ? "Start your application." : "Connect around AI policy.",
     forgot: "A fresh start.",
     reset: "Choose a new password.",
   };
+  const introduction = resettingPassword
+    ? mode === "forgot"
+      ? "Enter your account email and we’ll send you a link to reset your password."
+      : "Choose a new password for your AIPEX account."
+    : mode === "signup"
+      ? applying
+        ? "Create and verify your account, then tell us about your work and why you’d like to become an AIPEX member."
+        : "Create an account to apply for membership in a community helping governments prepare for advanced AI."
+      : openingSlack
+        ? "Sign in with the account linked to your approved AIPEX membership to open the Slack invitation."
+        : applying
+          ? "Sign in to continue your application or check your membership status."
+          : "A community of policymakers helping governments prepare for advanced AI. Sign in to manage your account and membership.";
+  const accountNote = resettingPassword
+    ? "Your profile and membership stay with your account when you reset your password."
+    : mode === "signup"
+      ? "Creating an account lets you apply for membership. We review your application before inviting you to the Slack community."
+      : "Check your application status in My account. Approved members can join our Slack community.";
   return (
     <>
       <Navigation />
       <main id="main" className="container auth-page">
         <div className="auth-intro">
-          <p className="label">{resettingPassword ? "AIPEX / Account access" : applying ? "AIPEX / Membership application" : "AIPEX / Your practice"}</p>
+          <p className="label">{resettingPassword ? "AIPEX / Account access" : applying ? "AIPEX / Membership application" : "AIPEX / Community"}</p>
           <h1>{titles[mode]}</h1>
           <p>
-            {resettingPassword ? mode === "forgot" ? "Enter your account email and we’ll send you a link to reset your password." : "Choose a new password for your AIPEX account." : applying ? "Create and verify your account, then tell us about your work and why you’d like to join. We review your application before granting membership." : "Practical tools for AI policy decisions. Save your working drafts to your account and return to them when you need them."}
+            {introduction}
           </p>
           <div className="auth-note">
-            <span className="label">{resettingPassword ? "Your account" : applying ? "Membership is reviewed" : "Your work, saved"}</span>
+            <span className="label">{resettingPassword ? "Your account" : mode === "signup" ? "Membership by application" : "Your AIPEX membership"}</span>
             <p>
-              {resettingPassword ? "Your profile and membership stay with your account when you reset your password." : applying ? "Creating an account lets you apply and check your status. It does not grant membership; you become a member only after approval." : "Save policy tool drafts, return to your work and download a copy whenever you need it."}
+              {accountNote}
             </p>
           </div>
         </div>
@@ -64,7 +83,7 @@ export default async function AuthPage({
           )}
           {mode === "login" && params.confirmed === "yes" && (
             <p className="form-success" role="status">
-              Email confirmation finished. Sign in to save your work.
+              Your email is verified. Sign in to continue.
             </p>
           )}
           {mode === "reset" && (!params.token || params.token.length > 2048) ? (
