@@ -65,8 +65,8 @@ export default function MembershipForm({ user, initialValues }: Props) {
           your application. This lets you keep track of the decision privately.
         </p>
         <p>
-          Creating an account does not make you a member. Every membership
-          application is reviewed individually.
+          Creating an account does not make you a member. We review your
+          application before granting membership.
         </p>
         <div className="membership-actions">
           <Link className="button" href="/signup?next=%2Fmembership">
@@ -92,19 +92,10 @@ export default function MembershipForm({ user, initialValues }: Props) {
         tabIndex={-1}
         role="status"
       >
-        <p className="label">Application received</p>
-        <h2>Your application is saved.</h2>
+        <h2>Application received.</h2>
         <p>
-          View My account for its current status. Jamie personally reviews
-          membership applications.
+          We will review your application and get back to you soon.
         </p>
-        <p>
-          Membership is confirmed only after approval. Your application details
-          stay private.
-        </p>
-        <Link className="button" href="/account">
-          View my application <span aria-hidden="true">→</span>
-        </Link>
       </div>
     );
   }

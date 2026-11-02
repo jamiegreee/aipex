@@ -41,7 +41,7 @@ Completion is a private participation record, not a tamper-proof professional cr
 
 In branch Auth settings, set application name AIPEX, require email verification, choose verification links, and trust the exact website origin. Production uses `https://theaipex.org` and `https://www.theaipex.org`. Trust specific preview origins only for testing, never a wildcard across arbitrary Vercel projects. Disable Allow Localhost in production once testing is done.
 
-Neon SMTP uses host `smtp.resend.com`, port `465`, username `resend`, password the restricted Resend key, sender email `hello@theaipex.org`, sender name AIPEX. The key is stored only in Neon SMTP and ignored local operator configuration; Vercel does not need it. Email click/open tracking is not configured.
+Neon SMTP uses host `smtp.resend.com`, port `465`, username `resend`, password the restricted account-email Resend key, sender email `hello@theaipex.org`, sender name AIPEX. That key stays in Neon SMTP. Membership notifications use a separate sending-only Resend key in Vercel production; see `docs/membership-operations.md`. Email click/open tracking is not configured.
 
 Hostinger’s Resend sending records were saved and verified on 13 October 2026: TXT `resend._domainkey`, CNAME `rsend` to `rsend-euw1.forge.rmta.net`, CNAME `send` to `send.forge.rmta.net`, TTL 3600. The domain dashboard is the source of truth for the public DKIM key. Keep Resend receiving disabled and preserve existing iCloud MX, SPF and DKIM records.
 
@@ -49,7 +49,7 @@ Signup requests a confirmation email, then the learner signs in after confirmati
 
 ## Vercel configuration
 
-Set `NEON_AUTH_BASE_URL`, `NEON_DATA_API_URL`, `NEON_AUTH_COOKIE_SECRET` and `NEXT_PUBLIC_SITE_URL=https://theaipex.org` in production. Preview deployments need matching site origins and branch endpoints. Do not put owner database credentials, SMTP passwords or management API tokens in application environments.
+Set `NEON_AUTH_BASE_URL`, `NEON_DATA_API_URL`, `NEON_AUTH_COOKIE_SECRET` and `NEXT_PUBLIC_SITE_URL=https://theaipex.org` in production. Membership notifications also require the separate domain-restricted `RESEND_API_KEY` and `MEMBERSHIP_EMAIL_DISPATCH_SECRET` described in the membership operations guide. Preview deployments need matching site origins and branch endpoints. Do not put owner database credentials, account SMTP passwords or management API tokens in application environments.
 
 Before promoting, verify real signup, confirmation, login, saved drafts, completions, logout and password reset against the dedicated backend. Review Data API advisors and test cross-user isolation. Run the build, lint, curriculum tests and production dependency audit.
 

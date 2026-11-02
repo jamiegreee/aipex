@@ -19,7 +19,7 @@ export default function JoinCallout() {
           <p>
             A community of policymakers preparing governments for advanced AI.
             Bring your experience, exchange ideas and help set the questions
-            we examine together. Every application is personally reviewed.
+            we examine together. We review your application before granting membership.
           </p>
           <Link className="button" href="/membership">
             Apply for membership <Arrow />

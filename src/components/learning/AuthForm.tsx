@@ -127,9 +127,8 @@ export default function AuthForm({
       )}
       {signup && (
         <p className="small-copy">
-          Your email and the drafts you choose to save are stored in your account. Read our{" "}
-          <Link href="/privacy">privacy notice</Link>. Please use fictional or
-          anonymised examples in your drafts.
+          We use your account details to manage your profile and membership application. Read our{" "}
+          <Link href="/privacy">privacy notice</Link>.
         </p>
       )}
       {mode === "login" && (
@@ -149,7 +148,7 @@ export default function AuthForm({
           <>
             New to AIPEX?{" "}
             <Link href={`/signup?next=${encodeURIComponent(next)}`}>
-              Create a free account
+              Create an account
             </Link>
           </>
         ) : (

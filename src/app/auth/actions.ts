@@ -18,7 +18,7 @@ export async function authenticate(
       error: "Accounts are being configured. Please try again shortly.",
     };
   const mode = form.get("resend") === "yes" ? "resend" : form.get("mode");
-  const next = safeNext(form.get("next"));
+  const next = safeNext(form.get("next"), "/account");
   const email = String(form.get("email") ?? "")
     .trim()
     .toLowerCase();
@@ -85,7 +85,7 @@ export async function authenticate(
       };
     return {
       message:
-        "Check your email to confirm your account, then sign in to save your work. If you already have an account, sign in instead.",
+        "Check your email to verify your account, then sign in to continue. If you already have an account, sign in instead.",
       confirmationEmail: email,
     };
   }

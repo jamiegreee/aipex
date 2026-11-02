@@ -34,6 +34,7 @@ export async function membershipReviewQueue(status: string, page: number) {
       .from("membership_applications")
       .select("*")
       .eq("status", status)
+      .is("archived_at", null)
       .order("created_at", { ascending: true })
       .order("user_id", { ascending: true })
       .range(page * 25, page * 25 + 24),
