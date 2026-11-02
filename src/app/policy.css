@@ -1,92 +1,8 @@
 /* AIPEX policy workbench: an editorial desk for practical work. */
-.policy-home-hero {
-  align-items: center;
-  gap: 7%;
-}
-.policy-home-hero h1 {
-  font-size: clamp(48px, 5vw, 74px);
-  line-height: 1.04;
-}
-.home-workbench {
-  background: var(--color-accent);
-  color: var(--color-cream);
-  padding: 36px;
-  align-self: center;
-}
-.home-workbench > .label {
-  color: #d8ddff;
-}
-.home-workbench h2 {
-  font-size: clamp(38px, 4vw, 58px);
-  line-height: 1.05;
-  margin: 30px 0;
-  color: inherit;
-}
-.home-workbench h2 em {
-  color: #d8e6ff;
-}
-.home-workbench > a {
-  display: grid;
-  grid-template-columns: 24px 1fr 20px;
-  gap: 16px;
-  border-top: 1px solid #7b8eeb;
-  padding: 20px 0;
-  font-size: 19px;
-  align-items: start;
-}
-.home-workbench > a:hover {
-  color: #fff4ce;
-}
-.home-workbench a .label {
-  color: inherit;
-}
-.home-workbench small {
-  display: block;
-  margin-top: 5px;
-  font-size: 12px;
-  color: #e0e5ff;
-}
-.home-workbench > p:last-child {
-  font-size: 12px;
-  border-top: 1px solid #7b8eeb;
-  padding-top: 20px;
-}
+
 .policy-band {
   background: #eeeee5;
   padding: 62px 0;
-}
-.policy-section-title {
-  font-size: clamp(35px, 4vw, 54px);
-  line-height: 1.1;
-  margin: 28px 0 40px;
-}
-.home-tool-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 40px;
-}
-.home-tool-grid article {
-  border-top: 1px solid var(--color-border);
-  padding-top: 24px;
-}
-.home-tool-grid h3 {
-  font-size: 33px;
-  line-height: 1.1;
-  margin: 24px 0 16px;
-}
-.home-tool-grid p:not(.label) {
-  font-size: 15px;
-  color: var(--color-muted);
-  margin-bottom: 22px;
-}
-.policy-section-note {
-  color: var(--color-muted);
-  font-size: 14px;
-  max-width: 760px;
-  margin-top: 30px;
-}
-.home-cases {
-  padding-block: 62px;
 }
 .policy-home-learning {
   padding-top: 58px;
@@ -727,35 +643,11 @@
   }
 }
 @media (max-width: 900px) {
-  .policy-home-hero {
-    grid-template-columns: 1fr;
-    gap: 35px;
-  }
-  .policy-home-hero h1 {
-    font-size: clamp(46px, 8vw, 68px);
-  }
-  .home-workbench {
-    padding: 28px;
-  }
-  .home-workbench h2 {
-    font-size: 44px;
-  }
-  .home-workbench > a {
-    font-size: 18px;
-  }
-  .home-tool-grid,
   .case-grid {
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  .home-tool-grid article {
-    padding-block: 22px;
-  }
-  .home-tool-grid h3 {
-    margin-top: 16px;
-  }
-  .policy-band,
-  .home-cases {
+  .policy-band {
     padding-block: 38px;
   }
   .policy-home-learning {
@@ -873,7 +765,6 @@
   body > header,
   body > footer,
   .analytics-choice,
-  .analytics-settings,
   .skip-link {
     display: none !important;
   }

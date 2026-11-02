@@ -8,6 +8,7 @@ import { ANALYTICS_CHOICE_COOKIE, GA_ID, analyticsLocation, clearAnalyticsCookie
 
 type Choice = "accepted" | "rejected" | null;
 const eventName = "aipex-analytics-choice";
+const openEventName = "aipex-open-cookie-preferences";
 function readChoice(): Choice {
   const value = document.cookie.split("; ").find(row => row.startsWith(`${ANALYTICS_CHOICE_COOKIE}=`))?.split("=")[1];
   return value === "accepted" || value === "rejected" ? value : null;
@@ -29,6 +30,12 @@ export default function Analytics() {
   const [ready, setReady] = useState(false);
   const previousPage = useRef<string | null>(null);
   const allowed = choice === "accepted" && isAnalyticsPage(pathname);
+
+  useEffect(() => {
+    const open = () => setPreferencesOpen(true);
+    window.addEventListener(openEventName, open);
+    return () => window.removeEventListener(openEventName, open);
+  }, []);
 
   useEffect(() => {
     const enabled = allowed && isAnalyticsHost(window.location.hostname);
@@ -58,7 +65,7 @@ export default function Analytics() {
       {allowed && typeof window !== "undefined" && isAnalyticsHost(window.location.hostname) && (
         <Script id="aipex-google-analytics" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" onReady={() => setReady(true)} />
       )}
-      {show ? (
+      {show && (
         <section className="analytics-choice" aria-label="Analytics preferences">
           <div className="container analytics-choice-inner">
             <div>
@@ -71,9 +78,16 @@ export default function Analytics() {
             </div>
           </div>
         </section>
-      ) : (
-        <button className="analytics-settings" onClick={() => setPreferencesOpen(true)}>Cookie preferences</button>
       )}
     </>
+  );
+}
+
+// Lets the footer reopen the consent banner after a choice has been made.
+export function CookiePreferencesButton() {
+  return (
+    <button className="footer-cookie-button" type="button" onClick={() => window.dispatchEvent(new Event(openEventName))}>
+      Cookie preferences
+    </button>
   );
 }

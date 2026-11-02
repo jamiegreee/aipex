@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { Arrow, ExchangeMark } from "./Brand";
+import { CookiePreferencesButton } from "./Analytics";
 
-export default function Footer() {
+export default function Footer({
+  tagline = "The public capacity to respond.",
+}: {
+  tagline?: string;
+} = {}) {
   return (
     <footer className="site-footer">
       <div className="container">
@@ -20,7 +25,8 @@ export default function Footer() {
           </Link>
           <p>
             Advanced AI.
-            <br />The public capacity to respond.
+            <br />
+            {tagline}
           </p>
           <Link className="text-link" href="/contact">
             Say hello <Arrow diagonal />
@@ -31,12 +37,9 @@ export default function Footer() {
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} AI Policy Exchange</span>
-          <span className="footer-location">
-            Helping governments prepare for advanced AI.
-          </span>
           <Link href="/membership">Membership</Link>
-          <Link href="/charter">Founding charter</Link>
           <Link href="/privacy">Privacy</Link>
+          <CookiePreferencesButton />
         </div>
       </div>
     </footer>
