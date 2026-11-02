@@ -4,180 +4,139 @@ import Footer from "@/components/Footer";
 import { Arrow } from "@/components/Brand";
 import { policyTools } from "@/content/policy-tools";
 import { policyCases } from "@/content/policy-cases";
+import "./home.css";
+
+const countryCount = new Set(policyCases.map((c) => c.country)).size;
+
+// An illustrative, unquantified picture of the thesis: capability compounds
+// while institutional capacity grows in steps. Not a data series.
+function GapChart() {
+  return (
+    <figure className="cb-chart">
+      <svg viewBox="0 0 600 380" role="img" aria-labelledby="cb-chart-title">
+        <title id="cb-chart-title">
+          Illustration: advanced AI capability rising faster than the public
+          capacity to respond, leaving a gap to close.
+        </title>
+        {[76, 152, 228, 304].map((y) => (
+          <line key={y} x1="0" x2="600" y1={y} y2={y} className="cb-grid" />
+        ))}
+        <path
+          className="cb-gap"
+          d="M0 350 C 200 345, 360 300, 470 170 S 580 20, 600 10 L 600 230 L 520 230 L 520 262 L 400 262 L 400 290 L 260 290 L 260 318 L 120 318 L 120 340 L 0 340 Z"
+        />
+        <path
+          className="cb-capability"
+          d="M0 350 C 200 345, 360 300, 470 170 S 580 20, 600 10"
+        />
+        <path
+          className="cb-capacity"
+          d="M0 340 H120 V318 H260 V290 H400 V262 H520 V230 H600"
+        />
+        <text x="405" y="60" className="cb-chart-label">AI capability</text>
+        <text x="408" y="298" className="cb-chart-label cb-muted">
+          What governments can do
+        </text>
+        <text x="500" y="200" className="cb-chart-label cb-accent">
+          the gap
+        </text>
+      </svg>
+    </figure>
+  );
+}
 
 export default function Home() {
   return (
-    <>
-      <Navigation />
+    <div className="cb">
+      <Navigation cta={{ href: "/membership", label: "Join the exchange" }} />
       <main id="main">
-        <section
-          className="hero container policy-home-hero"
-          aria-labelledby="hero-heading"
-        >
-          <div className="hero-copy">
-            <p className="label hero-label">
-              <span className="status-dot" /> For governments and policymakers
+        <section className="container cb-hero" aria-labelledby="cb-h1">
+          <div>
+            <p className="label cb-kicker">
+              <span /> Founding membership now open
             </p>
-            <h1 id="hero-heading">
-              Helping governments
-              <br />
-              <em>prepare for advanced AI.</em>
+            <h1 id="cb-h1">
+              The community for AI policy professionals
             </h1>
-            <p className="hero-description">
-              AIPEX helps governments and policymakers understand, plan for and
-              respond to the effects of advanced artificial intelligence on
-              public institutions, the economy and society.
+            <p className="cb-lede">
+              AIPEX is an online community for the public servants, regulators
+              and advisers working on AI. Join us on Slack to compare notes
+              with peers, share what&rsquo;s working and ask the questions
+              you&rsquo;re wrestling with.
             </p>
-            <div className="hero-actions">
+            <div className="cb-actions">
               <Link className="button" href="/membership">
-                Apply for membership <Arrow />
+                Join the exchange <Arrow />
               </Link>
-              <Link className="text-link" href="/tools">
-                Explore the tools <Arrow diagonal />
+              <Link className="cb-link" href="/tools">
+                Browse the tools first <Arrow diagonal />
               </Link>
             </div>
-            <p className="hero-footnote">
-              Founding community · Our first 50 members · Applications reviewed individually.
+            <p className="cb-join-note">
+              Join the community to learn and shape AI policy together.
             </p>
           </div>
-          <aside
-            className="home-workbench"
-            aria-label="Choose your starting question"
-          >
-            <p className="label">On your desk / A decision to make</p>
-            <h2>
-              Where do
-              <br />
-              <em>you begin?</em>
-            </h2>
-            {policyTools.map((t) => (
-              <Link key={t.slug} href={`/tools/${t.slug}`}>
-                <span className="label">{t.number}</span>
-                <span>
-                  {t.shortTitle}
-                  <small>{t.time} · A brief to take away</small>
-                </span>
-                <span aria-hidden="true">↗</span>
-              </Link>
-            ))}
-            <p>No account needed to start.</p>
-          </aside>
+          <GapChart />
         </section>
-        <section className="policy-band" aria-labelledby="home-tools-heading">
+
+        <section className="cb-mission" aria-labelledby="cb-mission-h">
           <div className="container">
-            <div className="section-heading">
-              <p className="label">01 / Use a tool</p>
-              <Link className="text-link" href="/tools">
-                The policy workbench ↗
-              </Link>
-            </div>
-            <h2 className="policy-section-title" id="home-tools-heading">
-              From a difficult question
-              <br />
-              to a <em>working brief.</em>
+            <p className="label">Why a community</p>
+            <h2 id="cb-mission-h">
+              Capacity is built by people, <em>not papers.</em>
             </h2>
-            <div className="home-tool-grid">
-              {policyTools.map((t) => (
-                <article key={t.slug}>
-                  <p className="label">
-                    {t.number} / {t.time}
-                  </p>
-                  <h3>
-                    <Link href={`/tools/${t.slug}`}>{t.shortTitle}.</Link>
-                  </h3>
-                  <p>{t.description}</p>
-                  <Link className="text-link" href={`/tools/${t.slug}`}>
-                    Open workspace ↗
-                  </Link>
-                </article>
-              ))}
-            </div>
-            <p className="policy-section-note">
-              Structured prompts, complete worked examples and primary sources.
-              Save drafts, compare your reasoning and export something you can
-              develop further.
+            <p>
+              Preparing for advanced AI means looking beyond individual
+              deployments to the changes more capable systems could bring. No
+              single department will work this out alone. AIPEX brings together
+              the people who will have to, so they can compare notes,
+              pressure-test their judgement and build the institutions needed to
+              act.
             </p>
-          </div>
-        </section>
-        <section
-          className="container home-cases"
-          aria-labelledby="home-cases-heading"
-        >
-          <div className="section-heading">
-            <p className="label">02 / Examine a case</p>
-            <Link className="text-link" href="/cases">
-              Explore the case library ↗
-            </Link>
-          </div>
-          <h2 className="policy-section-title" id="home-cases-heading">
-            Good judgement
-            <br />
-            <em>takes practice.</em>
-          </h2>
-          <div className="case-grid">
-            {policyCases
-              .filter((c) =>
-                [
-                  "robodebt",
-                  "singapore-retinal-screening",
-                  "brazil-victor",
-                ].includes(c.slug),
-              )
-              .map((c) => (
-                <article className="case-card" key={c.slug}>
-                  <p className="label">
-                    {c.kind} / {c.minutes} min
-                  </p>
-                  <h3>
-                    <Link href={`/cases/${c.slug}`}>{c.title}</Link>
-                  </h3>
-                  <p>{c.summary}</p>
-                  <p className="small-copy">
-                    {c.jurisdiction} · {c.period}
-                  </p>
-                  <Link className="text-link" href={`/cases/${c.slug}`}>
-                    Examine the case ↗
-                  </Link>
-                </article>
-              ))}
-          </div>
-          <p className="policy-section-note">
-            Documented decisions from the UK and beyond, dated primary sources
-            and explicit limits. Examine the evidence, try the decision and
-            compare your reasoning with an AIPEX analysis.
-          </p>
-        </section>
-        <section className="mission-section" aria-labelledby="mission-heading">
-          <div className="container mission-inner">
-            <p className="label">An enduring purpose</p>
-            <div>
-              <h2 id="mission-heading">
-                Plan for change.
-                <br />
-                <em>Build the capacity to respond.</em>
-              </h2>
-              <div className="mission-copy">
-                <p>
-                  Preparing for advanced AI means looking beyond individual
-                  deployments to the changes more capable systems could bring.
-                  Our purpose is to help governments anticipate those changes,
-                  weigh policy responses and build the institutions needed to act.
-                </p>
-                <p>
-                  We begin with practical tools and documented cases that help
-                  policymakers examine evidence, compare options and plan
-                  oversight. These resources provide a foundation for judgement
-                  as capabilities and evidence change.
-                </p>
-              </div>
-              <Link className="text-link" href="/about">
+            <div className="cb-actions">
+              <Link className="button" href="/membership">
+                Join the exchange <Arrow />
+              </Link>
+              <Link className="cb-link" href="/about">
                 About AIPEX <Arrow diagonal />
               </Link>
             </div>
           </div>
         </section>
+
+        <section className="cb-resources" aria-labelledby="cb-tools">
+          <div className="container">
+            <div className="cb-section-head">
+              <p className="label">Open resources</p>
+              <h2 id="cb-tools">
+                From a difficult question <em>to a working brief.</em>
+              </h2>
+            </div>
+            <ul className="cb-tool-list">
+              {policyTools.map((t) => (
+                <li key={t.slug}>
+                  <Link href={`/tools/${t.slug}`}>
+                    <span className="cb-tool-num">{t.number}</span>
+                    <span className="cb-tool-name">{t.shortTitle}</span>
+                    <span className="cb-tool-desc">{t.description}</span>
+                    <span className="label">{t.time}</span>
+                    <Arrow />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link className="cb-case-link" href="/cases">
+              <span>
+                <span className="label">Case library</span>
+                {policyCases.length} documented decisions from {countryCount}{" "}
+                countries
+              </span>
+              <Arrow diagonal />
+            </Link>
+          </div>
+        </section>
       </main>
-      <Footer />
-    </>
+      <Footer tagline="Worked out together." />
+    </div>
   );
 }
