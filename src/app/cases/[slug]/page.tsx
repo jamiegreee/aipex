@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { caseLibraryEnabled } from "@/lib/site";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SourceList from "@/components/policy/SourceList";
@@ -8,13 +9,15 @@ import { findTool } from "@/content/policy-tools";
 import { policySources } from "@/content/policy-sources";
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
-  return policyCases.map((c) => ({ slug: c.slug }));
+  return caseLibraryEnabled ? policyCases.map((c) => ({ slug: c.slug })) : [];
 }
 export async function generateMetadata({ params }: Props) {
+  if (!caseLibraryEnabled) redirect("/tools");
   const c = findCase((await params).slug);
   return { title: c?.title ?? "Case not found", description: c?.summary };
 }
 export default async function CasePage({ params }: Props) {
+  if (!caseLibraryEnabled) redirect("/tools");
   const c = findCase((await params).slug);
   if (!c) notFound();
   const tool = findTool(c.tool)!;

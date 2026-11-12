@@ -2,6 +2,7 @@ import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { policyTools } from "@/content/policy-tools";
+import { caseLibraryEnabled } from "@/lib/site";
 export const metadata = {
   title: "Tools for AI policy",
   description:
@@ -55,7 +56,7 @@ export default function Tools() {
             <div>
               <p className="label">A place to begin</p>
               <h2>
-                Start with a case.
+                Start with a worked example.
                 <br />
                 <em>Build your judgement.</em>
               </h2>
@@ -64,16 +65,18 @@ export default function Tools() {
               <p>
                 Each tool includes an AIPEX worked analysis of a documented
                 case, with unknowns left visible. Explore the original evidence,
-                then carry the case into a fresh workspace.
+                then develop your reasoning in a fresh workspace.
               </p>
               <p>
                 Work without signing in. Browser drafts, editable project files
                 and account saving help you return to a question as the evidence
                 develops.
               </p>
-              <Link className="text-link" href="/cases">
-                Explore the case library ↗
-              </Link>
+              {caseLibraryEnabled && (
+                <Link className="text-link" href="/cases">
+                  Explore the case library ↗
+                </Link>
+              )}
             </div>
           </div>
         </section>

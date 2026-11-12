@@ -7,6 +7,7 @@ import {
 import { findTool } from "@/content/policy-tools";
 import { policySources, reviewedOn } from "@/content/policy-sources";
 import { findCase } from "@/content/policy-cases";
+import { caseLibraryEnabled } from "./site";
 export const percentage = (n: number | null) =>
   n === null ? "Not defined (zero denominator)" : `${(n * 100).toFixed(1)}%`;
 export function workspaceMarkdown(w: Workspace) {
@@ -24,7 +25,7 @@ export function workspaceMarkdown(w: Workspace) {
     lines.splice(
       4,
       0,
-      `Starting case: [${startingCase.title}](https://theaipex.org/cases/${startingCase.slug}) · ${startingCase.kind}. Case facts are from dated reports, not a statement of present performance. AIPEX interpretations, proposed controls and next steps are analysis, not reported arrangements.`,
+      `Starting case: ${caseLibraryEnabled ? `[${startingCase.title}](https://theaipex.org/cases/${startingCase.slug})` : startingCase.title} · ${startingCase.kind}. Case facts are from dated reports, not a statement of present performance. AIPEX interpretations, proposed controls and next steps are analysis, not reported arrangements.`,
       "",
     );
   if (isRetiredPracticeCase(w.caseSlug))

@@ -6,6 +6,7 @@ import SourceList from "@/components/policy/SourceList";
 import ToolWorkspace from "@/components/policy/ToolWorkspace";
 import { findTool, policyTools } from "@/content/policy-tools";
 import { findCase } from "@/content/policy-cases";
+import { caseLibraryEnabled } from "@/lib/site";
 type Props = {
   params: Promise<{ tool: string }>;
   searchParams: Promise<{ case?: string }>;
@@ -52,9 +53,13 @@ export default async function ToolPage({ params, searchParams }: Props) {
           {initialCase && (
             <p className="case-context-note">
               Case entry:{" "}
-              <Link href={`/cases/${initialCase.slug}`}>
-                {initialCase.title}
-              </Link>
+              {caseLibraryEnabled ? (
+                <Link href={`/cases/${initialCase.slug}`}>
+                  {initialCase.title}
+                </Link>
+              ) : (
+                initialCase.title
+              )}
               . Returning to this case reopens its browser draft. If you switch
               drafts below, the draft source note identifies the work currently
               open.
@@ -68,18 +73,20 @@ export default async function ToolPage({ params, searchParams }: Props) {
         />
         <div className="container policy-reading">
           <SourceList ids={tool.sources} />
-          <section className="policy-next">
-            <h2>Go further.</h2>
-            <p>
-              Examine a documented decision and try applying this tool to
-              another case.
-            </p>
-            <div className="workspace-actions">
-              <Link className="text-link" href="/cases">
-                Case library ↗
-              </Link>
-            </div>
-          </section>
+          {caseLibraryEnabled && (
+            <section className="policy-next">
+              <h2>Go further.</h2>
+              <p>
+                Examine a documented decision and try applying this tool to
+                another case.
+              </p>
+              <div className="workspace-actions">
+                <Link className="text-link" href="/cases">
+                  Case library ↗
+                </Link>
+              </div>
+            </section>
+          )}
         </div>
       </main>
       <Footer />

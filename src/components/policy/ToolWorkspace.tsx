@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { PolicyTool } from "@/content/policy-tools";
 import { findCase, type PolicyCase } from "@/content/policy-cases";
 import { policySources } from "@/content/policy-sources";
+import { caseLibraryEnabled } from "@/lib/site";
 import {
   classificationMetrics,
   caseDraftToResume,
@@ -385,7 +386,11 @@ export default function ToolWorkspace({
       {workingCase && (
         <p className="container case-context-note">
           Draft source:{" "}
-          <Link href={`/cases/${workingCase.slug}`}>{workingCase.title}</Link>.{" "}
+          {caseLibraryEnabled ? (
+            <Link href={`/cases/${workingCase.slug}`}>{workingCase.title}</Link>
+          ) : (
+            workingCase.title
+          )}.{" "}
           Reported facts come from the dated case sources. Your interpretations,
           proposed controls and next steps are analysis, not reported
           arrangements.
@@ -529,9 +534,11 @@ export default function ToolWorkspace({
                 <p>{field.example}</p>
                 <p className="small-copy">
                   {tool.exampleNote}{" "}
-                  <Link href={`/cases/${tool.exampleCase}`}>
-                    Read the case and its evidence ↗
-                  </Link>
+                  {caseLibraryEnabled && (
+                    <Link href={`/cases/${tool.exampleCase}`}>
+                      Read the case and its evidence ↗
+                    </Link>
+                  )}
                 </p>
               </details>
               <p className="small-copy field-reading">{field.reading}</p>

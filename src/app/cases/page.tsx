@@ -2,12 +2,18 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import CaseBrowser from "@/components/policy/CaseBrowser";
 import { policyCases } from "@/content/policy-cases";
-export const metadata = {
-  title: "AI policy case library",
-  description:
-    "Examine documented AI and automated-decision policy cases. Source-backed evidence, decision questions and worked approaches, connected to practical AI policy tools.",
-};
+import { redirect } from "next/navigation";
+import { caseLibraryEnabled } from "@/lib/site";
+export function generateMetadata() {
+  if (!caseLibraryEnabled) redirect("/tools");
+  return {
+    title: "AI policy case library",
+    description:
+      "Examine documented AI and automated-decision policy cases. Source-backed evidence, decision questions and worked approaches, connected to practical AI policy tools.",
+  };
+}
 export default function Cases() {
+  if (!caseLibraryEnabled) redirect("/tools");
   return (
     <>
       <Navigation />

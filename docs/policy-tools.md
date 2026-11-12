@@ -1,6 +1,8 @@
 # Policy tools and case library
 
-Published routes: `/tools`, three `/tools/[tool]` workspaces, `/cases` and nine `/cases/[slug]` pages. The homepage and navigation connect all three tools, cases and the existing courses. Gatherings and community recruitment remain hidden.
+Published routes: `/tools` and three `/tools/[tool]` workspaces. The case library is hidden through `caseLibraryEnabled` in `src/lib/site.ts`: navigation, homepage promotion, tool links and sitemap entries are suppressed, and `/cases` and `/cases/[slug]` redirect to `/tools`. Case content, worked examples and saved drafts remain available for restoration. Courses, gatherings and community recruitment remain hidden.
+
+The homepage's open resources section is hidden through `homeResourcesEnabled` in the same file. The tools remain accessible through their existing routes.
 
 ## Editorial method
 

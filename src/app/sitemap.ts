@@ -2,16 +2,15 @@ import type { MetadataRoute } from "next";
 import { policyTools } from "@/content/policy-tools";
 import { policyCases } from "@/content/policy-cases";
 import { courses } from "@/content/courses";
-import { communityEnabled, coursesEnabled, gatheringsEnabled } from "@/lib/site";
+import { caseLibraryEnabled, communityEnabled, coursesEnabled, gatheringsEnabled } from "@/lib/site";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     "",
     "/about",
     "/charter",
     "/tools",
-    "/cases",
     ...policyTools.map(t => `/tools/${t.slug}`),
-    ...policyCases.map(c => `/cases/${c.slug}`),
+    ...(caseLibraryEnabled ? ["/cases", ...policyCases.map(c => `/cases/${c.slug}`)] : []),
     ...(communityEnabled ? ["/community"] : []),
     ...(gatheringsEnabled ? ["/gatherings"] : []),
     ...(coursesEnabled ? ["/courses", ...courses.map((c) => `/courses/${c.slug}`)] : []),

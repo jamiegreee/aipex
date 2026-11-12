@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Arrow } from "@/components/Brand";
 import { policyTools } from "@/content/policy-tools";
 import { policyCases } from "@/content/policy-cases";
+import { caseLibraryEnabled, homeResourcesEnabled } from "@/lib/site";
 import "./home.css";
 
 const countryCount = new Set(policyCases.map((c) => c.country)).size;
@@ -104,37 +105,41 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="cb-resources" aria-labelledby="cb-tools">
-          <div className="container">
-            <div className="cb-section-head">
-              <p className="label">Open resources</p>
-              <h2 id="cb-tools">
-                From a difficult question <em>to a working brief.</em>
-              </h2>
+        {homeResourcesEnabled && (
+          <section className="cb-resources" aria-labelledby="cb-tools">
+            <div className="container">
+              <div className="cb-section-head">
+                <p className="label">Open resources</p>
+                <h2 id="cb-tools">
+                  From a difficult question <em>to a working brief.</em>
+                </h2>
+              </div>
+              <ul className="cb-tool-list">
+                {policyTools.map((t) => (
+                  <li key={t.slug}>
+                    <Link href={`/tools/${t.slug}`}>
+                      <span className="cb-tool-num">{t.number}</span>
+                      <span className="cb-tool-name">{t.shortTitle}</span>
+                      <span className="cb-tool-desc">{t.description}</span>
+                      <span className="label">{t.time}</span>
+                      <Arrow />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              {caseLibraryEnabled && (
+                <Link className="cb-case-link" href="/cases">
+                  <span>
+                    <span className="label">Case library</span>
+                    {policyCases.length} documented decisions from {countryCount}{" "}
+                    countries
+                  </span>
+                  <Arrow diagonal />
+                </Link>
+              )}
             </div>
-            <ul className="cb-tool-list">
-              {policyTools.map((t) => (
-                <li key={t.slug}>
-                  <Link href={`/tools/${t.slug}`}>
-                    <span className="cb-tool-num">{t.number}</span>
-                    <span className="cb-tool-name">{t.shortTitle}</span>
-                    <span className="cb-tool-desc">{t.description}</span>
-                    <span className="label">{t.time}</span>
-                    <Arrow />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <Link className="cb-case-link" href="/cases">
-              <span>
-                <span className="label">Case library</span>
-                {policyCases.length} documented decisions from {countryCount}{" "}
-                countries
-              </span>
-              <Arrow diagonal />
-            </Link>
-          </div>
-        </section>
+          </section>
+        )}
       </main>
       <Footer tagline="Worked out together." />
     </div>
