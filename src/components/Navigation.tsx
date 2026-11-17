@@ -10,7 +10,6 @@ const links = [
   { href: "/membership", label: "Membership" },
   ...(caseLibraryEnabled ? [{ href: "/cases", label: "Case library" }] : []),
   ...(gatheringsEnabled ? [{ href: "/gatherings", label: "Gatherings" }] : []),
-  { href: "/about", label: "About AIPEX" },
 ];
 
 type NavCta = { href: string; label: string };
