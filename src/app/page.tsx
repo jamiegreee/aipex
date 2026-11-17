@@ -53,9 +53,6 @@ export default function Home() {
       <main id="main">
         <section className="container cb-hero" aria-labelledby="cb-h1">
           <div>
-            <p className="label cb-kicker">
-              <span /> Founding membership now open
-            </p>
             <h1 id="cb-h1">
               The community for AI policy professionals
             </h1>
