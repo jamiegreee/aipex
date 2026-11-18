@@ -33,7 +33,7 @@ export default async function Membership() {
           <div className="container">
             <p className="label">Founding membership / Our first 50 members</p>
             <h1>Help shape<br /><em>the public response.</em></h1>
-            <p>We’re bringing together people from the public and private sectors who are working on policy for advanced artificial intelligence. Apply to become one of AIPEX’s first 50 members.</p>
+            <p>We’re bringing together people from the public and private sectors who are working on policy for advanced artificial intelligence.</p>
           </div>
         </header>
         <div className="container membership-layout">
