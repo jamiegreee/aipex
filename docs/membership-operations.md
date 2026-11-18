@@ -1,6 +1,6 @@
 # Founding membership applications
 
-The first cohort is a manually reviewed group of up to 50 members. Creating an AIPEX account never grants membership. Applicants must verify their email before submitting; Jamie reviews each application separately. The application and account-status pages do not imply an existing member platform, government endorsement or confirmed event programme.
+Membership is manually reviewed and has no size limit: whoever Jamie approves becomes a member. Creating an AIPEX account never grants membership. Applicants must verify their email before submitting; Jamie reviews each application separately. The application and account-status pages do not imply an existing member platform, government endorsement or confirmed event programme.
 
 ## Dedicated backend and migration
 
@@ -50,7 +50,7 @@ Check that `membership_reviewers` contains only the intended account before laun
 - `membership_applications` stores one record per verified account, including the email read from managed Auth, the applicant’s bounded professional details, interests, reasons and the current decision. There is no public directory or internal-note field.
 - Applicants can select their own record. Reviewers can select the queue. Authenticated users have no table INSERT, UPDATE or DELETE grants; anonymous and PUBLIC access is revoked.
 - The authenticated `submit_membership` RPC accepts the form’s camelCase JSON fields. It derives identity and pending status itself. Retrying returns an existing record unchanged, including an approved or declined decision.
-- `membership_is_reviewer` reports whether the current verified account is allowlisted. `membership_counts` gives reviewers aggregate queue counts and the current cohort limit.
+- `membership_is_reviewer` reports whether the current verified account is allowlisted. `membership_counts` gives reviewers aggregate queue counts.
 - `review_membership` accepts `p_user_id`, `p_decision` (`approved` or `declined`) and the displayed record’s `p_expected_updated_at`. It checks the reviewer in the database, serialises decisions using the admissions row, and atomically writes the decision and an audit record. Only pending applications can be reviewed.
 - The private audit records the applicant, reviewer, decision and time. It is visible only to reviewers; applicant-account deletion cascades to their application and its audit rows.
 
@@ -70,10 +70,8 @@ Map these database exception messages to safe user-facing feedback rather than d
 | `invalid_decision` | The requested decision or version is missing or unsupported. |
 | `application_not_found` | The target record no longer exists. |
 | `application_changed` | Reload the queue; another decision or record version superseded this screen. |
-| `founding_cohort_full` | Fifty applications are already approved; leave the remaining application pending rather than silently admitting another member. |
-| `admissions_not_configured` | The singleton admission-limit record is missing; an operator must restore it. |
 
-The initial `member_limit` is 50. Increasing the cohort size is an explicit operator decision, not an applicant setting. Existing signed-in users and tool users remain distinct from approved members.
+Existing signed-in users and tool users remain distinct from approved members.
 
 ## Verification before launch
 
@@ -83,7 +81,7 @@ The isolated database checks can be run locally with PostgreSQL 15 binaries:
 bash tests/membership.database.test.sh
 ```
 
-Set `AIPEX_TEST_PG_BIN` when the binaries are installed elsewhere. The runner creates a temporary cluster under `/private/tmp`, binds only loopback on port 55450 with its own socket directory, supplies fictional Auth identities and removes the cluster after shutdown. It never connects to Neon. It checks the migration, privileges, row isolation, payload validation, audit records and two concurrent reviews competing for the final founding place.
+Set `AIPEX_TEST_PG_BIN` when the binaries are installed elsewhere. The runner creates a temporary cluster under `/private/tmp`, binds only loopback on port 55450 with its own socket directory, supplies fictional Auth identities and removes the cluster after shutdown. It never connects to Neon. It checks the migration, privileges, row isolation, payload validation, audit records and two concurrent reviews competing for the final place under the original 50-member limit. That limit was later removed; see below.
 
 Use disposable, genuinely email-verified test accounts in an isolated Neon child branch where possible. Never disable verification or delete real applications to make a test pass.
 
@@ -101,6 +99,10 @@ Apply `neon/migrations/20261030190000_archive_test_applications.sql` before depl
 Only pending applications can be archived. As the database operator, identify each disposable test by its account ID and confirmed test details, then set `archived_at` and advance `updated_at` together. Check the exact affected rows before committing. Never archive real applications merely to clean up a test run. Restore an archived test by clearing `archived_at` and advancing `updated_at` again.
 
 Archiving leaves the application, Auth account, reviewer access, decision audits and email delivery history intact. It sends no application or decision emails and does not free or grant a member place. Applicants retain access to their own saved status; archive management is not exposed through the Data API or reviewer UI. Run `bash tests/membership-archive.database.test.sh` for isolated permission, queue-count, review-guard and restoration checks.
+
+## Remove the member limit
+
+Deploy the application first, then apply `neon/migrations/20261118190000_remove_member_limit.sql`. The current app works with either database version, but an older deployment expects the `limit` count that this migration removes. The migration redefines `review_membership` and `membership_counts` without the 50-member limit and drops the `membership_admissions` table. It changes no applications, reviews or emails. Run `bash tests/membership-limit-removal.database.test.sh` to check approvals past 50 in a disposable database.
 
 ## Email and privacy
 

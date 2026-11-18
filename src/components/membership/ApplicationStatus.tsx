@@ -6,7 +6,7 @@ export default function ApplicationStatus({ application }: { application: Member
   const declined = application.status === "declined";
   return (
     <section className="membership-status" aria-labelledby="membership-status-heading">
-      {approved && <p className="label">Founding member</p>}
+      {approved && <p className="label">Member</p>}
       <h2 id="membership-status-heading">{approved ? "Welcome to AIPEX." : declined ? "Your application has been reviewed." : "Application received."}</h2>
       <p>
         {approved

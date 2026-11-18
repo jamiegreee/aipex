@@ -8,8 +8,8 @@ import { currentUser } from "@/lib/auth";
 import { membershipApplication } from "@/lib/membership-server";
 
 export const metadata: Metadata = {
-  title: "Apply for founding membership",
-  description: "Apply to join AIPEX’s founding community of AI policy people from the public and private sectors. Every application is individually reviewed.",
+  title: "Apply for membership",
+  description: "Apply to join AIPEX’s community of AI policy people from the public and private sectors. Every application is individually reviewed.",
   alternates: { canonical: "/membership" },
   // This page can show a signed-in applicant’s private status.
   robots: { index: false, follow: true },
@@ -31,13 +31,13 @@ export default async function Membership() {
       <main id="main">
         <header className="membership-intro">
           <div className="container">
-            <p className="label">Founding membership</p>
+            <p className="label">Membership</p>
             <h1>Help shape<br /><em>the public response.</em></h1>
             <p>We’re bringing together people from the public and private sectors who are working on policy for advanced artificial intelligence.</p>
           </div>
         </header>
         <div className="container membership-layout">
-          <aside className="membership-aside" aria-label="About founding membership">
+          <aside className="membership-aside" aria-label="About membership">
             <p className="label">Public and private sector</p>
             <h2>Different vantage points.<br /><em>Shared problems.</em></h2>
             <p>For people working on AI policy in government, parliaments, regulators and international institutions, and for policy teams at companies and AI developers.</p>

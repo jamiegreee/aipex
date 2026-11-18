@@ -78,15 +78,13 @@ export async function reviewMembership(
     const user = await currentUser(true);
     if (!user) return { error: "Sign in again before reviewing applications." };
     const client = await createClient();
-    // Reviewer authority and the cohort limit are enforced atomically in SQL.
+    // Reviewer authority and stale-decision checks are enforced atomically in SQL.
     const { error } = await client.rpc("review_membership", {
       p_user_id: userId,
       p_decision: decision,
       p_expected_updated_at: expectedUpdatedAt,
     });
     if (error) {
-      if (error.message.includes("cohort_full"))
-        return { error: "The founding group has reached 50 approved members. Leave this application pending while you decide on the next group." };
       if (/already_reviewed|stale_application|application_changed/.test(error.message))
         return { error: "This application changed in another session. Refresh before reviewing it." };
       if (/not_reviewer|reviewer_required|not_authorized|permission denied/.test(error.message))
