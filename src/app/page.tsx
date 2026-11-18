@@ -66,9 +66,6 @@ export default function Home() {
               <Link className="button" href="/membership">
                 Join the exchange <Arrow />
               </Link>
-              <Link className="cb-link" href="/tools">
-                Browse the tools first <Arrow diagonal />
-              </Link>
             </div>
             <p className="cb-join-note">
               Join the community to learn and shape AI policy together.
