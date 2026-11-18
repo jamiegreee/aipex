@@ -9,7 +9,7 @@ import { membershipApplication } from "@/lib/membership-server";
 
 export const metadata: Metadata = {
   title: "Apply for founding membership",
-  description: "Apply to join AIPEX’s founding community of policymakers preparing governments for advanced AI. The first 50 members are individually reviewed and approved.",
+  description: "Apply to join AIPEX’s founding community of AI policy people from the public and private sectors. The first 50 members are individually reviewed and approved.",
   alternates: { canonical: "/membership" },
   // This page can show a signed-in applicant’s private status.
   robots: { index: false, follow: true },
@@ -33,17 +33,17 @@ export default async function Membership() {
           <div className="container">
             <p className="label">Founding membership / Our first 50 members</p>
             <h1>Help shape<br /><em>the public response.</em></h1>
-            <p>We’re bringing together policymakers and practitioners helping governments prepare for advanced artificial intelligence. Apply to become one of AIPEX’s first 50 members.</p>
+            <p>We’re bringing together people from the public and private sectors who are working on policy for advanced artificial intelligence. Apply to become one of AIPEX’s first 50 members.</p>
           </div>
         </header>
         <div className="container membership-layout">
           <aside className="membership-aside" aria-label="About founding membership">
-            <p className="label">A community of policymakers</p>
-            <h2>Public purpose.<br /><em>Practical experience.</em></h2>
-            <p>For people shaping public decisions in government, parliaments, regulators and international institutions, and those whose work directly supports them.</p>
+            <p className="label">Public and private sector</p>
+            <h2>Different vantage points.<br /><em>Shared problems.</em></h2>
+            <p>For people working on AI policy in government, parliaments, regulators and international institutions, and for policy teams at companies and AI developers.</p>
             <h3>Who we’re looking for</h3>
             <ul>
-              <li>Current policymaking responsibilities or substantive experience supporting public policy.</li>
+              <li>Current responsibility for AI policy, in the public or private sector, or substantive experience shaping it.</li>
               <li>A serious interest in how advanced AI could affect public institutions, the economy and society.</li>
               <li>A willingness to share useful experience and engage constructively across different views.</li>
             </ul>
