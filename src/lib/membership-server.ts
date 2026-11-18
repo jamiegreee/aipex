@@ -6,7 +6,6 @@ export type MembershipCounts = {
   pending: number;
   approved: number;
   declined: number;
-  limit: number;
 };
 
 export async function membershipApplication(userId: string) {
@@ -44,8 +43,8 @@ export async function membershipReviewQueue(status: string, page: number) {
   if (
     applications.error || counts.error || !Array.isArray(applications.data) ||
     !countValues || typeof countValues !== "object" || Array.isArray(countValues) ||
-    !["pending", "approved", "declined", "limit"].every(key =>
-      Number.isInteger(countValues[key]) && Number(countValues[key]) >= (key === "limit" ? 1 : 0),
+    !["pending", "approved", "declined"].every(key =>
+      Number.isInteger(countValues[key]) && Number(countValues[key]) >= 0,
     )
   )
     throw new Error("Membership applications could not be loaded.");

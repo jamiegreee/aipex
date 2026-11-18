@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { foundingMemberLimit, membershipInterestOptions, parseMembershipForm } from "../src/lib/membership";
+import { membershipInterestOptions, parseMembershipForm } from "../src/lib/membership";
 
 function application() {
   const form = new FormData();
@@ -33,7 +33,6 @@ test("membership applications preserve international text and derive no identity
   assert.equal("email" in result.data, false);
   assert.equal("user_id" in result.data, false);
   assert.equal("status" in result.data, false);
-  assert.equal(foundingMemberLimit, 50);
 
   for (const name of ["山田 太郎", "عائشة حسن", "श्रेया कुमार", "A\u0301ine Ó Briain"]) {
     form.set("fullName", name);

@@ -14,11 +14,11 @@ export default function ReviewDecision({ userId, fullName, updatedAt }: { userId
         Decision for {fullName}
         <select name="decision" required value={decision} onChange={e => setDecision(e.target.value)}>
           <option value="">Choose a decision</option>
-          <option value="approved">Approve founding membership</option>
+          <option value="approved">Approve membership</option>
           <option value="declined">Decline this application</option>
         </select>
       </label>
-      <p className="small-copy">{decision === "approved" ? "This grants founding membership." : decision === "declined" ? "The applicant will see that a place has not been offered. Their account stays active." : "Nothing changes until you save a decision."} Saving a decision also queues an email to the applicant.</p>
+      <p className="small-copy">{decision === "approved" ? "This grants membership." : decision === "declined" ? "The applicant will see that membership has not been offered. Their account stays active." : "Nothing changes until you save a decision."} Saving a decision also queues an email to the applicant.</p>
       {state.error && <p className="form-alert" role="alert">{state.error}</p>}
       <button className="button button-small" type="submit" disabled={pending || !decision}>{pending ? "Saving decision…" : "Save decision"}</button>
     </form>

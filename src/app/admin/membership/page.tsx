@@ -32,8 +32,8 @@ export default async function MembershipReview({ searchParams }: { searchParams:
       <main id="main" className="container membership-admin">
         <header className="membership-admin-header">
           <p className="label">Private / Membership review</p>
-          <h1>The founding <em>group.</em></h1>
-          <p>{counts.approved} of {counts.limit} founding places approved · {counts.pending} awaiting review</p>
+          <h1>Membership <em>applications.</em></h1>
+          <p>{counts.approved} approved · {counts.pending} awaiting review</p>
           <p className="small-copy">Every membership decision is yours. Saving a decision updates the applicant’s account and queues an email to them.</p>
           <Link className="text-link" href="/account">My account ↗</Link>
         </header>

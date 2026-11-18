@@ -1,5 +1,3 @@
-export const foundingMemberLimit = 50;
-
 export const membershipInterestOptions = [
   { value: "public-institutions", label: "Public institutions and services" },
   { value: "economy", label: "The economy, work and public finances" },
