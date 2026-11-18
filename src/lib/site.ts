@@ -11,5 +11,3 @@ export const coursesEnabled = false;
 // Keep the case library ready to restore while hiding its public entry points.
 export const caseLibraryEnabled = false;
 
-// Keep the homepage's open resources section ready for a future return.
-export const homeResourcesEnabled = false;

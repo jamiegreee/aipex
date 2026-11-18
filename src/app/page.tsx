@@ -1,141 +1,93 @@
 import Link from "next/link";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import { Arrow } from "@/components/Brand";
-import { policyTools } from "@/content/policy-tools";
-import { policyCases } from "@/content/policy-cases";
-import { caseLibraryEnabled, homeResourcesEnabled } from "@/lib/site";
+import { Arrow, ExchangeMark } from "@/components/Brand";
+import { CookiePreferencesButton } from "@/components/Analytics";
 import "./home.css";
 
-const countryCount = new Set(policyCases.map((c) => c.country)).size;
 
-// An illustrative, unquantified picture of the thesis: capability compounds
-// while institutional capacity grows in steps. Not a data series.
-function GapChart() {
-  return (
-    <figure className="cb-chart">
-      <svg viewBox="0 0 600 380" role="img" aria-labelledby="cb-chart-title">
-        <title id="cb-chart-title">
-          Illustration: advanced AI capability rising faster than the public
-          capacity to respond, leaving a gap to close.
-        </title>
-        {[76, 152, 228, 304].map((y) => (
-          <line key={y} x1="0" x2="600" y1={y} y2={y} className="cb-grid" />
-        ))}
-        <path
-          className="cb-gap"
-          d="M0 350 C 200 345, 360 300, 470 170 S 580 20, 600 10 L 600 230 L 520 230 L 520 262 L 400 262 L 400 290 L 260 290 L 260 318 L 120 318 L 120 340 L 0 340 Z"
-        />
-        <path
-          className="cb-capability"
-          d="M0 350 C 200 345, 360 300, 470 170 S 580 20, 600 10"
-        />
-        <path
-          className="cb-capacity"
-          d="M0 340 H120 V318 H260 V290 H400 V262 H520 V230 H600"
-        />
-        <text x="405" y="60" className="cb-chart-label">AI capability</text>
-        <text x="408" y="298" className="cb-chart-label cb-muted">
-          What governments can do
-        </text>
-        <text x="500" y="200" className="cb-chart-label cb-accent">
-          the gap
-        </text>
-      </svg>
-    </figure>
-  );
-}
+// Illustrative questions only: the kinds of things members bring. Roles are
+// generic placeholders, not real people or real posts.
+const thread = [
+  { who: "Policy adviser", where: "Central government", text: "We’ve been asked for options on AI in public services by Friday. Has anyone seen a good framework for deciding where not to deploy?" },
+  { who: "Regulator", where: "Financial services", text: "How are other regulators resourcing technical expertise? We can’t compete on salary, so we’re looking at secondments." },
+  { who: "Committee staff", where: "Parliament", text: "Preparing questions for an evidence session on frontier AI. What do ministers usually struggle to answer?" },
+  { who: "Official", where: "International institution", text: "Comparing national approaches to AI incident reporting. Happy to share our draft table if others add their country." },
+];
 
+// The homepage is the product: a member's-eye view of the exchange, with
+// one call to action at the end of the thread. Minimal chrome, dark, almost
+// no marketing copy.
 export default function Home() {
   return (
-    <div className="cb">
-      <Navigation cta={{ href: "/membership", label: "Join the exchange" }} />
-      <main id="main">
-        <section className="container cb-hero" aria-labelledby="cb-h1">
-          <div>
-            <h1 id="cb-h1">
-              The community for AI policy professionals
-            </h1>
-            <p className="cb-lede">
-              AIPEX is an online community for the public servants, regulators
-              and advisers working on AI. Join us on Slack to compare notes
-              with peers, share what&rsquo;s working and ask the questions
-              you&rsquo;re wrestling with.
-            </p>
-            <div className="cb-actions">
-              <Link className="button" href="/membership">
-                Join the exchange <Arrow />
-              </Link>
-            </div>
-            <p className="cb-join-note">
-              Join the community to learn and shape AI policy together.
-            </p>
-          </div>
-          <GapChart />
+    <div className="pc">
+      <header className="pc-bar">
+        <Link className="pc-brand" href="/" aria-label="AIPEX — home">
+          <ExchangeMark /> AIPEX
+        </Link>
+        <nav aria-label="Main navigation">
+          <Link href="/account">My account</Link>
+          <Link className="pc-bar-cta" href="/membership">
+            Apply <Arrow />
+          </Link>
+        </nav>
+      </header>
+      <main id="main" className="pc-main">
+        <section className="pc-intro" aria-labelledby="pc-h1">
+          <h1 id="pc-h1">
+            Someone else is working on the same problem.
+            <em> Ask them.</em>
+          </h1>
+          <p>
+            AIPEX is the private community for people making AI policy in and
+            around government.
+          </p>
         </section>
 
-        <section className="cb-mission" aria-labelledby="cb-mission-h">
-          <div className="container">
-            <p className="label">Why a community</p>
-            <h2 id="cb-mission-h">
-              Capacity is built by people, <em>not papers.</em>
-            </h2>
-            <p>
-              Preparing for advanced AI means looking beyond individual
-              deployments to the changes more capable systems could bring. No
-              single department will work this out alone. AIPEX brings together
-              the people who will have to, so they can compare notes,
-              pressure-test their judgement and build the institutions needed to
-              act.
-            </p>
-            <div className="cb-actions">
-              <Link className="button" href="/membership">
-                Join the exchange <Arrow />
-              </Link>
-              <Link className="cb-link" href="/about">
-                About AIPEX <Arrow diagonal />
-              </Link>
-            </div>
+        <section className="pc-channel" aria-label="An illustration of conversations inside AIPEX">
+          <div className="pc-channel-head">
+            <span># ask-the-exchange</span>
+            <span className="pc-tag">Illustrative</span>
           </div>
-        </section>
-
-        {homeResourcesEnabled && (
-          <section className="cb-resources" aria-labelledby="cb-tools">
-            <div className="container">
-              <div className="cb-section-head">
-                <p className="label">Open resources</p>
-                <h2 id="cb-tools">
-                  From a difficult question <em>to a working brief.</em>
-                </h2>
-              </div>
-              <ul className="cb-tool-list">
-                {policyTools.map((t) => (
-                  <li key={t.slug}>
-                    <Link href={`/tools/${t.slug}`}>
-                      <span className="cb-tool-num">{t.number}</span>
-                      <span className="cb-tool-name">{t.shortTitle}</span>
-                      <span className="cb-tool-desc">{t.description}</span>
-                      <span className="label">{t.time}</span>
-                      <Arrow />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              {caseLibraryEnabled && (
-                <Link className="cb-case-link" href="/cases">
-                  <span>
-                    <span className="label">Case library</span>
-                    {policyCases.length} documented decisions from {countryCount}{" "}
-                    countries
+          <ol className="pc-thread">
+            {thread.map((m, i) => (
+              <li key={i} style={{ animationDelay: `${0.4 + i * 0.5}s` }}>
+                <span className="pc-avatar" aria-hidden="true" data-i={i} />
+                <div>
+                  <p className="pc-meta">
+                    <strong>{m.who}</strong> · {m.where}
+                  </p>
+                  <p>{m.text}</p>
+                </div>
+              </li>
+            ))}
+            <li className="pc-you" style={{ animationDelay: `${0.4 + thread.length * 0.5}s` }}>
+              <span className="pc-avatar pc-avatar-you" aria-hidden="true" />
+              <div>
+                <p className="pc-meta">
+                  <strong>You</strong> · Your role here
+                </p>
+                <Link className="pc-compose" href="/membership">
+                  <span>What are you wrestling with?</span>
+                  <span className="pc-compose-cta">
+                    Apply to join <Arrow />
                   </span>
-                  <Arrow diagonal />
                 </Link>
-              )}
-            </div>
-          </section>
-        )}
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section className="pc-small" aria-label="About membership">
+          <p><strong>Who.</strong> Public servants, regulators, parliamentary staff and advisers, and those whose work directly supports them.</p>
+          <p><strong>How.</strong> Apply, we review every application individually, then you join us on Slack. Our first 50 are founding members.</p>
+          <p><strong>Terms.</strong> Personal capacity. No endorsement by your employer. Leave confidential work out of it.</p>
+        </section>
       </main>
-      <Footer tagline="Worked out together." />
+      <footer className="pc-foot">
+        <span>© {new Date().getFullYear()} AI Policy Exchange</span>
+        <Link href="/contact">Say hello</Link>
+        <Link href="/privacy">Privacy</Link>
+        <CookiePreferencesButton />
+      </footer>
     </div>
   );
 }
