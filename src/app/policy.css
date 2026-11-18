@@ -1,7 +1,7 @@
 /* AIPEX policy workbench: an editorial desk for practical work. */
 
 .policy-band {
-  background: #eeeee5;
+  background: var(--color-cream-dark);
   padding: 62px 0;
 }
 .policy-home-learning {
@@ -109,12 +109,12 @@
 .workspace-shell select,
 .workspace-shell textarea {
   width: 100%;
-  border: 1px solid #999d91;
+  border: 1px solid var(--field-line);
   border-radius: 0;
   padding: 12px 14px;
   font: inherit;
   font-size: 15px;
-  background: #fffcf6;
+  background: var(--color-cream);
   color: var(--color-ink);
 }
 .case-filters input:focus,
@@ -176,7 +176,7 @@
   align-items: start;
 }
 .case-decision {
-  background: #eeeee5;
+  background: var(--color-cream-dark);
   padding: 28px;
   position: sticky;
   top: 115px;
@@ -230,7 +230,7 @@
 .case-limits {
   border-left: 3px solid var(--color-accent);
   padding: 18px 22px;
-  background: #eeeee5;
+  background: var(--color-cream-dark);
   margin: 20px 0;
 }
 .case-task {
@@ -354,7 +354,7 @@
   flex-wrap: wrap;
 }
 .workspace-message {
-  background: #eeeee5;
+  background: var(--color-cream-dark);
   padding: 18px;
   margin-bottom: 20px;
   font-size: 14px;
@@ -429,7 +429,7 @@
 }
 .workspace-outline button[aria-current="step"] {
   color: var(--color-accent);
-  background: #eae7dd;
+  background: var(--color-cream-dark);
 }
 .workspace-outline button:hover {
   color: var(--color-accent);
@@ -456,7 +456,7 @@
 .workspace-field details {
   padding: 20px;
   border: 1px solid var(--color-border);
-  background: #eeeee5;
+  background: var(--color-cream-dark);
 }
 .workspace-field details p {
   font-size: 14px;
@@ -515,7 +515,7 @@
 }
 .metric-results {
   padding: 24px;
-  background: #eeeee5;
+  background: var(--color-cream-dark);
 }
 .metric-results h3 {
   font-size: 29px;
@@ -538,7 +538,7 @@
 }
 .brief-review {
   padding: 24px;
-  background: #eeeee5;
+  background: var(--color-cream-dark);
   margin: 24px 0;
   font-size: 14px;
 }
@@ -860,7 +860,7 @@
 }
 .options-comparison th {
   font-weight: 500;
-  background: #eeeee5;
+  background: var(--color-cream-dark);
 }
 .options-comparison th[scope="row"] {
   min-width: 150px;
@@ -903,7 +903,7 @@
   z-index: 1;
   min-width: 135px;
   width: 150px;
-  background: #eeeee5;
+  background: var(--color-cream-dark);
 }
 
 .case-results-toolbar {
