@@ -1,0 +1,22 @@
+.pv-switch {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  background: #111;
+  color: #fff;
+  border-radius: 999px;
+  font: 500 12px/1 var(--font-label), monospace;
+  box-shadow: 0 8px 30px rgb(0 0 0 / 0.25);
+  white-space: nowrap;
+}
+.pv-switch span { padding: 0 10px; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.06em; font-size: 10px; }
+.pv-switch a { padding: 9px 12px; border-radius: 999px; color: #fff; }
+.pv-switch a:hover { background: #333; }
+.pv-switch a[aria-current] { background: #fff; color: #111; }
+@media (max-width: 640px) { .pv-switch span { display: none; } .pv-switch a { padding: 8px 9px; } }
