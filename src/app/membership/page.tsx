@@ -9,7 +9,7 @@ import { membershipApplication } from "@/lib/membership-server";
 
 export const metadata: Metadata = {
   title: "Apply for founding membership",
-  description: "Apply to join AIPEX’s founding community of AI policy people from the public and private sectors. The first 50 members are individually reviewed and approved.",
+  description: "Apply to join AIPEX’s founding community of AI policy people from the public and private sectors. Every application is individually reviewed.",
   alternates: { canonical: "/membership" },
   // This page can show a signed-in applicant’s private status.
   robots: { index: false, follow: true },
@@ -31,7 +31,7 @@ export default async function Membership() {
       <main id="main">
         <header className="membership-intro">
           <div className="container">
-            <p className="label">Founding membership / Our first 50 members</p>
+            <p className="label">Founding membership</p>
             <h1>Help shape<br /><em>the public response.</em></h1>
             <p>We’re bringing together people from the public and private sectors who are working on policy for advanced artificial intelligence.</p>
           </div>
