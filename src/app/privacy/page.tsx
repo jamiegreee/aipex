@@ -78,25 +78,31 @@ export default function Privacy() {
           <h3>Policy tool drafts</h3>
           <p>Tools save drafts in your browser’s local storage, including on shared devices. You can remove an individual browser draft from its workspace. Downloads and imports happen on your device. Clearing browser data also removes these local copies.</p>
           <p>Choosing Save to account sends that draft to our Neon database, associated with your account. Account copies are private in the interface and are subject to the same administrative access, account-deletion and backup arrangements described above. Browser-draft removal does not delete a separately saved account copy. You can request deletion of account drafts using the contact details below. Tool text is not sent to an AI service.</p>
-          <h3>Optional website analytics</h3>
+          <h3>Website analytics</h3>
           <p>
-            If you choose “Allow analytics”, Google Analytics measures visits to
-            public AIPEX pages. It receives page
-            addresses and titles, a shortened referring address, device and browser
-            information, and approximate location derived from your IP address.
-            Analytics cookies help distinguish visits. We do not send your name,
-            email address, saved work or progress records to Google Analytics.
-            Account, sign-in and password-reset pages are excluded, and we remove
-            query strings and fragments from the page addresses we send.
+            We use Google Analytics to measure visits to public AIPEX pages. It
+            receives page addresses and titles, a shortened referring address,
+            device and browser information, and approximate location derived
+            from your IP address. We do not send your name, email address, saved
+            work or progress records to Google Analytics. Account, sign-in and
+            password-reset pages are excluded, and we remove query strings and
+            fragments from the page addresses we send.
           </p>
           <p>
-            Analytics stays off until you opt in. You can reject it and still use
-            the whole site, or change your choice through “Cookie preferences” in
-            the footer of any page. We remember your choice for six months;
-            withdrawing consent stops collection and removes the analytics
-            cookies from this browser. It does not remove data already collected.
-            We keep advertising consent disabled. Google may process analytics
-            data outside the UK; see its{" "}
+            Until you make a choice, Google Analytics runs in a cookieless mode:
+            it sets no cookies on your device and sends only limited visit
+            signals, which Google uses to estimate overall traffic without
+            recognising you across visits. If you choose “Allow analytics”, it
+            also sets analytics cookies that help distinguish visits. If you
+            choose “Reject analytics”, nothing is sent to Google Analytics at all.
+          </p>
+          <p>
+            You can use the whole site either way, and change your choice through
+            “Cookie preferences” in the footer of any page. We remember your
+            choice for six months; rejecting stops collection and removes the
+            analytics cookies from this browser. It does not remove data already
+            collected. We keep advertising consent disabled. Google may process
+            analytics data outside the UK; see its{" "}
             <a href="https://policies.google.com/privacy">privacy policy</a>.
           </p>
           <h2>Access, correction and deletion</h2>

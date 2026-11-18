@@ -47,3 +47,24 @@ test("page URLs and referrers do not carry tokens or private paths", () => {
   assert.equal(analyticsReferrer("https://example.com/private/person@example.com?token=secret"), "https://example.com");
   assert.equal(analyticsReferrer("javascript:secret"), "");
 });
+
+test("before a choice, measurement runs cookieless with analytics storage denied", () => {
+  const set = setAnalyticsEnabled, track = trackPage;
+  const target = { location: { pathname: "/", hostname: "theaipex.org" } } as unknown as import("../src/lib/analytics").AnalyticsWindow;
+  Object.defineProperty(globalThis, "window", { value: target, configurable: true });
+  Object.defineProperty(globalThis, "document", { value: { title: "AIPEX", referrer: "" }, configurable: true });
+  try {
+    set(true, false);
+    track("/", "");
+    const commands = target.dataLayer!.map(entry => Array.from(entry as ArrayLike<unknown>));
+    const updates = commands.filter(c => c[0] === "consent" && c[1] === "update").map(c => c[2]);
+    assert.deepEqual(updates.at(-1), { analytics_storage: "denied" });
+    assert.ok(commands.some(c => c[0] === "event" && c[1] === "page_view"), "cookieless page view is still sent");
+    set(true, true);
+    const after = target.dataLayer!.map(entry => Array.from(entry as ArrayLike<unknown>)).at(-1);
+    assert.deepEqual(after, ["consent", "update", { analytics_storage: "granted" }]);
+  } finally {
+    Reflect.deleteProperty(globalThis, "window");
+    Reflect.deleteProperty(globalThis, "document");
+  }
+});
