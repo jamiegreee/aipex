@@ -5,6 +5,7 @@ const variants = [
   { href: "/preview/home-a", label: "A · Refine" },
   { href: "/preview/home-b", label: "B · Rework" },
   { href: "/preview/home-c", label: "C · Radical" },
+  { href: "/preview/home-c-light", label: "C · Light" },
 ];
 
 // Floating switcher so the homepage alternatives can be compared quickly.
