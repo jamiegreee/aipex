@@ -7,7 +7,7 @@ export default function JoinCallout() {
       <div className="container join-callout-inner">
         <div>
           <span className="label">
-            Founding membership / The first 50
+            Founding membership
           </span>
           <h2 id="join-heading">
             Join

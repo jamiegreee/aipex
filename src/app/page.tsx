@@ -78,7 +78,7 @@ export default function Home() {
 
         <section className="pc-small" aria-label="About membership">
           <p><strong>Who.</strong> People working on AI policy in the public and private sectors: officials, regulators and parliamentary staff, and policy teams at companies and AI developers.</p>
-          <p><strong>How.</strong> Apply, we review every application individually, then you join us on Slack. Our first 50 are founding members.</p>
+          <p><strong>How.</strong> Apply, we review every application individually, then you join us on Slack.</p>
           <p><strong>Terms.</strong> Personal capacity. No endorsement by your employer. Leave confidential work out of it.</p>
         </section>
       </main>
