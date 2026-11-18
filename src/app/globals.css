@@ -37,14 +37,17 @@
 }
 
 @theme inline {
-  --color-cream: #f5f3ec;
-  --color-cream-dark: #eae7dd;
-  --color-ink: #20251f;
-  --color-muted: #65685f;
-  --color-border: #d9dcd0;
-  --color-accent: #254bdd;
-  --color-dark: #1d3029;
-  --color-light: #f5f3ec;
+  /* Dark palette, shared with the homepage. "cream" is the page
+     background and "ink" the text, so existing class names keep working. */
+  --color-cream: #10140f;
+  --color-cream-dark: #181d17;
+  --color-ink: #eceae2;
+  --color-muted: #8d9488;
+  --color-border: #2a3128;
+  --color-accent: #e5edb5;
+  --color-on-accent: #10140f;
+  --color-dark: #181d17;
+  --color-light: #eceae2;
   --font-sans: var(--font-body);
   --font-mono: var(--font-label);
 }
@@ -53,6 +56,16 @@
   --lime: #e5edb5;
   --pink: #f3b5c9;
   --serif: var(--font-display), Georgia, serif;
+  --field-line: #4a5347;
+  --alert-text: #f2a99a;
+  --alert-bg: #2a1714;
+  --alert-line: #c2553f;
+  color-scheme: dark;
+}
+input,
+textarea,
+select {
+  color: inherit;
 }
 * {
   box-sizing: border-box;
@@ -72,7 +85,7 @@ body {
 }
 ::selection {
   background: var(--pink);
-  color: var(--color-ink);
+  color: var(--color-on-accent);
 }
 a {
   text-decoration: none;
@@ -138,7 +151,7 @@ a:hover .arrow {
   min-height: 54px;
   padding: 14px 23px;
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-on-accent);
   border: 1px solid var(--color-accent);
   font-size: 13px;
   font-weight: 500;
@@ -149,8 +162,8 @@ a:hover .arrow {
     border-color 180ms ease;
 }
 .button:hover {
-  background: #1b3cc4;
-  border-color: #1b3cc4;
+  background: #f3f7d6;
+  border-color: #f3f7d6;
 }
 .button-small {
   min-height: 45px;
@@ -183,7 +196,7 @@ a:hover .arrow {
   left: 10px;
   z-index: 100;
   padding: 10px 18px;
-  color: #fff;
+  color: var(--color-on-accent);
   background: var(--color-accent);
   transform: translateY(-160%);
 }
@@ -347,7 +360,7 @@ a:hover .arrow {
 .art-edition {
   text-align: right;
   font-size: 9px;
-  color: #e5edb5;
+  color: var(--color-on-accent);
   padding-bottom: 4px;
 }
 .gathering-section {
@@ -447,7 +460,7 @@ a:hover .arrow {
 }
 
 .questions-section {
-  background: #eeeee5;
+  background: var(--color-cream-dark);
   padding-block: 60px;
 }
 .questions-aside {
@@ -466,7 +479,7 @@ a:hover .arrow {
   margin-top: 40px;
 }
 .question-item {
-  border-left: 1px solid #c7cdbe;
+  border-left: 1px solid var(--color-border);
   padding-inline: 24px;
 }
 .question-item:first-child {
@@ -532,7 +545,7 @@ a:hover .arrow {
 
 .site-footer {
   background: var(--color-dark);
-  color: var(--color-cream);
+  color: var(--color-ink);
   padding-top: 45px;
 }
 .footer-top {
@@ -575,7 +588,7 @@ a:hover .arrow {
   display: flex;
   justify-content: space-between;
   gap: 25px;
-  border-top: 1px solid #536255;
+  border-top: 1px solid var(--color-border);
   padding-block: 22px;
   font-size: 10px;
   color: #c4cdc3;
@@ -686,7 +699,7 @@ a:hover .arrow {
 }
 .principles {
   padding-block: 55px;
-  background: #eeeee5;
+  background: var(--color-cream-dark);
 }
 .principles-inner {
   display: grid;
@@ -726,7 +739,9 @@ a:hover .arrow {
 }
 .join-panel {
   padding: 37px;
-  background: var(--lime);
+  background: var(--color-cream-dark);
+  border: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-accent);
 }
 .join-panel h2 {
   font-size: 41px;
@@ -735,7 +750,7 @@ a:hover .arrow {
 }
 .join-panel > p {
   margin-block: 20px;
-  color: #4d5b3b;
+  color: var(--color-muted);
   font-size: 14px;
   line-height: 1.8;
 }
@@ -747,14 +762,14 @@ a:hover .arrow {
   display: block;
   font-size: 12px;
   margin-block: 20px 0;
-  color: #48553b;
+  color: var(--color-muted);
 }
 .email-alternative a {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 .join-panel .privacy-note {
-  border-top: 1px solid #b8c590;
+  border-top: 1px solid var(--color-border);
   padding-top: 18px;
   margin-bottom: 0;
   font-size: 11px;
@@ -1320,11 +1335,11 @@ a:hover .arrow {
 }
 .course-art.blue {
   background: var(--lime);
-  color: var(--color-accent);
+  color: var(--color-on-accent);
 }
 .course-art.pink {
   background: var(--pink);
-  color: var(--color-dark);
+  color: var(--color-on-accent);
 }
 .course-art svg {
   width: 100%;
@@ -1361,7 +1376,7 @@ a:hover .course-art svg {
 }
 .learning-method {
   background: var(--color-dark);
-  color: var(--color-cream);
+  color: var(--color-ink);
   padding-block: 55px 65px;
 }
 .method-grid {
@@ -1635,7 +1650,7 @@ a:hover .course-art svg {
   margin-bottom: 20px;
 }
 .practice {
-  background: #eeeee5;
+  background: var(--color-cream-dark);
   padding: 32px;
   margin-top: 42px;
   border-top: 3px solid var(--color-accent);
@@ -1667,7 +1682,7 @@ a:hover .course-art svg {
   resize: vertical;
   min-height: 220px;
   padding: 16px;
-  border: 1px solid #a7ac9f;
+  border: 1px solid var(--field-line);
   border-radius: 2px;
   background: var(--color-cream);
   font: inherit;
@@ -1757,7 +1772,7 @@ button:disabled {
 }
 .quiz-option.selected {
   border-color: var(--color-accent);
-  background: #e5e8f4;
+  background: rgb(229 237 181 / 0.08);
 }
 .quiz-option input {
   margin-top: 4px;
@@ -1773,7 +1788,7 @@ button:disabled {
   background: var(--color-cream);
 }
 .quiz-feedback.incorrect {
-  border-color: #ad5931;
+  border-color: var(--alert-line);
 }
 .completion-actions {
   display: flex;
@@ -1784,7 +1799,7 @@ button:disabled {
 }
 .complete-label {
   font-size: 12px;
-  color: var(--color-dark);
+  color: var(--color-accent);
   font-weight: 600;
 }
 .form-alert,
@@ -1794,13 +1809,13 @@ button:disabled {
   margin-block: 16px;
 }
 .form-alert {
-  color: #8a3322;
-  background: #f7e5dc;
+  color: var(--alert-text);
+  background: var(--alert-bg);
   padding: 12px 15px;
-  border-left: 2px solid #8a3322;
+  border-left: 2px solid var(--alert-line);
 }
 .form-success {
-  color: var(--color-dark);
+  color: var(--color-accent);
 }
 .form-success:empty {
   display: none;
@@ -1868,7 +1883,8 @@ button:disabled {
 .auth-note {
   margin-top: 40px;
   padding: 24px;
-  background: var(--lime);
+  background: var(--color-cream-dark);
+  border-left: 2px solid var(--color-accent);
   max-width: 400px;
 }
 .auth-note p {
@@ -1905,7 +1921,7 @@ button:disabled {
   min-height: 48px;
   padding: 12px;
   background: var(--color-cream);
-  border: 1px solid #a8ad9f;
+  border: 1px solid var(--field-line);
   font: inherit;
   font-size: 16px;
   margin-block: 9px 5px;
@@ -2064,7 +2080,8 @@ button:disabled {
 .completion-note {
   font-size: 12px;
   line-height: 1.7;
-  background: var(--lime);
+  background: var(--color-cream-dark);
+  border-left: 2px solid var(--color-accent);
   padding: 18px;
   margin-top: 22px;
 }
@@ -2143,6 +2160,7 @@ button:disabled {
   display: block;
   padding: 32px;
   background: var(--lime);
+  color: var(--color-on-accent);
 }
 .home-course-links > a:nth-child(2) {
   background: var(--pink);

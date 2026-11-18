@@ -55,7 +55,7 @@
   padding: clamp(24px, 3.3vw, 44px);
   border: 1px solid var(--color-border);
   border-top: 3px solid var(--color-accent);
-  background: #fbfaf6;
+  background: var(--color-cream-dark);
 }
 .membership-form-heading h2,
 .membership-account-step h2,
@@ -110,14 +110,14 @@
   min-width: 0;
   min-height: 48px;
   padding: 12px 13px;
-  border: 1px solid #9ea396;
+  border: 1px solid var(--field-line);
   border-radius: 0;
-  background: #fffefb;
+  background: var(--color-cream);
   color: var(--color-ink);
   font: 400 16px/1.55 var(--font-body), sans-serif;
 }
 .membership-form textarea { min-height: 140px; resize: vertical; }
-.membership-form input::placeholder { color: #777b72; opacity: 1; }
+.membership-form input::placeholder { color: #6f766b; opacity: 1; }
 .membership-form input:focus-visible,
 .membership-form textarea:focus-visible,
 .membership-feedback:focus-visible,
@@ -126,7 +126,7 @@
   outline-offset: 3px;
 }
 .membership-form input[aria-invalid="true"],
-.membership-form textarea[aria-invalid="true"] { border-color: #9d3c27; }
+.membership-form textarea[aria-invalid="true"] { border-color: var(--alert-line); }
 .membership-hint,
 .membership-optional {
   font-size: 12px;
@@ -148,7 +148,7 @@
   font-size: 13px;
   line-height: 1.6;
   font-weight: 400;
-  color: #8a3322;
+  color: var(--alert-text);
 }
 .membership-feedback { overflow-wrap: anywhere; }
 .membership-feedback ul { margin-block: 8px 0; padding-inline-start: 20px; }
@@ -217,7 +217,7 @@
 .membership-status {
   padding: 26px 30px;
   border-inline-start: 3px solid var(--color-accent);
-  background: #e9edfc;
+  background: rgb(229 237 181 / 0.08);
   overflow-wrap: anywhere;
 }
 .membership-status .button { margin-top: 25px; }
@@ -245,7 +245,7 @@ article.membership-review { border-bottom: 1px solid var(--color-border); paddin
 .membership-review dl { margin-block: 24px; }
 .membership-review-decision { max-width: 650px; border-top: 1px solid var(--color-border); padding-top: 22px; }
 .membership-review-decision label { display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
-.membership-review-decision select { width: 100%; min-height: 48px; border: 1px solid #9ea396; padding: 12px; background: #fffefb; color: var(--color-ink); font: inherit; }
+.membership-review-decision select { width: 100%; min-height: 48px; border: 1px solid var(--field-line); padding: 12px; background: var(--color-cream); color: var(--color-ink); font: inherit; }
 .membership-review-decision .small-copy { margin-block: 14px; }
 .membership-review-decision select:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 .membership-pagination { display: flex; justify-content: space-between; gap: 24px; padding-block: 28px; }
