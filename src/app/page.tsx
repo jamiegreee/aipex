@@ -9,7 +9,7 @@ import "./home.css";
 const thread = [
   { who: "Policy adviser", where: "Central government", text: "We’ve been asked for options on AI in public services by Friday. Has anyone seen a good framework for deciding where not to deploy?" },
   { who: "Regulator", where: "Financial services", text: "How are other regulators resourcing technical expertise? We can’t compete on salary, so we’re looking at secondments." },
-  { who: "Committee staff", where: "Parliament", text: "Preparing questions for an evidence session on frontier AI. What do ministers usually struggle to answer?" },
+  { who: "Public policy lead", where: "AI company", text: "We’re responding to a consultation on AI assurance. It would help to hear from officials how responses actually get used." },
   { who: "Official", where: "International institution", text: "Comparing national approaches to AI incident reporting. Happy to share our draft table if others add their country." },
 ];
 
@@ -37,8 +37,8 @@ export default function Home() {
             <em> Ask them.</em>
           </h1>
           <p>
-            AIPEX is the private community for people making AI policy in and
-            around government.
+            AIPEX is the private community bringing together people working on
+            AI policy across government and industry.
           </p>
         </section>
 
@@ -77,7 +77,7 @@ export default function Home() {
         </section>
 
         <section className="pc-small" aria-label="About membership">
-          <p><strong>Who.</strong> Public servants, regulators, parliamentary staff and advisers, and those whose work directly supports them.</p>
+          <p><strong>Who.</strong> People working on AI policy in the public and private sectors: officials, regulators and parliamentary staff, and policy teams at companies and AI developers.</p>
           <p><strong>How.</strong> Apply, we review every application individually, then you join us on Slack. Our first 50 are founding members.</p>
           <p><strong>Terms.</strong> Personal capacity. No endorsement by your employer. Leave confidential work out of it.</p>
         </section>

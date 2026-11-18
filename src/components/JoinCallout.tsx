@@ -17,7 +17,7 @@ export default function JoinCallout() {
         </div>
         <div className="join-callout-copy">
           <p>
-            A community of policymakers preparing governments for advanced AI.
+            A community of public and private sector AI policy people preparing for advanced AI.
             Bring your experience, exchange ideas and help set the questions
             we examine together. We review your application before granting membership.
           </p>
