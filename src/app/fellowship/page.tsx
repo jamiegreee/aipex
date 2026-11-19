@@ -105,7 +105,7 @@ export default function Fellowship() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
           <Link
             href="/community"
-            className="flex items-center px-7 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
+            className="flex items-center px-7 py-3 bg-accent text-bg text-[13px] font-medium hover:opacity-90 transition-opacity"
           >
             Apply for Cohort 1
           </Link>
@@ -186,12 +186,12 @@ export default function Fellowship() {
       </section>
 
       {/* What You Get */}
-      <section className="flex flex-col lg:flex-row gap-10 lg:gap-16 w-full px-6 sm:px-10 lg:px-16 py-12 md:py-20 bg-dark">
+      <section className="flex flex-col lg:flex-row gap-10 lg:gap-16 w-full px-6 sm:px-10 lg:px-16 py-12 md:py-20 bg-band">
         <div className="max-w-[600px]">
           <p className="text-xs font-medium tracking-[0.12em] uppercase text-accent mb-3">
             What you leave with
           </p>
-          <h2 className="text-[40px] font-light leading-[52px] text-light">
+          <h2 className="text-[40px] font-light leading-[52px] text-on-band">
             Not just knowledge. Evidence.
           </h2>
         </div>
@@ -202,7 +202,7 @@ export default function Fellowship() {
                 {outcome.number}
               </span>
               <div>
-                <h3 className="text-[16px] font-medium leading-[20px] text-light mb-2">
+                <h3 className="text-[16px] font-medium leading-[20px] text-on-band mb-2">
                   {outcome.title}
                 </h3>
                 <p className="text-[13px] font-light leading-[22px] text-muted">
@@ -226,7 +226,7 @@ export default function Fellowship() {
         <div className="flex flex-col sm:flex-row gap-4 mt-2">
           <Link
             href="/community"
-            className="flex items-center px-7 py-3 bg-accent text-cream text-[13px] font-medium hover:opacity-90 transition-opacity"
+            className="flex items-center px-7 py-3 bg-accent text-bg text-[13px] font-medium hover:opacity-90 transition-opacity"
           >
             Register interest
           </Link>

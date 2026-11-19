@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Arrow, ExchangeMark } from "@/components/Brand";
 import { CookiePreferencesButton } from "@/components/Analytics";
+import ThemeToggle from "@/components/ThemeToggle";
 import "./home.css";
 
 
@@ -24,6 +25,7 @@ export default function Home() {
           <ExchangeMark /> AIPEX
         </Link>
         <nav aria-label="Main navigation">
+          <ThemeToggle />
           <Link href="/account">My account</Link>
           <Link className="pc-bar-cta" href="/membership">
             Apply <Arrow />
