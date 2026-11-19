@@ -22,6 +22,9 @@ function subscribe(notify: () => void) {
   };
 }
 const serverChoice = () => null;
+const subscribeNever = () => () => {};
+const clientTrue = () => true;
+const serverFalse = () => false;
 
 export default function Analytics() {
   const pathname = usePathname();
@@ -29,7 +32,15 @@ export default function Analytics() {
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const [ready, setReady] = useState(false);
   const previousPage = useRef<string | null>(null);
-  const allowed = choice === "accepted" && isAnalyticsPage(pathname);
+  // Server render and hydration see hydrated=false, so nothing loads until the
+  // real cookie choice is known.
+  const hydrated = useSyncExternalStore(subscribeNever, clientTrue, serverFalse);
+  // "off": nothing loads (rejected, private page or other host).
+  // "denied": cookieless pings only, until the visitor chooses.
+  // "granted": full measurement with analytics cookies.
+  const mode: "off" | "denied" | "granted" =
+    !hydrated || choice === "rejected" || !isAnalyticsPage(pathname) || !isAnalyticsHost(window.location.hostname)
+      ? "off" : choice === "accepted" ? "granted" : "denied";
 
   useEffect(() => {
     const open = () => setPreferencesOpen(true);
@@ -38,15 +49,15 @@ export default function Analytics() {
   }, []);
 
   useEffect(() => {
-    const enabled = allowed && isAnalyticsHost(window.location.hostname);
-    setAnalyticsEnabled(enabled);
+    const enabled = mode !== "off";
+    setAnalyticsEnabled(enabled, mode === "granted");
     if (!enabled) { previousPage.current = null; return; }
     if (ready && previousPage.current !== pathname) {
       trackPage(pathname, previousPage.current ? analyticsLocation(previousPage.current) : document.referrer);
       previousPage.current = pathname;
     }
     return () => setAnalyticsEnabled(false);
-  }, [allowed, pathname, ready]);
+  }, [mode, pathname, ready]);
 
   function choose(next: Exclude<Choice, null>) {
     document.cookie = `${ANALYTICS_CHOICE_COOKIE}=${next}; Max-Age=15552000; Path=/; SameSite=Lax${window.location.protocol === "https:" ? "; Secure" : ""}`;
@@ -62,7 +73,7 @@ export default function Analytics() {
   const show = choice === null || preferencesOpen;
   return (
     <>
-      {allowed && typeof window !== "undefined" && isAnalyticsHost(window.location.hostname) && (
+      {mode !== "off" && (
         <Script id="aipex-google-analytics" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" onReady={() => setReady(true)} />
       )}
       {show && (
@@ -70,7 +81,7 @@ export default function Analytics() {
           <div className="container analytics-choice-inner">
             <div>
               <h2>Cookie preferences</h2>
-              <p>We use optional Google Analytics cookies to understand visits to public pages. Account details and saved work stay private. <Link href="/privacy">Privacy details</Link></p>
+              <p>We use Google Analytics to understand visits to public pages. Until you allow analytics, it sets no cookies and sends only limited, cookieless visit signals. Account details and saved work stay private. <Link href="/privacy">Privacy details</Link></p>
             </div>
             <div className="analytics-actions">
               <button className="button button-small button-outline" onClick={() => choose("rejected")}>Reject analytics</button>

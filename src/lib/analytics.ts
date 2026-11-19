@@ -37,7 +37,9 @@ export type AnalyticsWindow = Window & {
 };
 
 let initialized = false;
-export function setAnalyticsEnabled(enabled: boolean) {
+// enabled loads measurement at all; storageGranted controls cookies.
+// Without consent Google receives cookieless pings (consent mode) and models visits.
+export function setAnalyticsEnabled(enabled: boolean, storageGranted = true) {
   const target = window as AnalyticsWindow;
   target[`ga-disable-${GA_ID}`] = !enabled;
   if (!enabled && !initialized) return;
@@ -59,7 +61,7 @@ export function setAnalyticsEnabled(enabled: boolean) {
     });
     initialized = true;
   }
-  target.gtag("consent", "update", { analytics_storage: enabled ? "granted" : "denied" });
+  target.gtag("consent", "update", { analytics_storage: enabled && storageGranted ? "granted" : "denied" });
 }
 
 export function trackPage(path: string, referrer: string) {
