@@ -1,0 +1,116 @@
+/*
+  AIPEX theme: the one place to change the site's colours.
+
+  Every colour on the site comes from a token below. Pages and components
+  only ever use `var(--color-…)` (or the matching Tailwind class, such as
+  `bg-surface` or `text-accent`), never a hex value. To retheme the site,
+  edit the values here: the dark block is the default, and the light block
+  applies when a visitor picks light mode with the toggle in the header.
+
+  Adding a new colour: add it to BOTH palettes, then use it by name.
+*/
+
+/* Dark palette (default). */
+:root {
+  /* Surfaces */
+  --color-bg: #10140f;            /* page background */
+  --color-surface: #181d17;       /* cards, panels, inputs */
+  --color-band: #181d17;          /* full-width bands, footer */
+  --color-on-band: #eceae2;       /* text on a band */
+  --color-border: #2a3128;        /* dividers and outlines */
+  --color-field-line: #4a5347;    /* form field borders */
+  --color-hover-tint: rgb(255 255 255 / 0.02); /* row hover wash */
+
+  /* Text */
+  --color-ink: #eceae2;           /* body text */
+  --color-ink-soft: #c4cdc3;      /* secondary text in the footer */
+  --color-muted: #8d9488;         /* captions, labels */
+  --color-placeholder: #6f766b;   /* form placeholders */
+
+  /* Accent: lime green */
+  --color-accent: #e5edb5;        /* accent text, links, outlines */
+  --color-accent-fill: #e5edb5;   /* buttons, dots, lime panels */
+  --color-accent-hover: #f3f7d6;  /* button hover */
+  --color-accent-tint: rgb(229 237 181 / 0.08); /* selected-row wash */
+  --color-on-accent: #10140f;     /* text on lime or pink */
+  --color-pink: #f3b5c9;          /* second highlight */
+
+  /* Alerts */
+  --color-alert-text: #f2a99a;
+  --color-alert-bg: #2a1714;
+  --color-alert-line: #c2553f;
+
+  /* Illustrations (lime poster, status pill, homepage avatars) */
+  --color-poster-ink: #2b473b;
+  --color-poster-line: #8c9b75;
+  --color-pill-bg: #e9ecdf;
+  --color-pill-ink: #4c5944;
+  --color-pill-dot: #637144;
+  --color-avatar-3: #254bdd;
+  --color-avatar-4: #d9c7a3;
+
+  color-scheme: dark;
+}
+
+/* Light palette. Same greens; lime stays on buttons and panels. Lime is
+   too pale to read as text on a light page, so accent text uses a deep
+   green instead. */
+:root[data-theme="light"] {
+  --color-bg: #f6f7f1;
+  --color-surface: #eaeee0;
+  --color-band: #e3e8d6;
+  --color-on-band: #141a12;
+  --color-border: #d3d9c7;
+  --color-field-line: #aeb5a2;
+  --color-hover-tint: rgb(20 26 18 / 0.03);
+
+  --color-ink: #141a12;
+  --color-ink-soft: #4a5345;
+  --color-muted: #5b6456;
+  --color-placeholder: #747c6e;
+
+  --color-accent: #4a6512;
+  --color-accent-fill: #d9e786;
+  --color-accent-hover: #cbdc68;
+  --color-accent-tint: rgb(74 101 18 / 0.07);
+  --color-on-accent: #10140f;
+  --color-pink: #f3b5c9;
+
+  --color-alert-text: #9b2c1a;
+  --color-alert-bg: #fbe9e4;
+  --color-alert-line: #c2553f;
+
+  --color-poster-ink: #2b473b;
+  --color-poster-line: #8c9b75;
+  --color-pill-bg: #f6f7f1;
+  --color-pill-ink: #4c5944;
+  --color-pill-dot: #637144;
+  --color-avatar-3: #254bdd;
+  --color-avatar-4: #d9c7a3;
+
+  color-scheme: light;
+}
+
+/* Fonts */
+:root {
+  --serif: var(--font-display), Georgia, serif;
+}
+
+/* Exposes the tokens as Tailwind classes (bg-surface, text-accent, …).
+   Each class points at the variable above, so classes follow the
+   light/dark switch too. `reference` stops Tailwind re-declaring them. */
+@theme inline reference {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-band: var(--color-band);
+  --color-on-band: var(--color-on-band);
+  --color-border: var(--color-border);
+  --color-ink: var(--color-ink);
+  --color-muted: var(--color-muted);
+  --color-accent: var(--color-accent);
+  --color-accent-fill: var(--color-accent-fill);
+  --color-on-accent: var(--color-on-accent);
+  --color-pink: var(--color-pink);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-label);
+}

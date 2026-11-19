@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Every colour on the site lives in theme.css. */
+@import "./theme.css";
 
 .analytics-choice {
   position: fixed;
@@ -6,7 +8,7 @@
   z-index: 100;
   padding-block: 16px;
   border-top: 1px solid var(--color-border);
-  background: var(--color-cream);
+  background: var(--color-bg);
   max-height: 80dvh;
   overflow-y: auto;
 }
@@ -28,7 +30,7 @@
   font-size: inherit;
 }
 .footer-cookie-button:hover {
-  color: var(--lime);
+  color: var(--color-accent);
 }
 @media (max-width: 800px) {
   .analytics-choice-inner { gap: 12px; flex-direction: column; align-items: stretch; }
@@ -36,32 +38,6 @@
   .analytics-actions button { flex: 1; }
 }
 
-@theme inline {
-  /* Dark palette, shared with the homepage. "cream" is the page
-     background and "ink" the text, so existing class names keep working. */
-  --color-cream: #10140f;
-  --color-cream-dark: #181d17;
-  --color-ink: #eceae2;
-  --color-muted: #8d9488;
-  --color-border: #2a3128;
-  --color-accent: #e5edb5;
-  --color-on-accent: #10140f;
-  --color-dark: #181d17;
-  --color-light: #eceae2;
-  --font-sans: var(--font-body);
-  --font-mono: var(--font-label);
-}
-
-:root {
-  --lime: #e5edb5;
-  --pink: #f3b5c9;
-  --serif: var(--font-display), Georgia, serif;
-  --field-line: #4a5347;
-  --alert-text: #f2a99a;
-  --alert-bg: #2a1714;
-  --alert-line: #c2553f;
-  color-scheme: dark;
-}
 input,
 textarea,
 select {
@@ -76,7 +52,7 @@ html {
 }
 body {
   margin: 0;
-  background: var(--color-cream);
+  background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-body), sans-serif;
   font-size: 16px;
@@ -84,7 +60,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 ::selection {
-  background: var(--pink);
+  background: var(--color-pink);
   color: var(--color-on-accent);
 }
 a {
@@ -150,9 +126,9 @@ a:hover .arrow {
   gap: 29px;
   min-height: 54px;
   padding: 14px 23px;
-  background: var(--color-accent);
+  background: var(--color-accent-fill);
   color: var(--color-on-accent);
-  border: 1px solid var(--color-accent);
+  border: 1px solid var(--color-accent-fill);
   font-size: 13px;
   font-weight: 500;
   line-height: 1.4;
@@ -162,8 +138,8 @@ a:hover .arrow {
     border-color 180ms ease;
 }
 .button:hover {
-  background: #f3f7d6;
-  border-color: #f3f7d6;
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
 }
 .button-small {
   min-height: 45px;
@@ -188,7 +164,7 @@ a:hover .arrow {
   height: 6px;
   flex: 0 0 6px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-accent-fill);
 }
 .skip-link {
   position: fixed;
@@ -197,7 +173,7 @@ a:hover .arrow {
   z-index: 100;
   padding: 10px 18px;
   color: var(--color-on-accent);
-  background: var(--color-accent);
+  background: var(--color-accent-fill);
   transform: translateY(-160%);
 }
 .skip-link:focus {
@@ -208,7 +184,7 @@ a:hover .arrow {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: var(--color-cream);
+  background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
 }
 .header-inner {
@@ -275,6 +251,28 @@ a:hover .arrow {
 .mobile-nav {
   display: none;
 }
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-ink);
+  transition:
+    color 160ms ease,
+    border-color 160ms ease;
+}
+.theme-toggle:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.theme-toggle-mobile {
+  display: none;
+}
 
 .hero {
   padding-block: 76px 66px;
@@ -303,8 +301,8 @@ a:hover .arrow {
 }
 .conversation-art {
   position: relative;
-  background: var(--color-accent);
-  color: var(--color-cream);
+  background: var(--color-accent-fill);
+  color: var(--color-bg);
   aspect-ratio: 0.94;
   display: flex;
   flex-direction: column;
@@ -376,8 +374,8 @@ a:hover .arrow {
   position: relative;
   padding: 34px;
   min-height: 450px;
-  background: var(--lime);
-  color: #2b473b;
+  background: var(--color-accent-fill);
+  color: var(--color-poster-ink);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -408,7 +406,7 @@ a:hover .arrow {
 .poster-bottom {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #8c9b75;
+  border-top: 1px solid var(--color-poster-line);
   padding-top: 14px;
   margin-top: auto;
   position: relative;
@@ -419,13 +417,13 @@ a:hover .arrow {
   align-items: center;
   gap: 8px;
   padding: 6px 10px;
-  background: #e9ecdf;
+  background: var(--color-pill-bg);
   border-radius: 2px;
-  color: #4c5944;
+  color: var(--color-pill-ink);
   font-size: 10px;
 }
 .pill .status-dot {
-  background: #637144;
+  background: var(--color-pill-dot);
   width: 5px;
   height: 5px;
   flex-basis: 5px;
@@ -460,7 +458,7 @@ a:hover .arrow {
 }
 
 .questions-section {
-  background: var(--color-cream-dark);
+  background: var(--color-surface);
   padding-block: 60px;
 }
 .questions-aside {
@@ -544,7 +542,7 @@ a:hover .arrow {
 }
 
 .site-footer {
-  background: var(--color-dark);
+  background: var(--color-band);
   color: var(--color-ink);
   padding-top: 45px;
 }
@@ -555,17 +553,17 @@ a:hover .arrow {
   gap: 30px;
 }
 .footer-brand > svg {
-  color: var(--lime);
+  color: var(--color-accent);
 }
 .footer-brand svg path:nth-child(2) {
-  fill: var(--color-dark);
+  fill: var(--color-band);
 }
 .footer-top p {
   font-size: 12px;
-  color: #c4cdc3;
+  color: var(--color-ink-soft);
 }
 .site-footer .text-link:hover {
-  color: var(--lime);
+  color: var(--color-accent);
 }
 .footer-wordmark {
   display: flex;
@@ -581,7 +579,7 @@ a:hover .arrow {
 .footer-wordmark span {
   font-weight: 300;
   font-size: 0.9em;
-  color: var(--lime);
+  color: var(--color-accent);
   line-height: 1;
 }
 .footer-bottom {
@@ -591,10 +589,10 @@ a:hover .arrow {
   border-top: 1px solid var(--color-border);
   padding-block: 22px;
   font-size: 10px;
-  color: #c4cdc3;
+  color: var(--color-ink-soft);
 }
 .footer-bottom a:hover {
-  color: var(--lime);
+  color: var(--color-accent);
 }
 
 .page-intro {
@@ -699,7 +697,7 @@ a:hover .arrow {
 }
 .principles {
   padding-block: 55px;
-  background: var(--color-cream-dark);
+  background: var(--color-surface);
 }
 .principles-inner {
   display: grid;
@@ -739,7 +737,7 @@ a:hover .arrow {
 }
 .join-panel {
   padding: 37px;
-  background: var(--color-cream-dark);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-top: 2px solid var(--color-accent);
 }
@@ -997,6 +995,11 @@ a:hover .arrow {
   }
   .desktop-nav {
     display: none;
+  }
+  .theme-toggle-mobile {
+    display: inline-flex;
+    margin-left: auto;
+    margin-right: 18px;
   }
   .menu-toggle {
     display: flex;
@@ -1334,11 +1337,11 @@ a:hover .arrow {
   overflow: hidden;
 }
 .course-art.blue {
-  background: var(--lime);
+  background: var(--color-accent-fill);
   color: var(--color-on-accent);
 }
 .course-art.pink {
-  background: var(--pink);
+  background: var(--color-pink);
   color: var(--color-on-accent);
 }
 .course-art svg {
@@ -1375,7 +1378,7 @@ a:hover .course-art svg {
   padding-left: 15px;
 }
 .learning-method {
-  background: var(--color-dark);
+  background: var(--color-band);
   color: var(--color-ink);
   padding-block: 55px 65px;
 }
@@ -1388,7 +1391,7 @@ a:hover .course-art svg {
 .method-number {
   font-family: var(--font-label);
   font-size: 12px;
-  color: var(--lime);
+  color: var(--color-accent);
 }
 .method-grid h2 {
   font-size: 38px;
@@ -1446,7 +1449,7 @@ a:hover .course-art svg {
   width: fit-content;
 }
 .course-outcomes {
-  background: var(--color-cream-dark);
+  background: var(--color-surface);
   padding-block: 36px;
 }
 .outcomes-grid {
@@ -1560,7 +1563,7 @@ a:hover .course-art svg {
 .progress-track > span {
   display: block;
   height: 100%;
-  background: var(--color-accent);
+  background: var(--color-accent-fill);
   transition: width 0.25s ease;
 }
 .reader-outline {
@@ -1592,7 +1595,7 @@ a:hover .course-art svg {
   color: var(--color-muted);
 }
 .reader-outline li a[aria-current="page"] {
-  background: var(--color-cream-dark);
+  background: var(--color-surface);
   color: var(--color-ink);
   border-left: 2px solid var(--color-accent);
 }
@@ -1650,7 +1653,7 @@ a:hover .course-art svg {
   margin-bottom: 20px;
 }
 .practice {
-  background: var(--color-cream-dark);
+  background: var(--color-surface);
   padding: 32px;
   margin-top: 42px;
   border-top: 3px solid var(--color-accent);
@@ -1682,9 +1685,9 @@ a:hover .course-art svg {
   resize: vertical;
   min-height: 220px;
   padding: 16px;
-  border: 1px solid var(--field-line);
+  border: 1px solid var(--color-field-line);
   border-radius: 2px;
-  background: var(--color-cream);
+  background: var(--color-bg);
   font: inherit;
   font-size: 15px;
   line-height: 1.7;
@@ -1704,7 +1707,7 @@ a:hover .course-art svg {
 }
 .button-outline:hover {
   background: var(--color-ink);
-  color: var(--color-cream);
+  color: var(--color-bg);
 }
 button:disabled {
   opacity: 0.6;
@@ -1768,11 +1771,11 @@ button:disabled {
   margin-top: 8px;
   font-size: 14px;
   line-height: 1.5;
-  background: var(--color-cream);
+  background: var(--color-bg);
 }
 .quiz-option.selected {
   border-color: var(--color-accent);
-  background: rgb(229 237 181 / 0.08);
+  background: var(--color-accent-tint);
 }
 .quiz-option input {
   margin-top: 4px;
@@ -1785,10 +1788,10 @@ button:disabled {
   padding: 15px;
   margin-top: 12px;
   border-left: 3px solid var(--color-accent);
-  background: var(--color-cream);
+  background: var(--color-bg);
 }
 .quiz-feedback.incorrect {
-  border-color: var(--alert-line);
+  border-color: var(--color-alert-line);
 }
 .completion-actions {
   display: flex;
@@ -1809,10 +1812,10 @@ button:disabled {
   margin-block: 16px;
 }
 .form-alert {
-  color: var(--alert-text);
-  background: var(--alert-bg);
+  color: var(--color-alert-text);
+  background: var(--color-alert-bg);
   padding: 12px 15px;
-  border-left: 2px solid var(--alert-line);
+  border-left: 2px solid var(--color-alert-line);
 }
 .form-success {
   color: var(--color-accent);
@@ -1883,7 +1886,7 @@ button:disabled {
 .auth-note {
   margin-top: 40px;
   padding: 24px;
-  background: var(--color-cream-dark);
+  background: var(--color-surface);
   border-left: 2px solid var(--color-accent);
   max-width: 400px;
 }
@@ -1893,7 +1896,7 @@ button:disabled {
   margin-top: 10px;
 }
 .auth-panel {
-  background: var(--color-cream-dark);
+  background: var(--color-surface);
   padding: 35px;
   align-self: start;
 }
@@ -1920,8 +1923,8 @@ button:disabled {
   width: 100%;
   min-height: 48px;
   padding: 12px;
-  background: var(--color-cream);
-  border: 1px solid var(--field-line);
+  background: var(--color-bg);
+  border: 1px solid var(--color-field-line);
   font: inherit;
   font-size: 16px;
   margin-block: 9px 5px;
@@ -2080,7 +2083,7 @@ button:disabled {
 .completion-note {
   font-size: 12px;
   line-height: 1.7;
-  background: var(--color-cream-dark);
+  background: var(--color-surface);
   border-left: 2px solid var(--color-accent);
   padding: 18px;
   margin-top: 22px;
@@ -2127,7 +2130,7 @@ button:disabled {
 }
 .empty-work {
   padding: 30px;
-  background: var(--color-cream-dark);
+  background: var(--color-surface);
 }
 .learning-error {
   min-height: 70vh;
@@ -2159,11 +2162,11 @@ button:disabled {
 .home-course-links > a {
   display: block;
   padding: 32px;
-  background: var(--lime);
+  background: var(--color-accent-fill);
   color: var(--color-on-accent);
 }
 .home-course-links > a:nth-child(2) {
-  background: var(--pink);
+  background: var(--color-pink);
 }
 .home-course-links h3 {
   font-family: var(--serif);
@@ -2448,7 +2451,7 @@ button:disabled {
   border-bottom: 1px solid var(--color-border);
 }
 .lesson-prose th {
-  background: var(--color-cream-dark);
+  background: var(--color-surface);
   font-weight: 600;
 }
 .lesson-videos h2 {

@@ -60,7 +60,7 @@ export default function Research() {
         <Link
           key={brief.href}
           href={brief.href}
-          className="group flex flex-col md:flex-row items-start gap-4 md:gap-12 w-full px-6 sm:px-10 lg:px-16 py-8 md:py-10 border-b border-border hover:bg-cream-dark transition-colors"
+          className="group flex flex-col md:flex-row items-start gap-4 md:gap-12 w-full px-6 sm:px-10 lg:px-16 py-8 md:py-10 border-b border-border hover:bg-surface transition-colors"
         >
           <div className="w-full md:w-[160px] shrink-0">
             <p className="text-[11px] font-medium tracking-[0.06em] uppercase text-accent">

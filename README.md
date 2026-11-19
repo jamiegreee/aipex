@@ -63,3 +63,7 @@ Course source selection and lesson-by-lesson reading tasks are documented in [co
 
 
 The [course quality review](docs/course-quality-review.md) maps every lesson to checked source support and limitations. Regenerate the full Notion curricula and reading map with `npm run export:curricula -- /tmp/aipex-curricula.json`. See learning operations before deploying revised question editions.
+
+## Theming
+
+All site colours live in `src/app/theme.css`: a dark palette (the default) and a light palette that visitors can switch to with the sun/moon button in the header. Pages and components only use the named tokens (`var(--color-accent)`, or Tailwind classes such as `bg-surface`), never raw hex values, so changing a value in `theme.css` changes it everywhere. When adding a colour, add it to both palettes.

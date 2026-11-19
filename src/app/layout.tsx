@@ -5,6 +5,7 @@ import "./policy.css";
 import "./membership.css";
 import { Suspense } from "react";
 import Analytics from "@/components/Analytics";
+import { themeScript } from "@/lib/theme";
 
 const sans = DM_Sans({
   variable: "--font-body",
@@ -45,8 +46,12 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
       className={`${sans.variable} ${serif.variable} ${mono.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <a className="skip-link" href="#main">
           Skip to content

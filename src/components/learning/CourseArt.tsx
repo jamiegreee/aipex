@@ -31,7 +31,7 @@ export default function CourseArt({
           stroke="currentColor"
           strokeWidth="3"
         />
-        <circle cx="230" cy="140" r="62" fill="var(--color-cream)" />
+        <circle cx="230" cy="140" r="62" fill="var(--color-bg)" />
         <path
           d="M202 140H257M239 122L257 140L239 158"
           stroke="currentColor"
