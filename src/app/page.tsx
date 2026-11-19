@@ -47,7 +47,6 @@ export default function Home() {
         <section className="pc-channel" aria-label="An illustration of conversations inside AIPEX">
           <div className="pc-channel-head">
             <span># ask-the-exchange</span>
-            <span className="pc-tag">Illustrative</span>
           </div>
           <ol className="pc-thread">
             {thread.map((m, i) => (
