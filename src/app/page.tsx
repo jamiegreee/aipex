@@ -35,8 +35,8 @@ export default function Home() {
       <main id="main" className="pc-main">
         <section className="pc-intro" aria-labelledby="pc-h1">
           <h1 id="pc-h1">
-            Someone else is working on the same problem.
-            <em> Ask them.</em>
+            Building the community for AI policy practitioners.
+            <em> Join to help build a positive future for AI.</em>
           </h1>
           <p>
             AIPEX is the private community bringing together people working on
