@@ -48,7 +48,7 @@ export default async function AuthPage({
     ? "Your profile and membership stay with your account when you reset your password."
     : mode === "signup"
       ? "Creating an account lets you apply for membership. We review your application before inviting you to the Slack community."
-      : "Check your application status in My account. Approved members can join our Slack community.";
+      : null;
   return (
     <>
       <Navigation />
@@ -59,12 +59,14 @@ export default async function AuthPage({
           <p>
             {introduction}
           </p>
-          <div className="auth-note">
-            <span className="label">{resettingPassword ? "Your account" : mode === "signup" ? "Membership by application" : "Your AIPEX membership"}</span>
-            <p>
-              {accountNote}
-            </p>
-          </div>
+          {accountNote && (
+            <div className="auth-note">
+              <span className="label">{resettingPassword ? "Your account" : "Membership by application"}</span>
+              <p>
+                {accountNote}
+              </p>
+            </div>
+          )}
         </div>
         <div className="auth-panel">
           <h2>
