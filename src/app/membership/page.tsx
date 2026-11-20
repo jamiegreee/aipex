@@ -53,7 +53,7 @@ export default async function Membership() {
               <li>We review your application.</li>
               <li>Check your decision in <Link href="/account">My account</Link>.</li>
             </ol>
-            <p className="small-copy">Applications are private. Membership is in a personal capacity and does not imply endorsement by your employer. Please leave out confidential work information.</p>
+            <p className="small-copy">Applications are private. Membership is in a personal capacity and does not imply endorsement by your employer.</p>
           </aside>
           <section className="membership-panel" aria-label="Membership application">
             {unavailable ? (
