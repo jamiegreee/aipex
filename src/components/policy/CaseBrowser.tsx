@@ -81,7 +81,7 @@ export default function CaseBrowser({ cases }: { cases: PolicyCase[] }) {
               {c.jurisdiction} · {c.period}
             </p>
             <Link className="text-link" href={`/cases/${c.slug}`}>
-              Examine the case ↗
+              Examine the case ↗︎
             </Link>
           </article>
         ))}

@@ -576,11 +576,11 @@ a:hover .arrow {
   margin-left: -0.015em;
   margin-top: 17px;
 }
-.footer-wordmark span {
-  font-weight: 300;
-  font-size: 0.9em;
+.footer-wordmark .footer-wordmark-arrow {
+  flex: none;
+  width: 0.62em;
+  height: 0.62em;
   color: var(--color-accent);
-  line-height: 1;
 }
 .footer-bottom {
   display: flex;
