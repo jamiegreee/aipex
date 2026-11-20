@@ -26,7 +26,10 @@ export default function Home() {
         </Link>
         <nav aria-label="Main navigation">
           <ThemeToggle />
-          <Link href="/account">My account</Link>
+          <Link href="/account">
+            <span className="pc-wide-only">My account</span>
+            <span className="pc-narrow-only">Account</span>
+          </Link>
           <Link className="pc-bar-cta" href="/membership">
             Apply <Arrow />
           </Link>
