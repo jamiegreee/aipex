@@ -18,7 +18,7 @@ export default function ReviewDecision({ userId, fullName, updatedAt }: { userId
           <option value="declined">Decline this application</option>
         </select>
       </label>
-      <p className="small-copy">{decision === "approved" ? "This grants membership." : decision === "declined" ? "The applicant will see that membership has not been offered. Their account stays active." : "Nothing changes until you save a decision."} Saving a decision also queues an email to the applicant.</p>
+      <p className="small-copy">{decision === "approved" ? "This grants membership." : decision === "declined" ? "The applicant will see that membership has not been offered. Their account stays active." : "Nothing changes until you save a decision."} Saving a decision also emails the applicant.</p>
       {state.error && <p className="form-alert" role="alert">{state.error}</p>}
       <button className="button button-small" type="submit" disabled={pending || !decision}>{pending ? "Saving decision…" : "Save decision"}</button>
     </form>
