@@ -1,5 +1,6 @@
 import type { MembershipApplication } from "@/lib/membership";
 import Link from "next/link";
+import SlackMobileQR from "./SlackMobileQR";
 
 // Reviewers run AIPEX, so they are members whether or not they ever applied.
 export default function ApplicationStatus({ application, reviewer = false }: { application: MembershipApplication | null; reviewer?: boolean }) {
@@ -19,6 +20,7 @@ export default function ApplicationStatus({ application, reviewer = false }: { a
             : "We will review your application and get back to you soon."}
       </p>
       {approved && <Link className="button" href="/community/slack">Join the Slack community →</Link>}
+      {approved && <SlackMobileQR />}
     </section>
   );
 }
