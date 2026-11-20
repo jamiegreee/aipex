@@ -36,7 +36,7 @@ export default function Home() {
         <section className="pc-intro" aria-labelledby="pc-h1">
           <h1 id="pc-h1">
             Building the community for AI policy practitioners.
-            <em> Join to help build a positive future for AI.</em>
+            <em> Join us.</em>
           </h1>
           <p>
             AIPEX is the private community bringing together people working on
@@ -80,7 +80,7 @@ export default function Home() {
         <section className="pc-small" aria-label="About membership">
           <p><strong>Who.</strong> People working on AI policy in the public and private sectors: officials, regulators and parliamentary staff, and policy teams at companies and AI developers.</p>
           <p><strong>How.</strong> Apply, we review every application individually, then you join us on Slack.</p>
-          <p><strong>Terms.</strong> Personal capacity. No endorsement by your employer. Leave confidential work out of it.</p>
+          <p><strong>Terms.</strong> Personal capacity. No endorsement by your employer.</p>
         </section>
       </main>
       <footer className="pc-foot">

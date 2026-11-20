@@ -10,7 +10,7 @@
 .pc-bar-cta { display: inline-flex; gap: 10px; align-items: center; padding: 9px 16px; border: 1px solid var(--color-border); border-radius: 999px; }
 
 .pc-main { width: min(100% - 40px, 820px); margin: 0 auto; padding: 72px 0 120px; }
-.pc-intro h1 { font-size: clamp(36px, 5vw, 64px); line-height: 1.02; }
+.pc-intro h1 { font-size: clamp(44px, 6.4vw, 84px); line-height: 0.98; }
 .pc-intro h1 em { color: var(--color-accent); font-style: normal; }
 .pc-intro p { margin-top: 24px; font-size: 18px; color: var(--color-muted); max-width: 44ch; }
 
