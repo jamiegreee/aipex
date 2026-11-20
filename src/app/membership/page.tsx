@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import MembershipForm from "@/components/membership/MembershipForm";
 import ApplicationStatus from "@/components/membership/ApplicationStatus";
 import { currentUser } from "@/lib/auth";
-import { membershipApplication } from "@/lib/membership-server";
+import { membershipApplication, membershipReviewer } from "@/lib/membership-server";
 
 export const metadata: Metadata = {
   title: "Apply for membership",
@@ -20,9 +20,10 @@ export const maxDuration = 60;
 export default async function Membership() {
   const user = await currentUser();
   let application = null;
+  let reviewer = false;
   let unavailable = false;
   if (user) {
-    try { application = await membershipApplication(user.id); }
+    try { [application, reviewer] = await Promise.all([membershipApplication(user.id), membershipReviewer()]); }
     catch { unavailable = true; }
   }
   return (
@@ -63,7 +64,7 @@ export default async function Membership() {
                 <Link className="text-link" href="/membership">Try again ↗</Link>
                 <p>For help, email <a href="mailto:hello@theaipex.org">hello@theaipex.org</a>.</p>
               </div>
-            ) : application ? <ApplicationStatus application={application} /> : <MembershipForm user={user ? { name: user.name, email: user.email } : null} />}
+            ) : application || reviewer ? <ApplicationStatus application={application} reviewer={reviewer} /> : <MembershipForm user={user ? { name: user.name, email: user.email } : null} />}
           </section>
         </div>
       </main>

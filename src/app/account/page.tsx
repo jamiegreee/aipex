@@ -67,7 +67,7 @@ export default async function Account() {
         </div>
         {membershipUnavailable ? (
           <section className="membership-status"><h2>Membership status is temporarily unavailable.</h2><p>Please try again shortly.</p><Link className="text-link" href="/membership">Check membership ↗</Link></section>
-        ) : application ? <ApplicationStatus application={application} /> : (
+        ) : application || reviewer ? <ApplicationStatus application={application} reviewer={reviewer} /> : (
           <section className="membership-status"><p className="label">Membership</p><h2>A community of policymakers.</h2><p>Apply to join the members helping shape AIPEX. We review your application before granting membership.</p><Link className="button" href="/membership">Apply for membership →</Link></section>
         )}
         {reviewer && <section className="membership-status"><p className="label">Private / Membership review</p><h2>Review membership applications.</h2><Link className="button" href="/admin/membership">Open review queue →</Link></section>}
