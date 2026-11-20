@@ -9,6 +9,10 @@ export async function GET() {
     currentUser,
     hasApprovedMembership: async (userId) => {
       const client = await createClient();
+      // Reviewers are members automatically, without an approved application.
+      const reviewer = await client.rpc("membership_is_reviewer");
+      if (reviewer.error) throw new Error("membership_unavailable");
+      if (reviewer.data === true) return true;
       const { data, error } = await client
         .from("membership_applications")
         .select("user_id")
