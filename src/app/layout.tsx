@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, Newsreader, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import "./policy.css";
@@ -37,6 +37,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_GB",
   },
+  // Name and status bar for the iOS home screen app.
+  appleWebApp: {
+    capable: true,
+    title: "AIPEX",
+    statusBarStyle: "black",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#10140f",
 };
 
 export default function RootLayout({
