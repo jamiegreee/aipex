@@ -60,54 +60,24 @@ export default function Analytics() {
       {allowed && (
         <Script id="aipex-google-analytics" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" onReady={() => setReady(true)} />
       )}
-      {choice !== undefined && pathname !== "/cookies" && (
-        <CookieBanner key={pathname} choice={choice} />
-      )}
+      {choice === null && pathname !== "/cookies" && <CookieNotice />}
     </>
   );
 }
 
-function CookieBanner({ choice }: { choice: Choice | null }) {
-  const [confirmed, setConfirmed] = useState(false);
+function CookieNotice() {
   const [failed, setFailed] = useState(false);
-  const message = useRef<HTMLParagraphElement>(null);
 
   function choose(next: Choice) {
-    const saved = saveChoice(next);
-    setConfirmed(saved);
-    setFailed(!saved);
+    setFailed(!saveChoice(next));
   }
 
-  useEffect(() => {
-    if (confirmed) message.current?.focus();
-  }, [confirmed]);
-
-  if (choice && !confirmed) return null;
   return (
-    <section className="analytics-choice" aria-label="Cookies on AIPEX" data-nosnippet="">
-      <div className="container analytics-choice-inner">
-        {choice ? (
-          <>
-            <p ref={message} tabIndex={-1} role="alert">
-              You’ve {choice} analytics cookies. You can <Link href="/cookies">change your cookie settings</Link> at any time.
-            </p>
-            <button type="button" className="button button-small" onClick={() => setConfirmed(false)}>Hide cookie message</button>
-          </>
-        ) : (
-          <>
-            <div>
-              <h2>Cookies on AIPEX</h2>
-              <p>We use essential cookies for sign-in and to remember your cookie choice. Can we also use Google Analytics cookies to see which public pages people visit?</p>
-            </div>
-            <div className="analytics-actions">
-              <button type="button" className="button button-small" onClick={() => choose("accepted")}>Accept analytics cookies</button>
-              <button type="button" className="button button-small" onClick={() => choose("rejected")}>Reject analytics cookies</button>
-              <Link href="/cookies">View cookies</Link>
-            </div>
-            {failed && <p role="alert">{saveError}</p>}
-          </>
-        )}
-      </div>
+    <section className="analytics-choice" aria-label="Analytics cookies" data-nosnippet="">
+      <p>We use cookies. <Link href="/privacy#cookies">Read more</Link></p>
+      <button type="button" aria-label="Reject analytics cookies" onClick={() => choose("rejected")}>Reject</button>
+      <button type="button" aria-label="Accept analytics cookies" onClick={() => choose("accepted")}>Accept</button>
+      {failed && <p className="cookie-error" role="alert">{saveError}</p>}
     </section>
   );
 }

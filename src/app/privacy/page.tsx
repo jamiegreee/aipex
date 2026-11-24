@@ -77,7 +77,7 @@ export default function Privacy() {
           <h3 id="tool-drafts">Policy tool drafts</h3>
           <p>Tools save drafts in your browser’s local storage, including on shared devices. You can remove an individual browser draft from its workspace. Downloads and imports happen on your device. Clearing browser data also removes these local copies. If you switch between light and dark mode, that choice is saved there too.</p>
           <p>Choosing Save to account sends that draft to our Neon database, associated with your account. Account copies are private in the interface and are subject to the same administrative access, account-deletion and backup arrangements described above. Browser-draft removal does not delete a separately saved account copy. You can request deletion of account drafts using the contact details below. Tool text is not sent to an AI service.</p>
-          <h3>Cookies and analytics</h3>
+          <h3 id="cookies">Cookies and analytics</h3>
           <p>
             We use essential cookies for sign-in and to remember your cookie
             choice. Google Analytics measures visits to public pages only if you
