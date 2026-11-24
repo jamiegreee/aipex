@@ -6,7 +6,7 @@ export type AnalyticsChoice = "accepted" | "rejected";
 
 // An allowlist keeps future account routes out of analytics by default.
 export function isAnalyticsPage(path: string): boolean {
-  return ["/", "/about", "/community", "/gatherings", "/charter", "/contact", "/privacy"].includes(path)
+  return ["/", "/about", "/community", "/gatherings", "/charter", "/privacy"].includes(path)
     || (coursesEnabled && (path === "/courses" || /^\/courses\/(ai-policy-in-practice|governing-ai-in-public-services)(\/[a-z0-9-]+)?$/.test(path)));
 }
 

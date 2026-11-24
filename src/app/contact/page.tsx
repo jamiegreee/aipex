@@ -3,6 +3,11 @@ import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Arrow } from "@/components/Brand";
+import ContactForm from "@/components/contact/ContactForm";
+import { contactFormToken } from "@/lib/contact-server";
+import "./contact.css";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -27,15 +32,7 @@ export default function Contact() {
         </section>
         <section className="container contact-grid">
           <div>
-            <h2>Let&apos;s talk.</h2>
-            <p>
-              Write to Jamie to discuss policy challenges, share subject
-              expertise or give feedback on our resources. You can also get in
-              touch with questions about your account.
-            </p>
-            <a className="contact-email" href="mailto:hello@theaipex.org">
-              hello@theaipex.org <Arrow diagonal />
-            </a>
+            <ContactForm token={contactFormToken()} />
           </div>
           <div className="contact-aside">
             <h2>A decision on your desk?</h2>
