@@ -23,7 +23,8 @@ export default function Privacy() {
         <section className="container prose-page">
           <h2>How we use your information</h2>
           <p>
-            We use your message to respond to your enquiry and develop our
+            When you use our contact form, we send your name, email address and
+            message to our inbox so we can reply. We use your message to respond to your enquiry and develop our
             resources. If you ask to hear about AIPEX updates, we
             use your email address to send those updates. You can ask us to stop
             by replying to any email.

@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { analyticsLocation, analyticsReferrer, canMeasureVisit, isAnalyticsHost, isAnalyticsPage, setAnalyticsEnabled, trackPage } from "../src/lib/analytics";
 
 test("public pages are tracked, private and unknown routes are excluded", () => {
-  for (const path of ["/", "/about", "/charter", "/contact", "/privacy"]) assert.ok(isAnalyticsPage(path));
+  for (const path of ["/", "/about", "/charter", "/privacy"]) assert.ok(isAnalyticsPage(path));
+  assert.equal(isAnalyticsPage("/contact"), false, "contact messages stay outside analytics");
   for (const path of ["/courses", "/courses/ai-policy-in-practice/a-policy-problem-not-a-technology", "/courses/governing-ai-in-public-services", "/learn", "/learn/portfolio", "/login", "/signup", "/reset-password", "/api/auth/callback", "/courses/user@example.com", "/future-account"]) assert.equal(isAnalyticsPage(path), false);
   assert.ok(isAnalyticsHost("theaipex.org"));
   assert.ok(isAnalyticsHost("www.theaipex.org"));
