@@ -11,7 +11,7 @@ export function ExchangeMark({ className = "" }: { className?: string }) {
       <path d="M4 5h23v21H15L4 35V5Z" fill="currentColor" />
       <path
         d="M17 13h19v21l-8-7H17V13Z"
-        fill="var(--color-cream)"
+        fill="var(--color-bg)"
         stroke="currentColor"
         strokeWidth="2.5"
       />

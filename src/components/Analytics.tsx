@@ -4,9 +4,8 @@ import { type FormEvent, useEffect, useRef, useState, useSyncExternalStore } fro
 import { usePathname } from "next/navigation";
 import Script from "next/script";
 import Link from "next/link";
-import { ANALYTICS_CHOICE_COOKIE, GA_ID, analyticsLocation, clearAnalyticsCookies, isAnalyticsHost, isAnalyticsPage, setAnalyticsEnabled, trackPage } from "@/lib/analytics";
+import { type AnalyticsChoice as Choice, ANALYTICS_CHOICE_COOKIE, GA_ID, analyticsLocation, canMeasureVisit, clearAnalyticsCookies, setAnalyticsEnabled, trackPage } from "@/lib/analytics";
 
-type Choice = "accepted" | "rejected";
 const eventName = "aipex-analytics-choice";
 function readChoice(): Choice | null {
   const value = document.cookie.split("; ").find(row => row.startsWith(`${ANALYTICS_CHOICE_COOKIE}=`))?.split("=")[1];
@@ -44,12 +43,11 @@ export default function Analytics() {
   const choice = useChoice();
   const [ready, setReady] = useState(false);
   const previousPage = useRef<string | null>(null);
-  const allowed = choice === "accepted" && isAnalyticsPage(pathname);
+  const allowed = typeof window !== "undefined" && canMeasureVisit(choice, window.location.hostname, pathname);
 
   useEffect(() => {
-    const enabled = allowed && isAnalyticsHost(window.location.hostname);
-    setAnalyticsEnabled(enabled);
-    if (!enabled) { previousPage.current = null; return; }
+    setAnalyticsEnabled(allowed);
+    if (!allowed) { previousPage.current = null; return; }
     if (ready && previousPage.current !== pathname) {
       trackPage(pathname, previousPage.current ? analyticsLocation(previousPage.current) : document.referrer);
       previousPage.current = pathname;
@@ -59,7 +57,7 @@ export default function Analytics() {
 
   return (
     <>
-      {allowed && typeof window !== "undefined" && isAnalyticsHost(window.location.hostname) && (
+      {allowed && (
         <Script id="aipex-google-analytics" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" onReady={() => setReady(true)} />
       )}
       {choice !== undefined && pathname !== "/cookies" && (

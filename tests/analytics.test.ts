@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { analyticsLocation, analyticsReferrer, isAnalyticsHost, isAnalyticsPage, setAnalyticsEnabled, trackPage } from "../src/lib/analytics";
+import { analyticsLocation, analyticsReferrer, canMeasureVisit, isAnalyticsHost, isAnalyticsPage, setAnalyticsEnabled, trackPage } from "../src/lib/analytics";
 
 test("public pages are tracked, private and unknown routes are excluded", () => {
   for (const path of ["/", "/about", "/charter", "/contact", "/privacy"]) assert.ok(isAnalyticsPage(path));
@@ -46,4 +46,14 @@ test("page URLs and referrers do not carry tokens or private paths", () => {
   assert.equal(analyticsReferrer("https://www.theaipex.org/about?token=secret"), "https://theaipex.org/about");
   assert.equal(analyticsReferrer("https://example.com/private/person@example.com?token=secret"), "https://example.com");
   assert.equal(analyticsReferrer("javascript:secret"), "");
+});
+
+test("the Google script and measurement require opt-in on a public production page", () => {
+  for (const choice of [undefined, null, "rejected"] as const) {
+    assert.equal(canMeasureVisit(choice, "theaipex.org", "/"), false);
+  }
+  assert.equal(canMeasureVisit("accepted", "theaipex.org", "/"), true);
+  assert.equal(canMeasureVisit("accepted", "theaipex.org", "/account"), false);
+  assert.equal(canMeasureVisit("accepted", "theaipex.org", "/cookies"), false);
+  assert.equal(canMeasureVisit("accepted", "aipex-preview.vercel.app", "/"), false);
 });

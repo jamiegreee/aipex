@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Arrow, ExchangeMark } from "@/components/Brand";
+import ThemeToggle from "@/components/ThemeToggle";
 import "./home.css";
 
 
@@ -23,7 +24,11 @@ export default function Home() {
           <ExchangeMark /> AIPEX
         </Link>
         <nav aria-label="Main navigation">
-          <Link href="/account">My account</Link>
+          <ThemeToggle />
+          <Link href="/account">
+            <span className="pc-wide-only">My account</span>
+            <span className="pc-narrow-only">Account</span>
+          </Link>
           <Link className="pc-bar-cta" href="/membership">
             Apply <Arrow />
           </Link>
@@ -32,8 +37,8 @@ export default function Home() {
       <main id="main" className="pc-main">
         <section className="pc-intro" aria-labelledby="pc-h1">
           <h1 id="pc-h1">
-            Someone else is working on the same problem.
-            <em> Ask them.</em>
+            Building the community for AI policy practitioners.
+            <em> Join us.</em>
           </h1>
           <p>
             AIPEX is the private community bringing together people working on
@@ -44,7 +49,6 @@ export default function Home() {
         <section className="pc-channel" aria-label="An illustration of conversations inside AIPEX">
           <div className="pc-channel-head">
             <span># ask-the-exchange</span>
-            <span className="pc-tag">Illustrative</span>
           </div>
           <ol className="pc-thread">
             {thread.map((m, i) => (
@@ -78,7 +82,7 @@ export default function Home() {
         <section className="pc-small" aria-label="About membership">
           <p><strong>Who.</strong> People working on AI policy in the public and private sectors: officials, regulators and parliamentary staff, and policy teams at companies and AI developers.</p>
           <p><strong>How.</strong> Apply, we review every application individually, then you join us on Slack.</p>
-          <p><strong>Terms.</strong> Personal capacity. No endorsement by your employer. Leave confidential work out of it.</p>
+          <p><strong>Terms.</strong> Personal capacity. No endorsement by your employer.</p>
         </section>
       </main>
       <footer className="pc-foot">

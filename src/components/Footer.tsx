@@ -32,7 +32,8 @@ export default function Footer({
           </Link>
         </div>
         <div className="footer-wordmark" aria-hidden="true">
-          AIPEX<span>↗</span>
+          AIPEX
+          <Arrow diagonal className="footer-wordmark-arrow" />
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} AI Policy Exchange</span>

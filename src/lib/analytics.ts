@@ -2,6 +2,7 @@ import { coursesEnabled } from "./site";
 
 export const GA_ID = "G-J1YPT21EYK";
 export const ANALYTICS_CHOICE_COOKIE = "aipex_analytics_v1";
+export type AnalyticsChoice = "accepted" | "rejected";
 
 // An allowlist keeps future account routes out of analytics by default.
 export function isAnalyticsPage(path: string): boolean {
@@ -28,6 +29,10 @@ export function analyticsReferrer(referrer: string): string {
 
 export function isAnalyticsHost(host: string): boolean {
   return host === "theaipex.org" || host === "www.theaipex.org";
+}
+
+export function canMeasureVisit(choice: AnalyticsChoice | null | undefined, host: string, path: string): boolean {
+  return choice === "accepted" && isAnalyticsHost(host) && isAnalyticsPage(path);
 }
 
 export type AnalyticsWindow = Window & {

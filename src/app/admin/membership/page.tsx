@@ -7,8 +7,7 @@ import ReviewDecision from "@/components/membership/ReviewDecision";
 import { currentUser } from "@/lib/auth";
 import { membershipReviewQueue, membershipReviewer } from "@/lib/membership-server";
 import { membershipInterestOptions } from "@/lib/membership";
-import EmailQueue from "@/components/membership/EmailQueue";
-import { membershipEmailConfigured, membershipEmailCounts } from "@/lib/membership-email-server";
+import { scheduleMembershipEmails } from "@/lib/membership-email-server";
 
 export const metadata: Metadata = { title: "Membership review", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -23,7 +22,8 @@ export default async function MembershipReview({ searchParams }: { searchParams:
   const status = ["pending", "approved", "declined"].includes(params.status ?? "") ? params.status! : "pending";
   const page = /^\d{1,4}$/.test(params.page ?? "") ? Number(params.page) : 0;
   const { applications, counts } = await membershipReviewQueue(status, page);
-  const emailCounts = await membershipEmailCounts().catch(() => null);
+  // Retry any emails an earlier attempt left waiting, in the background.
+  await scheduleMembershipEmails();
   const total = counts[status as "pending" | "approved" | "declined"];
   const date = (value: string) => new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/London" }).format(new Date(value));
   return (
@@ -34,10 +34,9 @@ export default async function MembershipReview({ searchParams }: { searchParams:
           <p className="label">Private / Membership review</p>
           <h1>Membership <em>applications.</em></h1>
           <p>{counts.approved} approved · {counts.pending} awaiting review</p>
-          <p className="small-copy">Every membership decision is yours. Saving a decision updates the applicant’s account and queues an email to them.</p>
+          <p className="small-copy">Every membership decision is yours. Saving a decision updates the applicant’s account and emails them.</p>
           <Link className="text-link" href="/account">My account ↗</Link>
         </header>
-        <EmailQueue counts={emailCounts} configured={membershipEmailConfigured()} />
         <nav className="membership-review-tabs" aria-label="Application status">
           {(["pending", "approved", "declined"] as const).map(s => <Link key={s} aria-current={s === status ? "page" : undefined} href={`/admin/membership?status=${s}`}>{s[0].toUpperCase() + s.slice(1)} ({counts[s]})</Link>)}
         </nav>

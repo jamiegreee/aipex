@@ -55,8 +55,10 @@ export default function Cookies() {
             a cookie choice, we remember it in this browser for six months.
             You can change it on this page at any time.
           </p>
+          <h2>Other browser storage</h2>
           <p>
-            If you use a policy tool, your browser also stores your draft on
+            If you switch between light and dark mode, your browser remembers
+            your choice. If you use a policy tool, it also stores your draft on
             this device. Read about{" "}
             <Link href="/privacy#tool-drafts">saving and deleting drafts</Link>.
           </p>

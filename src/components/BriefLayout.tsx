@@ -70,7 +70,7 @@ export default function BriefLayout({
           {children}
 
           {/* Key Recommendation */}
-          <div className="bg-cream-dark p-8 my-10 border-l-2 border-accent">
+          <div className="bg-surface p-8 my-10 border-l-2 border-accent">
             <p className="text-[12px] font-bold tracking-[0.06em] uppercase mb-3">
               Key recommendation
             </p>

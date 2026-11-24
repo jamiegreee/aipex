@@ -1,7 +1,7 @@
 import "server-only";
+import { after } from "next/server";
 import { NeonPostgrestClient, fetchWithToken } from "@neondatabase/postgrest-js";
 import { createAuth } from "./auth";
-import { createClient } from "./database";
 import { deliverMembershipEmailBatch, sendMembershipEmail, type ClaimedMembershipEmail } from "./membership-email-delivery";
 
 export function membershipEmailConfigured() {
@@ -55,17 +55,17 @@ async function dispatchWithClient(client: NeonPostgrestClient, userId?: string) 
   });
 }
 
-export type MembershipEmailCounts = {
-  pending: number; sending: number; sent: number; failed: number; needs_review: number;
-};
-
-export async function membershipEmailCounts(): Promise<MembershipEmailCounts> {
-  const client = await createClient();
-  const { data, error } = await client.rpc("membership_email_counts");
-  const keys = ["pending", "sending", "sent", "failed", "needs_review"];
-  if (error || !data || typeof data !== "object" || Array.isArray(data) ||
-    !keys.every(key => Number.isInteger(data[key]) && data[key] >= 0)) {
-    throw new Error("membership_email_queue_unavailable");
+/** Sends due emails in the background after the response. Applicants send
+ * their own; a reviewer's session (no userId) sends every due email, so
+ * anything an earlier attempt left behind goes out without a manual step. */
+export async function scheduleMembershipEmails(userId?: string) {
+  try {
+    const dispatch = await prepareMembershipEmailDispatch();
+    after(async () => {
+      try { await dispatch(userId); }
+      catch { console.error("Membership emails remain queued and will be retried automatically."); }
+    });
+  } catch {
+    console.error("Membership emails remain queued and will be retried automatically.");
   }
-  return data as MembershipEmailCounts;
 }

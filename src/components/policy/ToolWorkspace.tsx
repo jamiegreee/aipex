@@ -352,7 +352,7 @@ export default function ToolWorkspace({
           className="text-link"
           onClick={() => createDraft(true)}
         >
-          Open worked example ↗
+          Open worked example ↗︎
         </button>
       </div>
       <div className="container workspace-storage">
@@ -466,7 +466,7 @@ export default function ToolWorkspace({
                     );
                   }}
                 >
-                  Open a copy ↗
+                  Open a copy ↗︎
                 </button>
               </li>
             ))}
@@ -536,7 +536,7 @@ export default function ToolWorkspace({
                   {tool.exampleNote}{" "}
                   {caseLibraryEnabled && (
                     <Link href={`/cases/${tool.exampleCase}`}>
-                      Read the case and its evidence ↗
+                      Read the case and its evidence ↗︎
                     </Link>
                   )}
                 </p>
@@ -887,7 +887,7 @@ export default function ToolWorkspace({
                   Download editable project ↓
                 </button>
                 <button className="text-link" onClick={() => window.print()}>
-                  Print / save PDF ↗
+                  Print / save PDF ↗︎
                 </button>
               </div>
               <p className="small-copy">
