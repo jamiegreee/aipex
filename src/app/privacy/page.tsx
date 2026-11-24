@@ -17,11 +17,7 @@ export default function Privacy() {
         <section className="page-intro">
           <div className="container">
             <p className="label">Last updated 24 November 2026</p>
-            <h1>
-              Your information.
-              <br />
-              <em>Handled with care.</em>
-            </h1>
+            <h1>Privacy policy</h1>
           </div>
         </section>
         <section className="container prose-page">
