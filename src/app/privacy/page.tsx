@@ -16,7 +16,7 @@ export default function Privacy() {
       <main id="main">
         <section className="page-intro">
           <div className="container">
-            <p className="label">Last updated: 30 October 2026</p>
+            <p className="label">Last updated 24 November 2026</p>
             <h1>
               Your information.
               <br />
@@ -57,8 +57,7 @@ export default function Privacy() {
           </p>
           <p>
             Neon provides authentication and database storage; Vercel hosts
-            the application and Resend sends account and membership emails. Account cookies maintain your sign-in session.
-            These are necessary for account features. We do not use saved work
+            the application and Resend sends account and membership emails. We do not use saved work
             to train an AI model or submit it to an AI service for grading.
             Please do not enter confidential material or personal information
             about other people in your drafts.
@@ -75,29 +74,14 @@ export default function Privacy() {
             to deliver the website and correspondence, such as IP addresses and
             email delivery records.
           </p>
-          <h3>Policy tool drafts</h3>
+          <h3 id="tool-drafts">Policy tool drafts</h3>
           <p>Tools save drafts in your browser’s local storage, including on shared devices. You can remove an individual browser draft from its workspace. Downloads and imports happen on your device. Clearing browser data also removes these local copies.</p>
           <p>Choosing Save to account sends that draft to our Neon database, associated with your account. Account copies are private in the interface and are subject to the same administrative access, account-deletion and backup arrangements described above. Browser-draft removal does not delete a separately saved account copy. You can request deletion of account drafts using the contact details below. Tool text is not sent to an AI service.</p>
-          <h3>Optional website analytics</h3>
+          <h3>Cookies and analytics</h3>
           <p>
-            If you choose “Allow analytics”, Google Analytics measures visits to
-            public AIPEX pages. It receives page
-            addresses and titles, a shortened referring address, device and browser
-            information, and approximate location derived from your IP address.
-            Analytics cookies help distinguish visits. We do not send your name,
-            email address, saved work or progress records to Google Analytics.
-            Account, sign-in and password-reset pages are excluded, and we remove
-            query strings and fragments from the page addresses we send.
-          </p>
-          <p>
-            Analytics stays off until you opt in. You can reject it and still use
-            the whole site, or change your choice through “Cookie preferences” in
-            the footer of any page. We remember your choice for six months;
-            withdrawing consent stops collection and removes the analytics
-            cookies from this browser. It does not remove data already collected.
-            We keep advertising consent disabled. Google may process analytics
-            data outside the UK; see its{" "}
-            <a href="https://policies.google.com/privacy">privacy policy</a>.
+            We use essential cookies for sign-in and to remember your cookie
+            choice. Google Analytics measures visits to public pages only if you
+            agree. <Link href="/cookies">See which cookies we use and change your settings</Link>.
           </p>
           <h2>Access, correction and deletion</h2>
           <p>

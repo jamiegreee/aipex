@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Arrow, ExchangeMark } from "@/components/Brand";
-import { CookiePreferencesButton } from "@/components/Analytics";
 import "./home.css";
 
 
@@ -86,7 +85,7 @@ export default function Home() {
         <span>© {new Date().getFullYear()} AI Policy Exchange</span>
         <Link href="/contact">Say hello</Link>
         <Link href="/privacy">Privacy</Link>
-        <CookiePreferencesButton />
+        <Link href="/cookies">Cookies</Link>
       </footer>
     </div>
   );

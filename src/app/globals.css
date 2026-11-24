@@ -1,39 +1,45 @@
 @import "tailwindcss";
 
 .analytics-choice {
-  position: fixed;
-  inset: auto 0 0;
-  z-index: 100;
   padding-block: 16px;
-  border-top: 1px solid var(--color-border);
-  background: var(--color-cream);
-  max-height: 80dvh;
-  overflow-y: auto;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-cream-dark);
 }
 .analytics-choice-inner {
   display: flex;
   align-items: center;
-  gap: 32px;
+  flex-wrap: wrap;
+  gap: 12px 32px;
 }
-.analytics-choice-inner > div:first-child { flex: 1; }
-.analytics-choice h2 { font: 600 14px/1.5 var(--font-body), sans-serif; letter-spacing: normal; margin-bottom: 4px; }
-.analytics-choice p { font-size: 13px; }
-.analytics-choice a { text-decoration: underline; }
-.analytics-actions { display: flex; flex-shrink: 0; gap: 12px; }
-.footer-cookie-button {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  font-size: inherit;
+.analytics-choice-inner > div:first-child { flex: 1 1 38ch; }
+.analytics-choice h2 {
+  margin-bottom: 4px;
+  font: 600 16px/1.5 var(--font-body), sans-serif;
+  letter-spacing: normal;
 }
-.footer-cookie-button:hover {
-  color: var(--lime);
+.analytics-choice p { font-size: 14px; max-width: 72ch; }
+.analytics-choice a { text-decoration: underline; text-underline-offset: 3px; }
+.analytics-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.analytics-actions a { padding-block: 8px; font-size: 14px; }
+.cookie-settings { margin-block: 20px 28px; }
+.cookie-settings legend { font-weight: 600; }
+.cookie-settings label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  gap: 8px;
+  margin-right: 24px;
+  cursor: pointer;
 }
-@media (max-width: 800px) {
-  .analytics-choice-inner { gap: 12px; flex-direction: column; align-items: stretch; }
-  .analytics-actions { flex-wrap: wrap; }
-  .analytics-actions button { flex: 1; }
+.cookie-settings input { width: 18px; height: 18px; accent-color: var(--color-accent); }
+.cookie-settings button { margin-top: 8px; }
+.cookie-settings [role="status"]:not(:empty) { margin-top: 12px; }
+@media (max-width: 600px) {
+  .analytics-choice-inner { flex-direction: column; align-items: flex-start; }
+  .analytics-choice-inner > div:first-child { flex: auto; }
+  .analytics-actions { width: 100%; gap: 8px; }
+  .analytics-actions .button { flex: 1; }
+  .analytics-actions a { flex-basis: 100%; }
 }
 
 @theme inline {

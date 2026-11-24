@@ -48,11 +48,11 @@ export default function RootLayout({
       className={`${sans.variable} ${serif.variable} ${mono.variable}`}
     >
       <body>
+        <Suspense fallback={null}><Analytics /></Suspense>
         <a className="skip-link" href="#main">
           Skip to content
         </a>
         {children}
-        <Suspense fallback={null}><Analytics /></Suspense>
       </body>
     </html>
   );

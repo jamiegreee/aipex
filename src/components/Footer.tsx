@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Arrow, ExchangeMark } from "./Brand";
-import { CookiePreferencesButton } from "./Analytics";
 
 export default function Footer({
   tagline = "The public capacity to respond.",
@@ -39,7 +38,7 @@ export default function Footer({
           <span>© {new Date().getFullYear()} AI Policy Exchange</span>
           <Link href="/membership">Membership</Link>
           <Link href="/privacy">Privacy</Link>
-          <CookiePreferencesButton />
+          <Link href="/cookies">Cookies</Link>
         </div>
       </div>
     </footer>

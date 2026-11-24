@@ -5,8 +5,9 @@ The October community redesign removed the original Google tag from the root lay
 - Property: AI Policy Exchange (`530285307`), account James Green (`42309986`).
 - Web stream: theaipex.org (`14269438474`), measurement ID `G-J1YPT21EYK`.
 - Production domains only: theaipex.org and www.theaipex.org. Previews and localhost send nothing.
-- Basic consent: do not load Google code until the visitor selects Allow analytics. The preference cookie expires after six months. Rejecting or withdrawing stops measurement and clears GA cookies. Advertising consent remains denied.
-- Preferences appear in a compact, full-width bottom banner with Allow and Reject choices. After choosing, visitors can reopen the banner using Cookie preferences at the bottom of the page.
+- Google Analytics loads only after the visitor accepts analytics cookies. The existing `aipex_analytics_v1` cookie remembers either choice for 180 days. Rejecting or withdrawing stops measurement and clears the Google Analytics cookies from that browser. Advertising consent stays disabled.
+- Visitors without a saved choice see a banner at the top of the page that scrolls away with the content. **Accept analytics cookies** and **Reject analytics cookies** have equal prominence. Either button shows a confirmation that the visitor can hide.
+- The **Cookies** link in the footer opens `/cookies`. Visitors can review their choice there, select Yes or No and save it.
 - Explicit public-route allowlist: public site and course reading pages. No account/auth/API routes, learning records, exercise responses or user IDs. Only manual page views; no automatic forms, outbound links, downloads or history events.
 - Page addresses exclude query strings and fragments; external referrers retain only their origin, internal referrers must be an allowed public page. This prevents reset tokens and private paths from entering analytics. Global page fields are also sanitised for standard session/engagement events.
 - **Keep enhanced measurement OFF in the web stream.** The application disables automatic page views (`send_page_view: false`) and sends one view on first consent/load and on subsequent Next.js pathname changes. Turning on automatic history detection risks duplicates and unsanitised URLs.
@@ -14,7 +15,11 @@ The October community redesign removed the original Google tag from the root lay
 
 ## Verification
 
-Run `node --import tsx --test tests/analytics.test.ts`, lint and the production build. In a clean production browser session check that no Google script loads before consent or after Reject; Allow should load gtag.js, and public navigation should produce one manual page_view per pathname. Account navigation should stop collection. Reopening Cookie preferences and rejecting should clear analytics cookies and stop measurement; refresh should preserve the choice.
+Run `node --import tsx --test tests/analytics.test.ts`, lint and the production build. In a clean browser session on the production domain, check the following.
+
+1. Open the home page and reject analytics cookies. Check that the Google tag never loads, the banner confirms the choice and refreshing keeps the prompt hidden.
+2. Follow **Cookies** in the footer, select Yes and save. On a public page covered by analytics, check that `gtag.js` loads and each new pathname generates one manual `page_view`. Opening an account page should stop measurement.
+3. Return to **Cookies**, select No and save. Check that the browser's Google Analytics cookies have been removed and that a subsequent public page load sends no analytics. Refresh the settings page to confirm No is still selected.
 
 Use Google Tag Assistant or DebugView to inspect page locations and consent. Jamie's IP exclusion can prevent test traffic appearing in reports, so do not disable it just to make Realtime show a visitor. Reports and stream health can take time to update.
 
