@@ -70,7 +70,7 @@ export default function MembershipForm({ user, initialValues }: Props) {
         </p>
         <div className="membership-actions">
           <Link className="button" href="/signup?next=%2Fmembership">
-            Create an account to apply <span aria-hidden="true">→</span>
+            Apply
           </Link>
           <Link className="text-link" href="/login?next=%2Fmembership">
             Already have an account? Sign in →
