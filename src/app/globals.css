@@ -42,7 +42,9 @@
 .analytics-choice :focus-visible { outline-offset: 1px; }
 .analytics-choice .cookie-error { grid-column: 1 / -1; max-width: 32ch; }
 @media (max-width: 600px) {
-  body:has(.analytics-choice) { padding-bottom: calc(70px + env(safe-area-inset-bottom)); }
+  body:has(.analytics-choice) :is(.site-footer, .pc-foot) {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  }
 }
 .cookie-settings { margin-block: 20px 28px; }
 .cookie-settings legend { font-weight: 600; }
@@ -997,6 +999,16 @@ a:hover .arrow {
   }
 }
 @media (max-width: 900px) {
+  body:has(> .site-footer),
+  body > .pc {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+  }
+  .site-footer,
+  .pc-foot {
+    margin-top: auto;
+  }
   html {
     scroll-padding-top: 85px;
   }
