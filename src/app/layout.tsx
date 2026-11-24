@@ -63,11 +63,11 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <Suspense fallback={null}><Analytics /></Suspense>
         <a className="skip-link" href="#main">
           Skip to content
         </a>
         {children}
+        <Suspense fallback={null}><Analytics /></Suspense>
       </body>
     </html>
   );
