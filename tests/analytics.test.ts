@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { analyticsLocation, analyticsReferrer, isAnalyticsHost, isAnalyticsPage, setAnalyticsEnabled, trackPage } from "../src/lib/analytics";
+import { analyticsLocation, analyticsReferrer, canMeasureVisit, isAnalyticsHost, isAnalyticsPage, setAnalyticsEnabled, trackPage } from "../src/lib/analytics";
 
 test("public pages are tracked, private and unknown routes are excluded", () => {
   for (const path of ["/", "/about", "/charter", "/contact", "/privacy"]) assert.ok(isAnalyticsPage(path));
@@ -48,23 +48,12 @@ test("page URLs and referrers do not carry tokens or private paths", () => {
   assert.equal(analyticsReferrer("javascript:secret"), "");
 });
 
-test("before a choice, measurement runs cookieless with analytics storage denied", () => {
-  const set = setAnalyticsEnabled, track = trackPage;
-  const target = { location: { pathname: "/", hostname: "theaipex.org" } } as unknown as import("../src/lib/analytics").AnalyticsWindow;
-  Object.defineProperty(globalThis, "window", { value: target, configurable: true });
-  Object.defineProperty(globalThis, "document", { value: { title: "AIPEX", referrer: "" }, configurable: true });
-  try {
-    set(true, false);
-    track("/", "");
-    const commands = target.dataLayer!.map(entry => Array.from(entry as ArrayLike<unknown>));
-    const updates = commands.filter(c => c[0] === "consent" && c[1] === "update").map(c => c[2]);
-    assert.deepEqual(updates.at(-1), { analytics_storage: "denied" });
-    assert.ok(commands.some(c => c[0] === "event" && c[1] === "page_view"), "cookieless page view is still sent");
-    set(true, true);
-    const after = target.dataLayer!.map(entry => Array.from(entry as ArrayLike<unknown>)).at(-1);
-    assert.deepEqual(after, ["consent", "update", { analytics_storage: "granted" }]);
-  } finally {
-    Reflect.deleteProperty(globalThis, "window");
-    Reflect.deleteProperty(globalThis, "document");
+test("the Google script and measurement require opt-in on a public production page", () => {
+  for (const choice of [undefined, null, "rejected"] as const) {
+    assert.equal(canMeasureVisit(choice, "theaipex.org", "/"), false);
   }
+  assert.equal(canMeasureVisit("accepted", "theaipex.org", "/"), true);
+  assert.equal(canMeasureVisit("accepted", "theaipex.org", "/account"), false);
+  assert.equal(canMeasureVisit("accepted", "theaipex.org", "/cookies"), false);
+  assert.equal(canMeasureVisit("accepted", "aipex-preview.vercel.app", "/"), false);
 });

@@ -2,6 +2,7 @@ import { coursesEnabled } from "./site";
 
 export const GA_ID = "G-J1YPT21EYK";
 export const ANALYTICS_CHOICE_COOKIE = "aipex_analytics_v1";
+export type AnalyticsChoice = "accepted" | "rejected";
 
 // An allowlist keeps future account routes out of analytics by default.
 export function isAnalyticsPage(path: string): boolean {
@@ -30,6 +31,10 @@ export function isAnalyticsHost(host: string): boolean {
   return host === "theaipex.org" || host === "www.theaipex.org";
 }
 
+export function canMeasureVisit(choice: AnalyticsChoice | null | undefined, host: string, path: string): boolean {
+  return choice === "accepted" && isAnalyticsHost(host) && isAnalyticsPage(path);
+}
+
 export type AnalyticsWindow = Window & {
   dataLayer?: unknown[];
   gtag?: (...args: unknown[]) => void;
@@ -37,9 +42,7 @@ export type AnalyticsWindow = Window & {
 };
 
 let initialized = false;
-// enabled loads measurement at all; storageGranted controls cookies.
-// Without consent Google receives cookieless pings (consent mode) and models visits.
-export function setAnalyticsEnabled(enabled: boolean, storageGranted = true) {
+export function setAnalyticsEnabled(enabled: boolean) {
   const target = window as AnalyticsWindow;
   target[`ga-disable-${GA_ID}`] = !enabled;
   if (!enabled && !initialized) return;
@@ -61,7 +64,7 @@ export function setAnalyticsEnabled(enabled: boolean, storageGranted = true) {
     });
     initialized = true;
   }
-  target.gtag("consent", "update", { analytics_storage: enabled && storageGranted ? "granted" : "denied" });
+  target.gtag("consent", "update", { analytics_storage: enabled ? "granted" : "denied" });
 }
 
 export function trackPage(path: string, referrer: string) {
