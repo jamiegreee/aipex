@@ -46,8 +46,8 @@ export default function Privacy() {
             issue.
           </p>
           <p>
-            Neon provides authentication and database storage; Vercel hosts
-            the application and Resend sends account and membership emails. We do not use saved work
+            We use service providers to manage accounts, store saved work,
+            host the website and deliver emails. We do not use saved work
             to train an AI model or submit it to an AI service for grading.
             Please do not enter confidential material or personal information
             about other people in your drafts.
@@ -66,7 +66,7 @@ export default function Privacy() {
           </p>
           <h3 id="tool-drafts">Policy tool drafts</h3>
           <p>Tools save drafts in your browser’s local storage, including on shared devices. You can remove an individual browser draft from its workspace. Downloads and imports happen on your device. Clearing browser data also removes these local copies. If you switch between light and dark mode, that choice is saved there too.</p>
-          <p>Choosing Save to account sends that draft to our Neon database, associated with your account. Account copies are private in the interface and are subject to the same administrative access, account-deletion and backup arrangements described above. Browser-draft removal does not delete a separately saved account copy. You can request deletion of account drafts using the contact details below. Tool text is not sent to an AI service.</p>
+          <p>Choosing Save to account stores a copy of your draft with your account. The access, deletion and backup arrangements above also apply to saved drafts. Removing a browser draft does not delete an account copy. To request deletion of a saved draft, contact us using the details below. Tool text is not sent to an AI service.</p>
           <h3 id="cookies">Cookies and analytics</h3>
           <p>
             We use essential cookies for sign-in and to remember your cookie
