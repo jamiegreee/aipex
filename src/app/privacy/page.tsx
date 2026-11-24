@@ -21,12 +21,6 @@ export default function Privacy() {
           </div>
         </section>
         <section className="container prose-page">
-          <h2>Contacting AIPEX</h2>
-          <p>
-            AIPEX is an AI policy project founded by Jamie Green. When you email
-            us, we receive your email address and the information you choose to
-            include, such as your name, city and interest in AI policy.
-          </p>
           <h2>How we use your information</h2>
           <p>
             We use your message to respond to your enquiry and develop our
