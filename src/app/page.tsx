@@ -85,10 +85,12 @@ export default function Home() {
         </section>
       </main>
       <footer className="pc-foot">
-        <span>© {new Date().getFullYear()} AI Policy Exchange</span>
-        <Link href="/contact">Say hello</Link>
-        <Link href="/privacy">Privacy</Link>
-        <Link href="/cookies">Cookies</Link>
+        <span className="footer-copy">© {new Date().getFullYear()} AI Policy Exchange</span>
+        <nav className="footer-links" aria-label="Footer">
+          <Link href="/contact">Say hello</Link>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/cookies">Cookies</Link>
+        </nav>
         <ThemeToggle className="footer-theme-toggle" />
       </footer>
     </div>

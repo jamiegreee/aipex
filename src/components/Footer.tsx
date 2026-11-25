@@ -37,10 +37,14 @@ export default function Footer({
           <Arrow diagonal className="footer-wordmark-arrow" />
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} AI Policy Exchange</span>
-          <Link href="/membership">Membership</Link>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/cookies">Cookies</Link>
+          <span className="footer-copy">
+            © {new Date().getFullYear()} AI Policy Exchange
+          </span>
+          <nav className="footer-links" aria-label="Footer">
+            <Link href="/membership">Membership</Link>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/cookies">Cookies</Link>
+          </nav>
           <ThemeToggle className="footer-theme-toggle" />
         </div>
       </div>

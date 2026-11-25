@@ -45,7 +45,6 @@
   .pc-bar { gap: 16px; padding-block: 16px; }
   .pc-bar nav { gap: 14px; }
   .pc-bar-cta { padding: 8px 14px; gap: 8px; }
-  .pc-foot { flex-wrap: wrap; gap: 14px 20px; }
   .pc-wide-only { display: none; }
   .pc-narrow-only { display: inline; }
   .pc-small { grid-template-columns: 1fr; gap: 14px; }
