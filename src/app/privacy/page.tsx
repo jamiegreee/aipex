@@ -16,7 +16,7 @@ export default function Privacy() {
       <main id="main">
         <section className="page-intro">
           <div className="container">
-            <p className="label">Last updated 24 November 2026</p>
+            <p className="label">Last updated 25 November 2026</p>
             <h1>Privacy policy</h1>
           </div>
         </section>
@@ -31,10 +31,10 @@ export default function Privacy() {
           </p>
           <h2>The website</h2>
           <h3>Membership applications</h3>
-          <p>When you apply for membership, we store your verified account email, name, role, organisation, country or region, optional LinkedIn profile, policy interests and the written answers you submit. We use these to review your application and administer membership. We record the decision, reviewer and time to keep a reliable record of approvals.</p>
-          <p>Applications and membership status are private to you and the authorised reviewer in the interface. We do not publish a member directory or share your application with other members. Membership is in a personal capacity; it does not imply endorsement by an employer. Please do not include confidential employer information or sensitive personal details.</p>
-          <p>We retain your application and decision while your account remains active. You can request a copy, correction, withdrawal or deletion by emailing hello@theaipex.org from your account address. Application and review pages are excluded from Google Analytics, and application text is not sent to an AI service.</p>
-          <p>Resend delivers your application confirmation and the email notifying you of an approval or decline. We also send the authorised reviewer a short alert containing your name, role and organisation, with a link to the private application. We keep notification status and provider message references so failed deliveries can be investigated and retried without sending duplicates. Your decision also appears in My account.</p>
+          <p>You can apply for membership without creating an account. We store the email address, name, role, organisation, country or region, optional LinkedIn profile, policy interests and written answers you submit. We use these to review your application, contact you about it and administer membership. We record the decision, reviewer and time.</p>
+          <p>Applications are available to authorised reviewers. We do not publish a member directory or share your application with other members. Membership is in a personal capacity; it does not imply endorsement by an employer. Please do not include confidential employer information or sensitive personal details.</p>
+          <p>We retain your application and decision for review and membership administration. You can request a copy, correction, withdrawal or deletion by emailing hello@theaipex.org from the address you applied with. We may need to verify that address before acting on a request. Application and review pages are excluded from Google Analytics, and application text is not sent to an AI service. We limit repeated submissions to help prevent abuse.</p>
+          <p>Resend delivers your application confirmation and our approval or decline email. We also send the authorised reviewer a short alert containing your name, role and organisation, with a link to your application. We keep delivery status so failed emails can be investigated and retried. If approved, you can create an account with the same email address and verify it to activate membership. Your membership status will then appear in My account.</p>
           <h3>Accounts and saved work</h3>
           <p>
             When you create an account, we store your email address, optional

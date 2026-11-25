@@ -5,6 +5,7 @@
  */
 import { buildMembershipEmail as buildMembershipEmailV1 } from "./membership-email-content-v1";
 import { buildMembershipEmail as buildMembershipEmailV2 } from "./membership-email-content-v2";
+import { buildMembershipEmail as buildMembershipEmailV3 } from "./membership-email-content-v3";
 
 export const membershipEmailFrom = "AIPEX <hello@theaipex.org>";
 export const membershipEmailReplyTo = "hello@theaipex.org";
@@ -36,8 +37,8 @@ export type MembershipEmailPayload = {
   tags: { name: string; value: string }[];
 };
 
-const accountUrl = "https://theaipex.org/account";
 const reviewUrl = "https://theaipex.org/admin/membership";
+const activationSignupUrl = "https://theaipex.org/signup?next=%2Fmembership%2Factivate";
 const kinds = new Set<MembershipEmailKind>([
   "founder_alert", "application_received", "application_approved", "application_declined",
 ]);
@@ -75,7 +76,7 @@ function paragraph(value: string): string {
   return `<p style="margin:0 0 20px;line-height:1.65">${escapeHtml(value)}</p>`;
 }
 
-function documentHtml(title: string, content: string, link: string, linkText: string): string {
+function documentHtml(title: string, content: string, link: string | null, linkText: string): string {
   return `<!doctype html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)}</title></head>
@@ -88,7 +89,7 @@ function documentHtml(title: string, content: string, link: string, linkText: st
 </tr></table>
 <h1 style="margin:0 0 24px;font-size:28px;line-height:1.25;font-weight:normal">${escapeHtml(title)}</h1>
 ${content}
-<p style="margin:28px 0"><a href="${link}" style="display:inline-block;padding:13px 18px;background:#3549d8;color:#fff;text-decoration:none;font-weight:bold;line-height:1.4">${escapeHtml(linkText)}</a></p>
+${link ? `<p style="margin:28px 0"><a href="${link}" style="display:inline-block;padding:13px 18px;background:#3549d8;color:#fff;text-decoration:none;font-weight:bold;line-height:1.4">${escapeHtml(linkText)}</a></p>` : ""}
 <p style="margin:28px 0 0;font-size:14px;line-height:1.6;color:#55554f">Questions? Reply to this email or contact <a href="mailto:hello@theaipex.org" style="color:#3549d8">hello@theaipex.org</a>.</p>
 </td></tr></table>
 <p style="max-width:600px;margin:20px 0 0;font-size:12px;line-height:1.6;color:#66665f">AI Policy Exchange · Helping governments prepare for advanced AI.</p>
@@ -105,8 +106,11 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
   if (event.template_version === 2) {
     return buildMembershipEmailV2(event);
   }
+  if (event.template_version === 3) {
+    return buildMembershipEmailV3(event);
+  }
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/iu.test(event.id) ||
-    !kinds.has(event.kind) || event.template_version !== 3) {
+    !kinds.has(event.kind) || event.template_version !== 4) {
     throw new Error("unsupported_membership_email_event");
   }
   const recipient = checkedRecipient(event.recipient_email);
@@ -120,8 +124,8 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
   let subject: string;
   let heading: string;
   let paragraphs: string[];
-  let link = accountUrl;
-  let linkText = "View your application";
+  let link: string | null = null;
+  let linkText = "";
 
   switch (event.kind) {
     case "founder_alert":
@@ -143,7 +147,6 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
       paragraphs = [
         greeting,
         "We’ve received your application for AIPEX membership. We will review your application and get back to you soon.",
-        "You can check your application status in My account.",
         "The AIPEX team",
       ];
       break;
@@ -153,11 +156,12 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
       paragraphs = [
         greeting,
         "Your application for AIPEX membership has been approved. Welcome to the community.",
-        "Join our Slack community to meet other members and take part in the conversation.",
+        "Create your AIPEX account using the same email address you used to apply, then verify your email to activate your membership and join the Slack community.",
+        "If you already have an AIPEX account with this email address, sign in instead.",
         "The AIPEX team",
       ];
-      link = "https://theaipex.org/community/slack";
-      linkText = "Join the Slack community";
+      link = activationSignupUrl;
+      linkText = "Create your account";
       break;
     case "application_declined":
       subject = "Your AIPEX membership application";
@@ -165,7 +169,7 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
       paragraphs = [
         greeting,
         "Thank you for your interest in AIPEX. We’re unable to offer you membership at this stage.",
-        "We appreciate the time you took to apply. Your AIPEX account remains available.",
+        "We appreciate the time you took to apply.",
         "The AIPEX team",
       ];
       break;
@@ -177,7 +181,7 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
     reply_to: membershipEmailReplyTo,
     subject,
     html: documentHtml(heading, paragraphs.map(paragraph).join("\n"), link, linkText),
-    text: [heading, ...paragraphs, `${linkText}: ${link}`, "Questions? Reply to this email or contact hello@theaipex.org.", "AI Policy Exchange · Helping governments prepare for advanced AI."].join("\n\n"),
+    text: [heading, ...paragraphs, ...(link ? [`${linkText}: ${link}`] : []), "Questions? Reply to this email or contact hello@theaipex.org.", "AI Policy Exchange · Helping governments prepare for advanced AI."].join("\n\n"),
     tags: [
       { name: "category", value: "membership" },
       { name: "event_id", value: event.id },

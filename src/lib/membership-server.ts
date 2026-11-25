@@ -7,6 +7,7 @@ export type MembershipCounts = {
   approved: number;
   declined: number;
 };
+export type MembershipReviewApplication = Omit<MembershipApplication, "user_id"> & { id: string; source: "account" | "request" };
 
 export async function membershipApplication(userId: string) {
   const client = await createClient();
@@ -30,14 +31,18 @@ export async function membershipReviewQueue(status: string, page: number) {
   const client = await createClient();
   const [applications, counts] = await Promise.all([
     client
-      .from("membership_applications")
+      .from("membership_review_queue")
       .select("*")
       .eq("status", status)
-      .is("archived_at", null)
       .order("created_at", { ascending: true })
-      .order("user_id", { ascending: true })
+      .order("id", { ascending: true })
       .range(page * 25, page * 25 + 24),
-    client.rpc("membership_counts"),
+    Promise.all([client.rpc("membership_counts"), client.rpc("public_membership_counts")]).then(([legacy, requests]) => {
+      if (legacy.error || requests.error) return { error: true, data: null };
+      if (!legacy.data || !requests.data || typeof legacy.data !== "object" || typeof requests.data !== "object") return { error: true, data: null };
+      const data = Object.fromEntries(["pending", "approved", "declined"].map(key => [key, Number(legacy.data[key]) + Number(requests.data[key])]));
+      return { error: null, data };
+    }),
   ]);
   const countValues = counts.data as Record<string, unknown> | null;
   if (
@@ -49,7 +54,7 @@ export async function membershipReviewQueue(status: string, page: number) {
   )
     throw new Error("Membership applications could not be loaded.");
   return {
-    applications: (applications.data ?? []) as MembershipApplication[],
+    applications: (applications.data ?? []) as MembershipReviewApplication[],
     counts: countValues as MembershipCounts,
   };
 }
