@@ -126,6 +126,8 @@ Deploy the application first, then apply `neon/migrations/20261118190000_remove_
 
 ## Email and privacy
 
+The shared, versioned email theme in `src/lib/email-theme-v1.ts` matches the green invitation palette and uses an email-compatible PNG rendered from the website’s existing green icon. Deploy support for membership template version five before applying `neon/migrations/20261125160000_green_email_templates.sql`. That migration changes only future outbox defaults and allowed versions in the historical and public-application outboxes. It does not update existing events, approve applications, backfill or send notifications. Versions one to four remain frozen for retries, including their original logo assets. All new receipts, reviewer alerts, approvals and declines use the green theme once the migration is applied.
+
 Neon SMTP continues to provide signup and recovery emails using its existing key. Membership notifications use a separate Resend sending-only key restricted to `theaipex.org`, from the existing Resend account tied to `green.jcb@gmail.com`. The fallback authorised by Jamie is a new account tied to `hello@theaipex.org`, only if the original account cannot be used; do not provision or switch to another account automatically.
 
 Apply `neon/migrations/20261030170000_membership_emails.sql` to the same AIPEX production branch. It adds a private transactional outbox: the first application insert queues the founder alert and applicant receipt; a pending-to-approved or pending-to-declined transition queues that decision email. Retried submissions and stale decisions do not create duplicate events. Historical records are not emailed automatically.

@@ -97,6 +97,7 @@ test("transport confirms provider acceptance and uses the same opaque idempotenc
   assert.equal(await sendAuthEmail("fictional-key", message, stub), false);
   assert.equal(await sendAuthEmail("fictional-key", message, stub), true);
   assert.equal(new Headers(calls[0].headers).get("Idempotency-Key"), new Headers(calls[1].headers).get("Idempotency-Key"));
+  assert.match(new Headers(calls[0].headers).get("Idempotency-Key")!, /^aipex-auth-email\/v2\/[0-9a-f]{64}$/);
   assert.ok(!new Headers(calls[0].headers).get("Idempotency-Key")!.includes("qa@example.org"));
   assert.equal(calls[0].body, calls[1].body);
   assert.ok(!String(calls[0].body).includes("192.0.2.1"));

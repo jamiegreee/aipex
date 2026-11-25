@@ -1,5 +1,6 @@
-/** Version-one auth email content. Keep retry payloads deterministic: no clock,
+/** Version-two auth email content. Keep retry payloads deterministic: no clock,
  * event identifiers, tracking parameters or provider branding in visible copy. */
+import { emailButton, emailDocument, emailTheme } from "./email-theme-v1";
 export type AuthEmailMessage = {
   eventId: string;
   email: string;
@@ -96,28 +97,13 @@ export function buildAuthEmail(message: AuthEmailMessage): AuthEmailPayload {
   const ignore = "If you didn’t request this email, you can ignore it.";
   const fallback = "If the button doesn’t work, copy and paste this link into your browser:";
   const contact = "Questions? Reply to this email or contact hello@theaipex.org.";
-  const html = `<!doctype html>
-<html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(content.subject)}</title></head>
-<body style="margin:0;padding:32px 16px;background:#f5f4ef;color:#22221f;font-family:Arial,Helvetica,sans-serif;font-size:16px">
-<table role="presentation" style="width:100%;border-collapse:collapse"><tr><td align="center">
-<table role="presentation" style="width:100%;max-width:600px;border-collapse:collapse;background:#fff"><tr><td style="padding:36px 28px;border-top:3px solid #3549d8">
-<table role="presentation" style="margin:0 0 28px;border-collapse:collapse"><tr>
-<td style="padding:0 12px 0 0;vertical-align:middle"><img src="https://theaipex.org/brand/aipex-mark-email-v1.png" width="40" height="40" alt="" style="display:block;border:0;width:40px;height:40px"></td>
-<td style="padding:0;vertical-align:middle;font-size:16px;font-weight:bold;line-height:1.1;color:#22221f">AI Policy<br>Exchange.</td>
-</tr></table>
-<h1 style="margin:0 0 24px;font-size:28px;line-height:1.25;font-weight:normal">${escapeHtml(content.heading)}</h1>
+  const html = emailDocument(content.heading, `
 <p style="margin:0 0 20px;line-height:1.65">${escapeHtml(greeting)}</p>
 <p style="margin:0 0 20px;line-height:1.65">${escapeHtml(content.introduction)}</p>
-<p style="margin:28px 0"><a href="${escapeHtml(link)}" style="display:inline-block;padding:13px 18px;background:#3549d8;color:#fff;text-decoration:none;font-weight:bold;line-height:1.4">${escapeHtml(content.button)}</a></p>
-<p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:#55554f">${escapeHtml(fallback)}</p>
-<p style="margin:0 0 20px;font-size:13px;line-height:1.6;overflow-wrap:anywhere;word-break:break-all"><a href="${escapeHtml(link)}" style="color:#3549d8">${escapeHtml(link)}</a></p>
-<p style="margin:0 0 20px;line-height:1.65">${escapeHtml(ignore)}</p>
-<p style="margin:28px 0 0;font-size:14px;line-height:1.6;color:#55554f">Questions? Reply to this email or contact <a href="mailto:hello@theaipex.org" style="color:#3549d8">hello@theaipex.org</a>.</p>
-</td></tr></table>
-<p style="max-width:600px;margin:20px 0 0;font-size:12px;line-height:1.6;color:#66665f">AI Policy Exchange · Helping governments prepare for advanced AI.</p>
-</td></tr></table>
-</body></html>`;
+${emailButton(link, content.button)}
+<p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:${emailTheme.muted}">${escapeHtml(fallback)}</p>
+<p style="margin:0 0 20px;font-size:13px;line-height:1.6;overflow-wrap:anywhere;word-break:break-all"><a href="${escapeHtml(link)}" style="color:${emailTheme.link}">${escapeHtml(link)}</a></p>
+<p style="margin:0 0 20px;line-height:1.65">${escapeHtml(ignore)}</p>`);
 
   return {
     from: "AIPEX <hello@theaipex.org>",

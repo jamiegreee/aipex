@@ -6,6 +6,8 @@
 import { buildMembershipEmail as buildMembershipEmailV1 } from "./membership-email-content-v1";
 import { buildMembershipEmail as buildMembershipEmailV2 } from "./membership-email-content-v2";
 import { buildMembershipEmail as buildMembershipEmailV3 } from "./membership-email-content-v3";
+import { buildMembershipEmail as buildMembershipEmailV4 } from "./membership-email-content-v4";
+import { emailButton, emailDocument } from "./email-theme-v1";
 
 export const membershipEmailFrom = "AIPEX <hello@theaipex.org>";
 export const membershipEmailReplyTo = "hello@theaipex.org";
@@ -77,24 +79,7 @@ function paragraph(value: string): string {
 }
 
 function documentHtml(title: string, content: string, link: string | null, linkText: string): string {
-  return `<!doctype html>
-<html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)}</title></head>
-<body style="margin:0;padding:32px 16px;background:#f5f4ef;color:#22221f;font-family:Arial,Helvetica,sans-serif;font-size:16px">
-<table role="presentation" style="width:100%;border-collapse:collapse"><tr><td align="center">
-<table role="presentation" style="width:100%;max-width:600px;border-collapse:collapse;background:#fff"><tr><td style="padding:36px 28px;border-top:3px solid #3549d8">
-<table role="presentation" style="margin:0 0 28px;border-collapse:collapse"><tr>
-<td style="padding:0 12px 0 0;vertical-align:middle"><img src="https://theaipex.org/brand/aipex-mark-email-v1.png" width="40" height="40" alt="" style="display:block;border:0;width:40px;height:40px"></td>
-<td style="padding:0;vertical-align:middle;font-size:16px;font-weight:bold;line-height:1.1;color:#22221f">AI Policy<br>Exchange.</td>
-</tr></table>
-<h1 style="margin:0 0 24px;font-size:28px;line-height:1.25;font-weight:normal">${escapeHtml(title)}</h1>
-${content}
-${link ? `<p style="margin:28px 0"><a href="${link}" style="display:inline-block;padding:13px 18px;background:#3549d8;color:#fff;text-decoration:none;font-weight:bold;line-height:1.4">${escapeHtml(linkText)}</a></p>` : ""}
-<p style="margin:28px 0 0;font-size:14px;line-height:1.6;color:#55554f">Questions? Reply to this email or contact <a href="mailto:hello@theaipex.org" style="color:#3549d8">hello@theaipex.org</a>.</p>
-</td></tr></table>
-<p style="max-width:600px;margin:20px 0 0;font-size:12px;line-height:1.6;color:#66665f">AI Policy Exchange · Helping governments prepare for advanced AI.</p>
-</td></tr></table>
-</body></html>`;
+  return emailDocument(title, `${content}\n${link ? emailButton(link, linkText) : ""}`);
 }
 
 export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEmailPayload {
@@ -109,8 +94,11 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
   if (event.template_version === 3) {
     return buildMembershipEmailV3(event);
   }
+  if (event.template_version === 4) {
+    return buildMembershipEmailV4(event);
+  }
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/iu.test(event.id) ||
-    !kinds.has(event.kind) || event.template_version !== 4) {
+    !kinds.has(event.kind) || event.template_version !== 5) {
     throw new Error("unsupported_membership_email_event");
   }
   const recipient = checkedRecipient(event.recipient_email);

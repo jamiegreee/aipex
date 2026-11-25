@@ -335,4 +335,102 @@ delete from neon_auth."user" where id='00000000-0000-0000-0000-000000000001';
 select public.test_assert((select count(*)=0 from public.membership_requests where email='applicant-a@invalid.test'),'linked account deletion also removes request and private outbox');
 select public.test_assert((select count(*)=0 from public.membership_applications where email='applicant-a@invalid.test'),'linked legacy membership is deleted through existing cascade');
 SQL
+
+# Green templates are new event versions, never a rewrite of earlier payloads.
+# Exercise the existing enqueue/claim functions on both intake paths so default
+# changes cannot silently leave one family of future emails in the old theme.
+"${public_psql[@]}" >"$public_pg_root/green-fixtures.log" <<'SQL'
+insert into neon_auth."user" (id,email,"emailVerified") values
+ ('20000000-0000-0000-0000-000000000001','green-before-account@invalid.test',true),
+ ('20000000-0000-0000-0000-000000000002','green-account-approved@invalid.test',true),
+ ('20000000-0000-0000-0000-000000000003','green-account-declined@invalid.test',true);
+set role authenticated;
+select set_config('request.jwt.claim.sub','20000000-0000-0000-0000-000000000001',false);
+select public.submit_membership(public.test_application('green-before-account@invalid.test','Old account theme') - 'email');
+reset role;
+set role anonymous;
+select set_config('request.jwt.claim.sub','anonymous',false);
+select public.submit_public_membership('test-secret-with-more-than-thirty-two-characters',public.test_application('green-before-request@invalid.test','Old request theme'),repeat('0',64));
+reset role;
+update public.membership_email_outbox set status='sent', provider_id='old-legacy-provider-receipt', sent_at=clock_timestamp(),
+  first_attempt_at=clock_timestamp(),last_attempt_at=clock_timestamp(),attempts=1
+  where applicant_user_id='20000000-0000-0000-0000-000000000001' and kind='application_received';
+update public.membership_email_outbox set status='pending',first_attempt_at=clock_timestamp(),last_attempt_at=clock_timestamp(),
+  attempts=1,next_attempt_at=clock_timestamp()-interval '1 minute',last_error='simulated_rate_limit'
+  where applicant_user_id='20000000-0000-0000-0000-000000000001' and kind='founder_alert';
+update public.membership_request_emails set status='sent',provider_id='old-request-provider-receipt',sent_at=clock_timestamp(),
+  first_attempt_at=clock_timestamp(),last_attempt_at=clock_timestamp(),attempts=1
+  where request_id=public.test_request_id('green-before-request@invalid.test') and kind='application_received';
+update public.membership_request_emails set status='pending',first_attempt_at=clock_timestamp(),last_attempt_at=clock_timestamp(),
+  attempts=1,next_attempt_at=clock_timestamp()-interval '1 minute',last_error='simulated_rate_limit'
+  where request_id=public.test_request_id('green-before-request@invalid.test') and kind='founder_alert';
+select public.test_assert((select count(*)=2 and bool_and(template_version=3) from public.membership_email_outbox where applicant_user_id='20000000-0000-0000-0000-000000000001'),'old legacy theme fixtures use version three');
+select public.test_assert((select count(*)=2 and bool_and(template_version=4) from public.membership_request_emails where request_id=public.test_request_id('green-before-request@invalid.test')),'old public theme fixtures use version four');
+create table public.test_green_legacy_snapshot as select * from public.membership_email_outbox;
+create table public.test_green_request_snapshot as select * from public.membership_request_emails;
+create table public.test_green_applications_snapshot as select * from public.membership_applications;
+create table public.test_green_intake_snapshot as select * from public.membership_requests;
+create table public.test_green_settings_snapshot as select * from public.membership_email_settings;
+SQL
+
+"${public_psql[@]}" -f "$public_repo_root/neon/migrations/20261125160000_green_email_templates.sql" >"$public_pg_root/green-migration.log" 2>&1
+
+"${public_psql[@]}" >"$public_pg_root/green-checks.log" <<'SQL'
+select public.test_assert((select jsonb_agg(to_jsonb(e) order by event_id) from public.membership_email_outbox e) = (select jsonb_agg(to_jsonb(e) order by event_id) from public.test_green_legacy_snapshot e),'green migration preserves every legacy event field, including pending/sending/sent snapshots');
+select public.test_assert((select jsonb_agg(to_jsonb(e) order by event_id) from public.membership_request_emails e) = (select jsonb_agg(to_jsonb(e) order by event_id) from public.test_green_request_snapshot e),'green migration preserves every public event field, including pending/sending/sent snapshots');
+select public.test_assert((select jsonb_agg(to_jsonb(a) order by user_id) from public.membership_applications a) = (select jsonb_agg(to_jsonb(a) order by user_id) from public.test_green_applications_snapshot a),'green migration changes no memberships or decisions');
+select public.test_assert((select jsonb_agg(to_jsonb(r) order by id) from public.membership_requests r) = (select jsonb_agg(to_jsonb(r) order by id) from public.test_green_intake_snapshot r),'green migration changes no public applications or decisions');
+select public.test_assert((select jsonb_agg(to_jsonb(s)) from public.membership_email_settings s) = (select jsonb_agg(to_jsonb(s)) from public.test_green_settings_snapshot s),'green migration preserves email settings');
+select public.test_assert(not has_table_privilege('authenticated','public.membership_email_outbox','SELECT,INSERT,UPDATE,DELETE') and not has_table_privilege('anonymous','public.membership_email_outbox','SELECT,INSERT,UPDATE,DELETE'),'legacy outbox remains private');
+select public.test_assert(not has_table_privilege('authenticated','public.membership_request_emails','SELECT,INSERT,UPDATE,DELETE') and not has_table_privilege('anonymous','public.membership_request_emails','SELECT,INSERT,UPDATE,DELETE'),'public outbox remains private');
+select public.test_assert((select bool_and(relrowsecurity) from pg_class where oid in ('public.membership_email_outbox'::regclass,'public.membership_request_emails'::regclass)),'both outboxes retain RLS');
+select public.test_error('update public.membership_email_outbox set template_version=4','23514');
+select public.test_error('update public.membership_request_emails set template_version=3','23514');
+
+-- A retry after rollout still returns the original version and immutable event.
+set role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000005',false);
+create temp table green_legacy_retry as select * from public.claim_membership_emails('test-secret-with-more-than-thirty-two-characters','20000000-0000-0000-0000-000000000001',10);
+select public.test_assert((select count(*)=1 and bool_and(template_version=3 and kind='founder_alert' and attempts=2) from green_legacy_retry),'old legacy retry retains version three and advances its existing lease');
+reset role;
+set role anonymous;
+create temp table green_request_retry as select * from public.claim_public_membership_emails('test-secret-with-more-than-thirty-two-characters',public.test_request_id('green-before-request@invalid.test'),10);
+select public.test_assert((select count(*)=1 and bool_and(template_version=4 and kind='founder_alert' and attempts=2) from green_request_retry),'old public retry retains version four and advances its existing lease');
+reset role;
+select public.test_assert((select to_jsonb(e)-'status'-'attempts'-'next_attempt_at'-'lease_token'-'lease_expires_at'-'last_attempt_at'-'last_error' from public.membership_email_outbox e where event_id=(select event_id from green_legacy_retry)) = (select to_jsonb(e)-'status'-'attempts'-'next_attempt_at'-'lease_token'-'lease_expires_at'-'last_attempt_at'-'last_error' from public.test_green_legacy_snapshot e where event_id=(select event_id from green_legacy_retry)),'legacy retry retains its original ID, recipient, content and first-attempt timestamp');
+select public.test_assert((select to_jsonb(e)-'status'-'attempts'-'next_attempt_at'-'lease_token'-'lease_expires_at'-'last_attempt_at'-'last_error' from public.membership_request_emails e where event_id=(select event_id from green_request_retry)) = (select to_jsonb(e)-'status'-'attempts'-'next_attempt_at'-'lease_token'-'lease_expires_at'-'last_attempt_at'-'last_error' from public.test_green_request_snapshot e where event_id=(select event_id from green_request_retry)),'public retry retains its original ID, recipient, content and first-attempt timestamp');
+
+set role authenticated;
+select set_config('request.jwt.claim.sub','20000000-0000-0000-0000-000000000002',false);
+select public.submit_membership(public.test_application('green-account-approved@invalid.test','Green account approval') - 'email');
+select set_config('request.jwt.claim.sub','20000000-0000-0000-0000-000000000003',false);
+select public.submit_membership(public.test_application('green-account-declined@invalid.test','Green account decline') - 'email');
+reset role;
+set role anonymous;
+select public.submit_public_membership('test-secret-with-more-than-thirty-two-characters',public.test_application('green-request-approved@invalid.test','Green request approval'),repeat('1',64));
+select public.submit_public_membership('test-secret-with-more-than-thirty-two-characters',public.test_application('green-request-declined@invalid.test','Green request decline'),repeat('1',64));
+reset role;
+select public.test_assert((select count(*)=4 and bool_and(template_version=5) from public.membership_email_outbox where applicant_user_id in ('20000000-0000-0000-0000-000000000002','20000000-0000-0000-0000-000000000003')),'both new legacy applications queue version-five receipt and founder alert');
+select public.test_assert((select count(*)=4 and bool_and(template_version=5) from public.membership_request_emails where request_id in (public.test_request_id('green-request-approved@invalid.test'),public.test_request_id('green-request-declined@invalid.test'))),'both new public applications queue version-five receipt and founder alert');
+
+set role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000005',false);
+select public.review_membership('20000000-0000-0000-0000-000000000001','approved',(select updated_at from public.membership_applications where user_id='20000000-0000-0000-0000-000000000001'));
+select public.review_membership('20000000-0000-0000-0000-000000000002','approved',(select updated_at from public.membership_applications where user_id='20000000-0000-0000-0000-000000000002'));
+select public.review_membership('20000000-0000-0000-0000-000000000003','declined',(select updated_at from public.membership_applications where user_id='20000000-0000-0000-0000-000000000003'));
+select public.review_public_membership(public.test_request_id('green-before-request@invalid.test'),'approved',public.test_request_version('green-before-request@invalid.test'));
+select public.review_public_membership(public.test_request_id('green-request-approved@invalid.test'),'approved',public.test_request_version('green-request-approved@invalid.test'));
+select public.review_public_membership(public.test_request_id('green-request-declined@invalid.test'),'declined',public.test_request_version('green-request-declined@invalid.test'));
+reset role;
+select public.test_assert((select count(*)=3 and bool_and(template_version=5) from public.membership_email_outbox where applicant_user_id in ('20000000-0000-0000-0000-000000000001','20000000-0000-0000-0000-000000000002','20000000-0000-0000-0000-000000000003') and kind in ('application_approved','application_declined')),'all future account decisions use green version five, including a pre-rollout application');
+select public.test_assert((select count(*)=3 and bool_and(template_version=5) from public.membership_request_emails where request_id in (public.test_request_id('green-before-request@invalid.test'),public.test_request_id('green-request-approved@invalid.test'),public.test_request_id('green-request-declined@invalid.test')) and kind in ('application_approved','application_declined')),'all future public decisions use green version five, including a pre-rollout application');
+select public.test_assert((select count(*)=2 and bool_and(template_version=3) from public.membership_email_outbox where applicant_user_id='20000000-0000-0000-0000-000000000001' and kind in ('founder_alert','application_received')),'pre-rollout account initial emails remain blue version three after a green decision');
+select public.test_assert((select count(*)=2 and bool_and(template_version=4) from public.membership_request_emails where request_id=public.test_request_id('green-before-request@invalid.test') and kind in ('founder_alert','application_received')),'pre-rollout public initial emails remain blue version four after a green decision');
+
+set role authenticated;
+select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000005',false);
+select public.test_assert((select count(*)=3 and bool_and(template_version=5) from public.claim_membership_emails('test-secret-with-more-than-thirty-two-characters','20000000-0000-0000-0000-000000000002',10)),'existing account dispatcher returns green events unchanged');
+select public.test_assert((select count(*)=3 and bool_and(template_version=5) from public.claim_public_membership_emails('test-secret-with-more-than-thirty-two-characters',public.test_request_id('green-request-approved@invalid.test'),10)),'existing public dispatcher returns green events unchanged');
+reset role;
+SQL
 printf 'Public membership database checks passed (disposable PostgreSQL; no external database or email used).\n'
