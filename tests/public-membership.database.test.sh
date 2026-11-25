@@ -73,6 +73,10 @@ set role authenticated;
 select set_config('request.jwt.claim.sub','00000000-0000-0000-0000-000000000006',false);
 select public.submit_membership(public.test_application('legacy-pending@invalid.test') - 'email');
 SQL
+"${public_psql[@]}" >"$public_pg_root/schema-prerequisite.log" <<'SQL'
+revoke usage on schema public from public, anonymous;
+select public.test_assert(not has_schema_privilege('anonymous','public','USAGE'),'fixture removes inherited schema usage before applying migration');
+SQL
 "${public_psql[@]}" -f "$public_repo_root/neon/migrations/20261125130000_public_membership_applications.sql" >"$public_pg_root/public-migration.log" 2>&1
 
 "${public_psql[@]}" >"$public_pg_root/checks.log" <<'SQL'
@@ -80,6 +84,8 @@ SQL
 -- production RLS grants of the acting role.
 create function public.test_request_id(email text) returns uuid language sql stable security definer as $$ select id from public.membership_requests where membership_requests.email=$1; $$;
 create function public.test_request_version(email text) returns timestamptz language sql stable security definer as $$ select updated_at from public.membership_requests where membership_requests.email=$1; $$;
+select public.test_assert(has_schema_privilege('anonymous','public','USAGE') and not has_schema_privilege('anonymous','public','CREATE'),'migration grants guest schema USAGE only');
+select public.test_assert((select count(*)=4 and bool_and(p.proname = any(array['public_membership_available','submit_public_membership','claim_public_membership_emails','finish_public_membership_email'])) from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname !~ '^test_' and has_function_privilege('anonymous',p.oid,'EXECUTE')),'guest can execute exactly the four intended server-secret RPCs, not inherited legacy helpers');
 select public.test_assert((select count(*)=3 from public.membership_applications),'migration preserves existing applications');
 select public.test_assert((select count(*)=2 and bool_and(template_version=3) from public.membership_email_outbox),'historical email state/version is untouched');
 select public.test_assert((select count(*)=0 from public.membership_request_emails),'migration does not backfill notifications');

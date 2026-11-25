@@ -4,6 +4,10 @@
 -- dispatch secret for the narrow intake/outbox functions. No owner URL is needed.
 begin;
 
+-- Name resolution for the guest RPCs only: this grants neither CREATE nor
+-- access to any table. Do not rely on a database's default PUBLIC privileges.
+grant usage on schema public to anonymous;
+
 create table public.membership_requests (
   id uuid primary key default pg_catalog.gen_random_uuid(),
   email text not null check (
