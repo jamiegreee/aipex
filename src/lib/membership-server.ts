@@ -1,6 +1,8 @@
 import "server-only";
 import { createClient } from "./database";
 import type { MembershipApplication } from "./membership";
+import { requireMembershipReviewer } from "./membership-review-access";
+import { readMembershipRpc } from "./membership-read-rpc";
 
 export type MembershipCounts = {
   pending: number;
@@ -33,9 +35,13 @@ export async function membershipApplication(userId: string) {
 
 export async function membershipReviewer() {
   const client = await createClient();
-  const { data, error } = await client.rpc("membership_is_reviewer");
-  if (error) throw new Error("Membership review access could not be checked.");
-  return data === true;
+  const result = await readMembershipRpc(client, "membership_is_reviewer");
+  if (result.error || typeof result.data !== "boolean") {
+    reportReviewFailure("membership_is_reviewer", result);
+    throw new Error("Membership review access could not be checked.");
+  }
+  console.info("Membership review access result.", { reviewer: result.data });
+  return requireMembershipReviewer(result.data);
 }
 
 export async function membershipReviewQueue(status: string, page: number) {
@@ -48,8 +54,8 @@ export async function membershipReviewQueue(status: string, page: number) {
       .order("created_at", { ascending: true })
       .order("id", { ascending: true })
       .range(page * 25, page * 25 + 24),
-    client.rpc("membership_counts"),
-    client.rpc("public_membership_counts"),
+    readMembershipRpc(client, "membership_counts"),
+    readMembershipRpc(client, "public_membership_counts"),
   ]);
   let failed = false;
   if (applications.error || !Array.isArray(applications.data)) {
