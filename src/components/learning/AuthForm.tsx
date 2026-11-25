@@ -19,6 +19,7 @@ export default function AuthForm({
     {},
   );
   const signup = mode === "signup";
+  const activating = next === "/membership/activate";
   return (
     <form action={action} className="auth-form">
       <input type="hidden" name="mode" value={mode} />
@@ -127,7 +128,7 @@ export default function AuthForm({
       )}
       {signup && (
         <p className="small-copy">
-          We use your account details to manage your profile and membership application. Read our{" "}
+          We use your account details to manage your profile and membership. Read our{" "}
           <Link href="/privacy">privacy notice</Link>.
         </p>
       )}
@@ -145,12 +146,19 @@ export default function AuthForm({
             </Link>
           </>
         ) : mode === "login" ? (
-          <>
-            New to AIPEX?{" "}
-            <Link href={`/signup?next=${encodeURIComponent(next)}`}>
-              Create an account
-            </Link>
-          </>
+          activating ? (
+            <>
+              Need an account?{" "}
+              <Link href={`/signup?next=${encodeURIComponent(next)}`}>
+                Create your account
+              </Link>
+            </>
+          ) : (
+            <>
+              Not yet a member?{" "}
+              <Link href="/membership">Apply for membership</Link>
+            </>
+          )
         ) : (
           <Link href="/login">Back to sign in</Link>
         )}

@@ -8,6 +8,7 @@ import { currentUser } from "@/lib/auth";
 import { membershipReviewQueue, membershipReviewer } from "@/lib/membership-server";
 import { membershipInterestOptions } from "@/lib/membership";
 import { scheduleMembershipEmails } from "@/lib/membership-email-server";
+import { schedulePublicMembershipEmails } from "@/lib/public-membership-server";
 
 export const metadata: Metadata = { title: "Membership review", robots: { index: false, follow: false } };
 export const dynamic = "force-dynamic";
@@ -24,6 +25,7 @@ export default async function MembershipReview({ searchParams }: { searchParams:
   const { applications, counts } = await membershipReviewQueue(status, page);
   // Retry any emails an earlier attempt left waiting, in the background.
   await scheduleMembershipEmails();
+  await schedulePublicMembershipEmails();
   const total = counts[status as "pending" | "approved" | "declined"];
   const date = (value: string) => new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Europe/London" }).format(new Date(value));
   return (
@@ -34,7 +36,7 @@ export default async function MembershipReview({ searchParams }: { searchParams:
           <p className="label">Private / Membership review</p>
           <h1>Membership <em>applications.</em></h1>
           <p>{counts.approved} approved · {counts.pending} awaiting review</p>
-          <p className="small-copy">Every membership decision is yours. Saving a decision updates the applicant’s account and emails them.</p>
+          <p className="small-copy">Every membership decision is yours. We email applicants your decision. Approved applicants can then create and verify their account.</p>
           <Link className="text-link" href="/account">My account ↗</Link>
         </header>
         <nav className="membership-review-tabs" aria-label="Application status">
@@ -42,15 +44,16 @@ export default async function MembershipReview({ searchParams }: { searchParams:
         </nav>
         {!applications.length && <section className="membership-review"><h2>No {status} applications on this page.</h2><p>New applications will appear in the pending queue.</p></section>}
         {applications.map(a => (
-          <article key={`${a.user_id}:${a.updated_at}`} className="membership-review">
+          <article key={`${a.source}:${a.id}:${a.updated_at}`} className="membership-review">
             <header><p className="label">{a.status} / Submitted {date(a.created_at)} UK time</p><h2>{a.full_name}</h2><p>{a.role} · {a.organisation} · {a.country}</p><p><a href={`mailto:${a.email}`}>{a.email}</a>{a.profile_url && <> · <a href={a.profile_url} target="_blank" rel="noopener noreferrer">LinkedIn profile ↗</a></>}</p></header>
             <dl>
+              {a.source === "request" && <><dt>Account</dt><dd>Account not linked. Email ownership will be verified when membership is activated.</dd></>}
               <dt>Policy interests</dt><dd>{a.interests.map(i => membershipInterestOptions.find(o => o.value === i)?.label ?? i).join("; ")}</dd>
               <dt>Why they want to join</dt><dd>{a.motivation}</dd>
               {a.contribution && <><dt>What they could contribute</dt><dd>{a.contribution}</dd></>}
             </dl>
             {a.reviewed_at && <p className="small-copy">Decision recorded {date(a.reviewed_at)} UK time.</p>}
-            {a.status === "pending" && <ReviewDecision userId={a.user_id} fullName={a.full_name} updatedAt={a.updated_at} />}
+            {a.status === "pending" && <ReviewDecision userId={a.id} source={a.source} fullName={a.full_name} updatedAt={a.updated_at} />}
           </article>
         ))}
         <nav className="membership-pagination" aria-label="Application pages">

@@ -1,6 +1,26 @@
-# Founding membership applications
+# Membership applications
 
-Membership is manually reviewed and has no size limit: whoever Jamie approves becomes a member. Creating an AIPEX account never grants membership. Applicants must verify their email before submitting; Jamie reviews each application separately. The application and account-status pages do not imply an existing member platform, government endorsement or confirmed event programme.
+Membership is manually reviewed and has no size limit. The application journey is **invitation → public application → review → approval email → account creation and email verification → membership activation → Slack**. An account is not required to apply. Creating an account never grants membership. Existing members, accounts and historical applications remain supported.
+
+## Public application intake (25 November 2026)
+
+Apply `neon/migrations/20261125130000_public_membership_applications.sql` to the same AIPEX project and branch described below **before deploying this application version**. It is additive and transactional. It does not change existing members, reviewer access, authentication settings, earlier decisions or historical email contents. All new public records and notifications are private; the anonymous database role receives no table-read or table-write permissions.
+
+The server obtains a guest JWT from the existing managed Auth `/token/anonymous` endpoint. The narrow intake and one-request email functions also require the existing server-only `MEMBERSHIP_EMAIL_DISPATCH_SECRET`, checked against its existing database hash. No owner database URL or new credential is introduced. `public_membership_available` provides a secret-protected read-only readiness check after migration. The public form uses a signed, one-hour intent token, same-origin checks, a honeypot, strict validation and persistent database limits (5 per IP/hour, 10 per IP/day, 50 total/hour, 100 total/day). Rate identifiers are HMACs; raw IP addresses are not stored in the application tables. Rate events older than two days are removed during subsequent intake. Preview deployments cannot submit applications or dispatch these emails.
+
+`membership_requests` stores applications before any account exists. Email addresses are trimmed and lowercased, retaining plus aliases and dots. Duplicate addresses return generic success without revealing an existing decision, changing the record or sending another email. Corrections, mistaken addresses and withdrawals require identity-verified support. Intake also recognises historical applications, including archived QA records, to avoid duplicates. New email addresses are **not verified at application time**; reviewers must not treat submission as proof of email ownership.
+
+The private review queue uses the RLS-preserving `membership_review_queue` view to paginate historical and new applications together. `review_public_membership` requires a live verified reviewer, records the decision/audit atomically and queues one v4 decision email. Approved requests remain visible until activated, after which their existing-format approved membership appears in the same queue.
+
+V4 receipt and decline emails do not assume an account exists. Approval emails invite creation of an account with the same email address and lead to `/membership/activate`. Existing accounts can sign in instead. Activation is an explicit POST: `claim_approved_membership` verifies the live provider-owned email, locks the approved nonarchived request, creates the approved legacy membership/audit and links it to the account. Wrong, unverified, pending and declined identities cannot claim. Concurrent/repeated activation cannot create duplicate memberships or send a second welcome email. Existing pending/declined or archived legacy applications are not silently overwritten; conflicts require operator support.
+
+New notifications use the separate private `membership_request_emails` outbox with the existing Resend sending-only key. Intake dispatches only its own new request; a reviewer may retry all due emails. Leases, immutable v4 bodies, provider idempotency and retry cutoffs match the existing email delivery behavior. Earlier v1/v2/v3 renderers remain frozen for historical retries. Verify actual inbox delivery when testing; provider acceptance alone does not prove placement.
+
+Run `bash tests/public-membership.database.test.sh` against the disposable local PostgreSQL fixture. It checks public-role denial, server-secret scope, validation, duplicate immutability, all persistent/concurrent limits, the combined queue and RLS, reviewer-only/stale decisions, wrong-email/unverified activation, historical conflicts, concurrent claims, outbox worker leases and deletion cascades. It never connects to production.
+
+Production verification must cover a clearly labelled owner-controlled alias applying while signed out, receipt and founder-alert delivery, reviewer approval, the approval email, fresh signup and real email verification, explicit activation, account/Slack guards and invitation sharing. Do not announce the new flow as live until the migration and this journey are verified.
+
+The historical setup and migration notes below describe the original account-first flow and its preserved tables.
 
 ## Dedicated backend and migration
 

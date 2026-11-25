@@ -6,6 +6,7 @@ import MembershipForm from "@/components/membership/MembershipForm";
 import ApplicationStatus from "@/components/membership/ApplicationStatus";
 import { currentUser } from "@/lib/auth";
 import { membershipApplication, membershipReviewer } from "@/lib/membership-server";
+import { membershipFormToken } from "@/lib/public-membership-server";
 
 export const metadata: Metadata = {
   title: "Apply for membership",
@@ -50,9 +51,9 @@ export default async function Membership() {
             </ul>
             <h3>How it works</h3>
             <ol>
-              <li>Verify your email and tell us about your work and interests.</li>
+              <li>Tell us about your work and interests. No account is needed.</li>
               <li>We review your application.</li>
-              <li>Check your decision in <Link href="/account">My account</Link>.</li>
+              <li>If approved, we’ll email you an invitation to create your account and access the community.</li>
             </ol>
             <p className="small-copy">Applications are private. Membership is in a personal capacity and does not imply endorsement by your employer.</p>
           </aside>
@@ -64,7 +65,7 @@ export default async function Membership() {
                 <Link className="text-link" href="/membership">Try again ↗</Link>
                 <p>For help, email <a href="mailto:hello@theaipex.org">hello@theaipex.org</a>.</p>
               </div>
-            ) : application || reviewer ? <ApplicationStatus application={application} reviewer={reviewer} /> : <MembershipForm user={user ? { name: user.name, email: user.email } : null} />}
+            ) : application || reviewer ? <ApplicationStatus application={application} reviewer={reviewer} /> : <MembershipForm user={user ? { name: user.name, email: user.email } : null} token={membershipFormToken()} />}
           </section>
         </div>
       </main>

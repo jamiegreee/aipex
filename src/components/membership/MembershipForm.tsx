@@ -5,15 +5,17 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import { submitMembership } from "@/app/membership/actions";
 import {
   membershipInterestOptions,
-  type MembershipInput,
 } from "@/lib/membership";
+import type { PublicMembershipInput } from "@/lib/public-membership";
 
 type Props = {
   user: { name?: string | null; email: string } | null;
-  initialValues?: Partial<MembershipInput>;
+  initialValues?: Partial<PublicMembershipInput>;
+  token: string;
 };
 
-const fieldNames: Record<keyof MembershipInput, string> = {
+const fieldNames: Record<keyof PublicMembershipInput, string> = {
+  email: "Email address",
   fullName: "Full name",
   role: "Role or position",
   organisation: "Organisation or affiliation",
@@ -25,9 +27,10 @@ const fieldNames: Record<keyof MembershipInput, string> = {
   agreement: "Participation agreement",
 };
 
-export default function MembershipForm({ user, initialValues }: Props) {
+export default function MembershipForm({ user, initialValues, token }: Props) {
   const [state, action, pending] = useActionState(submitMembership, {});
-  const [values, setValues] = useState<MembershipInput>({
+  const [values, setValues] = useState<PublicMembershipInput>({
+    email: initialValues?.email ?? user?.email ?? "",
     fullName: initialValues?.fullName ?? user?.name ?? "",
     role: initialValues?.role ?? "",
     organisation: initialValues?.organisation ?? "",
@@ -55,35 +58,6 @@ export default function MembershipForm({ user, initialValues }: Props) {
     }
   }, [state]);
 
-  if (!user) {
-    return (
-      <div className="membership-account-step">
-        <p className="label">Before you apply</p>
-        <h2>Join now.</h2>
-        <p>
-          Create an account and confirm your email, then return here to submit
-          your application. This lets you keep track of the decision privately.
-        </p>
-        <p>
-          Creating an account does not make you a member. We review your
-          application before granting membership.
-        </p>
-        <div className="membership-actions">
-          <Link className="button" href="/signup?next=%2Fmembership">
-            Apply
-          </Link>
-          <Link className="text-link" href="/login?next=%2Fmembership">
-            Already have an account? Sign in →
-          </Link>
-        </div>
-        <p className="membership-hint">
-          We’ll ask about your role, organisation, policy interests and reasons
-          for joining. No CV is required.
-        </p>
-      </div>
-    );
-  }
-
   if (state.success) {
     return (
       <div
@@ -100,21 +74,21 @@ export default function MembershipForm({ user, initialValues }: Props) {
     );
   }
 
-  function change(field: keyof MembershipInput, value: string | boolean) {
+  function change(field: keyof PublicMembershipInput, value: string | boolean) {
     setValues((current) => ({ ...current, [field]: value }));
   }
 
-  function error(field: keyof MembershipInput) {
+  function error(field: keyof PublicMembershipInput) {
     return state.errors?.[field];
   }
 
-  function describe(field: keyof MembershipInput, hint?: string) {
+  function describe(field: keyof PublicMembershipInput, hint?: string) {
     return [hint, error(field) ? `membership-${field}-error` : ""]
       .filter(Boolean)
       .join(" ") || undefined;
   }
 
-  function fieldError(field: keyof MembershipInput) {
+  function fieldError(field: keyof PublicMembershipInput) {
     return error(field) ? (
       <span className="membership-field-error" id={`membership-${field}-error`}>
         {error(field)}
@@ -124,15 +98,11 @@ export default function MembershipForm({ user, initialValues }: Props) {
 
   return (
     <form action={action} className="membership-form" ref={formRef}>
+      <input type="hidden" name="token" value={state.token ?? token} />
       <div className="membership-form-heading">
         <p className="label">Your membership application</p>
         <h2>Tell us about your work.</h2>
-        <p>All fields are required unless marked optional.</p>
-      </div>
-      <div className="membership-verified-email">
-        <span className="label">Verified email</span>
-        <strong>{user.email}</strong>
-        <span>This is the address associated with your application.</span>
+        <p>No account is needed to apply. All fields are required unless marked optional.</p>
       </div>
       {(state.error || (state.errors && Object.keys(state.errors).length > 0)) && (
         <div
@@ -148,7 +118,7 @@ export default function MembershipForm({ user, initialValues }: Props) {
                 <li key={field}>
                   {field in fieldNames ? (
                     <a href={`#membership-${field}`}>
-                      {fieldNames[field as keyof MembershipInput]}: {message}
+                      {fieldNames[field as keyof PublicMembershipInput]}: {message}
                     </a>
                   ) : (
                     message
@@ -163,6 +133,16 @@ export default function MembershipForm({ user, initialValues }: Props) {
         <legend className="membership-section-legend">
           <span className="label">01 / Your background</span>
         </legend>
+        <label className="membership-field" htmlFor="membership-email">
+          Email address
+          <input id="membership-email" name="email" type="email" autoComplete="email"
+            required maxLength={254} value={values.email}
+            onChange={event => change("email", event.target.value)}
+            aria-invalid={Boolean(error("email"))}
+            aria-describedby={describe("email", "membership-email-hint")} />
+          <span className="membership-hint" id="membership-email-hint">We’ll email you our decision. If approved, you’ll create your account using this address.</span>
+          {fieldError("email")}
+        </label>
         <label className="membership-field" htmlFor="membership-fullName">
           Full name
           <input
