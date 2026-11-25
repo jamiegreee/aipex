@@ -40,6 +40,7 @@ export type MembershipApplication = {
   updated_at: string;
   reviewed_at: string | null;
   reviewed_by: string | null;
+  archived_at?: string | null;
 };
 
 const singleLineControls = /[\u0000-\u001f\u007f-\u009f\u202a-\u202e\u2066-\u2069]/u;
