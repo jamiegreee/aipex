@@ -61,12 +61,10 @@ export default function MemberInvitationShare({ qrCodeDataUrl }: { qrCodeDataUrl
         Share invitation <ShareIcon />
       </button>
       <dialog className="member-share-dialog" ref={dialogRef}
-        aria-labelledby="account-invite-dialog-title" aria-describedby="account-invite-dialog-description">
+        aria-labelledby="account-invite-dialog-title">
         <button className="member-share-close" type="button" aria-label="Close sharing options"
           onClick={() => dialogRef.current?.close()}>×</button>
-        <p className="label">Share AIPEX</p>
         <h2 id="account-invite-dialog-title">Invite someone to apply.</h2>
-        <p id="account-invite-dialog-description">Share the membership application with someone who might find the community useful. We review every application.</p>
         <div className="member-share-content">
           <div>
             <label className="member-share-label" htmlFor="account-invitation-link">Application link</label>
