@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Arrow, ExchangeMark } from "./Brand";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Footer({
   tagline = "The public capacity to respond.",
@@ -40,6 +41,7 @@ export default function Footer({
           <Link href="/membership">Membership</Link>
           <Link href="/privacy">Privacy</Link>
           <Link href="/cookies">Cookies</Link>
+          <ThemeToggle className="footer-theme-toggle" />
         </div>
       </div>
     </footer>

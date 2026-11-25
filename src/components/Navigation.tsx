@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Arrow, ExchangeMark } from "./Brand";
-import ThemeToggle from "./ThemeToggle";
 import { caseLibraryEnabled, gatheringsEnabled } from "@/lib/site";
 
 const links = [
@@ -61,12 +60,10 @@ export default function Navigation({ cta }: { cta?: NavCta } = {}) {
             </Link>
           ))}
           {cta && <Link href="/account">My account</Link>}
-          <ThemeToggle />
           <Link href={cta?.href ?? "/account"} className="button button-small">
             {cta?.label ?? "My account"} <Arrow />
           </Link>
         </nav>
-        <ThemeToggle className="theme-toggle-mobile" />
         <button
           id="menu-toggle"
           className="menu-toggle"

@@ -41,10 +41,9 @@
 .analytics-choice button:hover { text-decoration: underline; }
 .analytics-choice :focus-visible { outline-offset: 1px; }
 .analytics-choice .cookie-error { grid-column: 1 / -1; max-width: 32ch; }
-@media (max-width: 600px) {
-  body:has(.analytics-choice) :is(.site-footer, .pc-foot) {
-    padding-bottom: calc(70px + env(safe-area-inset-bottom));
-  }
+/* Keep the footer row (and its theme toggle) clear of the cookie banner. */
+body:has(.analytics-choice) :is(.site-footer, .pc-foot) {
+  padding-bottom: calc(70px + env(safe-area-inset-bottom));
 }
 .cookie-settings { margin-block: 20px 28px; }
 .cookie-settings legend { font-weight: 600; }
@@ -292,8 +291,12 @@ a:hover .arrow {
   color: var(--color-accent);
   border-color: var(--color-accent);
 }
-.theme-toggle-mobile {
-  display: none;
+/* Lives at the end of the footer's bottom row on every page. */
+.footer-theme-toggle {
+  width: 34px;
+  height: 34px;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .hero {
@@ -606,6 +609,7 @@ a:hover .arrow {
 }
 .footer-bottom {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 25px;
   border-top: 1px solid var(--color-border);
@@ -1027,11 +1031,6 @@ a:hover .arrow {
   }
   .desktop-nav {
     display: none;
-  }
-  .theme-toggle-mobile {
-    display: inline-flex;
-    margin-left: auto;
-    margin-right: 18px;
   }
   .menu-toggle {
     display: flex;

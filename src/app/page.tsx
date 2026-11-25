@@ -24,7 +24,6 @@ export default function Home() {
           <ExchangeMark /> AIPEX
         </Link>
         <nav aria-label="Main navigation">
-          <ThemeToggle />
           <Link href="/account">
             <span className="pc-wide-only">My account</span>
             <span className="pc-narrow-only">Account</span>
@@ -90,6 +89,7 @@ export default function Home() {
         <Link href="/contact">Say hello</Link>
         <Link href="/privacy">Privacy</Link>
         <Link href="/cookies">Cookies</Link>
+        <ThemeToggle className="footer-theme-toggle" />
       </footer>
     </div>
   );
