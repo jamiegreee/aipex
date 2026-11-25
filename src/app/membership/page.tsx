@@ -33,7 +33,7 @@ export default async function Membership() {
         <header className="membership-intro">
           <div className="container">
             <p className="label">Membership</p>
-            <h1>Help shape<br /><em>the public response.</em></h1>
+            <h1>Help society prepare<br /><em>for advanced AI.</em></h1>
             <p>We’re bringing together people from the public and private sectors who are working on policy for advanced artificial intelligence.</p>
           </div>
         </header>
