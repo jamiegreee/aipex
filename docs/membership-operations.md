@@ -132,3 +132,11 @@ The reviewer page does not show email status; the database operator can check th
 Run `bash tests/membership-emails.database.test.sh` for isolated transactional, permission, retry and concurrency checks; the test never connects to Neon. The content and delivery unit tests stub the provider and never send real mail. For live checks, use only clearly labelled QA applications and genuine verified owner-controlled email aliases. Never approve or decline a real applicant merely to test an email. Do not backfill all historical applications; any selected QA backfill must be explicit and use the same event uniqueness rules.
 
 Do not publish member details or add applicants to third-party groups automatically. Requests for a copy or deletion should follow the existing identity-verified support process at `hello@theaipex.org`. Before opening recruitment, publish the application-data purpose and retention arrangements in Privacy. Keep administrative access limited to the intended reviewer and necessary infrastructure operators.
+
+## Member invitation sharing
+
+My account shows **Invite someone to AIPEX** to approved, nonarchived members and to reviewers (who already count as members). A failed membership lookup hides the feature. The server checks membership before rendering the sharing card.
+
+The sharing dialog offers copy link, native sharing where supported, email, WhatsApp, LinkedIn and a downloadable QR code. All options point to `https://theaipex.org/membership`, with no member identity, referral identifier or raw Slack invitation. Recipients still sign up, verify their email and apply for individual review; sharing does not grant membership. The website does not send invitations automatically.
+
+QR codes are generated locally as black-on-white SVGs using `qrcode-generator`, with a four-module quiet zone. No QR service receives the link or member details. Unit checks cover visibility and sharing destinations; independent rasterization/decoding verifies the actual SVG opens the application page.

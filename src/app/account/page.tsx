@@ -7,6 +7,10 @@ import { signOut } from "@/app/auth/actions";
 import { membershipApplication, membershipReviewer } from "@/lib/membership-server";
 import ApplicationStatus from "@/components/membership/ApplicationStatus";
 import ProfileForm from "@/components/account/ProfileForm";
+import MemberInvitationShare from "@/components/account/MemberInvitationShare";
+import { canShareMembershipInvitation } from "@/lib/membership-invitation";
+import { membershipInvitationQr } from "@/lib/membership-invitation-qr";
+import "./account-sharing.css";
 
 export const metadata = {
   title: "My account",
@@ -26,6 +30,7 @@ export default async function Account() {
       membershipApplication(user.id), membershipReviewer(),
     ]);
   } catch { membershipUnavailable = true; }
+  const canInvite = canShareMembershipInvitation({ application, reviewer, membershipUnavailable });
 
   return (
     <>
@@ -70,6 +75,7 @@ export default async function Account() {
         ) : application || reviewer ? <ApplicationStatus application={application} reviewer={reviewer} /> : (
           <section className="membership-status"><p className="label">Membership</p><h2>A community of policymakers.</h2><p>Apply to join the members helping shape AIPEX. We review your application before granting membership.</p><Link className="button" href="/membership">Apply for membership →</Link></section>
         )}
+        {canInvite && <MemberInvitationShare qrCodeDataUrl={membershipInvitationQr().dataUrl} />}
         {reviewer && <section className="membership-status"><p className="label">Private / Membership review</p><h2>Review membership applications.</h2><Link className="button" href="/admin/membership">Open review queue →</Link></section>}
       </main>
       <Footer />
