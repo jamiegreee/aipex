@@ -20,12 +20,14 @@ test("all auth purposes have AIPEX logo, styling, readable fallback branding and
     assert.equal(result.reply_to, "hello@theaipex.org");
     assert.match(result.html, /<html lang="en">/);
     assert.match(result.html, /role="presentation"/);
-    assert.match(result.html, /border-top:3px solid #3549d8/);
+    assert.match(result.html, /border-top:3px solid #e8edb6/);
+    assert.match(result.html, /background:#e8edb6;color:#18221d/);
+    assert.doesNotMatch(result.html, /#3549d8/);
     assert.match(result.html, /AI Policy<br>Exchange\./);
     assert.match(result.text, /AI Policy Exchange\./);
     const images = [...result.html.matchAll(/<img\b[^>]+>/g)].map(m => m[0]);
     assert.equal(images.length, 1);
-    assert.match(images[0], /src="https:\/\/theaipex.org\/brand\/aipex-mark-email-v1.png"/);
+    assert.match(images[0], /src="https:\/\/theaipex.org\/brand\/aipex-mark-email-green-v1.png"/);
     assert.match(images[0], /width="40" height="40"/);
     assert.ok(!images[0].includes(message(kind).eventId));
     assert.ok(!images[0].includes(message(kind).email));

@@ -101,7 +101,7 @@ test("recipient addresses cannot introduce headers, extra recipients, or display
 
 test("unsupported event identifiers and future template versions fail closed", () => {
   assert.throws(() => buildMembershipEmail({ ...event("application_received"), id: "not-an-event" }), /unsupported_membership_email_event/);
-  assert.throws(() => buildMembershipEmail({ ...event("application_received"), template_version: 5 }), /unsupported_membership_email_event/);
+  assert.throws(() => buildMembershipEmail({ ...event("application_received"), template_version: 6 }), /unsupported_membership_email_event/);
   assert.throws(() => buildMembershipEmail({ ...event("application_received"), kind: "arbitrary" as MembershipEmailKind }), /unsupported_membership_email_event/);
 });
 
@@ -261,4 +261,36 @@ test("version-four events retain safe recipients, branding, escaping and determi
   }
   assert.throws(() => buildMembershipEmail({ ...event("founder_alert"), template_version: 4, recipient_email: "attacker@example.org" }), /invalid_membership_review_recipient/);
   assert.throws(() => buildMembershipEmail({ ...event("application_received"), template_version: 4, recipient_email: "person@example.org\r\nBcc: attacker@example.org" }), /invalid_membership_email_recipient/);
+});
+
+test("historical version-four payloads remain byte-for-byte stable across the green rollout", () => {
+  const hashes = {
+    founder_alert: "3b9ee3d313c56ce1ea6ab9e50cfb4e27513904d781557fc209a1b55f8ae611d3",
+    application_received: "7b0099f43d3252fbd9dd5bb812d5569000643cd64c87a155cb963f7357ffc33a",
+    application_approved: "b47b0ca5def35817ba19b5d6293caa24209975ebd0701f76783c7b8cbb076a3d",
+    application_declined: "ad28cb43fc474497764ebbf8c0f74836a9bd0d81219ffd75494eecde16c8c077",
+  };
+  for (const kind of Object.keys(hashes) as MembershipEmailKind[]) {
+    assert.equal(createHash("sha256").update(JSON.stringify(buildMembershipEmail({ ...event(kind), template_version: 4 }))).digest("hex"), hashes[kind]);
+  }
+});
+
+test("all new membership notifications use the invitation green theme and preserve their meaning", () => {
+  for (const kind of ["founder_alert", "application_received", "application_approved", "application_declined"] as const) {
+    const input = { ...event(kind), template_version: 5 };
+    const message = buildMembershipEmail(input);
+    const earlier = buildMembershipEmail({ ...input, template_version: 4 });
+    assert.equal(message.text, earlier.text);
+    assert.equal(message.subject, earlier.subject);
+    assert.deepEqual(message.to, earlier.to);
+    assert.deepEqual(message.tags, earlier.tags);
+    assert.match(message.html, /border-top:3px solid #e8edb6/);
+    assert.match(message.html, /color:#18221d/);
+    assert.match(message.html, /aipex-mark-email-green-v1\.png/);
+    assert.doesNotMatch(message.html, /#3549d8/);
+    assert.deepEqual(buildMembershipEmail(input), message);
+  }
+  const hostile = buildMembershipEmail({ ...event("founder_alert"), template_version: 5, applicant_name: '<script>#3549d8 & friends</script>' });
+  assert.ok(hostile.html.includes("&lt;script&gt;#3549d8 &amp; friends&lt;/script&gt;"), "theme changes must not replace strings in applicant text");
+  assert.throws(() => buildMembershipEmail({ ...event("founder_alert"), template_version: 5, recipient_email: "someone-else@example.org" }), /invalid_membership_review_recipient/);
 });

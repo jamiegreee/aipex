@@ -125,7 +125,7 @@ export async function sendAuthEmail(apiKey: string, message: AuthEmailMessage, f
   try {
     const response = await fetcher("https://api.resend.com/emails", {
       method: "POST", cache: "no-store", signal: AbortSignal.timeout(5_000),
-      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json", "Idempotency-Key": `aipex-auth-email/v1/${createHash("sha256").update(message.eventId).digest("hex")}` },
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json", "Idempotency-Key": `aipex-auth-email/v2/${createHash("sha256").update(message.eventId).digest("hex")}` },
       body: JSON.stringify(payload),
     });
     if (!response.ok) return false;
