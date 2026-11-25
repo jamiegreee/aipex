@@ -37,12 +37,14 @@
 .member-share-options { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
 .member-share-options > a { display: inline-flex; align-items: center; gap: 14px; padding: 11px 13px; border: 1px solid var(--color-field-line); font-size: 13px; min-height: 44px; }
 .member-share-options > a:hover { background: var(--color-bg); }
+.member-share-options > a .arrow { width: 16px; height: 16px; }
 .member-share-native { flex-basis: 100%; justify-content: center; gap: 12px; margin-bottom: 4px; }
 .member-share-feedback { min-height: 24px; margin-top: 16px; font-size: 13px; color: var(--color-muted); }
 .member-share-qr { text-align: center; }
 .member-share-qr img { display: block; width: 100%; height: auto; background: #fff; }
 .member-share-qr p { margin-top: 10px; font-size: 13px; }
-.member-share-qr > a { display: inline-block; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; margin-top: 6px; }
+.member-share-qr > a { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; margin-top: 6px; }
+.member-share-download-arrow { width: 14px; height: 14px; rotate: 90deg; }
 .member-share-dialog :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
 @media (max-width: 640px) {
   .member-invite { align-items: flex-start; flex-direction: column; }

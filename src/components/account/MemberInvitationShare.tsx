@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState, useSyncExternalStore } from "react";
+import { Arrow } from "@/components/Brand";
 import {
   membershipInvitationLinks,
   membershipInvitationShare,
@@ -75,9 +76,9 @@ export default function MemberInvitationShare({ qrCodeDataUrl }: { qrCodeDataUrl
             </div>
             <div className="member-share-options" role="group" aria-label="Sharing options">
               {canUseNativeShare && <button className="button member-share-native" type="button" onClick={share}><ShareIcon /> Share…</button>}
-              <a href={membershipInvitationLinks.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp <span aria-hidden="true">↗</span></a>
-              <a href={membershipInvitationLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-              <a href={membershipInvitationLinks.email}>Email <span aria-hidden="true">↗</span></a>
+              <a href={membershipInvitationLinks.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp <Arrow diagonal /></a>
+              <a href={membershipInvitationLinks.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <Arrow diagonal /></a>
+              <a href={membershipInvitationLinks.email}>Email <Arrow diagonal /></a>
             </div>
             <p className="member-share-feedback" role="status">{notice}</p>
           </div>
@@ -85,7 +86,7 @@ export default function MemberInvitationShare({ qrCodeDataUrl }: { qrCodeDataUrl
             <Image src={qrCodeDataUrl} width={208} height={208} unoptimized
               alt="QR code linking to the AIPEX membership application" />
             <p>Scan to apply</p>
-            <a href={qrCodeDataUrl} download="aipex-membership-qr.svg">Download QR code ↓</a>
+            <a href={qrCodeDataUrl} download="aipex-membership-qr.svg">Download QR code <Arrow className="member-share-download-arrow" /></a>
           </div>
         </div>
       </dialog>
