@@ -7,7 +7,8 @@ import { buildMembershipEmail as buildMembershipEmailV1 } from "./membership-ema
 import { buildMembershipEmail as buildMembershipEmailV2 } from "./membership-email-content-v2";
 import { buildMembershipEmail as buildMembershipEmailV3 } from "./membership-email-content-v3";
 import { buildMembershipEmail as buildMembershipEmailV4 } from "./membership-email-content-v4";
-import { emailButton, emailDocument } from "./email-theme-v1";
+import { buildMembershipEmail as buildMembershipEmailV5 } from "./membership-email-content-v5";
+import { emailButton, emailDocument, emailFooterLine } from "./email-theme-v2";
 
 export const membershipEmailFrom = "AIPEX <hello@theaipex.org>";
 export const membershipEmailReplyTo = "hello@theaipex.org";
@@ -79,7 +80,7 @@ function paragraph(value: string): string {
 }
 
 function documentHtml(title: string, content: string, link: string | null, linkText: string): string {
-  return emailDocument(title, `${content}\n${link ? emailButton(link, linkText) : ""}`);
+  return emailDocument(title, `${content}\n${link ? emailButton(link, linkText) : ""}`, "AIPEX / Membership");
 }
 
 export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEmailPayload {
@@ -97,8 +98,11 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
   if (event.template_version === 4) {
     return buildMembershipEmailV4(event);
   }
+  if (event.template_version === 5) {
+    return buildMembershipEmailV5(event);
+  }
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/iu.test(event.id) ||
-    !kinds.has(event.kind) || event.template_version !== 5) {
+    !kinds.has(event.kind) || event.template_version !== 6) {
     throw new Error("unsupported_membership_email_event");
   }
   const recipient = checkedRecipient(event.recipient_email);
@@ -169,7 +173,7 @@ export function buildMembershipEmail(event: MembershipEmailEvent): MembershipEma
     reply_to: membershipEmailReplyTo,
     subject,
     html: documentHtml(heading, paragraphs.map(paragraph).join("\n"), link, linkText),
-    text: [heading, ...paragraphs, ...(link ? [`${linkText}: ${link}`] : []), "Questions? Reply to this email or contact hello@theaipex.org.", "AI Policy Exchange · Helping governments prepare for advanced AI."].join("\n\n"),
+    text: [heading, ...paragraphs, ...(link ? [`${linkText}: ${link}`] : []), "Questions? Reply to this email or contact hello@theaipex.org.", emailFooterLine].join("\n\n"),
     tags: [
       { name: "category", value: "membership" },
       { name: "event_id", value: event.id },

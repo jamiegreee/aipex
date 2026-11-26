@@ -101,7 +101,7 @@ test("recipient addresses cannot introduce headers, extra recipients, or display
 
 test("unsupported event identifiers and future template versions fail closed", () => {
   assert.throws(() => buildMembershipEmail({ ...event("application_received"), id: "not-an-event" }), /unsupported_membership_email_event/);
-  assert.throws(() => buildMembershipEmail({ ...event("application_received"), template_version: 6 }), /unsupported_membership_email_event/);
+  assert.throws(() => buildMembershipEmail({ ...event("application_received"), template_version: 7 }), /unsupported_membership_email_event/);
   assert.throws(() => buildMembershipEmail({ ...event("application_received"), kind: "arbitrary" as MembershipEmailKind }), /unsupported_membership_email_event/);
 });
 
@@ -293,4 +293,40 @@ test("all new membership notifications use the invitation green theme and preser
   const hostile = buildMembershipEmail({ ...event("founder_alert"), template_version: 5, applicant_name: '<script>#3549d8 & friends</script>' });
   assert.ok(hostile.html.includes("&lt;script&gt;#3549d8 &amp; friends&lt;/script&gt;"), "theme changes must not replace strings in applicant text");
   assert.throws(() => buildMembershipEmail({ ...event("founder_alert"), template_version: 5, recipient_email: "someone-else@example.org" }), /invalid_membership_review_recipient/);
+});
+
+test("historical version-five payloads remain byte-for-byte stable across the dark rollout", () => {
+  const hashes = {
+    founder_alert: "3141dd9aa07210c9d94d9bad0e692db752bae4f0be55d3f9083412e0fe5a0c17",
+    application_received: "82975ff1243c9107c1482d4304469941bc7679f5fefd97d20dc3d8f5e162bddc",
+    application_approved: "ab4e6451accb2486489d1ee04c4fe503c30f853ef169223a4ecab74c61915120",
+    application_declined: "d860999a8985f49062fa9a29acab85dd9f09e3c1bfc183f123a5bbd3e4e4698d",
+  };
+  for (const kind of Object.keys(hashes) as MembershipEmailKind[]) {
+    assert.equal(createHash("sha256").update(JSON.stringify(buildMembershipEmail({ ...event(kind), template_version: 5 }))).digest("hex"), hashes[kind]);
+  }
+});
+
+test("version-six notifications use the dark site theme and keep their meaning", () => {
+  for (const kind of ["founder_alert", "application_received", "application_approved", "application_declined"] as const) {
+    const input = { ...event(kind), template_version: 6 };
+    const message = buildMembershipEmail(input);
+    const earlier = buildMembershipEmail({ ...input, template_version: 5 });
+    assert.equal(message.subject, earlier.subject);
+    assert.deepEqual(message.to, earlier.to);
+    assert.deepEqual(message.tags, earlier.tags);
+    assert.match(message.html, /background:#10140f/);
+    assert.match(message.html, /background:#181d17/);
+    assert.match(message.html, /border-top:3px solid #e5edb5/);
+    assert.match(message.html, /<meta name="color-scheme" content="dark">/);
+    assert.match(message.html, /aipex-mark-email-green-v1\.png/);
+    assert.doesNotMatch(message.html + message.text, /#3549d8|Helping governments/);
+    assert.match(message.text, /across government and industry/);
+    assert.deepEqual(buildMembershipEmail(input), message);
+  }
+  const approval = buildMembershipEmail({ ...event("application_approved"), template_version: 6 });
+  assert.match(approval.html, /background:#e5edb5;color:#10140f/);
+  const hostile = buildMembershipEmail({ ...event("founder_alert"), template_version: 6, applicant_name: '<script>#3549d8 & friends</script>' });
+  assert.ok(hostile.html.includes("&lt;script&gt;#3549d8 &amp; friends&lt;/script&gt;"));
+  assert.throws(() => buildMembershipEmail({ ...event("founder_alert"), template_version: 6, recipient_email: "someone-else@example.org" }), /invalid_membership_review_recipient/);
 });
