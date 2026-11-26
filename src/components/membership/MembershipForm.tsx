@@ -219,11 +219,8 @@ export default function MembershipForm({ user, initialValues, token }: Props) {
             value={values.profileUrl}
             onChange={(event) => change("profileUrl", event.target.value)}
             aria-invalid={Boolean(error("profileUrl"))}
-            aria-describedby={describe("profileUrl", "membership-profileUrl-hint")}
+            aria-describedby={describe("profileUrl")}
           />
-          <span className="membership-hint" id="membership-profileUrl-hint">
-            A public profile can help us understand your background.
-          </span>
           {fieldError("profileUrl")}
         </label>
       </fieldset>
