@@ -138,8 +138,7 @@ export default function MembershipForm({ user, initialValues, token }: Props) {
             required maxLength={254} value={values.email}
             onChange={event => change("email", event.target.value)}
             aria-invalid={Boolean(error("email"))}
-            aria-describedby={describe("email", "membership-email-hint")} />
-          <span className="membership-hint" id="membership-email-hint">We’ll email you our decision. If approved, you’ll create your account using this address.</span>
+            aria-describedby={describe("email")} />
           {fieldError("email")}
         </label>
         <label className="membership-field" htmlFor="membership-fullName">
