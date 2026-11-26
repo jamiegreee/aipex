@@ -20,8 +20,9 @@ test("all auth purposes have AIPEX logo, styling, readable fallback branding and
     assert.equal(result.reply_to, "hello@theaipex.org");
     assert.match(result.html, /<html lang="en">/);
     assert.match(result.html, /role="presentation"/);
-    assert.match(result.html, /border-top:3px solid #e8edb6/);
-    assert.match(result.html, /background:#e8edb6;color:#18221d/);
+    assert.match(result.html, /border-top:3px solid #e5edb5/);
+    assert.match(result.html, /background:#e5edb5;color:#10140f/);
+    assert.match(result.html, /background:#10140f/);
     assert.doesNotMatch(result.html, /#3549d8/);
     assert.match(result.html, /AI Policy<br>Exchange\./);
     assert.match(result.text, /AI Policy Exchange\./);

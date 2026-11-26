@@ -1,6 +1,6 @@
-/** Version-two auth email content. Keep retry payloads deterministic: no clock,
+/** Version-three auth email content (dark site theme). Keep retry payloads deterministic: no clock,
  * event identifiers, tracking parameters or provider branding in visible copy. */
-import { emailButton, emailDocument, emailTheme } from "./email-theme-v1";
+import { emailButton, emailDocument, emailTheme } from "./email-theme-v2";
 export type AuthEmailMessage = {
   eventId: string;
   email: string;
@@ -103,7 +103,7 @@ export function buildAuthEmail(message: AuthEmailMessage): AuthEmailPayload {
 ${emailButton(link, content.button)}
 <p style="margin:0 0 8px;font-size:14px;line-height:1.6;color:${emailTheme.muted}">${escapeHtml(fallback)}</p>
 <p style="margin:0 0 20px;font-size:13px;line-height:1.6;overflow-wrap:anywhere;word-break:break-all"><a href="${escapeHtml(link)}" style="color:${emailTheme.link}">${escapeHtml(link)}</a></p>
-<p style="margin:0 0 20px;line-height:1.65">${escapeHtml(ignore)}</p>`);
+<p style="margin:0 0 20px;line-height:1.65">${escapeHtml(ignore)}</p>`, "AIPEX / Account");
 
   return {
     from: "AIPEX <hello@theaipex.org>",
