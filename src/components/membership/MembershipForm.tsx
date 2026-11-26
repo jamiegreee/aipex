@@ -101,8 +101,7 @@ export default function MembershipForm({ user, initialValues, token }: Props) {
       <input type="hidden" name="token" value={state.token ?? token} />
       <div className="membership-form-heading">
         <p className="label">Your membership application</p>
-        <h2>Tell us about your work.</h2>
-        <p>No account is needed to apply. All fields are required unless marked optional.</p>
+        <h2>Join AI Policy Exchange</h2>
       </div>
       {(state.error || (state.errors && Object.keys(state.errors).length > 0)) && (
         <div
@@ -188,11 +187,8 @@ export default function MembershipForm({ user, initialValues, token }: Props) {
               value={values.organisation}
               onChange={(event) => change("organisation", event.target.value)}
               aria-invalid={Boolean(error("organisation"))}
-              aria-describedby={describe("organisation", "membership-organisation-hint")}
+              aria-describedby={describe("organisation")}
             />
-            <span className="membership-hint" id="membership-organisation-hint">
-              Independent practitioners can enter “Independent”.
-            </span>
             {fieldError("organisation")}
           </label>
         </div>
@@ -272,9 +268,8 @@ export default function MembershipForm({ user, initialValues, token }: Props) {
         <label className="membership-field" htmlFor="membership-motivation">
           Why would you like to join AIPEX?
           <span className="membership-hint" id="membership-motivation-hint">
-            Tell us about the policy questions you work on and what you hope to
-            gain from the community. A short paragraph is enough; please leave
-            out confidential information.
+            Tell us what you work on and what you hope to gain from the
+            community. A short paragraph is enough.
           </span>
           <textarea
             id="membership-motivation"
@@ -292,27 +287,6 @@ export default function MembershipForm({ user, initialValues, token }: Props) {
             {Array.from(values.motivation.normalize("NFC")).length.toLocaleString()} / 1,500 characters · minimum 40
           </span>
           {fieldError("motivation")}
-        </label>
-        <label className="membership-field" htmlFor="membership-contribution">
-          <span>What could you contribute? <span className="membership-optional">(optional)</span></span>
-          <span className="membership-hint" id="membership-contribution-hint">
-            For example, an area of experience, a practical question to work
-            through or a perspective others could learn from.
-          </span>
-          <textarea
-            id="membership-contribution"
-            name="contribution"
-            rows={4}
-            maxLength={1000}
-            value={values.contribution}
-            onChange={(event) => change("contribution", event.target.value)}
-            aria-invalid={Boolean(error("contribution"))}
-            aria-describedby={describe("contribution", "membership-contribution-hint membership-contribution-count")}
-          />
-          <span className="membership-count" id="membership-contribution-count">
-            {Array.from(values.contribution.normalize("NFC")).length.toLocaleString()} / 1,000 characters
-          </span>
-          {fieldError("contribution")}
         </label>
       </fieldset>
       <div className="membership-honeypot" aria-hidden="true">
@@ -334,8 +308,7 @@ export default function MembershipForm({ user, initialValues, token }: Props) {
           />
           <span>
             I will engage respectfully, protect confidential information and
-            participate in a personal capacity. My application does not imply
-            an endorsement by my employer.
+            participate in a personal capacity.
           </span>
         </label>
         {fieldError("agreement")}
@@ -347,11 +320,11 @@ export default function MembershipForm({ user, initialValues, token }: Props) {
       </div>
       <div className="membership-submit">
         <button className="button" type="submit" disabled={pending}>
-          {pending ? "Submitting your application…" : "Submit membership application"}
+          {pending ? "Submitting your application…" : "Submit"}
           {!pending && <span aria-hidden="true">→</span>}
         </button>
         <p className="membership-hint" aria-live="polite">
-          {pending ? "Please keep this page open while we save your application." : "Membership is by individual approval."}
+          {pending ? "Please keep this page open while we save your application." : null}
         </p>
       </div>
     </form>
